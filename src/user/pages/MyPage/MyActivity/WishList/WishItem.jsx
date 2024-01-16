@@ -1,11 +1,14 @@
+import React, { useState } from 'react';
 import './WishItem.css';
 import CheckBox from '../../../../components/CheckBox/CheckBox';
 
 function WishItem(){
-
+    
     return(
         <div className='wishItem-container'>
-            <CheckBox />
+            <div className='wishList-checkbox'>
+                    <CheckBox />
+                </div>
             <div className='wishItem-item'>
                 <div className='wishItem-img'>
                     이미지

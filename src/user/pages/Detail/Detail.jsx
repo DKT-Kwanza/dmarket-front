@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CheckBox from '../../components/CheckBox/CheckBox';
 import './Detail.css';
 import DetailQna from '../../components/Detail/DetailQna';
 import DetailQna2 from '../../components/Detail/DetailQna2';
@@ -6,6 +7,7 @@ import wishButton from '../../../assets/icons/wishButton.png'
 import productDetail from '../../../assets/images/productDetail.png'
 import arrowRight from '../../../assets/icons/chevron-right.svg'
 import parcelIcon from '../../../assets/icons/truck-02.png'
+
 function Detail() {
   const [showNewDetailQna, setShowDetailQna] = useState(false);
   const [showNewDetailQna2, setShowDetailQna2] = useState(false);
@@ -24,11 +26,6 @@ function Detail() {
 
   const handleCloseDetaiQna2 = () => {
     setShowDetailQna2(false);
-  };
-  const [isPublicChecked, setIsPublicChecked] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setIsPublicChecked((prev) => !prev);
   };
 
   return (
@@ -182,15 +179,13 @@ function Detail() {
           <div className='secretState'>
             <div className='secretArticle'>비밀글</div>
             <label className="public">
-              <input type="checkbox" checked={isPublicChecked} onChange={handleCheckboxChange} />
-              <span className="checkmark"></span>
               공개
             </label>
+            <CheckBox />
             <label className="private">
-              <input type="checkbox" checked={!isPublicChecked} onChange={handleCheckboxChange} />
-              <span className="checkmark"></span>
               비공개
             </label>
+            <CheckBox />
           </div>
           <button className='enrollButton '>등록</button>
         </div>
