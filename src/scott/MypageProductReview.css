@@ -1,0 +1,300 @@
+.mypageProductReview-body {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+.mypageProductReview-container {
+    margin-top: 40px;
+    display: flex;
+}
+
+.mypageProductReview-submenu {
+    width: 220px;
+    height: 500px;
+    border-radius: 20px;
+    border: 2px #e1e4e6 solid;
+    margin: 53px 20px 0 0;
+}
+
+.mypageProductReview-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.mypageProductReview-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.mypageProductReview-title-bar {
+    width: 5px;
+    height: 34px;
+    background-color: #000000;
+}
+
+.mypageProductReview-title-content {
+    color: #000;
+    padding-left: 15px;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.mypageProductReview-title-line {
+    width: 1040px;
+    height: 2px;
+    background-color: #000;
+    margin-top: 16px;
+}
+
+.mypageProductReview-order-head {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.mypageProductReview-order-date {
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.mypageProductReview-order-time {
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 8px;
+}
+
+.mypageProductReview-order-number-tit {
+    color: #A9AFB3;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 24px;
+}
+
+.mypageProductReview-order-number {
+    color: #191919;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 12px;
+}
+
+.mypageProductReview-order-detail-btn {
+    display: flex;
+    align-items: center;
+    border: none;
+    outline: none;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.mypageProductReview-order-detail-tit {
+    color: #767676;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.mypageProductReview-order-detail-icon {
+    margin-left: 8px;
+}
+
+.mypageProductReview-order-line {
+    width: 1040px;
+    height: 1px;
+    background: #919191;
+    margin: 15px 0 20px 0;
+}
+
+.mypageProductReview-order-item {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0;
+    align-items: center;
+}
+
+.mypageProductReview-item-img {
+    width: 129px;
+    height: 129px;
+    background: #D9D9D9;
+}
+
+.mypageProductReview-item-info {
+    text-align: left;
+    margin-left: 24px;
+    border-spacing: 8px;
+}
+
+.mypageProductReview-item-info-tit {
+    width: 80px;
+    color: #A9AFB3;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.mypageProductReview-item-info-cont {
+    color: #191919;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.mypageProductReview-item-info-bar {
+    width: 1px;
+    height: 14px;
+    background: #DBDBDB;
+    margin: 0 20px;
+}
+
+.mypageProductReview-item-process {
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: auto;
+}
+
+.mypageProductReview-stars-before-line {
+    width: 1040px;
+    height: 1px;
+    background: #DBDBDB;
+}
+
+.mypageProductReview-stars{
+    margin-top: 20px;
+    display: flex;
+}
+
+.mypageProductReview-stars-title{
+    color: #000;
+    font-family: Noto Sans KR;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+.mypageProductReview-stars-contents{
+    color: #FFD465;
+    font-family: Noto Sans KR;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #000;
+    font-family: Noto Sans KR;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 23px;
+}
+
+.filledStar {
+    color: gold;
+    cursor: pointer;
+}
+
+.emptyStar {
+    color: grey;
+    cursor: pointer;
+}
+
+.mypageProductReview-contents{
+    margin-top: 10px;
+}
+
+.mypageProductReview-contents-contents{
+    width: 1040px;
+    height: 192px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 1px solid #A9AFB3;
+    margin-top: 10px;
+}
+
+.mypageProductReview-pictures{
+    margin-top: 10px;
+    display: flex;
+}
+
+.mypageProductReview-stars-button {
+    width: 100px;
+    height: 100px;
+    background: #EDEDED;
+    flex-shrink: 0;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    margin-left: 23px;
+  }
+  
+  .mypageProductReview-stars-button-plus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #AAA;
+    font-size: 96px;
+    color: #AAA;
+    font-size: 96px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .mypageProductReview-pictures-notice{
+    margin-top: 10px;
+    margin-left: 45px;
+    color: #A9AFB3;
+    font-family: Noto Sans KR;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.mypageProductReview-registration{
+    margin-top: 68px;
+    margin-left: 427px;
+}
+
+.mypageProductReview-registration-button{
+    width: 166px;
+    height: 56px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #FFD465;
+    color: #363A3C;
+    text-align: center;
+    font-family: Noto Sans KR;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border:none;
+    cursor: pointer;
+}
+
+
+
+  
