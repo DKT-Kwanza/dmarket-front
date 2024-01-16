@@ -1,0 +1,154 @@
+.orderHistoryDetail-body {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+.orderHistoryDetail-container {
+    margin-top: 40px;
+    display: flex;
+}
+
+.orderHistoryDetail-submenu {
+    width: 220px;
+    height: 500px;
+    border-radius: 20px;
+    border: 2px #e1e4e6 solid;
+    margin: 53px 20px 0 0;
+}
+
+.orderHistoryDetail-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.orderHistoryDetail-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.orderHistoryDetail-title-bar {
+    width: 5px;
+    height: 34px;
+    background-color: #000000;
+}
+
+.orderHistoryDetail-title-content {
+    color: #000;
+    padding-left: 15px;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.orderHistoryDetail-title-line {
+    width: 1040px;
+    height: 2px;
+    background-color: #000;
+    margin-top: 16px;
+}
+
+.orderHistoryDetail-order-head {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin: 20px 0 10px 0;
+}
+
+.orderHistoryDetail-order-date {
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.orderHistoryDetail-order-time {
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 8px;
+}
+
+.orderHistoryDetail-order-number-tit {
+    color: #A9AFB3;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 24px;
+}
+
+.orderHistoryDetail-order-number {
+    color: #191919;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 12px;
+}
+
+.orderHistoryDetail-info {
+    text-align: left;
+    border-spacing: 0 10px;
+}
+
+.orderHistoryDetail-info-tit {
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.orderHistoryDetail-info-cont {
+    color: #919191;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+}
+
+.orderHistoryDetail-info-name {
+    color: #919191;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-right: 15px;
+}
+
+.orderHistoryDetail-line {
+    width: 1040px;
+    height: 1px;
+    background: #919191;
+    margin-bottom: 20px;
+}
+
+.orderHistoryDetail-price {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: auto;
+}
+
+.orderHistoryDetail-price-tit {
+    color: #F00;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.orderHistoryDetail-price-cont {
+    color: #ED1C14;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: 8px;
+}
