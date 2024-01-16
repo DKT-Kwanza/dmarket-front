@@ -1,0 +1,29 @@
+{
+    "totCnt": 2,
+    "totProdPrice": "318,000",
+    "totDiscPrice": "31,100",
+    "totSales": "286,900",
+    "productList":
+[
+    { 
+        "id": 1, 
+        "image": "https://placehold.co/100x100", 
+        "brand": "바비브라운",
+        "productName": "파운데이션",
+        "option": "21호/바닐라",
+        "sales": "25,000",
+        "productPrice": "27,000",
+        "quantity": 2 
+    },
+    { 
+        "id": 2, 
+        "image": "https://placehold.co/100x100", 
+        "brand": "룩캐스트",
+        "productName": "윈터 울 코트",
+        "option": "BLACK/ONE",
+        "sales": "261,900",
+        "productPrice": "291,000",
+        "quantity": 1 
+    }
+]
+}
