@@ -20,6 +20,7 @@
 
 .Inquiry-contents {
     display: flex;
+    padding-bottom: 200px;
 }
 
 .Inquiry-contents-sidebar {
@@ -88,6 +89,19 @@
     height: 20px;
 }
 
+.Inquiry-contents-content-data-5 {
+    margin-top: 18px;
+    width: 160px;
+    height: 20px;
+    color: #FF0000;
+}
+.Inquiry-contents-content-data-6 {
+    margin-top: 18px;
+    width: 160px;
+    height: 20px;
+    color: #6F97FF;
+}
+
 .Inquiry-contents-content-data-list {
     margin: 0;
     list-style: none;
@@ -107,13 +121,37 @@
     cursor: pointer;
 }
 
-.Inquiry-contents-content-data-list-detail {
-    display: none;
-}
-
-
 .Inquiry-contents-content-data-list-data {
     margin: 20px;
+}
+
+.Inquiry-contents-content-data-list-data-info {
+    display: flex;
+    margin-bottom: 20px;
+}
+.Inquiry-contents-content-data-list-data-info-profile {
+    color: #000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-right: 20px;
+}
+
+.Inquiry-contents-content-data-list-data-info-date {
+    color: #000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.Inquiry-contents-content-data-list-data-answer {
+    color: #000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .Inquiry-contents-content-data-list-btn-wrap {
@@ -124,6 +162,7 @@
     width: 160px;
     height: 48px;
     border: none;
+    border-radius: 5px;
     margin-top: 20px;
     margin-bottom: 20px;
     background-color: #FFD465;
