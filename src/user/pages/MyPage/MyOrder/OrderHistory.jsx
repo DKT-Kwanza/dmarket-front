@@ -5,7 +5,7 @@ function OrderHistory() {
     const navigate = useNavigate();
 
     const navigateToOrderHistoryDetail = () => {
-        navigate("../orderhistorydetail");
+        navigate("./detail");
     }
 
     return (

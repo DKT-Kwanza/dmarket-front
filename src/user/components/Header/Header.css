@@ -1,0 +1,248 @@
+/* DivsComponent.css */
+
+body, html {
+    height: 100%;
+    margin: 0;
+    
+}
+
+.header-div {
+    height: 166px;
+    position: relative;
+
+    background: white;
+}
+
+.nav-div {
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1280px;
+    margin: 0 auto;
+    
+}
+
+
+.logo {
+    width: 180px;
+    height: 48.247px;
+    flex-shrink: 0;
+    background-image: url('../../../assets/images/logo.png');
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    border:none;
+    background-color: #FFF;
+    cursor: pointer;
+
+}
+.search-box-div{
+    display: flex;
+}
+.search-box-svg{
+    margin-left: -70px;
+    margin-top: 7px;
+}
+
+/* SearchBox */
+.search-box {
+    /* SearchBox스타일 */
+    width: 620px;
+    margin-left: 26px;
+    margin-right: 26px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-left: 26px;
+    border-radius: 20px;
+    background: #EDEDED;
+    border : none;
+
+    /* 텍스트 폰트 스타일 */
+    color: #767676;
+    font-family: 'Noto Sans HK', sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
+    margin-right: 14px; /* Adjust the margin-right for spacing between the icon and text */
+}
+
+
+.icons {
+    width: 210px;
+    height: 50px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mypage{
+    width: 36px;
+    height: 36px;
+    margin-top: 7px;
+    cursor: pointer;
+
+    border:none;
+    background-color: #FFF;
+    cursor: pointer;
+}
+
+.bucket{
+    width: 40px;
+    height: 30px;
+    position: relative;
+    margin-top: 10px;
+
+    border:none;
+    background-color: #FFF;
+    cursor: pointer;
+}
+
+.bucket-count{
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 0px; /* Adjust the top position as needed */
+    right: 0px; /* Adjust the right position to place it in the top right corner */
+}
+
+.likes{
+    width: 40px;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    border:none;
+    background-color: #FFF;
+    cursor: pointer;
+}
+
+.alams{
+    width: 40px;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    border:none;
+    background-color: #FFF;
+    cursor: pointer;
+}
+
+.category-div {
+    height: 70px;
+    border-top: 1px solid #EDEDED;
+    border-bottom: 1px solid #EDEDED;
+    background: #FFF;
+    margin: 0 auto;
+}
+
+
+
+/* DivLayout.css */
+.category-div-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-category {
+    width: 200px;
+    height: 30px;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    display: flex;
+    align-items: center;
+}
+
+.category-svg{
+    width: 17px;
+    height: 14px;
+    flex-shrink: 0;
+}
+.category-text{
+    color: #000;
+
+    font-family: Noto Sans KR;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    margin-left: 10px;
+
+    cursor: pointer;
+}
+
+.category-text:hover, .user-center:hover{
+    font-weight: 700;
+}
+
+.sub-category{
+    width: 770px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+.sub-category button{
+    width: 110px;
+    border:none;
+    background-color: #FFF;
+    cursor: pointer;
+
+    color: #000;
+    font-family: Noto Sans KR;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.sub-category button:hover{
+    font-weight: 700;
+}
+
+.sub-sub-category-title{
+    width:140px;
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.user-center {
+    width: 200px;
+    height: 30px;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+
+    color: #919191;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    cursor: pointer;
+}
