@@ -1,0 +1,237 @@
+.header{
+    height: 160px;
+}
+
+.other-component{
+    height: 240px;
+    background: #ffffff;
+}
+
+.contents-reigon{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+
+}
+
+.contents{
+    width: 1280px;
+}
+
+.contents-title{
+    height: 60px;
+    display: flex;
+}
+.empty-div{
+    width: 229px;
+    height: 60px;
+    
+}
+
+.contents-main{
+    display: flex;
+    
+}
+
+.contents-left{
+    width: 220px;
+    height: 500px;
+    flex-shrink: 0;
+    margin-right: 25px;
+
+    border-radius: 20px;
+    border: 2px solid #E1E4E6;
+
+    background: #FFF;
+
+}
+
+.contnets-title-bar{
+    align-items: center;
+    margin-right: 20px;
+    width: 5px;
+    height: 34px;
+    flex-shrink: 0;
+    background: #191919;
+}
+.contents-title-div{
+    width: 1036px;
+    align-items: center;
+    border-bottom: 2px solid #000;
+    border-width: 3px;
+    display: flex;
+    color: #000;
+
+    font-family: Noto Sans KR;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+}
+
+.contents-right{
+    margin-top: 10px;
+
+}
+
+.contents-right-intro{
+    width: 1036px;
+    height: 110px;
+    margin-top: 10px;
+    margin-bottom: 60px;
+}
+
+.contents-right-flow{
+    height: 160px;
+    width: 1036px;
+    margin-top: 10px;
+    margin-bottom: 60px;
+}
+.contents-right-charge{
+    width: 1036px;
+    height: 110px;
+    display: flex;
+    margin-top: 10px;
+}
+
+.contents-right-intro-title{
+    color: #191919;
+    font-size: 15px;
+    font-family: Noto Sans KR;
+    font-weight: 700;
+    word-wrap: break-word
+}
+.contents-right-intro-contents{
+    margin-top: 20px;
+}
+.contents-right-intro-contents-style{
+    color: #4D5256;
+    font-size: 15px;
+    font-family: Noto Sans KR;
+    font-weight: 400;
+    word-wrap: break-word
+}
+.contents-right-flow{
+    display: flex;
+    justify-content: space-between;
+}
+.contents-right-flow-details{
+    width: 30%;
+    box-sizing: border-box;
+}
+.contents-right-flow-bar{
+    width: 1px;
+    height: 160px;
+    background: #DBDBDB;
+}
+.contents-right-flow-details-title{
+    height: 50%;
+    color: #000;
+
+    font-family: Noto Sans KR;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.contents-right-flow-details-contents{
+    height: 50%;
+    color: #4D5256;
+
+    font-family: Noto Sans KR;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.contents-right-charge-price{
+    width: 800px;
+}
+
+.contents-right-charge-price input::placeholder{
+    color: #A9AFB3;
+
+    font-family: Noto Sans KR;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.contents-right-charge-request{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.contents-right-charge-price-enalbe{
+    height: 40%;
+    display: flex;
+    justify-content: flex-end;
+}
+.contents-right-charge-price-inputbox{
+    height: 60%;
+}
+.contents-right-charge-price-enalbe-A{
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    margin-right: 17px;
+    color: #4D5256;
+
+    font-family: Noto Sans KR;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.contents-right-charge-price-enalbe-B{
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    color: #4D5256;
+
+    font-family: Noto Sans KR;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.contents-right-charge-price-inputbox{
+    display: flex;
+    align-items: center;
+    width: 800px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 1px solid #A9AFB3;
+}
+
+
+.contents-right-charge-request{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contents-right-charge-request-button-div{
+    box-sizing: border-box;
+}
+
+.contents-right-charge-request-button{
+    width: 160px;
+    height: 48px;
+    flex-shrink: 0;
+    margin-top: 15px;
+    border-radius: 5px;
+    background: #FFD465;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    font-family: Noto Sans KR;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}

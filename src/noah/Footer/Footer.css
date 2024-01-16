@@ -1,0 +1,190 @@
+/* 전체 footer */
+.footer {
+    height: 340px;
+    background-color: #fff;
+}
+
+
+/* footer 세부 내용 공통 사항 */
+.up-footer ,.down-footer{
+    max-width: 1280px;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+
+}
+.up-footer{
+    height:56px;
+    border-bottom: 1px solid #EDEDED;
+}
+.down-footer{
+    height:284px;
+}
+
+/* footer 위쪽 내용 */
+.upfooter-service-basic,.upfooter-service-details{
+    color: #000;
+    font-family: Noto Sans KR;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    display: flex;
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+.upfooter-service-basic button{
+    color: #000;
+    font-family: Noto Sans KR;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border:none;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.upfooter-service-basic, .down-footer-left{
+    width: 810px; 
+}
+
+.bar-style{
+    width: 1px;
+    height: 10px;
+    flex-shrink: 0;
+    background: #DBDBDB;
+}
+
+.upfooter-service-details{
+    width: 210px;
+}
+.upfooter-service-details button{
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    margin-left: -15px;
+    margin-top: 3px;
+}
+
+.down-footer-left, .down-footer-right{
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.down-footer-left-first{
+    margin-bottom: 30px;
+}
+
+.down-footer-left-first-title{
+    margin-bottom: 10px;
+    color: #000;
+    font-family: Noto Sans KR;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.down-footer-left-first-content-A{
+    width: 790px;
+    display: flex;
+    color: #505050;
+    align-items: center;
+    justify-content: space-between;
+
+    font-family: Noto Sans KR;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.down-footer-left-first-content-B{
+    width: 400px;
+    display: flex;
+    color: #505050;
+    align-items: center;
+    justify-content: space-between;
+
+    font-family: Noto Sans KR;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+
+.down-footer-left-second-title{
+    margin-bottom: 10px;
+    color: #191919;
+
+    font-family: Noto Sans KR;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.down-footer-left-second-content-A, .down-footer-left-second-content-B{
+    display: flex;
+    color: #505050;
+    align-items: center;
+    justify-content: space-between;
+
+    font-family: Noto Sans KR;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.down-footer-right{
+    margin-right: 30px;
+}
+
+.down-footer-right-title-text{
+    align-items: center;
+    margin-right: 9px;
+    color: #000;
+
+    font-family: Noto Sans KR;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+}
+
+.down-footer-right-title-number{
+    align-items: center;
+    margin-top: 5px;
+    color: #000;
+
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+}
+
+.down-footer-right-title{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.down-footer-right-contents{
+    color: #000;
+
+    font-family: Noto Sans KR;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

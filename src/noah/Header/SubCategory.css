@@ -1,0 +1,41 @@
+
+.sub-sub-category{
+    height: 210px;
+    display: flex;
+    justify-content: center;
+
+    background: #FFF;
+}
+
+.sub-sub-category-contents{
+    width: 770px;
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+
+.sub-sub-category-contents-details{
+    width: 110px;
+
+    color: #000;
+
+    text-align: center;
+    font-family: Noto Sans KR;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.sub-sub-category-contents-details button{
+    border:none;
+    background-color: #FFF;
+    cursor: pointer;
+}
+.sub-sub-category-contents-details button:hover{
+    font-weight: 700;
+}
+
+.sub-sub-category-contents-details-style{
+    margin-bottom: 9px;
+}
