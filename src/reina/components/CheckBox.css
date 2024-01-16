@@ -1,0 +1,30 @@
+/* 
+// NOTE 체크박스 체크 전
+*/
+.custom-checkbox-before {
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 2px solid darkgray;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+/* 
+// NOTE 체크박스 체크 전 체크 svg 색상
+*/
+.custom-checkbox-before path {
+    fill: darkgray
+}
+
+/* 
+// NOTE 체크박스 체크 후
+*/
+.custom-checkbox-after {
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 2px solid #FFD465;
+    border-radius: 5px;
+    background-color: #FFD465;
+}
