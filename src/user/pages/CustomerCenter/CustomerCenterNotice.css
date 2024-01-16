@@ -7,16 +7,16 @@
 .CustomerCenterNotice{
   width: 1280px;
   margin: 0 auto;
-  height: 1000px;
+  padding-bottom: 200px;
 }
 
-.CustomerCenterNotice-body{
-  /*margin-top: 210px;*/
+.CustomerCenterNotice-body {
+  margin: auto;
 }
 
 .CustomerCenterName{
   color: #000;
-  font-size: 48px;
+  font-size: 40px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -86,7 +86,7 @@
   color: #000;
   text-align: center;
   font-family: Noto Sans KR;
-  font-size: 36px;
+  font-size: 30px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -96,7 +96,7 @@
   color: #919191;
   text-align: center;
   font-family: Noto Sans KR;
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal; 
@@ -122,7 +122,7 @@
   flex-shrink: 0;
   color: #363A3C;
   text-align: center;
-  font-size: 24px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -131,7 +131,6 @@
 
 .notice-main-menu{
   width: 1280px;
-  height: 50px;
 }
 
 .notice-main-menu-display{
@@ -153,7 +152,7 @@
   height: 34px;
   flex-shrink: 0;
   color: #000;
-  font-size: 24px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -166,7 +165,7 @@
   flex-shrink: 0;
   color: #919191;
   text-align: right;
-  font-size: 24px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -181,7 +180,7 @@
   width: 1250px;
   height: 200px;
   flex-shrink: 0;
-  font-size: 24px;
+  font-size: 16px;
   background: #D9D9D9;
   padding-top: 30px;
   padding-left: 30px;

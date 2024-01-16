@@ -23,8 +23,8 @@ function CustomerCenterNotice() {
 
   return (
     <div className='CustomerCenterNotice'>
-      {/*<div className='CustomerCenterNotice-body'>*/}
-      <div>
+      <div className='CustomerCenterNotice-body'>
+      {/* <div> */}
         <div className='CustomerCenterName'>
           고객센터
         </div>
@@ -139,7 +139,6 @@ function CustomerCenterNotice() {
 
 
       </div>
-
     </div>
   );
 }
