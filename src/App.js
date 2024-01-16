@@ -28,6 +28,7 @@ import WriteReview from "./user/pages/MyPage/MyActivity/Review/WriteReview";
 import OrderHistory from './user/pages/MyPage/MyOrder/OrderHistory';
 import OrderHistoryDetail from "./user/pages/MyPage/MyOrder/OrderHistoryDetail";
 import Inquiry from "./user/pages/MyPage/MyActivity/CustomerInquiry/Inquiry";
+import Qna from "./user/pages/MyPage/MyActivity/Qna/Qna";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
               <Route path='/main/detail' element={<Detail/>} />
               <Route path='/mypage/wishlist' element={<WishList/>} />
               <Route path='/mypage/cart' element={<Cart />} />
+              <Route path='/mypage/Qna' element={<Qna />} />
               <Route path='/main/productlist' element={<ProductList/>}/>
               <Route path='/main/searchlist' element={<SearchList/>}/>
               <Route path='/order' element={<Payment/>}/>
