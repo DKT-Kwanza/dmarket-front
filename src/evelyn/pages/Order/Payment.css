@@ -1,0 +1,429 @@
+.payment-navbar{ /*네브바 자리 표시 위해서 임시 생성*/
+    background-color: #878D91;
+    height: 166px;
+}
+
+.payment-background{
+    /* width: 1280px;  */ /*설정하면 화면 줄일때 1280px까지만 줄어듦*/
+	margin: 0 auto;
+    margin-top: 59px;
+}
+.payment-wrap{
+    margin: 0 auto;
+    width: 990px;
+}
+.payment-wrap input {
+    outline:none;
+    border: 1.3px solid #cccccc;
+    font-size: 13px;
+    text-align: start;
+    margin-right: 20px;
+    height: 25px;
+    background-color: white;
+}
+.payment-wrap input:-webkit-autofill{
+    -webkit-text-fill-color: #565656;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+.payment-wrap input:focus{
+    border: 1.2px solid #717171;   
+}
+.payment-wrap input::placeholder{
+    color: #dbdbdb;
+}
+
+.payment-title-div{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    height: 52px;
+    width: 990px;
+}
+.payment-title-span{
+    font-size: 36px;
+    height: 52px;
+    width: 133px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.payment-delivery{
+    height: 378px;
+    width: 990px;
+    border-top-style: solid;
+    border-width: 2px;
+}
+.payment-delivery-title{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 72px;
+}
+.payment-delivery-title-span1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 122px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 28px;
+}
+.payment-delivery-title-span2{
+    color: #919191;
+    font-size: 14px;
+}
+.payment-deliveryAddr-form{
+    height: 111px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-bottom-style: solid;
+    border-width: 2px;
+    border-color: #dbdbdb;
+}
+.payment-deliveryAddr-span{
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 72px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 23px;
+    width: 78px;
+}
+.payment-deliveryAddr-input{
+    margin-top: 15px;
+}
+.payment-deliverAddr-input-add1{
+    margin-bottom: 8px;
+}
+.payment-deliverAddr-input-add2{
+    margin-bottom: 30px;
+}
+
+.payment-deliveryReq-form{
+    height: 85px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-bottom-style: solid;
+    border-width: 2px;
+    border-color: #dbdbdb;
+}
+.payment-deliveryReq-span{ /*span 크기 지정위해 display 설정했는데 없어도 될 것 같기도 해요(다른 span도 마찬가지)*/
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 25px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 23px;
+    width: 125px;
+}
+.payment-deliveryReq-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 1.3px solid #cccccc;
+    position: relative;
+    width: 440px;
+}
+.payment-deliveryReq-div input{
+    background-color: white;
+    outline:none;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    margin: 0;
+    width: 400px;
+    height: 40px;
+    font-size: 13px;
+    &:focus{
+        border: none;
+    }
+}
+.payment-deliveryReq-drop{
+    background-color: white;
+    cursor: pointer;
+    margin: 0;
+    width: 400px;
+    height: 40px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.payment-dropdown{
+    position: absolute;
+    width: 440px;
+    top: 40px;
+    right: -1px;
+    border: 1px solid #565656;
+    background: #fff;
+}
+.payment-dropdown-scroll{
+    overflow : auto;
+    margin: 0;
+    padding: 0;
+}
+.payment-dropdown-scroll ul{
+    list-style-type:none;
+    margin: 0;
+    padding:10px 0;
+}
+.payment-dropdown-scroll li{
+    padding: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    &:hover, &:focus{
+        background-color: #f0f0f0;
+        font-weight: bold;
+    }
+}
+.payment-dropdown-scroll span{
+    padding: 0 20px;
+}
+
+.payment-deliveryInfo{
+    height: 76px;
+    font-size:16px;
+}
+.payment-deliveryInfo-num{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 15px;
+}
+.payment-deliveryInfo-num-span{
+    font-weight: bold;
+    margin-right: 105px;
+    width: 45px;
+    height: 23px;
+}
+.payment-deliveryInfo-name{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+.payment-deliveryInfo-name-span{
+    font-weight: bold;
+    margin-right: 33px;
+    width: 117px;
+    height: 23px;
+}
+
+.payment-products{
+    width: 990px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-top: 10px;
+    border-top-style: solid;
+    border-width: 2px;
+}
+.payment-products-title{
+    margin-top: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    width: 144px;
+    height: 35px;
+}
+.payment-product-wrap{
+    display: block;
+    margin: 0;
+    margin-top: 20px;
+    border: 1px solid #CED3D6;
+    box-sizing: border-box;
+    width: 990px;
+}
+.payment-product-wrap table{ /*양쪽 정렬 때문에 %사용했는데 괜찮을까요*/
+    border-collapse: collapse;
+    border: 0 none;
+    width: 100%;
+}
+.payment-products-table:first-child{
+    display: table-row;
+}
+.payment-product-td-img{
+    position: relative;
+    padding: 20px;
+    padding-right: 0;
+    vertical-align: top;
+}
+.payment-product-td1-div{
+    position: relative;
+    vertical-align: top;
+}
+.payment-product-td1-span{
+    display: block;
+    width: 100px;
+    height: 100px;
+}
+
+.payment-product-td-info{
+    position: relative;
+    padding: 20px;
+    vertical-align: top;
+}
+
+.payment-product-brand{
+    font-size: 18px;
+    font-weight: bold;
+    height: 26px;
+    margin: 0;
+}
+.payment-product-productName{
+    font-size: 14px;
+    color: #505050;
+    margin: 0;
+    margin-top: 7px;
+}
+.payment-product-option{
+    font-size: 12px;
+    color: #878D91;
+    margin: 0;
+    margin-top: 16px;
+}
+.payment-product-option-op{
+    border-top: 1px solid #878D91;
+    height: 17px;
+    margin-right: 8px;
+}
+
+.payment-product-td-price{
+    border-left: 1px solid #CED3D6;
+    position: relative;
+    padding: 20px 5px 20px 20px;
+}
+.payment-product-sales-div{
+    padding: 0;
+    margin: 0;
+}
+.payment-product-sales{
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 500;
+    vertical-align: -2px;
+    line-height: 25px;
+    letter-spacing: -0.5px;
+}
+.payment-product-tx{
+    display: inline-block;
+    padding-left: 1px;
+    font-size: 11px;
+    color: #222;
+    vertical-align: -1px;
+    line-height: 15px;
+}
+.payment-product-prodPrice{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    color: #505050;
+    text-decoration: line-through;
+    vertical-align: middle;
+    line-height: 16px;
+    letter-spacing: -0.5px;
+}
+.payment-product-line{
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: #e1e1e1;
+    margin: 6px 0;
+}
+.payment-product-quantity{
+    display: block;
+    font-size: 12px;
+    line-height: 1.38;
+    letter-spacing: -0.5px;
+}
+.payment-info{
+    width: 990px;
+}
+.payment-info-title{
+    position: relative;
+    margin-top: 48px;
+    padding-bottom: 6px;
+}
+.payment-info-title-h2{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 20px;
+    vertical-align: top;
+    letter-spacing: -0.3px;
+    line-height: 24px;
+    margin: 0;
+}
+.payment-info-des{
+    border-top: 2px solid #000;
+    margin-top: 0;
+    padding-top: 0;
+    display: flex;
+    flex-direction: row;
+}
+.payment-info-prices{
+    width: 630px;
+    padding: 0 60px;
+    padding-bottom: 20px;
+    font-size: 16px;
+    font-weight: 700;
+}
+.payment-info-dl{
+    margin: 0;
+    margin-top: 13px;
+    padding: 0;
+}
+.payment-info-dl.tot{
+    color: #ED1C14;
+    border-top: 1px solid #dbdbdb;
+}
+.payment-info-dt{
+    width: 200px;
+    float: left;
+    position: relative;
+    width: 200px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.payment-info-dd{
+    margin-left: 200px;
+    text-align: right;
+    position: relative;
+    margin-left: 200px;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.payment-info-order{
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.payment-info-order div{
+    font-size: 13px;
+    color: #919191;
+    width: max-content;
+    padding: 22px 60px ;
+    padding-bottom: 11px;
+}
+.payment-info-order button{
+    color: white;
+    width: 150px;
+    height: 56px;
+    background-color: #FF4248;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
