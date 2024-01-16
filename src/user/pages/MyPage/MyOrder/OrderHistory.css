@@ -1,0 +1,185 @@
+.orderHistory-body {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+.orderHistory-container {
+    margin-top: 40px;
+    display: flex;
+}
+
+.orderHistory-submenu {
+    width: 220px;
+    height: 500px;
+    border-radius: 20px;
+    border: 2px #e1e4e6 solid;
+    margin: 53px 20px 0 0;
+}
+
+.orderHistory-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.orderHistory-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.orderHistory-title-bar {
+    width: 5px;
+    height: 34px;
+    background-color: #000000;
+}
+
+.orderHistory-title-content {
+    color: #000;
+    padding-left: 15px;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.orderHistory-title-line {
+    width: 1040px;
+    height: 2px;
+    background-color: #000;
+    margin-top: 16px;
+}
+
+.orderHistory-process {
+    margin-top: 40px;
+    width: 1040px;
+    height: 70px;
+    border-radius: 12px;
+    border: 2px solid #000;
+    background: #FFF;
+}
+
+.orderHistory-process-list {
+    display: flex;
+    flex-direction: row;
+    margin: 17px 43px;
+}
+
+.orderHistory-process-item-wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.orderHistory-process-title {
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.orderHistory-process-count {
+    color: #919191;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-left: 40px;
+}
+
+.orderHistory-process-bar {
+    width: 1px;
+    height: 36px;
+    background: #DBDBDB;
+    margin: 0 80px;
+}
+
+.orderHistory-process-cancel {
+    width: 540px;
+    height: 70px;
+    border-radius: 12px;
+    background: #F9F9F9;
+    margin-top: 6px;
+}
+
+.orderHistory-process-cancel-title {
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.orderHistory-order-list {
+    margin-top: 40px;
+}
+
+.orderHistory-order-head {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.orderHistory-order-date {
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.orderHistory-order-time {
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 8px;
+}
+
+.orderHistory-order-number-tit {
+    color: #A9AFB3;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 24px;
+}
+
+.orderHistory-order-number {
+    color: #191919;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 12px;
+}
+
+.orderHistory-order-detail-btn {
+    display: flex;
+    align-items: center;
+    border: none;
+    outline: none;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.orderHistory-order-detail-tit {
+    color: #767676;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.orderHistory-order-detail-icon {
+    margin-left: 8px;
+}
+
+.orderHistory-order-line {
+    width: 1040px;
+    height: 1px;
+    background: #919191;
+    margin: 15px 0 20px 0;
+}
