@@ -1,11 +1,11 @@
-.Inquiry-title {
+.Qna-title {
     height: 97px;
     font-size: 26px;
     font-weight: bold;
     display: flex;
 }
 
-.Inquiry-title-bar {
+.Qna-title-bar {
     margin-top: 42px;
     margin-left: 560px;
     width: 5px;
@@ -13,123 +13,123 @@
     background-color: #191919;
 }
 
-.Inquiry-title-info {
+.Qna-title-info {
     margin-top: 42px;
     margin-left: 15px;
 }
 
-.Inquiry-contents {
+.Qna-contents {
     display: flex;
     padding-bottom: 200px;
 }
 
-.Inquiry-contents-sidebar {
+.Qna-contents-sidebar {
     margin-left: 318px;
 }
 
-.Inquiry-contents-content {
+.Qna-contents-content {
     margin-left: 22px;
     width: 1040px;
     text-align: left;
     font-size: 15px;
 }
 
-.Inquiry-contents-content-hr {
+.Qna-contents-content-hr {
     border: none;
     height: 2px;
     background-color: black;
     margin-bottom: 20px;
 }
 
-.Inquiry-contents-content-info {
+.Qna-contents-content-info {
     color: #919191;
 }
 
-.Inquiry-contents-content-data {
+.Qna-contents-content-data {
     margin-top: 30px;
     width: 1040px;
     /* height: 56px; */
 }
 
-.Inquiry-contents-content-data-hr {
+.Qna-contents-content-data-hr {
     border: none;
     height: 1px;
     margin: 0;
     background-color: #919191;
 }
 
-.Inquiry-contents-content-data-title {
+.Qna-contents-content-data-title {
     height: 56px;
     background-color: #FAFAFA;
     display: flex;
 }
 
-.Inquiry-contents-content-data-1 {
+.Qna-contents-content-data-1 {
     margin-top: 18px;
     margin-left: 24px;
     width: 265px;
     height: 20px;
 }
 
-.Inquiry-contents-content-data-2 {
+.Qna-contents-content-data-2 {
     margin-top: 18px;
     width: 377px;
     height: 20px;
 }
 
-.Inquiry-contents-content-data-3 {
+.Qna-contents-content-data-3 {
     margin-top: 18px;
     width: 214px;
     height: 20px;
 }
 
-.Inquiry-contents-content-data-4 {
+.Qna-contents-content-data-4 {
     margin-top: 18px;
     width: 160px;
     height: 20px;
 }
 
-.Inquiry-contents-content-data-5 {
+.Qna-contents-content-data-5 {
     margin-top: 18px;
     width: 160px;
     height: 20px;
     color: #FF0000;
 }
-.Inquiry-contents-content-data-6 {
+.Qna-contents-content-data-6 {
     margin-top: 18px;
     width: 160px;
     height: 20px;
     color: #6F97FF;
 }
 
-.Inquiry-contents-content-data-list {
+.Qna-contents-content-data-list {
     margin: 0;
     list-style: none;
     padding-left: 0;
 }
 
-.Inquiry-contents-content-data-list-hr {
+.Qna-contents-content-data-list-hr {
     border: none;
     height: 1px;
     margin: 0;
     background-color: #DBDBDB;
 }
 
-.Inquiry-contents-content-data-list-temp {
+.Qna-contents-content-data-list-temp {
     display: flex;
     height: 56px;
     cursor: pointer;
 }
 
-.Inquiry-contents-content-data-list-data {
+.Qna-contents-content-data-list-data {
     margin: 20px;
 }
 
-.Inquiry-contents-content-data-list-data-info {
+.Qna-contents-content-data-list-data-info {
     display: flex;
     margin-bottom: 20px;
 }
-.Inquiry-contents-content-data-list-data-info-profile {
+.Qna-contents-content-data-list-data-info-profile {
     color: #000;
     font-size: 15px;
     font-style: normal;
@@ -138,7 +138,7 @@
     margin-right: 20px;
 }
 
-.Inquiry-contents-content-data-list-data-info-date {
+.Qna-contents-content-data-list-data-info-date {
     color: #000;
     font-size: 15px;
     font-style: normal;
@@ -146,7 +146,7 @@
     line-height: normal;
 }
 
-.Inquiry-contents-content-data-list-data-answer {
+.Qna-contents-content-data-list-data-answer {
     color: #000;
     font-size: 15px;
     font-style: normal;
@@ -154,11 +154,11 @@
     line-height: normal;
 }
 
-.Inquiry-contents-content-data-list-btn-wrap {
+.Qna-contents-content-data-list-btn-wrap {
     text-align: right;
 }
 
-.Inquiry-contents-content-data-list-btn {
+.Qna-contents-content-data-list-btn {
     width: 160px;
     height: 48px;
     border: none;
@@ -169,7 +169,7 @@
     cursor: pointer;
 }
 
-.Inquiry-contents-content-data-list-btn-hr {
+.Qna-contents-content-data-list-btn-hr {
     border: none;
     height: 1px;
     margin: 0;

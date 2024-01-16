@@ -7,6 +7,7 @@
 .CustomerCenterInquiry{
   width: 1280px;
   margin: 0 auto;
+  padding-bottom: 200px;
 }
 
 .CustomerCenterInquiry-body{
@@ -16,7 +17,7 @@
 .CustomerCenterName{
   color: #000;
   font-family: Noto Sans KR;
-  font-size: 48px;
+  font-size: 40px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -37,7 +38,7 @@
   margin-bottom: 65px;
   color: #000;
   font-family: Noto Sans KR;
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -52,14 +53,14 @@
 
 
 .inquiry-menu-submenu{
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   display: flex;
 }
 
 .inquiry-menu-submenu-title{
   color: #000;
   font-family: Noto Sans KR;
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -71,7 +72,7 @@
 .inquiry-menu-submenu-title-contents{
   color: #000;
   font-family: Noto Sans KR;
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -100,7 +101,7 @@
   flex-shrink: 0;
   color: #000;
   font-family: Noto Sans KR;
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -156,7 +157,7 @@
   justify-content: center;
   flex-shrink: 0;
   font-family: Noto Sans KR;
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -178,14 +179,14 @@
   justify-content: center;
   flex-shrink: 0;
   font-family: Noto Sans KR;
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   margin-left: 45px;
   border: 1px solid #C6C6C6;
   resize: none; 
-  padding-top: 20px;
+  padding-top: 16px;
   
 }
 
@@ -210,7 +211,6 @@
   color: #FFF;
   text-align: center;
   font-family: Noto Sans KR;
-  font-size: 128px;
   font-style: normal;
   font-weight: 100;
   line-height: normal;
@@ -278,7 +278,7 @@
   cursor: pointer;
   position: relative;
   margin-left: 45px;
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .inquiry-menu-stars-button-plus {
@@ -298,7 +298,7 @@
 .inquiry-menu-notice-redstar{
   color: #F00;
   font-family: Noto Sans KR;
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -307,7 +307,7 @@
 .inquiry-menu-submenu-redstar{
   color: #F00;
   font-family: Noto Sans KR;
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
