@@ -50,7 +50,7 @@ function App() {
               <Route path='/order/complete' element={<OrderComplete/>} />
               <Route path='/mypage/changepwd' element={<ChangePwd/>} />
               <Route path='/customercenter' element={<CustomerCenterNotice/>} />
-              <Route path='/customercenter/faq' element={<CustomerCenterFAQ/>}/>
+              <Route path='/customercenter/faq/:tab' element={<CustomerCenterFAQ/>}/> 
               <Route path='/customercenter/inquiry' element={<CustomerCenterInquiry/>}/>
               <Route path='/mypage/writereview' element={<WriteReview/>} />
               <Route path='/mypage/orderhistory' element={<OrderHistory/>}/>

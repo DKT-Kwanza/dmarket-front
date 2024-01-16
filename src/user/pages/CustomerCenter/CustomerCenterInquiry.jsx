@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import './CustomerCenterInquiry.css';
 import { ReactComponent as ChevronDown } from "../../../assets/icons/chevron-down.svg";
 
 function CustomerCenterInquiry() {
+  const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(''); // 선택된 옵션을 추적하기 위한 상태 추가
 
@@ -14,6 +15,10 @@ function CustomerCenterInquiry() {
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
     setDropdownOpen(false);
+  };
+
+  const handleCancel = () => {
+    navigate(-1);
   };
 
   return (
@@ -117,7 +122,7 @@ function CustomerCenterInquiry() {
 
 
         <div className='inquiry-decision'>
-          <button className='inquiry-decision-cancel'>취소</button>
+          <button  onClick={handleCancel} className='inquiry-decision-cancel'>취소</button>
           <button className='inquiry-decision-accept'>등록</button>
         </div>
       
