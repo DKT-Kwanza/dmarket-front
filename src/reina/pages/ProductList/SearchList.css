@@ -1,0 +1,151 @@
+.searchList-body {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+.searchList-category {
+    font-size: 16px;
+}
+
+.searchList-title {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 18px auto;
+    text-align: center;
+}
+
+.searchList-title-bar {
+    background: #000;
+    height: 2px;    
+}
+/* 
+.searchList-filter-container {
+    padding: 0 70px;
+}
+
+.searchList-price-container {
+    display: flex;
+    margin-top: 24px;
+    align-items: center;
+}
+
+.searchList-label {
+    color: #616161;
+    font-size: 16px;
+    font-weight: 400;
+    margin-right: 30px;
+}
+
+.searchList-font {
+    color: #616161;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0 14px;
+}
+
+.searchList-filter-price {
+    width: 141px;
+    height: 28px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    background: #fff;
+    padding: 1px 12px;
+}
+
+.searchList-rating-container {
+    display: flex;
+    margin-top: 24px;
+    align-items: center;
+}
+
+.searchList-radio-btn {
+    display: none;
+}
+
+.searchList-radio-label {
+    display: inline-block;
+    text-align: center;
+    line-height: 28px;
+    width: 153px;
+    height: 28px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    background: #fff;
+    color: #9E9E9E;
+    font-size: 15px;
+    font-weight: 400;
+    margin-right: 37px;
+    padding: 1px 6px;
+}
+
+.searchList-radio-btn:checked + .searchList-radio-label {
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    background: #E0E0E0;
+    color: #fff;
+}
+
+.searchList-radio-label:hover {
+    cursor: pointer;
+}
+
+.searchList-star {
+    display: inline;
+    vertical-align: middle;
+    font-size: 16px;
+}
+
+.searchList-btn-container {
+    text-align: right;
+    margin-bottom: 16px;
+    padding: 0 70px;
+}
+
+.searchList-search-btn {
+    width: 72px;
+    height: 29px;
+    border: 0px;
+    border-radius: 5px;
+    background: #FFD465;
+    margin-right: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.searchList-clear-btn {
+    width: 72px;
+    height: 29px;
+    border: 0px;
+    border-radius: 5px;
+    background: #F3F3F3;
+    color: #919191;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+} */
+
+.searchList-dropdown-container {
+    text-align: right;
+}
+
+.searchList-dropdown {
+    font-size: 16px;
+    color: #505050;
+    font-weight: 700;
+    border: 0;
+    margin: 44px 8px 6px 0;
+    cursor: pointer;
+}
+
+.searchList-bar {
+    background: #DBDBDB;
+    height: 2px;    
+}
+
+.searchList-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+    margin-top: 17px;
+}

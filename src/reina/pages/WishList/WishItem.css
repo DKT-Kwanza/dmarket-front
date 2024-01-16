@@ -1,0 +1,49 @@
+.wishItem-container {
+    display: flex;
+    gap: 40px;
+    height: 140px;
+    align-items: center;
+    border: 1px solid #CED3D6;
+    padding: 0 40px;
+    margin: 22px auto;
+}
+
+.wishItem-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.wishItem-img {
+    width: 100px;
+    height: 100px;
+    background-color: #D9D9D9;
+}
+
+.wishItem-brand {
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 4px 0;
+}
+
+.wishItem-name {
+    color: #505050;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 4px 0;
+}
+
+.wishItem-bar {
+    width: 1px;
+    height: 139px;
+    background-color: #CED3D6;
+    margin-left: auto;
+}
+
+.wishItem-price {
+    color: #000;
+    font-size: 26px;
+    font-weight: 700;
+}
