@@ -1,0 +1,138 @@
+.Inquiry-title {
+    height: 97px;
+    font-size: 26px;
+    font-weight: bold;
+    display: flex;
+}
+
+.Inquiry-title-bar {
+    margin-top: 42px;
+    margin-left: 560px;
+    width: 5px;
+    height: 34px;
+    background-color: #191919;
+}
+
+.Inquiry-title-info {
+    margin-top: 42px;
+    margin-left: 15px;
+}
+
+.Inquiry-contents {
+    display: flex;
+}
+
+.Inquiry-contents-sidebar {
+    margin-left: 318px;
+}
+
+.Inquiry-contents-content {
+    margin-left: 22px;
+    width: 1040px;
+    text-align: left;
+    font-size: 15px;
+}
+
+.Inquiry-contents-content-hr {
+    border: none;
+    height: 2px;
+    background-color: black;
+    margin-bottom: 20px;
+}
+
+.Inquiry-contents-content-info {
+    color: #919191;
+}
+
+.Inquiry-contents-content-data {
+    margin-top: 30px;
+    width: 1040px;
+    /* height: 56px; */
+}
+
+.Inquiry-contents-content-data-hr {
+    border: none;
+    height: 1px;
+    margin: 0;
+    background-color: #919191;
+}
+
+.Inquiry-contents-content-data-title {
+    height: 56px;
+    background-color: #FAFAFA;
+    display: flex;
+}
+
+.Inquiry-contents-content-data-1 {
+    margin-top: 18px;
+    margin-left: 24px;
+    width: 265px;
+    height: 20px;
+}
+
+.Inquiry-contents-content-data-2 {
+    margin-top: 18px;
+    width: 377px;
+    height: 20px;
+}
+
+.Inquiry-contents-content-data-3 {
+    margin-top: 18px;
+    width: 214px;
+    height: 20px;
+}
+
+.Inquiry-contents-content-data-4 {
+    margin-top: 18px;
+    width: 160px;
+    height: 20px;
+}
+
+.Inquiry-contents-content-data-list {
+    margin: 0;
+    list-style: none;
+    padding-left: 0;
+}
+
+.Inquiry-contents-content-data-list-hr {
+    border: none;
+    height: 1px;
+    margin: 0;
+    background-color: #DBDBDB;
+}
+
+.Inquiry-contents-content-data-list-temp {
+    display: flex;
+    height: 56px;
+    cursor: pointer;
+}
+
+.Inquiry-contents-content-data-list-detail {
+    display: none;
+}
+
+
+.Inquiry-contents-content-data-list-data {
+    margin: 20px;
+}
+
+.Inquiry-contents-content-data-list-btn-wrap {
+    text-align: right;
+}
+
+.Inquiry-contents-content-data-list-btn {
+    width: 160px;
+    height: 48px;
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #FFD465;
+    cursor: pointer;
+}
+
+.Inquiry-contents-content-data-list-btn-hr {
+    border: none;
+    height: 1px;
+    margin: 0;
+    background-color: #D9D9D9;
+}

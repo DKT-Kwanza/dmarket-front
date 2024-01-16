@@ -1,0 +1,47 @@
+.myPage-sideBar {
+    width: 220px;
+    border-radius: 20px;
+    border: 2px solid #E1E4E6;
+    background: #FFF;
+    text-align: center;
+}
+
+.myPage-sideBar-wrapper {
+    margin-top: 51px;
+    margin-bottom: 51px;
+}
+
+.myPage-sideBar-wrapper-contents {
+    text-align: left;
+    margin-left: 32px;
+}
+
+.myPage-sideBar-wrapper-contents-title {
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.myPage-sideBar-wrapper-hr {
+    width: 176px;
+    background-color: #E1E4E6;
+    text-align: center;
+    margin-top: 17px;
+    margin-bottom: 25px;
+    border: none;
+    height: 2px;
+}
+
+.myPage-sideBar-wrapper-contents-button {
+    border: none;
+    outline: none;
+    background-color: inherit;
+    cursor: pointer;
+    color: #A9AFB3;
+    display: block;
+    margin-bottom: 8px;
+    padding-left: 0;
+}
+
+.myPage-sideBar-wrapper-contents-button:hover {
+    color: black;
+}
