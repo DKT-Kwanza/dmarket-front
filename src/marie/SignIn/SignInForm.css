@@ -1,0 +1,195 @@
+.signInForm-container {
+    padding: 0 320px;
+}
+
+.signInForm-title {
+    color: #000;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.signInForm-border {
+    width: 100%;
+    height: 1px;
+    background: #D9D9D9;
+    margin-bottom: 20px;
+}
+
+.signInForm-essential-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 29px;
+}
+
+.signInForm-essential {
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.signInForm-essential::before {
+    content: "*";
+    color: #ED1C14;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.signInForm-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signInForm-contents {
+    width: 680px;
+}
+
+.signInForm-form {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.signInForm-form label {
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 200px;
+    margin-right: 60px;
+}
+
+.signInForm-form label:not(.signInForm-no-asterisk)::after {
+    content: "*";
+    color: #ED1C14;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.signInForm-input {
+    width: 500px;
+    height: 56px;
+    border: none;
+    border-bottom: 1px solid #DBDBDB;
+    background: #FFF;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.signInForm-password-essential {
+    color: #919191;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: -12px;
+    margin-left: 240px;
+    margin-bottom: 20px;
+}
+
+.signInForm-agreement{
+    margin-top: 44px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 54px;
+}
+.signInForm-agreement-title{
+    text-align: center;
+    color: #000;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 50px;
+}
+
+.signInForm-agreement-contents {
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 50px;
+}
+.signInForm-agreement-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.signInForm-agreement-form label {
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.signInForm-checkbox {
+    width: 26px;
+    height: 26px;
+    border-radius: 5px;
+    border: 1px solid #505050;
+    appearance: none;
+    cursor: pointer;
+}
+
+.signInForm-checkbox:checked {
+    background-color: #FFD465;
+    border: none;
+}
+  
+.signInForm-checkbox:checked:after {
+    content: '✔';
+    color: #363A3C;
+    display: block;
+    text-align: center;
+    position: relative;
+    font-size: 20px;
+}
+
+.signInForm-agreement-btn {
+    margin-left: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #919191;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.signInForm-btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signInForm-btn {
+    margin-top: 120px;
+    width: 394px;
+    height: 56px;
+    border-radius: 5px;
+    background: #FFD465;
+    border: none;
+    color: #363A3C;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    cursor: pointer;
+    text-decoration: none;
+}
