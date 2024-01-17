@@ -5,7 +5,9 @@ function CartItem(){
 
     return(
         <div className='cartItem-container'>
-            <CheckBox />
+            <div className='cartItem-checkbox'>
+                    <CheckBox />
+                </div>
             <div className='cartItem-item'>
                 <div className='cartItem-img'>
                     이미지

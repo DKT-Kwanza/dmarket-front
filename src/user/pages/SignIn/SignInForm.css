@@ -139,12 +139,9 @@
 }
 
 .signInForm-checkbox {
-    width: 26px;
-    height: 26px;
-    border-radius: 5px;
-    border: 1px solid #505050;
-    appearance: none;
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
 }
 
 .signInForm-checkbox:checked {
