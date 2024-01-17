@@ -10,11 +10,11 @@ const Inquiry = () => {
 
     const handleToggle1 = () => {
         setIsExpanded1(!isExpanded1);
-      };
+    };
     
-      const handleToggle2 = () => {
+    const handleToggle2 = () => {
         setIsExpanded2(!isExpanded2);
-      };
+    };
 
     return (<>
         <div><MyPageSubHeader /></div>

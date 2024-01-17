@@ -23,6 +23,7 @@ function Detail() {
 
   const [showNewDetailQna, setShowDetailQna] = useState(false);
   const [showNewDetailQna2, setShowDetailQna2] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleButtonClick = () => {
     setShowDetailQna(true);
@@ -39,6 +40,10 @@ function Detail() {
 
   const handleCloseDetaiQna2 = () => {
     setShowDetailQna2(false);
+  };
+
+  const handleToggle = () => {
+    setIsExpanded(!isExpanded);
   };
 
   return (
@@ -159,7 +164,7 @@ function Detail() {
           <button className='qnaAll'>전체(3)</button><text>&nbsp; | &nbsp;</text>
           <button className='qnaReplyDone'>답변완료(0)</button>&nbsp; | &nbsp;
           <button className='qnaReplyWaiting'>답변대기(0)</button>
-          <button className='qnaEnroll'>Q&A 작성하기 <img src={arrowRight} /></button>
+          <button onClick={handleToggle} className='qnaEnroll'>Q&A 작성하기 <img src={arrowRight} /></button>
         </div>
         <div className='qnaAttributes'>
           <div className='qnaAttributesTitle'><text>제목</text></div>
@@ -178,29 +183,30 @@ function Detail() {
           <div className='questionState2'><text>답변 완료</text></div>
         </div>
         {showNewDetailQna2 && <DetailQna2 onClose={handleCloseDetaiQna2} />}
-
-        <div className='questionWrite'>
-          <div className='questionWriteTitle'>
-            <text>제목</text>
-            <input type="text" className='questionTitleInput' name="title" placeholder="제목을 입력해주세요." required></input>
+        {isExpanded && (
+          <div className='questionWrite'>
+            <div className='questionWriteTitle'>
+              <text>제목</text>
+              <input type="text" className='questionTitleInput' name="title" placeholder="제목을 입력해주세요." required></input>
+            </div>
+            <div className='questionWriteContents'>
+              <div className='questionContentsleft'><text>내용</text></div>
+              <textarea type="text" className='questionContentsInput' name="contents" placeholder="내용을 입력해주세요." required></textarea>
+            </div>
+            <div className='secretState'>
+              <div className='secretArticle'>비밀글</div>
+              <label className="public">
+                공개
+              </label>
+              <CheckBox />
+              <label className="private">
+                비공개
+              </label>
+              <CheckBox />
+            </div>
+            <button onClick={handleToggle} className='enrollButton '>등록</button>
           </div>
-          <div className='questionWriteContents'>
-            <div className='questionContentsleft'><text>내용</text></div>
-            <textarea type="text" className='questionContentsInput' name="contents" placeholder="내용을 입력해주세요." required></textarea>
-          </div>
-          <div className='secretState'>
-            <div className='secretArticle'>비밀글</div>
-            <label className="public">
-              공개
-            </label>
-            <CheckBox />
-            <label className="private">
-              비공개
-            </label>
-            <CheckBox />
-          </div>
-          <button className='enrollButton '>등록</button>
-        </div>
+        )}
         <div className='recommandTitle'><div class="recommandButtonScroll" id="recommandButtonScroll">함께 보면 좋은 상품</div></div>
         <div className='recommandArea'>
           <div className='recommandElement' style={{marginLeft : '0px'}}>
