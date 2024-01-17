@@ -1,4 +1,4 @@
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 import './App.css';
 import MyPageSubHeader from './user/components/MyPage/SubHeader/MyPageSubHeader';
@@ -31,9 +31,12 @@ import Inquiry from "./user/pages/MyPage/MyActivity/CustomerInquiry/Inquiry";
 import Qna from "./user/pages/MyPage/MyActivity/Qna/Qna";
 
 function App() {
+  const location = useLocation();
+  const hideHeaderFooter = location.pathname === '/signin/form';
+
   return (
     <div className="App">
-        <Header />
+        {!hideHeaderFooter && <Header />}
           <Routes>
               <Route path='/login' element={<Login/>} />
               <Route path='/signin' element={<SignIn/>}/>
@@ -66,9 +69,10 @@ function App() {
               <Route path='MyPageSubHeader' element={<MyPageSubHeader />} />
 
           </Routes>
-        <Footer />
+          {!hideHeaderFooter && <Footer />}
     </div>
   );
 }
 
 export default App;
+

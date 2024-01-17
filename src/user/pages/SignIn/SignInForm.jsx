@@ -1,7 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import CheckBox from '../../components/CheckBox/CheckBox';
 import './SignInForm.css';
 
 function SignInForm() {
+    const navigate = useNavigate();
+
+    const navigateToMain = () => {
+        navigate("../main");
+    }
+
     return (
         <div className='signInForm-container'>
             <p className='signInForm-title'>
@@ -121,28 +129,22 @@ function SignInForm() {
                                 이용약관 및 개인정보수집 및 이용, 쇼핑정보 수신(선택)에 모두 동의합니다.
                             </div>
                             <div className='signInForm-agreement-form'>
-                                <input
-                                    type='checkbox'
-                                    id='agreement'
-                                    name='agreement'
-                                    className="signInForm-checkbox"
-                                />
+                                <div className="signInForm-checkbox">
+                                    <CheckBox/>
+                                </div>
                                 <label htmlFor='agreement'>[필수] 개인정보 수집 및 이용 동의</label>
                                 <button className='signInForm-agreement-btn'>약관 보기</button>
                             </div>
                             <div className='signInForm-agreement-form'>
-                                <input
-                                    type='checkbox'
-                                    id='agreement'
-                                    name='agreement'
-                                    className="signInForm-checkbox"
-                                />
+                                <div className="signInForm-checkbox">
+                                    <CheckBox/>
+                                </div>
                                 <label htmlFor='agreement'>[필수] 개인정보 수집 및 이용 동의</label>
                                 <button className='signInForm-agreement-btn'>약관 보기</button>
                             </div>
                         </div>
                         <div className='signInForm-btn-container'>
-                            <button type='submit' className='signInForm-btn'>회원가입</button>
+                            <button type='submit' onClick={navigateToMain} className='signInForm-btn'>회원가입</button>
                         </div>
                     </form>
                 </div>

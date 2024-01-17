@@ -62,9 +62,14 @@ function CustomerCenterFAQ() {
   };
 
   const navigate = useNavigate();
+  const params = useParams();
   const [selectedMenu, setSelectedMenu] = useState('회원 문의');
   const selectedFaqItems = faqData[selectedMenu] || []; // 선택된 메뉴에 해당하는 FAQ 데이터
-  const params = useParams();
+  const [isExpanded_1, setIsExpanded_1] = useState(false);
+  const [isExpanded_2, setIsExpanded_2] = useState(false);
+  const [isExpanded_3, setIsExpanded_3] = useState(false);
+  const [isExpanded_4, setIsExpanded_4] = useState(false);
+  const [pageName, setPageName] = useState("");
 
   useEffect(() => {
     if (params.tab) {
@@ -72,14 +77,18 @@ function CustomerCenterFAQ() {
     }
   }, [params.tab]); // 고객센터에서 넘어올 때 탭 선택
 
+  useEffect(() => {
+    window.onpopstate = (event) => {
+      setPageName(event.state); // 탭 선택 시 url 변경
+    };
+  }, []);
+
   const handleMenuClick = (menu) => {
     setSelectedMenu(menu);
+    const path = encodeURIComponent(menu); // 띄어쓰기 인코딩
+    window.history.pushState(pageName, "", path);
+    setPageName(pageName);
   };
-
-  const [isExpanded_1, setIsExpanded_1] = useState(false);
-  const [isExpanded_2, setIsExpanded_2] = useState(false);
-  const [isExpanded_3, setIsExpanded_3] = useState(false);
-  const [isExpanded_4, setIsExpanded_4] = useState(false);
 
   const handleToggle_1 = () => {
     setIsExpanded_1(!isExpanded_1);

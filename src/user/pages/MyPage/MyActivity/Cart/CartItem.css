@@ -8,6 +8,12 @@
     margin: 22px auto;
 }
 
+.cartItem-checkbox {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+}
+    
 .cartItem-item {
     display: flex;
     gap: 10px;

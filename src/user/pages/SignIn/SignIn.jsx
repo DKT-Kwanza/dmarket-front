@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './SignIn.css';
 import logo from '../../../assets/images/logo.png'
 
 function SignIn() {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState(''); // 사용자 이메일 상태
     const [showVerification, setShowVerification] = useState(false); // 인증 코드 입력칸 상태
     const [timer, setTimer] = useState(600); // 10분을 초로 환산
@@ -22,7 +24,6 @@ function SignIn() {
         return () => clearInterval(interval);
     }, [showVerification, timer]);
 
-
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
@@ -38,6 +39,10 @@ function SignIn() {
         const seconds = timer % 60;
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
+
+    const navigateToSignForm = () => {
+        navigate("./form");
+    }
 
     return (
         <div className="signIn-container">
@@ -83,7 +88,7 @@ function SignIn() {
                                 </div>
                             )}
                         </div>
-                        <Link to="/signin/form" className="signIn-btn2">인증하기</Link>
+                        <div onClick={navigateToSignForm} className="signIn-btn2">인증하기</div>
                     </div>
                 )}
                 <div className='signIn-info'>

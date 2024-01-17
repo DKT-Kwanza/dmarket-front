@@ -10,7 +10,9 @@ function Cart(){
                 <div className='cart-title-content'>장바구니</div>
             </div>
             <div className='cart-container'>
-                <CheckBox/>
+                <div className='cart-checkbox'>
+                    <CheckBox />
+                </div>
                 <div className='cart-count'>전체 상품 : <span>2</span>개</div>
                 <button className='cart-delete-button'>삭제</button>
             </div>
