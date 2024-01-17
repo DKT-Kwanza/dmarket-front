@@ -1,6 +1,7 @@
-import './WishList.css';
+import React, { useState } from 'react';
 import WishItem from './WishItem';
 import CheckBox from '../../../../components/CheckBox/CheckBox';
+import './WishList.css';
 
 function WishList(){
 
@@ -10,7 +11,9 @@ function WishList(){
                 <div className='wishList-title-content'>위시리스트</div>
             </div>
             <div className='wishList-container'>
-                <CheckBox/>
+                <div className='wishList-checkbox'>
+                    <CheckBox />
+                </div>
                 <div className='wishList-count'>전체 상품 : <span>2</span>개</div>
                 <button className='wishList-delete-button'>삭제</button>
             </div>

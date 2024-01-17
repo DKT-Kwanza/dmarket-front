@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import CheckBox from '../../components/CheckBox/CheckBox';
 import './Login.css';
 import logo from '../../../assets/images/logo.png'
 import chevronRight from '../../../assets/icons/chevron-right.svg'
@@ -41,12 +42,10 @@ function Login() {
               </div>
             )}
             <div className="login-maintain">
-              <input 
-                type="checkbox"
-                id="keep-logged-in"
-                className="login-checkbox"
-              />
-              <label htmlFor="keep-logged-in" className='login-checkbox-label'>로그인 상태 유지</label>
+              <CheckBox />
+              <label className='login-checkbox-label'>
+                로그인 상태 유지
+              </label>
             </div>
             <button type="submit" className="login-btn">
               로그인

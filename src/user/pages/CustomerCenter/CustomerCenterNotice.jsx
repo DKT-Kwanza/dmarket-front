@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import './CustomerCenterNotice.css';
 import { ReactComponent as ChevronDown } from "../../../assets/icons/chevron-down.svg";
 import { ReactComponent as ChevronUp } from "../../../assets/icons/chevron-up.svg";
 
 function CustomerCenterNotice() {
+
+  const navigate = useNavigate();
 
   const [isExpanded_1, setIsExpanded_1] = useState(false);
   const [isExpanded_2, setIsExpanded_2] = useState(false);
@@ -21,22 +24,27 @@ function CustomerCenterNotice() {
     setIsExpanded_3(!isExpanded_3);
   };
 
+  const navigateToFaQ = (menu) => {
+    const path = encodeURIComponent(menu); // 띄어쓰기 인코딩
+    navigate(`./faq/${path}`); // 각각의 메뉴 탭으로 바로 이동
+  };
+
   return (
     <div className='CustomerCenterNotice'>
-      {/*<div className='CustomerCenterNotice-body'>*/}
-      <div>
+      <div className='CustomerCenterNotice-body'>
+      {/* <div> */}
         <div className='CustomerCenterName'>
           고객센터
         </div>
         <div className="notice-bar"/>
         <div className="notice-submenu">
-          <button className='notice-submenu-content-left'>회원리뷰</button>
+          <button className='notice-submenu-content-left' onClick={() => navigateToFaQ('회원문의')}>회원 문의</button>
           <div className="submenu-line"/>
-          <button className='notice-submenu-content-mid'>주문/결제 문의</button>
+          <button className='notice-submenu-content-mid' onClick={() => navigateToFaQ('주문/결제 문의')}>주문/결제 문의</button>
           <div className="submenu-line"/>
-          <button className='notice-submenu-content-mid'>반품/환불 문의</button>
+          <button className='notice-submenu-content-mid' onClick={() => navigateToFaQ('반품/환불 문의')}>반품/환불 문의</button>
           <div className="submenu-line"/>
-          <button className='notice-submenu-content-right'>마일리지 문의</button>
+          <button className='notice-submenu-content-right' onClick={() => navigateToFaQ('마일리지 문의')}>마일리지 문의</button>
         </div>
 
         <div className='Center-notice-body'>
@@ -139,7 +147,6 @@ function CustomerCenterNotice() {
 
 
       </div>
-
     </div>
   );
 }
