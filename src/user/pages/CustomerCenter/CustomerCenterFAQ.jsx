@@ -79,11 +79,11 @@ function CustomerCenterFAQ() {
 
   useEffect(() => {
     window.onpopstate = (event) => {
-      setPageName(event.state); // 탭 선택 시 url 변경
+      setPageName(event.state);
     };
   }, []);
 
-  const handleMenuClick = (menu) => {
+  const handleMenuClick = (menu) => { // 탭 선택 시 url 변경
     setSelectedMenu(menu);
     const path = encodeURIComponent(menu); // 띄어쓰기 인코딩
     window.history.pushState(pageName, "", path);
