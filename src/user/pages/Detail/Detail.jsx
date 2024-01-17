@@ -1,14 +1,26 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CheckBox from '../../components/CheckBox/CheckBox';
 import './Detail.css';
 import DetailQna from '../../components/Detail/DetailQna';
 import DetailQna2 from '../../components/Detail/DetailQna2';
-import wishButton from '../../../assets/icons/wishButton.png'
+import heart from '../../../assets/icons/heart.svg'
 import productDetail from '../../../assets/images/productDetail.png'
 import arrowRight from '../../../assets/icons/chevron-right.svg'
 import parcelIcon from '../../../assets/icons/truck-02.png'
 
 function Detail() {
+
+  const navigate = useNavigate();
+
+  const navigateToMypage = (menu) => {
+    navigate(`../mypage/${menu}`); // 각각의 메뉴 탭으로 바로 이동
+  };
+
+  const navigateToOrder = () => {
+      navigate("../order");
+  }
+
   const [showNewDetailQna, setShowDetailQna] = useState(false);
   const [showNewDetailQna2, setShowDetailQna2] = useState(false);
 
@@ -89,9 +101,9 @@ function Detail() {
           </div>
         </div>
         <div className='purchaseArea'>
-          <button className='wishlistButton'><img src={wishButton} /></button>
-          <button className='cartButton'>장바구니</button>
-          <button className='purchaseButton'>바로구매</button>
+          <button onClick={() => navigateToMypage('wishlist')} className='wishlistButton'><img src={heart} /></button>
+          <button onClick={() => navigateToMypage('cart')} className='cartButton'>장바구니</button>
+          <button onClick={navigateToOrder} className='purchaseButton'>바로구매</button>
         </div>
       </div>
       

@@ -1,7 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SignInForm.css';
 
 function SignInForm() {
+    const navigate = useNavigate();
+
+    const navigateToMain = () => {
+        navigate("../main");
+    }
+
     return (
         <div className='signInForm-container'>
             <p className='signInForm-title'>
@@ -142,7 +149,7 @@ function SignInForm() {
                             </div>
                         </div>
                         <div className='signInForm-btn-container'>
-                            <button type='submit' className='signInForm-btn'>회원가입</button>
+                            <button type='submit' onClick={navigateToMain} className='signInForm-btn'>회원가입</button>
                         </div>
                     </form>
                 </div>
