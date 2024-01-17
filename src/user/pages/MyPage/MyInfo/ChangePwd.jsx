@@ -1,14 +1,15 @@
 import React from "react";
 import "./ChangePwd.css";
+import MyPageSubHeader from "../../../components/MyPage/SubHeader/MyPageSubHeader";
+import MyPageSidebar from "../../../components/MyPage/Sidebar/MyPageSidebar";
 
 function ChangePwd(){
     return(
-        <div>
-            <div className="changePwd-navbar">navbar</div>
-            <div className="changePwd-mynavbar">마이페이지 네브바</div>
+        <div className='changePwd'>
+            <MyPageSubHeader />
             <div className="changePwd-body">
                 <div className="changePwd-container">
-                    <div className="changePwd-submenu"/>
+                    <MyPageSidebar />
                     <div className="changePwd-content">
                         <div className="changePwd-title">
                             <div className="changePwd-title-bar"/>

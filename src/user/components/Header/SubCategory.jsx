@@ -1,10 +1,10 @@
 import './SubCategory.css'
+import {useState} from "react";
 
-const SubCategory = ({ setSubDivHovered }) =>{
-
+const SubCategory = () =>{
 
     return(
-        <div className='sub-sub-category' onMouseEnter={() => setSubDivHovered(true)} onMouseLeave={() => setSubDivHovered(false)}>
+        <div className='sub-sub-category-container'>
             <div className='sub-sub-category-contents'>
                 <div className='sub-sub-category-contents-details'>
                     <div className='sub-sub-category-contents-details-style'><button>여성 의류</button></div>

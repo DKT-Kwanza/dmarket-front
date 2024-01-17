@@ -1,3 +1,7 @@
+.orderHistory {
+    padding-bottom: 200px;
+}
+
 .orderHistory-body {
     width: 1280px;
     margin: 0 auto;
@@ -17,6 +21,7 @@
 }
 
 .orderHistory-content {
+    margin-left: 22px;
     display: flex;
     flex-direction: column;
 }

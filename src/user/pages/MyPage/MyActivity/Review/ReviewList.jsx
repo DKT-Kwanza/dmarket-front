@@ -1,6 +1,8 @@
 import React from "react";
 import "./ReviewList.css";
 import eximg from '../../../../../assets/images/720X720.jpg'
+import MyPageSidebar from "../../../../components/MyPage/Sidebar/MyPageSidebar";
+import MyPageSubHeader from "../../../../components/MyPage/SubHeader/MyPageSubHeader";
 import {useState} from "react";
 import { PiStarFill, PiStarLight } from "react-icons/pi";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -25,14 +27,13 @@ const ReviewList = () => {
     
     return (
         <div className="productreview-div-global-wrapper"> {/* 전체 wrapper */}
-            <div className="productreview-div-subheader-container">  {/* 회원기본정보 들어갈 자리 */}
-                <h1>이 공간은 컴포넌트로 대체 될 공간입니다.</h1>
-            </div>
+            <MyPageSubHeader />
             <div className="productreview-div-review-container"> {/* 상품리뷰 전체 wrapper */}
-                <div className="productreview-div-sidebar"></div> {/* 사이드바 */}
+                <MyPageSidebar />
                 <div className="productreview-div-review-wrapper">
                     <div className="productreview-div-review-header"> {/* 상품리뷰 title */}
-                        | 상품리뷰
+                        <div className="productreview-title-bar"/>
+                        <div className="productreview-title-content">상품리뷰</div>
                     </div>
                     <hr className="productreview-hr-line"/>  {/* 상품리뷰 title과 내용 구분선 */}
                     <div className="productreview-div-review-togglewrapper"> {/* 작성 가능한 리뷰, 작성한 리뷰 toggle 버튼 */}

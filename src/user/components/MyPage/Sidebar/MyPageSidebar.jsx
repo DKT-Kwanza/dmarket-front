@@ -4,6 +4,34 @@ import './MyPageSidebar.css';
 const MyPageSidebar = () => {
 
     const navigate = useNavigate();
+    const navigateToOrderHistory = () => {
+        navigate('/mypage/orderhistory');
+    }
+
+    const navigateToCart = () => {
+        navigate('/mypage/cart');
+    }
+
+    const navigateToWishList = () => {
+        navigate('/mypage/wishlist');
+    }
+
+    const navigateToReviewList = () => {
+        navigate('/mypage/reviewlist');
+    }
+
+    const navigateToInquiry = () => {
+        navigate('/mypage/inquiry');
+    }
+
+    const navigateToChangeInfo = () => {
+        navigate('/mypage/changeinfo');
+    }
+
+    const navigateToChangePwd = () => {
+        navigate('/mypage/changepwd');
+    }
+
     const temp = () => {
         navigate('/');
     }
@@ -14,63 +42,31 @@ const MyPageSidebar = () => {
 
                 <div className='myPage-sideBar-wrapper-contents'>
                     <p className='myPage-sideBar-wrapper-contents-title'>나의 주문관리</p>
-                    <button className='myPage-sideBar-wrapper-contents-button' onClick={temp}>주문/배송 조회</button>
+                    <button className='myPage-sideBar-wrapper-contents-button' onClick={navigateToOrderHistory}>주문/배송 조회</button>
                 </div>
 
                 <hr className='myPage-sideBar-wrapper-hr' />
 
                 <div className='myPage-sideBar-wrapper-contents'>
                     <p className='myPage-sideBar-wrapper-contents-title'>나의 활동관리</p>
-                    <button className='myPage-sideBar-wrapper-contents-button' onClick={temp}>장바구니</button>
-                    <button className='myPage-sideBar-wrapper-contents-button' onClick={temp}>위시리스트</button>
-                    <button className='myPage-sideBar-wrapper-contents-button' onClick={temp}>상품리뷰</button>
+                    <button className='myPage-sideBar-wrapper-contents-button' onClick={navigateToCart}>장바구니</button>
+                    <button className='myPage-sideBar-wrapper-contents-button' onClick={navigateToWishList}>위시리스트</button>
+                    <button className='myPage-sideBar-wrapper-contents-button' onClick={navigateToReviewList}>상품리뷰</button>
                     <button className='myPage-sideBar-wrapper-contents-button' onClick={temp}>상품 Q&A</button>
-                    <button className='myPage-sideBar-wrapper-contents-button' onClick={temp}>고객 문의</button>
+                    <button className='myPage-sideBar-wrapper-contents-button' onClick={navigateToInquiry}>고객 문의</button>
                 </div>
 
                 <hr className='myPage-sideBar-wrapper-hr' />
 
                 <div className='myPage-sideBar-wrapper-contents'>
                     <p className='myPage-sideBar-wrapper-contents-title'>나의 정보관리</p>
-                    <button className='myPage-sideBar-wrapper-contents-button' onClick={temp}>회원정보 변경</button>
-                    <button className='myPage-sideBar-wrapper-contents-button' onClick={temp}>비밀번호 변경/회원탈퇴</button>
+                    <button className='myPage-sideBar-wrapper-contents-button' onClick={navigateToChangeInfo}>회원정보 변경</button>
+                    <button className='myPage-sideBar-wrapper-contents-button' onClick={navigateToChangePwd}>비밀번호 변경</button>
                 </div>
 
             </div>
         </div>
     );
-
-    // return (
-    //     <div className='myPage-sideBar'>
-    //         <div className='myPage-sideBar-wrapper'>
-    //             <ul>
-    //                 <div className='myPage-sideBar-contents'>
-    //                     <p>나의 주문관리</p>
-    //                     <li><button onClick={temp}>주문/배송 조회</button></li>
-    //                 </div>
-    //             </ul>
-    //             <hr />
-    //             <ul>
-    //                 <div className='myPage-sideBar-contents'>
-    //                     <p>나의 활동관리</p>
-    //                     <li><button onClick={temp}>장바구니</button></li>
-    //                     <li><button onClick={temp}>위시리스트</button></li>
-    //                     <li><button onClick={temp}>상품리뷰</button></li>
-    //                     <li><button onClick={temp}>상품 Q&A</button></li>
-    //                     <li><button onClick={temp}>고객 문의</button></li>
-    //                 </div>
-    //             </ul>
-    //             <hr />
-    //             <ul>
-    //                 <div className='myPage-sideBar-contents'>
-    //                     <p>나의 정보관리</p>
-    //                     <li><button onClick={temp}>회원정보 변경</button></li>
-    //                     <li><button onClick={temp}>비밀번호 변경/회원탈퇴</button></li>
-    //                 </div>
-    //             </ul>
-    //         </div>
-    //     </div>
-    // );
 };
 
 export default MyPageSidebar;

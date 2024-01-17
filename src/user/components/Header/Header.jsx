@@ -5,7 +5,6 @@ import Footer from '../Footer/Footer';
 
 function Header(){
     const [isMainDivHovered, setMainDivHovered] = useState(false);
-    const [isSubDivHovered, setSubDivHovered] = useState(false);
 
 
     // svg 클릭 이벤트 만들어야함
@@ -64,7 +63,7 @@ function Header(){
             </div>
         </div>
         <div className="category-div">
-            <div className="category-div-container" onMouseEnter={() => setMainDivHovered(true)} onMouseLeave={() => setMainDivHovered(false)}>
+            <div className="category-div-container" onMouseOver={() => setMainDivHovered(false)}>
                 <div className="main-category">
                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="14" viewBox="0 0 17 14" fill="none">
                         <rect x="0.835938" width="16" height="2" fill="black"/>
@@ -83,10 +82,7 @@ function Header(){
                 <div className="user-center">고객센터</div>
             </div>
         </div>
-        {isMainDivHovered && <SubCategory setSubDivHovered={setSubDivHovered}/>}
-        {/* <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>
-            <Footer />
-        </div> */}
+        {isMainDivHovered && <SubCategory />}
         </div>
         
       );
