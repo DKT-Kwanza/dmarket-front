@@ -11,6 +11,7 @@
 .changePwd-body {
     width: 1280px;
     margin: 0 auto;
+    padding-bottom: 200px;
 }
 .changePwd-body input {
     outline:none;
@@ -109,14 +110,5 @@
     border: none;
     margin-right: 21px;
     background: #FFD465;
-    cursor: pointer;
-}
-.changePwd-button-del{
-    width: 122px;
-    height: 49px;
-    border-radius: 5px;
-    border: none;
-    background: #FF4248;
-    color: white;
     cursor: pointer;
 }

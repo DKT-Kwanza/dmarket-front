@@ -61,7 +61,6 @@ function ChangePwd(){
                         </div>
                         <div className="changePwd-button-div">
                             <button className="changePwd-button-conf">확인</button>
-                            <button className="changePwd-button-del">회원 탈퇴</button>
                         </div>
                     </div>
                 </div>
