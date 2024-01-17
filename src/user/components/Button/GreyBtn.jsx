@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function OrderCancelBtn({ disabled, onClick, children }) {
+function GreyBtn({ disabled, onClick, children }) {
     return <StyledButton disabled={disabled} onClick={onClick}>{children}</StyledButton>;
 }
 
@@ -27,4 +27,4 @@ const StyledButton = styled.button`
   }
 `;
 
-export default OrderCancelBtn;
+export default GreyBtn;

@@ -1,20 +1,35 @@
+.Inquiry {
+    padding-bottom: 200px;
+}
+
+.Inquiry-contents-body {
+    display: flex;
+    flex-direction: row;
+    width: 1280px;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
+.Inquiry-contents {
+    margin-left: 22px;
+}
+
 .Inquiry-title {
-    height: 97px;
     font-size: 26px;
     font-weight: bold;
     display: flex;
+    flex-direction: row;
+    margin-left: 22px;
+    align-items: center;
 }
 
 .Inquiry-title-bar {
-    margin-top: 42px;
-    margin-left: 560px;
     width: 5px;
     height: 34px;
     background-color: #191919;
 }
 
 .Inquiry-title-info {
-    margin-top: 42px;
     margin-left: 15px;
 }
 
@@ -29,16 +44,15 @@
 
 .Inquiry-contents-content {
     margin-left: 22px;
-    width: 1040px;
     text-align: left;
     font-size: 15px;
 }
 
 .Inquiry-contents-content-hr {
-    border: none;
+    width: 1040px;
     height: 2px;
-    background-color: black;
-    margin-bottom: 20px;
+    background-color: #000;
+    margin-top: 16px;
 }
 
 .Inquiry-contents-content-info {
@@ -47,7 +61,6 @@
 
 .Inquiry-contents-content-data {
     margin-top: 30px;
-    width: 1040px;
     /* height: 56px; */
 }
 

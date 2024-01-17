@@ -1,5 +1,7 @@
 import "./OrderHistory.css";
 import OrderItem from "../../../components/OrderItem";
+import MyPageSubHeader from "../../../components/MyPage/SubHeader/MyPageSubHeader";
+import MyPageSidebar from "../../../components/MyPage/Sidebar/MyPageSidebar";
 import {useNavigate} from "react-router-dom";
 function OrderHistory() {
     const navigate = useNavigate();
@@ -9,10 +11,12 @@ function OrderHistory() {
     }
 
     return (
+        <div className="orderHistory">
+        <MyPageSubHeader />
         <div className="orderHistory-body">
             <div className="orderHistory-container">
                 {/*왼쪽 메뉴 바 영역 입니다.*/}
-                <div className="orderHistory-submenu"/>
+                <MyPageSidebar />
                 {/*컨텐트 영역 입니다.*/}
                 <div className="orderHistory-content">
                     {/*주문/배송 조회 제목 영역 입니다.*/}
@@ -134,6 +138,7 @@ function OrderHistory() {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

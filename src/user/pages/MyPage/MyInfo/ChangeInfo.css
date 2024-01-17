@@ -1,6 +1,5 @@
-.InfoChange-header {
-    height: 240px;
-    background: #FFE39A;
+.InfoChange {
+    padding-bottom: 200px;
 }
 
 .InfoChange-body {
@@ -24,6 +23,7 @@
 .InfoChange-content {
     display: flex;
     flex-direction: column;
+    margin-left: 22px;
 }
 
 .InfoChange-title {

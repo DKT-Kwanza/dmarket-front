@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 200px;
 }
 .productreview-div-sidebar{
     width: 220px;
@@ -12,7 +13,7 @@
 }
 .productreview-div-review-wrapper{
     width: 1040px;
-    margin-top: 40px;
+    margin-left: 22px;
 }
 .productreview-div-subheader-container {
     width: 1920px;
@@ -25,15 +26,29 @@
 
 .productreview-div-review-container{
     display:flex;
+    margin-top: 40px;
 }
 
 .productreview-div-review-header{
-    color: #000;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.productreview-title-bar {
+    width: 5px;
+    height: 34px;
+    background-color: #000000;
+}
+
+.productreview-title-content {
+    padding-left: 15px;
     font-size: 26px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
 }
+
 .productreview-div-review-divide{
     width: 1px;
     height: 16px;

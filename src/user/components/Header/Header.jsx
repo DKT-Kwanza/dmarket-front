@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Header.css'
 import SubCategory from './SubCategory'
@@ -8,24 +8,31 @@ import heart from '../../../assets/icons/heart.svg'
 import shoppingBag from '../../../assets/icons/shoppingBag.svg'
 import alert from '../../../assets/icons/alert.svg'
 
-function Header(){
+function Header() {
     const navigate = useNavigate();
     const [isMainDivHovered, setMainDivHovered] = useState(false);
     const [isSubDivHovered, setSubDivHovered] = useState(false);
 
-
     // svg 클릭 이벤트 만들어야함
-    const exclick =(e)=> {
-        alert("버튼 클릭")
-    }
-
-    const navigateToMain = () => {
-        navigate(`./main`);
+    const exclick = (e) => {
+        alert("버튼 클릭");
     }
 
     // 아이콘 클릭 이후 페이지 변경
     const iconClick = (menu) => {
         navigate(`./mypage/${menu}`);
+    }
+
+    const handleMouseOver = () => {
+        setMainDivHovered(true);
+        setSubDivHovered(true);
+    }
+
+    const handleMouseLeaveSubCategory = () => {
+        setSubDivHovered(false);
+      
+    const navigateToMain = () => {
+        navigate(`./main`);
     }
 
     return (
@@ -65,7 +72,7 @@ function Header(){
             </div>
         </div>
         <div className="category-div">
-            <div className="category-div-container" onMouseEnter={() => setMainDivHovered(true)} onMouseLeave={() => setMainDivHovered(false)}>
+            <div className="category-div-container" onMouseEnter={handleMouseOver}>
                 <div className="main-category">
                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="14" viewBox="0 0 17 14" fill="none">
                         <rect x="0.835938" width="16" height="2" fill="black"/>
@@ -84,7 +91,7 @@ function Header(){
                 <div className="user-center">고객센터</div>
             </div>
         </div>
-        {isMainDivHovered && <SubCategory setSubDivHovered={setSubDivHovered}/>}
+        {isSubDivHovered && <SubCategory onMouseLeave={handleMouseLeaveSubCategory}/>}
         {/* <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>
             <Footer />
         </div> */}

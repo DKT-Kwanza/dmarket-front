@@ -16,16 +16,18 @@ const Inquiry = () => {
         setIsExpanded2(!isExpanded2);
     };
 
-    return (<>
+    return (
+        <div className='Inquiry'>
         <div><MyPageSubHeader /></div>
-        <div className='Inquiry-title'>
-            <div className='Inquiry-title-bar'></div>
-            <div className='Inquiry-title-info'>고객문의</div>
-        </div>
-        <div className='Inquiry-contents'>
-            <div className='Inquiry-contents-sidebar'><MyPageSidebar /></div>
+            <div className='Inquiry-contents-body'>
+                <MyPageSidebar />
+                <div className='Inquiry-container'>
+                    <div className='Inquiry-title'>
+                        <div className='Inquiry-title-bar'></div>
+                        <div className='Inquiry-title-info'>고객문의</div>
+                    </div>
             <div className='Inquiry-contents-content'>
-                <hr className='Inquiry-contents-content-hr' />
+                <div className='Inquiry-contents-content-hr' />
                 <div className='Inquiry-contents-content-info'>
                     <p>* 관련 없는 내용, 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</p>
                     <p>* 고객님께서 고객문의에 작성하신 내용입니다.</p>
@@ -95,7 +97,9 @@ const Inquiry = () => {
                 </div>
             </div>
         </div>
-    </>);
+            </div>
+    </div>
+    );
 };
 
 export default Inquiry;

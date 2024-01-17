@@ -1,7 +1,9 @@
 import "./OrderHistoryDetail.css";
-import OrderCancelBtn from "../../../components/Button/OrderCancelBtn"
+import GreyBtn from "../../../components/Button/GreyBtn"
 import ConfirmCancelModal from "../../../components/Modal/ConfirmCancelModal";
 import OrderItem from "../../../components/OrderItem";
+import MyPageSubHeader from "../../../components/MyPage/SubHeader/MyPageSubHeader";
+import MyPageSidebar from "../../../components/MyPage/Sidebar/MyPageSidebar";
 import {useEffect, useState} from "react";
 
 function OrderHistoryDetail() {
@@ -38,6 +40,8 @@ function OrderHistoryDetail() {
     }, [])
 
     return(
+        <div className="orderHistoryDetail">
+            <MyPageSubHeader />
         <div className="orderHistoryDetail-body">
 
             <ConfirmCancelModal isOpen={isOpen} onClose={closeModalHandler} onConfirm={handleConfirm}>
@@ -53,7 +57,7 @@ function OrderHistoryDetail() {
 
             <div className="orderHistoryDetail-container">
                 {/*왼쪽 메뉴 바 영역 입니다.*/}
-                <div className="orderHistoryDetail-submenu"/>
+                <MyPageSidebar />
                 {/*컨텐츠 영역 입니다.*/}
                 <div className="orderHistoryDetail-content">
                     {/*주문/배송 조회 제목 영역 입니다.*/}
@@ -99,12 +103,12 @@ function OrderHistoryDetail() {
                         count="1"
                         price="1,208,000">
                         {/*주문 취소 버튼 입니다.*/}
-                        <OrderCancelBtn
+                        <GreyBtn
                             onClick={openModalHandler}
                             // disabled={isConfirming}
                         >
                             {status}
-                        </OrderCancelBtn>
+                        </GreyBtn>
 
                     </OrderItem>
 
@@ -116,15 +120,16 @@ function OrderHistoryDetail() {
                         count="1"
                         price="1,208,000">
                         {/*반품 신청 버튼 입니다.*/}
-                        <OrderCancelBtn
+                        <GreyBtn
                             onClick={openModalHandler}
                             // disabled={isConfirming}
                         >
                             {status}
-                        </OrderCancelBtn>
+                        </GreyBtn>
                     </OrderItem>
                 </div>
             </div>
+        </div>
         </div>
     );
 }
