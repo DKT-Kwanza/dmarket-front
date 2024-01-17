@@ -1,8 +1,6 @@
 import {Route, Routes} from "react-router-dom";
 
 import './App.css';
-import MyPageSubHeader from './user/components/MyPage/SubHeader/MyPageSubHeader';
-import MyPageSidebar from './user/components/MyPage/Sidebar/MyPageSidebar';
 import Header from './user/components/Header/Header'
 import Footer from './user/components/Footer/Footer'
 import Login from './user/pages/Login/Login'
@@ -55,13 +53,6 @@ function App() {
               <Route path='/mypage/orderhistory' element={<OrderHistory/>}/>
               <Route path='/mypage/orderhistory/detail' element={<OrderHistoryDetail/>}/>
               <Route path='/mypage/inquiry' element={<Inquiry />} />
-
-
-
-
-              <Route path='MyPageSidebar' element={<MyPageSidebar />} />
-              <Route path='MyPageSubHeader' element={<MyPageSubHeader />} />
-
           </Routes>
         <Footer />
     </div>
