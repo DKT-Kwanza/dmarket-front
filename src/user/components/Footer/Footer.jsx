@@ -1,7 +1,6 @@
 import './Footer.css'
 
 function Footer(){
-    if (window.location.pathname === '/signin/form') return null;
     
     return(
         <div className='footer'>

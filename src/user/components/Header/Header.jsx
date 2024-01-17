@@ -28,8 +28,6 @@ function Header(){
         navigate(`./mypage/${menu}`);
     }
 
-    if (window.location.pathname === '/signin/form') return null;
-
     return (
         <div className="header-div">
           <div className="nav-div">
