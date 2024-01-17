@@ -14,11 +14,8 @@ button {
 	margin: 0 auto;
 }
 
-.head {
-    padding: 45px;
-}
 .category {
-    padding-top: 77px;
+    padding-top: 50px;
     font-size: 16px;
 }
 
@@ -229,6 +226,7 @@ button {
     height: 29px;
     border: none;
     border-right: 2px solid #cfcfcf;
+    text-align: center;
 }
 
 .reviewButton {
@@ -236,6 +234,7 @@ button {
     height: 29px;
     border: none;
     border-right: 2px solid #cfcfcf;
+    text-align: center;
 }
 
 .qnaButton {
@@ -243,6 +242,7 @@ button {
     height: 29px;
     border: none;
     border-right: 2px solid #cfcfcf;
+    text-align: center;
 }
 
 .recommandButton {
@@ -250,13 +250,24 @@ button {
     height: 29px;
     border: none;
     border-right: 2px solid #cfcfcf;
+    text-align: center;
 }
 
 .returnInfoButton {
     width: 262px;
     height: 29px;
     border: none;
+    text-align: center;
 }
+
+ul, ol, li {list-style-type: none;}
+a {color: #333; text-decoration: none;}
+
+.list {position: relative; height: 50px; margin-bottom: 50px;}
+.list li {display: inline-block; padding: 0 20px;}
+.listbox {margin: 0 auto; text-align: center;}
+
+.productDetailButtonScroll, .reviewButtonScroll, .qnaButtonScroll, .recommandButtonscroll, .deliveryTitleScroll {width: 100%; margin-bottom: 20px;}
 
 .productNum {
     height: 63px;

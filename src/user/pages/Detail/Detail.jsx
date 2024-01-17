@@ -11,6 +11,7 @@ import parcelIcon from '../../../assets/icons/truck-02.png'
 function Detail() {
   const [showNewDetailQna, setShowDetailQna] = useState(false);
   const [showNewDetailQna2, setShowDetailQna2] = useState(false);
+
   const handleButtonClick = () => {
     setShowDetailQna(true);
   };
@@ -31,7 +32,6 @@ function Detail() {
   return (
     <>
       <div id="container1">
-        <div className='head' />
         <div className='category'><text>카테고리/카테고리/카테고리</text></div>
         <div className='productArea'>
           <div className='repImg' />
@@ -96,23 +96,23 @@ function Detail() {
       </div>
       
       <div id='container2'>
-        <div className='buttonArea'>
-          <button className='productDetailButton'>상품상세정보</button>
-          <button className='reviewButton'>고객리뷰(3)</button>
-          <button className='qnaButton'>상품 Q&A(0)</button>
-          <button className='recommandButton'>추천 상품</button>
-          <button className='returnInfoButton'>배송/반품/교환 안내</button>
-        </div>
+        <ul className='buttonArea'>
+          <li className='productDetailButton'><a href="#productDetailButtonScroll" class="scroll_move">상품상세정보</a></li>
+          <li className='reviewButton'><a href="#reviewButtonScroll" class="scroll_move">고객리뷰(3)</a></li>
+          <li className='qnaButton'><a href="#qnaButtonScroll" class="scroll_move">상품 Q&A(0)</a></li>
+          <li className='recommandButton'><a href="#recommandButtonScroll" class="scroll_move">추천 상품</a></li>
+          <li className='returnInfoButton'><a href="#scroll5" class="scroll_move">배송/반품/교환 안내</a></li>
+        </ul>
         <hr style={{ marginTop: '5px', borderWidth: '2px' }} />
         <div className='productNum'>
           <text>상품번호 : 1000563057860<br />모델번호 : J103401008</text>
         </div>
-        <div className='productDetail'><text>상품상세정보</text></div>
+        <div className='productDetail'><div class="productDetailButtonScroll" id="productDetailButtonScroll">상품상세정보</div></div>
         <div className='productDetailImg'>
           <img src={productDetail} />
         </div>
         <div className='productDetailBox'></div>
-        <div className='reviewTitle'><text>고객리뷰(3)</text></div>
+        <div className='reviewTitle'><div class="reviewButtonScroll" id="reviewButtonScroll">고객리뷰(3)</div></div>
         <div className='ratingBox'>
           <div className='ratingNum'><text>3.0</text></div>
           <div className='ratingStar'>
@@ -141,7 +141,7 @@ function Detail() {
             <hr style={{ marginTop: '19px', marginLeft: '-15px' }} />
           </div>
         </div>
-        <div className='qnaTitle'><text>상품Q&A(0)</text></div>
+        <div className='qnaTitle'><div class="qnaButtonScroll" id="qnaButtonScroll">Q&A(0)</div></div>
         <div className='qnaAnnounce'><text>상품 외 배송, 교환/반품 등에 관한 문의사항은 고객센터에서 확인하실 수 있습니다.</text></div>
         <div className='qnaCategory'>
           <button className='qnaAll'>전체(3)</button><text>&nbsp; | &nbsp;</text>
@@ -189,7 +189,7 @@ function Detail() {
           </div>
           <button className='enrollButton '>등록</button>
         </div>
-        <div className='recommandTitle'><text>함께 보면 좋은 상품</text></div>
+        <div className='recommandTitle'><div class="recommandButtonScroll" id="recommandButtonScroll">함께 보면 좋은 상품</div></div>
         <div className='recommandArea'>
           <div className='recommandElement' style={{marginLeft : '0px'}}>
             <div className='recommandElementImg'></div>
@@ -218,7 +218,7 @@ function Detail() {
             <div className='recomandElementPrice'><text>20,710원</text></div>
           </div>
         </div>
-        <div className='deliveryTitle'><text>배송 안내</text></div>
+        <div className='deliveryTitle'><div class="deliveryTitleScroll" id="deliveryTitleScroll">배송 안내</div></div>
         <hr style={{ marginTop: '16px', borderWidth: '2px', marginBottom: '0px'}} />
         <div className='deliveryContents'>
           <div className='deliveryIcon'><img className='deliveryIconImg' src={parcelIcon}/></div>
@@ -252,7 +252,7 @@ function Detail() {
           <text><br/>※ 전자상거래 등에서의 소비자 보호에 관한 법률에 의한 반품규정이 판매자가 상품상세 페이지 등에서 개별적으로 고지 또는 지정한 반품조건보다 우선합니다.</text>
         </div>
       </div>
-      <div style={{marginBottom :'600px'}}/>
+      <div style={{marginBottom :'200px'}}/>
     </>
   );
 }
