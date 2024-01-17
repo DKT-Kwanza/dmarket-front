@@ -9,7 +9,6 @@ body, html {
 .header-div {
     height: 166px;
     position: relative;
-
     background: white;
 }
 
@@ -20,9 +19,7 @@ body, html {
     align-items: center;
     width: 1280px;
     margin: 0 auto;
-    
 }
-
 
 .logo {
     width: 180px;
