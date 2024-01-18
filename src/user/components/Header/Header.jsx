@@ -102,7 +102,6 @@ function Header() {
             <Footer />
         </div> */}
             </div>
-
         );
 }
 export default Header;
