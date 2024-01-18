@@ -194,7 +194,7 @@ function Detail() {
           <div className='questionDate2'><text>2024.01.08</text></div>
           <div className='questionState2'><text>답변 완료</text></div>
         </div>
-        {showNewDetailQna2 && <DetailQna2 onClose={handleCloseDetaiQna2} />}
+        {showNewDetailQna2 && <DetailQna2 onClose={handleCloseDetailQna2} />}
         {isExpanded && (
           <div className='questionWrite'>
             <div className='questionWriteTitle'>
