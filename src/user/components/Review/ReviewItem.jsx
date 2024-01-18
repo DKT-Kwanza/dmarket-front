@@ -1,15 +1,14 @@
 import React from "react";
 import { PiStarFill, PiStarLight } from "react-icons/pi";
 import { RiDeleteBinLine } from "react-icons/ri";
-import eximg from '../../../assets/images/720X720.jpg';
 import './ReviewItem.css';
 
 const ReviewItem = ({ imgSrc, rating, reviewText, reviewDate }) => {
   return (
     <div className="productreview-div-review-content-wrapper">
-      {imgSrc && imgSrc !== "none" && (
+      {imgSrc && (
         <div className="productreview-div-review-content-img">
-          <img src={imgSrc} className='productreview-img-review-content-img' alt="상품이미지"/>
+          <img src={imgSrc} className='productreview-img-review-content-img' alt="리뷰 이미지"/>
         </div>
       )}
       <div className="productreview-div-review-content-text2-wrapper">

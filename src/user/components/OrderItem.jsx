@@ -2,10 +2,10 @@
 // 사진, 정보, 배송 상태
 import styled from 'styled-components';
 
-function OrderItem({brand, name, option, count, price, children}) {
+function OrderItem({img, brand, name, option, price, children}) {
     return (
         <Item>
-            <ItemImg />
+            <img src={img} className='productreview-img-review-content-img' alt="상품 이미지"/>
             <Info>
                 <tr>
                     <InfoTitle>브랜드</InfoTitle>
@@ -19,9 +19,6 @@ function OrderItem({brand, name, option, count, price, children}) {
                     <InfoTitle>옵션</InfoTitle>
                     <InfoContent>
                         <div>{option}</div>
-                        <Line/>
-                        <InfoTitle>수량</InfoTitle>
-                        <div>{count}</div>
                     </InfoContent>
                 </tr>
                 <tr>
