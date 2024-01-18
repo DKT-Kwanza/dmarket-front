@@ -151,7 +151,7 @@ function CustomerCenterFAQ() {
               FAQ
             </div>
             <div className='faq-main-body-line'/>
-            <div className='CustomerCenterfaq'>
+            <div>
               <CustomerCenterFAQList items={selectedFaqItems} />
             </div>
             <div className='faq-main-menu-line'/>
