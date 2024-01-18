@@ -18,7 +18,7 @@ const Main = () =>{
         <div className='main-div-global-wrapper'> {/* 전체 wrapper */}
             <div className='main-div-mainimg-wrapper'> {/* 메인이미지 wrapper */}
                 <div className='main-div-mainimg'> {/* 메인이미지 */}
-                    <h1>1580 X 600</h1>
+                    <h1>1580 X 600 이었는데 너무 커서 1500 X 300으로 줄였어용</h1>
                 </div>
                 <div className='main-div-buttonwrapper'> {/* 메인이미지 버튼 wrapper */}
                     <button className='main-btn-movebtn'><FaAngleLeft/></button> {/* 왼쪽가기 버튼 */}

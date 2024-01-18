@@ -32,6 +32,7 @@ function Detail() {
   };
 
   const [isExpanded, setIsExpanded] = useState(false);
+  const [checkboxState, setCheckboxState] = useState('none');
 
   const handleButtonClick = () => {
     setShowDetailQna(true);
@@ -49,8 +50,18 @@ function Detail() {
     setShowDetailQna2(false);
   };
 
-  const handleToggle = () => {
+  const handleToggle = () => { // qna 작성창 열기
     setIsExpanded(!isExpanded);
+  };
+
+  const handleCheckboxChange = (newState) => { // qna 작성 공개 여부 체크박스
+    console.log(newState);
+    if (checkboxState === newState) {
+      setCheckboxState('none');
+    } else {
+      setCheckboxState(newState);
+      console.log(newState);
+    }
   };
 
   return (
@@ -199,11 +210,17 @@ function Detail() {
               <label className="public">
                 공개
               </label>
-              <CheckBox />
+              <CheckBox 
+                checked={checkboxState === 'public'} 
+                onChange={() => handleCheckboxChange('public')} 
+              />
               <label className="private">
                 비공개
               </label>
-              <CheckBox />
+              <CheckBox 
+                checked={checkboxState === 'private'} 
+                onChange={() => handleCheckboxChange('private')} 
+              />
             </div>
             <button onClick={handleToggle} className='enrollButton '>등록</button>
           </div>

@@ -1,8 +1,9 @@
 import React from 'react';
 import { ReactComponent as ChevronDown } from "../../../assets/icons/chevron-down.svg";
 import { ReactComponent as ChevronUp } from "../../../assets/icons/chevron-up.svg";
+import './CustomerCenterFAQItem.css';
 
-function CustomerCenterFAQListItem({ question, isExpanded, onToggle, children }) {
+function CustomerCenterFAQItem({ question, isExpanded, onToggle, children }) {
   return (
     <div>
       <div className='faq-main-menu-display' onClick={onToggle}>
@@ -16,4 +17,4 @@ function CustomerCenterFAQListItem({ question, isExpanded, onToggle, children })
   );
 }
 
-export default CustomerCenterFAQListItem;
+export default CustomerCenterFAQItem;
