@@ -128,31 +128,10 @@
   width: 1280px;
 }
 
-.faq-main-menu-display{
-  display: flex;
-  margin-top: 42px;
-  margin-bottom: 42px;
-  cursor: pointer;
-
-}
-
 .faq-main-menu-line{
   width: 1275px;
   height: 1px;
   background: linear-gradient(0deg, #919191 0%, #919191 100%), #919191;
-  
-}
-
-.faq-main-menu-text{
-  width: 906px;
-  height: 34px;
-  flex-shrink: 0;
-  color: #000;
-  font-family: Noto Sans KR;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
   
 }
 
@@ -170,10 +149,6 @@
   margin-left: 180px;
 }
 
-.faq-main-menu-button-faq{
-  margin-left: 325px;
-}
-
 .faq-main-menu-expanded-content{
   width: 1250px;
   height: 200px;
@@ -182,10 +157,6 @@
   background: #D9D9D9;
   padding-top: 30px;
   padding-left: 30px;
-}
-
-.faq-main-menu-expanded-content li {
-  margin-bottom: 10px;
 }
 
 .faq-main-body-redtitle{

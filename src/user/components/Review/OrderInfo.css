@@ -1,0 +1,49 @@
+.productreview-div-review-orderwrapper{
+    display: flex;
+    align-items: center;
+    margin-top:27px;
+    gap: 20px;
+}
+
+.productreview-div-review-ordertime{
+    display: flex;
+    gap: 10px;
+}
+
+.productreview-p-review-orderdate{
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin:0;
+}
+.productreview-p-review-ordertime{
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin:0;
+}
+.productreview-div-review-ordernum{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.productreview-p-review-ordernum{
+    color: #A9AFB3;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin:0;
+}
+.productreview-p-review-ordernum-num{
+    color: #191919;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin:0;
+}
