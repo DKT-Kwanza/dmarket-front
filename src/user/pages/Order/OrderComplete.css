@@ -1,15 +1,12 @@
-.orderComplete-navbar{ /*네브바 자리 표시 위해서 임시 생성*/
-    background-color: #878D91;
-    height: 166px;
-}
 .orderComplete-background{
     /* width: 1280px;  */ /*설정하면 화면 줄일때 1280px까지만 줄어듦*/
 	margin: 0 auto;
-    margin-top: 59px; /*네브바를 위해 임시 추가*/
+    margin-top: 30px; /*네브바를 위해 임시 추가*/
 }
 .orderComplete-wrap{
     margin: 0 auto;
     width: 990px;
+    padding-bottom: 200px;
 }
 
 .orderComplete-title-div{

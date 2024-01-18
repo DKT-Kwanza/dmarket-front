@@ -38,7 +38,7 @@ function CustomerCenterNotice() {
         </div>
         <div className="notice-bar"/>
         <div className="notice-submenu">
-          <button className='notice-submenu-content-left' onClick={() => navigateToFaQ('회원문의')}>회원 문의</button>
+          <button className='notice-submenu-content-left' onClick={() => navigateToFaQ('회원 문의')}>회원 문의</button>
           <div className="submenu-line"/>
           <button className='notice-submenu-content-mid' onClick={() => navigateToFaQ('주문/결제 문의')}>주문/결제 문의</button>
           <div className="submenu-line"/>

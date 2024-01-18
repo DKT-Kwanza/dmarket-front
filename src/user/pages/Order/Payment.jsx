@@ -20,7 +20,6 @@ function Payment(){
     
     return(
         <div>
-        <div className="payment-navbar">navbar</div>
         <div className="payment-background">
             <div className="payment-wrap">
                 <div className="payment-title-div">

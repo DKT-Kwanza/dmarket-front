@@ -1,8 +1,15 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import datas from "../../../assets/PaymentProductsData.json";
 import {ReactComponent as ShoppingBag} from "../../../assets/icons/shopping-bag-03.svg";
+import './PaymentInfo.css'
 
 export default function PaymentInfo(){
+    const navigate = useNavigate();
+
+    const navigateToOrderComplete = () => {
+        navigate("./complete");
+    }
     return(
         <div className="payment-info">
             <div className="payment-info-title">
@@ -30,7 +37,7 @@ export default function PaymentInfo(){
                     <div>
                         <span>주문정보 및 서비스 이용약관에 동의합니다.</span>
                     </div>
-                    <button>주문하기</button> {/*버튼 클릭시 주문요청 api*/}
+                    <button onClick={navigateToOrderComplete}>주문하기</button> {/*버튼 클릭시 주문요청 api*/}
                 </div>
             </div>
         </div>

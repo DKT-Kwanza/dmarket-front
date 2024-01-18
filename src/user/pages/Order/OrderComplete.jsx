@@ -5,7 +5,6 @@ import datas from "../../../assets/PaymentProductsData.json";
 function OrderComplete(){
     return(
         <div>
-            <div className="orderComplete-navbar">navbar</div>
             <div className="orderComplete-background">
                 <div className="orderComplete-wrap">    
                     <div className="orderComplete-title-div">

@@ -1,0 +1,80 @@
+.payment-info{
+    width: 990px;
+}
+.payment-info-title{
+    position: relative;
+    margin-top: 48px;
+    padding-bottom: 6px;
+}
+.payment-info-title-h2{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 20px;
+    vertical-align: top;
+    letter-spacing: -0.3px;
+    line-height: 24px;
+    margin: 0;
+}
+.payment-info-des{
+    border-top: 2px solid #000;
+    margin-top: 0;
+    padding-top: 0;
+    display: flex;
+    flex-direction: row;
+}
+.payment-info-prices{
+    width: 630px;
+    padding: 0 60px;
+    padding-bottom: 20px;
+    font-size: 16px;
+    font-weight: 700;
+}
+.payment-info-dl{
+    margin: 0;
+    margin-top: 13px;
+    padding: 0;
+}
+.payment-info-dl.tot{
+    color: #ED1C14;
+    border-top: 1px solid #dbdbdb;
+}
+.payment-info-dt{
+    width: 200px;
+    float: left;
+    position: relative;
+    width: 200px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.payment-info-dd{
+    margin-left: 200px;
+    text-align: right;
+    position: relative;
+    margin-left: 200px;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.payment-info-order{
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.payment-info-order div{
+    font-size: 13px;
+    color: #919191;
+    width: max-content;
+    padding: 22px 60px ;
+    padding-bottom: 11px;
+}
+.payment-info-order button{
+    color: white;
+    width: 150px;
+    height: 56px;
+    background-color: #FF4248;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

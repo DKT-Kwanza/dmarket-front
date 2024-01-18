@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import './SearchList.css';
 // import { PiStarFill, PiStarLight } from "react-icons/pi";
-import ProductListItem from './ProductListItem';
-import Filter from './Filter';
+import ProductListItem from '../../components/ProductList/ProductItem';
+import Filter from '../../components/ProductList/Filter';
+import Dropdown from '../../components/ProductList/Dropdown';
+import datas from "../../../assets/ProductListData.json";
 
 function SearchList(){
+    const [items, setItems] = useState(datas);
 
     return (
         <div className="searchList-body">
@@ -72,24 +76,20 @@ function SearchList(){
                 <button className='searchList-clear-btn'>전체해제</button>
             </div> */}
             <div className='searchList-bar'></div>
-            <div className='searchList-dropdown-container'>
-                <select className='searchList-dropdown'>
-                    <option>최신순</option>
-                    <option>판매순</option>
-                    <option>별점순</option>
-                    <option>리뷰개수순</option>
-                </select>
-            </div>
+            <Dropdown />
             <div className='searchList-bar'></div>
             <div className='searchList-container'>
-                <ProductListItem/>
-                <ProductListItem/>
-                <ProductListItem/>
-                <ProductListItem/>
-                <ProductListItem/>
-                <ProductListItem/>
-                <ProductListItem/>
-                <ProductListItem/>
+                {items.map((item, index) => (
+                    <ProductListItem 
+                        key={index}
+                        imgSrc={item.imgSrc}
+                        brand={item.brand}
+                        name={item.name}
+                        price={item.price}
+                        rating={item.rating}
+                        reviews={item.reviews}
+                    />
+                ))}
             </div>
         </div>
     )
