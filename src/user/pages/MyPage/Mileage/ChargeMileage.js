@@ -1,20 +1,22 @@
 import './ChargeMileage.css'
+import MyPageSubHeader from "../../../components/MyPage/SubHeader/MyPageSubHeader";
+import MyPageSidebar from "../../../components/MyPage/Sidebar/MyPageSidebar";
 
 function ChargeMileage(){
     return(
-        <div >
-            <div className='other-component'></div>
+        <div className='chargemileage'>
+            <MyPageSubHeader />
             <div className='contents-reigon'>
-                <div className='contents'>
+                <div className='contents-main'>
+                    <MyPageSidebar />
+                    <div className='contents'>
                     <div className='contents-title'>
                         <div className='empty-div'></div>
                         <div className='contents-title-div'>
-                            <div className='contnets-title-bar'></div>
+                            <div className='contents-title-bar'></div>
                             <div>마일리지 충전하기</div>
                         </div>
                     </div>
-                    <div className='contents-main'>
-                        <div className='contents-left'></div>
                         <div className='contents-right'>
                             <div className='contents-right-intro'>
                                 <div className='contents-right-intro-title'>마일리지</div>

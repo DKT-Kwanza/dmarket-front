@@ -1,18 +1,17 @@
 import React from 'react';
 import './ChangeInfo.css';
+import MyPageSubHeader from '../../../../user/components/MyPage/SubHeader/MyPageSubHeader';
+import MyPageSidebar from "../../../components/MyPage/Sidebar/MyPageSidebar";
 
 function ChangeInfo() {
     
     return (
         <div className='InfoChange'>
-            <div className='InfoChange-header'>
-                {/*상단 서브 헤더 영역 입니다.*/}
-            </div>
+            <MyPageSubHeader/>
             <div className="InfoChange-body">
                  <div className="InfoChange-container">
                     {/*왼쪽 메뉴 바 영역 입니다.*/}
-                    <div className="InfoChange-submenu"/>
-                        {/*컨텐트 영역 입니다.*/}
+                    <MyPageSidebar/>
                     <div className="InfoChange-content">
                         {/*주문/배송 조회 제목 영역 입니다.*/}
                         <div className="InfoChange-title">

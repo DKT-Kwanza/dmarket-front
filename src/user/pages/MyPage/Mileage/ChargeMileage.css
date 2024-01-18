@@ -1,52 +1,33 @@
-.header{
-    height: 160px;
+.chargemileage {
+    padding-bottom: 200px;
 }
 
-.other-component{
-    height: 240px;
-    background: #ffffff;
+.header{
+    height: 160px;
 }
 
 .contents-reigon{
     display: flex;
     justify-content: center;
     margin-top: 50px;
-
 }
 
 .contents{
-    width: 1280px;
+
 }
 
 .contents-title{
     height: 60px;
     display: flex;
 }
-.empty-div{
-    width: 229px;
-    height: 60px;
-    
-}
 
 .contents-main{
     display: flex;
-    
+    width: 1280px;
+    margin: 0 auto;
 }
 
-.contents-left{
-    width: 220px;
-    height: 500px;
-    flex-shrink: 0;
-    margin-right: 25px;
-
-    border-radius: 20px;
-    border: 2px solid #E1E4E6;
-
-    background: #FFF;
-
-}
-
-.contnets-title-bar{
+.contents-title-bar{
     align-items: center;
     margin-right: 20px;
     width: 5px;
@@ -55,24 +36,21 @@
     background: #191919;
 }
 .contents-title-div{
-    width: 1036px;
+    width: 1040px;
     align-items: center;
-    border-bottom: 2px solid #000;
-    border-width: 3px;
+    border-bottom: 3px solid #000;
+    margin-left: 22px;
     display: flex;
     color: #000;
-
-    font-family: Noto Sans KR;
     font-size: 26px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-
 }
 
 .contents-right{
     margin-top: 10px;
-
+    margin-left: 22px;
 }
 
 .contents-right-intro{

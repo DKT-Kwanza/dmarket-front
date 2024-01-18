@@ -1,8 +1,7 @@
-
-.changePwd-navbar{ /*네브바 자리 표시 위해서 임시 생성*/
-    background-color: #878D91;
-    height: 166px;
+.changePwd {
+    padding-bottom: 200px;
 }
+
 .changePwd-mynavbar{
     height: 240px;
     background-color: #FFE39A;
@@ -39,17 +38,10 @@
     display: flex;
 }
 
-.changePwd-submenu {
-    width: 220px;
-    height: 500px;
-    border-radius: 20px;
-    border: 2px #e1e4e6 solid;
-    margin: 53px 20px 0 0;
-}
-
 .changePwd-content {
     display: flex;
     flex-direction: column;
+    margin-left: 22px;
 }
 
 .changePwd-title {

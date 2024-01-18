@@ -4,6 +4,8 @@ import CheckBox from '../../components/CheckBox/CheckBox';
 import './Detail.css';
 import DetailQna from '../../components/Detail/DetailQna';
 import DetailQna2 from '../../components/Detail/DetailQna2';
+import ProductOptionTab from "../../components/Detail/ProductOptionTab";
+import wishButton from '../../../assets/icons/wishButton.png'
 import heart from '../../../assets/icons/heart.svg'
 import productDetail from '../../../assets/images/productDetail.png'
 import arrowRight from '../../../assets/icons/chevron-right.svg'
@@ -23,6 +25,12 @@ function Detail() {
 
   const [showNewDetailQna, setShowDetailQna] = useState(false);
   const [showNewDetailQna2, setShowDetailQna2] = useState(false);
+  const [selected, setSelected] = useState("");
+
+  const handleSelect = (e) => {
+    setSelected(e.target.value);
+  };
+
   const [isExpanded, setIsExpanded] = useState(false);
   const [checkboxState, setCheckboxState] = useState('none');
 
@@ -30,7 +38,7 @@ function Detail() {
     setShowDetailQna(true);
   };
 
-  const handleCloseDetaiQna = () => {
+  const handleCloseDetailQna = () => {
     setShowDetailQna(false);
   };
 
@@ -38,7 +46,7 @@ function Detail() {
     setShowDetailQna2(true);
   };
 
-  const handleCloseDetaiQna2 = () => {
+  const handleCloseDetailQna2 = () => {
     setShowDetailQna2(false);
   };
 
@@ -70,13 +78,13 @@ function Detail() {
             <div className='subImg' />
           </div>
           <div className='detailArea'>
-            <div className='title'><text>JAJU&gt;</text></div>
+            <div className='title'><text>JAJU &gt;</text></div>
             <div className='subTitle'><text>여 다운필 루즈핏 퀼팅 점퍼 J103401008099</text></div>
-            <div class="rating">
-              <span class="starSolid">★★★☆☆</span>
+            <div className="rating">
+              <span className="starSolid">★★★☆☆</span>
               <text> 3.0 (3건)</text>
             </div>
-            <div class='price'><text>59,900원</text></div>
+            <div className='price'><text>59,900원</text></div>
             <div className='releasePrice'><text>최초출시가 89,900원</text></div>
             <hr style={{ marginTop: '13px' }} />
             <div className='deliveryInfo'>
@@ -92,22 +100,16 @@ function Detail() {
             </div>
             <div className='colorSelect'>
               <text style={{ marginTop: '2px' }}>색상</text>
-              <select id="colors" name="colors">
+              <select id="colors" name="colors" onChange={handleSelect}>
                 <option value="" disabled selected hidden>선택하세요.</option>
                 <option value="red">Red</option>
                 <option value="blue">Blue</option>
                 <option value="green">Green</option>
               </select>
             </div>
-            <div className='sizeSelect'>
-              <text style={{ marginTop: '2px' }}>사이즈</text>
-              <select id="sizes" name="sizes">
-                <option value="" disabled selected hidden>선택하세요.</option>
-                <option value="small">S</option>
-                <option value="medium">M</option>
-                <option value="large">L</option>
-              </select>
-            </div>
+            {
+              selected && <ProductOptionTab option={selected} name={"여 다운필 루즈핏 퀼팅 점퍼 J103401008099"}/>
+            }
             <div className='totalCost'>
               <div className='total'><text>합계</text></div>
               <div className='cost'><text>59,900원</text></div>
@@ -186,7 +188,7 @@ function Detail() {
           <div className='questionDate'><text>2024.01.08</text></div>
           <div className='questionState'><text>답변 대기</text></div>
         </div>
-        {showNewDetailQna && <DetailQna onClose={handleCloseDetaiQna} />}
+        {showNewDetailQna && <DetailQna onClose={handleCloseDetailQna} />}
         <div className='question'>
           <button className='questionTitle' onClick={handleButtonClick2}>반품신청했는데 언제 환불 되냐요?</button>
           <div className='questionDate2'><text>2024.01.08</text></div>
