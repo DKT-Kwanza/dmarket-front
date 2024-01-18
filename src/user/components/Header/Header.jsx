@@ -30,6 +30,7 @@ function Header() {
 
     const handleMouseLeaveSubCategory = () => {
         setSubDivHovered(false);
+    }
 
         const navigateToMain = () => {
             navigate(`./main`);
@@ -103,6 +104,5 @@ function Header() {
             </div>
 
         );
-    }
 }
 export default Header;
