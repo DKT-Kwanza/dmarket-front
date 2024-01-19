@@ -1,102 +1,21 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import CheckBox from '../../components/CheckBox/CheckBox';
 import './Detail.css';
+import recommendProductData from "../../../assets/RecommendProductData.json";
+import productQnaData from "../../../assets/RroductQnaData.json";
+import reviewData from "../../../assets/ReviewData.json";
+import DetailQnaList from "../../components/Detail/DetailQnaList";
 import DetailReviewsList from "../../components/Detail/DetailReviewsList";
-import DetailQnaReply from '../../components/Detail/DetailQnaReply';
-import DetailQnaReply2 from '../../components/Detail/DetailQnaReply2';
 import ProductOptionTab from "../../components/Detail/ProductOptionTab";
 import StarRating from "../../components/Detail/StarRating";
-import DetailQna from "../../components/Detail/DetailQna";
 import RecommendProductList from "../../components/Detail/RecommendProductList";
-import heart from '../../../assets/icons/heart.svg'
-import productDetail from '../../../assets/images/productDetail.png'
-import arrowRight from '../../../assets/icons/chevron-right.svg'
+import DetailWriteQna from "../../components/Detail/DetailWriteQna";
+import heart from '../../../assets/icons/heart.svg';
+import productDetail from '../../../assets/images/productDetail.png';
+import arrowRight from '../../../assets/icons/chevron-right.svg';
 import parcelIcon from '../../../assets/icons/truck-02.png';
 
 function Detail() {
-
-    const reviewData = {
-        productId: 452,
-        reviewCnt: 3,
-        ratingAvg: 3.8,
-        reviewList: [
-            {
-                reviewId: 2,
-                rating: 4,
-                writer: "홍**",
-                option: "21호/바닐라",
-                createdAt: "2024-01-09 09:48:00",
-                content: "색상이 엄청 밝네요",
-                reviewImg: "https://amazonaws.com/image.png"
-            },
-            {
-                reviewId: 3,
-                rating: 5,
-                writer: "홍**",
-                option: "21호/바닐라",
-                createdAt: "2024-01-09 09:48:00",
-                content: "색상이 엄청 밝네요",
-                reviewImg: null
-            },
-            {
-                reviewId: 5,
-                rating: 4,
-                writer: "홍**",
-                option: "21호/바닐라",
-                createdAt: "2024-01-09 09:48:00",
-                content: "색상이 엄청 밝네요",
-                reviewImg: "https://amazonaws.com/image.png"
-            },
-        ]
-    }
-
-    const qnaData = {
-        qnaCount: 3,
-        qnaList : [
-            {
-                qnaId: "10",
-                isSecret: true,
-                writer: "홍**",
-                title: "정사이즈로 나온 건가요?",
-                createdAt: "2024-01-12 09:00:00",
-                status: "답변 완료"
-            },
-            {
-                qnaId: "11",
-                isSecret: true,
-                writer: "홍**",
-                title: "포인트 충전 어떻게 하나요?",
-                createdAt: "2024-01-12 09:00:00",
-                status: "답변 대기"
-            },
-            {
-                qnaId: "12",
-                isSecret: true,
-                writer: "홍**",
-                title: "반품신청 했는데 언제 환불 되나요?",
-                createdAt: "2024-01-12 09:00:00",
-                status: "답변 대기"
-            },
-        ]
-    }
-
-    const qnaReplyData = {
-        qna: {
-            "qnaId": "10",
-            "writer": "홍**",
-            "title": "정사이즈로 나온 건가요?",
-            "content": "정사이즈로 나온 건가요?",
-            "createdAt": "2024-01-12 09:00:00",
-            "status": "답변 완료"
-        },
-        reply: {
-            "replyId": 42,
-            "replyAt": "2024-01-09 09:48:00",
-            "content": "안녕하세요 고객님. 저희 제품에 관심을 가져주셔서 감사합니다. ... ",
-            "answerer": "상품관리자"
-        }
-    }
 
     const navigate = useNavigate();
 
@@ -108,8 +27,6 @@ function Detail() {
         navigate("../order");
     }
 
-    const [showNewDetailQna, setShowDetailQna] = useState(false);
-    const [showNewDetailQna2, setShowDetailQna2] = useState(false);
     const [selected, setSelected] = useState([]);
 
     const handleSelect = (e) => {
@@ -117,38 +34,21 @@ function Detail() {
     };
 
     const [isExpanded, setIsExpanded] = useState(false);
-    const [checkboxState, setCheckboxState] = useState('none');
-
-    const handleButtonClick = () => {
-        setShowDetailQna(true);
-        console.log("클릭", showNewDetailQna);
-    };
-
-    const handleCloseDetailQna = () => {
-        setShowDetailQna(false);
-    };
-
-    const handleButtonClick2 = () => {
-        setShowDetailQna2(true);
-    };
-
-    const handleCloseDetailQna2 = () => {
-        setShowDetailQna2(false);
-    };
+    // const [checkboxState, setCheckboxState] = useState('none');
 
     const handleToggle = () => { // qna 작성창 열기
         setIsExpanded(!isExpanded);
     };
 
-    const handleCheckboxChange = (newState) => { // qna 작성 공개 여부 체크박스
-        console.log(newState);
-        if (checkboxState === newState) {
-            setCheckboxState('none');
-        } else {
-            setCheckboxState(newState);
-            console.log(newState);
-        }
-    };
+    // const handleCheckboxChange = (newState) => { // qna 작성 공개 여부 체크박스
+    //     console.log(newState);
+    //     if (checkboxState === newState) {
+    //         setCheckboxState('none');
+    //     } else {
+    //         setCheckboxState(newState);
+    //         console.log(newState);
+    //     }
+    // };
 
     return (
         <>
@@ -277,88 +177,30 @@ function Detail() {
                     }
                 </div>
                 <div className='qnaTitle'>
-                    <div className="qnaButtonScroll" id="qnaButtonScroll">Q&A({qnaData.qnaCount})</div>
+                    <div className="qnaButtonScroll" id="qnaButtonScroll">Q&A({productQnaData.qnaCount})</div>
                 </div>
                 <div className='qnaAnnounce'>
                     <text>상품 외 배송, 교환/반품 등에 관한 문의사항은 고객센터에서 확인하실 수 있습니다.</text>
                 </div>
                 <div className='qnaCategory'>
                     <div className='qna-category-btn-area'>
-                        <button className='qnaAll'>전체({qnaData.qnaCount})</button>
-                        <div className='qna-category-line' />
+                        <button className='qnaAll'>전체({productQnaData.qnaCount})</button>
+                        <div className='qna-category-line'/>
                         <button className='qnaReplyDone'>답변완료(0)</button>
-                        <div className='qna-category-line' />
+                        <div className='qna-category-line'/>
                         <button className='qnaReplyWaiting'>답변대기(0)</button>
                     </div>
                     <button onClick={handleToggle} className='qnaEnroll'>Q&A 작성하기 <img src={arrowRight}/></button>
                 </div>
-                <div className='qnaAttributes'>
-                    <div className='qnaAttributesTitle'>
-                        <text>제목</text>
-                    </div>
-                    <div className='qnaAttributesDate'>
-                        <text>작성일</text>
-                    </div>
-                    <div className='qnaAttributesState'>
-                        <text>답변상태</text>
-                    </div>
-                </div>
-
-
-
-                <DetailQna onClick={handleButtonClick}/>
-                {showNewDetailQna && <DetailQnaReply onClose={() => setShowDetailQna(false)}/>}
-
-
-                <div className='question'>
-                    <button className='questionTitle' onClick={handleButtonClick2}>반품신청했는데 언제 환불 되냐요?</button>
-                    <div className='questionDate2'>
-                        <text>2024.01.08</text>
-                    </div>
-                    <div className='questionState2'>
-                        <text>답변 완료</text>
-                    </div>
-                </div>
-                {showNewDetailQna2 && <DetailQnaReply2 onClose={handleCloseDetailQna2}/>}
-                {isExpanded && (
-                    <div className='questionWrite'>
-                        <div className='questionWriteTitle'>
-                            <text>제목</text>
-                            <input type="text" className='questionTitleInput' name="title" placeholder="제목을 입력해주세요."
-                                   required></input>
-                        </div>
-                        <div className='questionWriteContents'>
-                            <div className='questionContentsleft'>
-                                <text>내용</text>
-                            </div>
-                            <textarea type="text" className='questionContentsInput' name="contents"
-                                      placeholder="내용을 입력해주세요." required></textarea>
-                        </div>
-                        <div className='secretState'>
-                            <div className='secretArticle'>비밀글</div>
-                            <label className="public">
-                                공개
-                            </label>
-                            <CheckBox
-                                checked={checkboxState === 'public'}
-                                onChange={() => handleCheckboxChange('public')}
-                            />
-                            <label className="private">
-                                비공개
-                            </label>
-                            <CheckBox
-                                checked={checkboxState === 'private'}
-                                onChange={() => handleCheckboxChange('private')}
-                            />
-                        </div>
-                        <button onClick={handleToggle} className='enrollButton '>등록</button>
-                    </div>
-                )}
+                <DetailQnaList datas={productQnaData.qnaList}/>
+                {
+                    isExpanded && <DetailWriteQna onClick={handleToggle}/>
+                }
 
                 <div className='recommandTitle'>
                     <div className="recommandButtonScroll" id="recommandButtonScroll">함께 보면 좋은 상품</div>
                 </div>
-                <RecommendProductList />
+                <RecommendProductList data={recommendProductData}/>
 
                 <div className='deliveryTitle'>
                     <div className="deliveryTitleScroll" id="deliveryTitleScroll">배송 안내</div>

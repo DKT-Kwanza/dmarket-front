@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import React from "react";
 
-function DetailQna({onClick, title, }) {
+function DetailQnaListItem({onClick, title, createdAt, status}) {
     return (
         <QnaArea onClick={onClick}>
-            <Title>포인트 충전 어떻게 하나요?</Title>
-            <Date>2024.01.08</Date>
-            <State1>답변 대기</State1>
+            <Title>{title}</Title>
+            <Date>{createdAt}</Date>
+            <State status={status}>{status}</State>
         </QnaArea>
     );
 }
@@ -34,15 +34,9 @@ const Date = styled.div`
   width: 192px;
 `;
 
-const State1 = styled.div`
+const State = styled.div`
   font-size: 14px;
   font-weight: 400;
-  color: #FF0000;
+  color: ${(props) => props.status === "답변 완료" ? "#FF0000" : "#6F97FF"};
 `;
-
-const State2 = styled.div`
-  font-size: 14px;
-  font-weight: 400;
-  color: #6F97FF;
-`;
-export default DetailQna;
+export default DetailQnaListItem;
