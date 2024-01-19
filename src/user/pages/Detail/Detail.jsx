@@ -3,11 +3,12 @@ import {useNavigate} from 'react-router-dom';
 import CheckBox from '../../components/CheckBox/CheckBox';
 import './Detail.css';
 import DetailReviewsList from "../../components/Detail/DetailReviewsList";
-import DetailQna from '../../components/Detail/DetailQna';
-import DetailQna2 from '../../components/Detail/DetailQna2';
+import DetailQnaReply from '../../components/Detail/DetailQnaReply';
+import DetailQnaReply2 from '../../components/Detail/DetailQnaReply2';
 import ProductOptionTab from "../../components/Detail/ProductOptionTab";
 import StarRating from "../../components/Detail/StarRating";
-import wishButton from '../../../assets/icons/wishButton.png'
+import DetailQna from "../../components/Detail/DetailQna";
+import RecommendProductList from "../../components/Detail/RecommendProductList";
 import heart from '../../../assets/icons/heart.svg'
 import productDetail from '../../../assets/images/productDetail.png'
 import arrowRight from '../../../assets/icons/chevron-right.svg'
@@ -15,7 +16,7 @@ import parcelIcon from '../../../assets/icons/truck-02.png';
 
 function Detail() {
 
-    const data = {
+    const reviewData = {
         productId: 452,
         reviewCnt: 3,
         ratingAvg: 3.8,
@@ -50,6 +51,53 @@ function Detail() {
         ]
     }
 
+    const qnaData = {
+        qnaCount: 3,
+        qnaList : [
+            {
+                qnaId: "10",
+                isSecret: true,
+                writer: "홍**",
+                title: "정사이즈로 나온 건가요?",
+                createdAt: "2024-01-12 09:00:00",
+                status: "답변 완료"
+            },
+            {
+                qnaId: "11",
+                isSecret: true,
+                writer: "홍**",
+                title: "포인트 충전 어떻게 하나요?",
+                createdAt: "2024-01-12 09:00:00",
+                status: "답변 대기"
+            },
+            {
+                qnaId: "12",
+                isSecret: true,
+                writer: "홍**",
+                title: "반품신청 했는데 언제 환불 되나요?",
+                createdAt: "2024-01-12 09:00:00",
+                status: "답변 대기"
+            },
+        ]
+    }
+
+    const qnaReplyData = {
+        qna: {
+            "qnaId": "10",
+            "writer": "홍**",
+            "title": "정사이즈로 나온 건가요?",
+            "content": "정사이즈로 나온 건가요?",
+            "createdAt": "2024-01-12 09:00:00",
+            "status": "답변 완료"
+        },
+        reply: {
+            "replyId": 42,
+            "replyAt": "2024-01-09 09:48:00",
+            "content": "안녕하세요 고객님. 저희 제품에 관심을 가져주셔서 감사합니다. ... ",
+            "answerer": "상품관리자"
+        }
+    }
+
     const navigate = useNavigate();
 
     const navigateToMypage = (menu) => {
@@ -62,10 +110,10 @@ function Detail() {
 
     const [showNewDetailQna, setShowDetailQna] = useState(false);
     const [showNewDetailQna2, setShowDetailQna2] = useState(false);
-    const [selected, setSelected] = useState("");
+    const [selected, setSelected] = useState([]);
 
     const handleSelect = (e) => {
-        setSelected(e.target.value);
+        setSelected([...selected, e.target.value]);
     };
 
     const [isExpanded, setIsExpanded] = useState(false);
@@ -73,6 +121,7 @@ function Detail() {
 
     const handleButtonClick = () => {
         setShowDetailQna(true);
+        console.log("클릭", showNewDetailQna);
     };
 
     const handleCloseDetailQna = () => {
@@ -124,8 +173,8 @@ function Detail() {
                             <text>여 다운필 루즈핏 퀼팅 점퍼 J103401008099</text>
                         </div>
                         <div className="rating">
-                            <StarRating rating={data.ratingAvg}/>
-                            <text style={{marginLeft: '10px'}}>({data.reviewCnt}건)</text>
+                            <StarRating rating={reviewData.ratingAvg}/>
+                            <text style={{marginLeft: '10px'}}>({reviewData.reviewCnt}건)</text>
                         </div>
                         <div className='price'>
                             <text>59,900원</text>
@@ -157,7 +206,11 @@ function Detail() {
                             </select>
                         </div>
                         {
-                            selected && <ProductOptionTab option={selected} name={"여 다운필 루즈핏 퀼팅 점퍼 J103401008099"}/>
+                            selected.map((value, index) => (
+                                <div key={index}>
+                                    <ProductOptionTab option={value} name={"여 다운필 루즈핏 퀼팅 점퍼 J103401008099"}/>
+                                </div>
+                            ))
                         }
                         <div className='totalCost'>
                             <div className='total'>
@@ -180,12 +233,11 @@ function Detail() {
 
             <div id='container2'>
                 <ul className='buttonArea'>
-                    <li className='productDetailButton'><a href="#productDetailButtonScroll"
-                                                           class="scroll_move">상품상세정보</a></li>
-                    <li className='reviewButton'><a href="#reviewButtonScroll" class="scroll_move">고객리뷰(3)</a></li>
-                    <li className='qnaButton'><a href="#qnaButtonScroll" class="scroll_move">상품 Q&A(0)</a></li>
-                    <li className='recommandButton'><a href="#recommandButtonScroll" class="scroll_move">추천 상품</a></li>
-                    <li className='returnInfoButton'><a href="#scroll5" class="scroll_move">배송/반품/교환 안내</a></li>
+                    <li className='productDetailButton'><a href="#productDetailButtonScroll">상품상세정보</a></li>
+                    <li className='reviewButton'><a href="#reviewButtonScroll">고객리뷰({reviewData.reviewCnt})</a></li>
+                    <li className='qnaButton'><a href="#qnaButtonScroll">상품 Q&A(0)</a></li>
+                    <li className='recommandButton'><a href="#recommandButtonScroll">추천 상품</a></li>
+                    <li className='returnInfoButton'><a href="#scroll5">배송/반품/교환 안내</a></li>
                 </ul>
                 <hr style={{marginTop: '5px', borderWidth: '2px'}}/>
                 <div className='productNum'>
@@ -201,43 +253,43 @@ function Detail() {
 
 
                 <div className='reviewTitle'>
-                    <div className="reviewButtonScroll" id="reviewButtonScroll">고객리뷰({data.reviewCnt})</div>
+                    <div className="reviewButtonScroll" id="reviewButtonScroll">고객리뷰({reviewData.reviewCnt})</div>
                 </div>
                 <div className='ratingBox'>
                     <div className='ratingNum'>
-                        <text>{data.ratingAvg}</text>
+                        <text>{reviewData.ratingAvg}</text>
                     </div>
                     <div className='ratingStar'>
-                        <StarRating rating={data.ratingAvg} style={"none"}/>
-                        <text style={{fontSize: '16px'}}>총 {data.reviewCnt}건 리뷰</text>
+                        <StarRating rating={reviewData.ratingAvg} style={"none"}/>
+                        <text style={{fontSize: '16px'}}>총 {reviewData.reviewCnt}건 리뷰</text>
                     </div>
                 </div>
                 <div className='reviewAnnounce'>
                     <text>※ 리뷰 등록, 수정, 삭제 및 상세 내용은 [마이페이지 &gt; 나의 활동관리 &gt; 상품 리뷰]에서 확인하실 수 있습니다.</text>
                 </div>
                 <div className='reviewCategory'>
-                    <text>전체({data.reviewCnt})</text>
+                    <text>전체({reviewData.reviewCnt})</text>
                 </div>
                 <hr style={{marginTop: '8px', borderWidth: '2px'}}/>
                 <div className='reviewList'>
                     {
-                        <DetailReviewsList reviews={data.reviewList}/>
+                        <DetailReviewsList reviews={reviewData.reviewList}/>
                     }
                 </div>
-
-
                 <div className='qnaTitle'>
-                    <div className="qnaButtonScroll" id="qnaButtonScroll">Q&A(0)</div>
+                    <div className="qnaButtonScroll" id="qnaButtonScroll">Q&A({qnaData.qnaCount})</div>
                 </div>
                 <div className='qnaAnnounce'>
                     <text>상품 외 배송, 교환/반품 등에 관한 문의사항은 고객센터에서 확인하실 수 있습니다.</text>
                 </div>
                 <div className='qnaCategory'>
-                    <button className='qnaAll'>전체(3)</button>
-                    <text>&nbsp; | &nbsp;</text>
-                    <button className='qnaReplyDone'>답변완료(0)</button>
-                    &nbsp; | &nbsp;
-                    <button className='qnaReplyWaiting'>답변대기(0)</button>
+                    <div className='qna-category-btn-area'>
+                        <button className='qnaAll'>전체({qnaData.qnaCount})</button>
+                        <div className='qna-category-line' />
+                        <button className='qnaReplyDone'>답변완료(0)</button>
+                        <div className='qna-category-line' />
+                        <button className='qnaReplyWaiting'>답변대기(0)</button>
+                    </div>
                     <button onClick={handleToggle} className='qnaEnroll'>Q&A 작성하기 <img src={arrowRight}/></button>
                 </div>
                 <div className='qnaAttributes'>
@@ -251,16 +303,13 @@ function Detail() {
                         <text>답변상태</text>
                     </div>
                 </div>
-                <div className='question'>
-                    <button className='questionTitle' onClick={handleButtonClick}>포인트 충전 어떻게 하나요?</button>
-                    <div className='questionDate'>
-                        <text>2024.01.08</text>
-                    </div>
-                    <div className='questionState'>
-                        <text>답변 대기</text>
-                    </div>
-                </div>
-                {showNewDetailQna && <DetailQna onClose={handleCloseDetailQna}/>}
+
+
+
+                <DetailQna onClick={handleButtonClick}/>
+                {showNewDetailQna && <DetailQnaReply onClose={() => setShowDetailQna(false)}/>}
+
+
                 <div className='question'>
                     <button className='questionTitle' onClick={handleButtonClick2}>반품신청했는데 언제 환불 되냐요?</button>
                     <div className='questionDate2'>
@@ -270,7 +319,7 @@ function Detail() {
                         <text>답변 완료</text>
                     </div>
                 </div>
-                {showNewDetailQna2 && <DetailQna2 onClose={handleCloseDetailQna2}/>}
+                {showNewDetailQna2 && <DetailQnaReply2 onClose={handleCloseDetailQna2}/>}
                 {isExpanded && (
                     <div className='questionWrite'>
                         <div className='questionWriteTitle'>
@@ -305,69 +354,14 @@ function Detail() {
                         <button onClick={handleToggle} className='enrollButton '>등록</button>
                     </div>
                 )}
+
                 <div className='recommandTitle'>
-                    <div class="recommandButtonScroll" id="recommandButtonScroll">함께 보면 좋은 상품</div>
+                    <div className="recommandButtonScroll" id="recommandButtonScroll">함께 보면 좋은 상품</div>
                 </div>
-                <div className='recommandArea'>
-                    <div className='recommandElement' style={{marginLeft: '0px'}}>
-                        <div className='recommandElementImg'></div>
-                        <div className='recomandElementTitle'>
-                            <text>일룸</text>
-                        </div>
-                        <div className='recomandElementSubTitle'>
-                            <text>쿠시노 코지 저상형 침대(패브릭,SS)</text>
-                        </div>
-                        <div className='recomandElementPrice'>
-                            <text>1,208,000원</text>
-                        </div>
-                        <div className='recomandElementStar'>
-                            <text style={{color: '#FFD465'}}>★★★★★</text>
-                            <text>(5건)</text>
-                        </div>
-                    </div>
-                    <div className='recommandElement'>
-                        <div className='recommandElementImg'></div>
-                        <div className='recomandElementTitle'>
-                            <text>일룸</text>
-                        </div>
-                        <div className='recomandElementSubTitle'>
-                            <text>헤이즐 무헤드 평상형 퀸 침대 프레임</text>
-                        </div>
-                        <div className='recomandElementPrice'>
-                            <text>449,000원</text>
-                        </div>
-                    </div>
-                    <div className='recommandElement'>
-                        <div className='recommandElementImg'></div>
-                        <div className='recomandElementTitle'>
-                            <text>JAJU</text>
-                        </div>
-                        <div className='recomandElementSubTitle'>
-                            <text>여 다운필 루즈핏 퀼팅 점퍼 J1034099</text>
-                        </div>
-                        <div className='recomandElementPrice'>
-                            <text>20,710원</text>
-                        </div>
-                        <div className='recomandElementStar'>
-                            <text style={{color: '#FFD465'}}>★★★☆☆</text>
-                            <text>(20건)</text>
-                        </div>
-                    </div>
-                    <div className='recommandElement'>
-                        <div className='recommandElementImg'></div>
-                        <div className='recomandElementTitle'>
-                            <text>JAJU</text>
-                        </div>
-                        <div className='recomandElementSubTitle'>
-                            <text>여 다운필 루즈핏 퀼팅 점퍼 J1034099</text>
-                        </div>
-                        <div className='recomandElementPrice'>
-                            <text>20,710원</text>
-                        </div>
-                    </div>
-                </div>
+                <RecommendProductList />
+
                 <div className='deliveryTitle'>
-                    <div class="deliveryTitleScroll" id="deliveryTitleScroll">배송 안내</div>
+                    <div className="deliveryTitleScroll" id="deliveryTitleScroll">배송 안내</div>
                 </div>
                 <hr style={{marginTop: '16px', borderWidth: '2px', marginBottom: '0px'}}/>
                 <div className='deliveryContents'>

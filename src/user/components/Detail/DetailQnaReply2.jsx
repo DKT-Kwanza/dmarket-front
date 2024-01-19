@@ -1,6 +1,6 @@
 import React from 'react';
-import './DetailQna2.css';
-function DetailQna2({ onClose }) {
+import './DetailQnaReply2.css';
+function DetailQnaReply2({ onClose }) {
 
     const handleConfirmClick = () => {
         onClose();
@@ -25,4 +25,4 @@ function DetailQna2({ onClose }) {
   );
 }
 
-export default DetailQna2;
+export default DetailQnaReply2;

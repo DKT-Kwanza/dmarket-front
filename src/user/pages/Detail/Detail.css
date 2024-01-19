@@ -210,9 +210,10 @@ button {
     background-color: #FFFFFF;
     cursor: pointer;
 }
-.buttonArea button:hover,
-.buttonArea button:active {
+.buttonArea li:hover,
+.buttonArea li:active {
     color: #000000;
+    font-weight: 600;
 }
 
 .productDetailButton {
@@ -346,11 +347,23 @@ a {color: #333; text-decoration: none;}
 }
 
 .qnaCategory {
-    width: 1060px;
     display: flex;
     margin-top: 32px;
-    height: 29px;
     color: #919191;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.qna-category-btn-area {
+    display: flex;
+    align-items: center;
+}
+
+.qna-category-line {
+    width: 1px;
+    height: 16px;
+    background: #919191;
+    margin: 0 16px;
 }
 
 .qnaCategory button {
@@ -367,25 +380,20 @@ a {color: #333; text-decoration: none;}
 }
 
 .qnaAll {
-    height: 22px;
     border: none;
 }
 
 .qnaReplyDone {
-    height: 22px;
     border: none;
-
 }
 
 .qnaReplyWaiting {
-    height: 22px;
     border: none;
 }
 
 .qnaEnroll {
     display: flex; 
     align-items: center;
-    margin-left: 655px;
     height: 22px;
     border: none;
 }
@@ -403,12 +411,12 @@ a {color: #333; text-decoration: none;}
 
 .qnaAttributesTitle {
     margin-top: 18px;
-    margin-left: 0;
+    margin-left: 5px;
 }
 
 .qnaAttributesDate {
     margin-top: 18px;
-    margin-left: 374px;
+    margin-left: 365px;
 }
 
 .qnaAttributesState {
@@ -555,12 +563,6 @@ a {color: #333; text-decoration: none;}
     height: 46px;
     font-size: 32px;
     font-weight: 500;
-  }
-
-.recommandArea {
-    display: flex;
-    margin-top: 22px;
-    height: 357px;
   }
 
 .recommandElement {
