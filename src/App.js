@@ -44,7 +44,8 @@ function App() {
               <Route path='/mypage/mileagehistory' element={<HistoryMileage/>} />
               <Route path='/main' element={<Main/>} />
               <Route path='/mypage/reviewlist' element={<ReviewList/>} />
-              <Route path='/main/detail' element={<Detail/>} />
+              <Route path='/main/detail/:productId' element={<Detail/>}/>
+              <Route path='/main/detail' element={<Detail/>}/>
               <Route path='/mypage/wishlist' element={<WishList/>} />
               <Route path='/mypage/cart' element={<Cart />} />
               <Route path='/mypage/Qna' element={<Qna />} />
@@ -67,4 +68,3 @@ function App() {
 }
 
 export default App;
-

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './SearchList.css';
 // import { PiStarFill, PiStarLight } from "react-icons/pi";
-import ProductListItem from '../../components/ProductList/ProductItem';
+import ProductItem from '../../components/ProductList/ProductItem';
 import Filter from '../../components/ProductList/Filter';
 import Dropdown from '../../components/ProductList/Dropdown';
 import datas from "../../../assets/ProductListData.json";
@@ -80,14 +80,14 @@ function SearchList(){
             <div className='searchList-bar'></div>
             <div className='searchList-container'>
                 {items.map((item, index) => (
-                    <ProductListItem 
+                    <ProductItem 
                         key={index}
                         imgSrc={item.imgSrc}
                         brand={item.brand}
-                        name={item.name}
-                        price={item.price}
-                        rating={item.rating}
-                        reviews={item.reviews}
+                        productName={item.name}
+                        sales={item.price}
+                        ratingAvg={item.rating}
+                        reviewCnt={item.reviews}
                     />
                 ))}
             </div>

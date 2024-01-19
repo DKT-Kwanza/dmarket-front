@@ -1,14 +1,14 @@
 import {PiStarFill, PiStarLight} from "react-icons/pi";
 import './ProductItem.css'
 
-function ProductListItem({onClick, brand, productName, productImg, sales, ratingAvg, reviewCnt}) {
+function ProductItem({onClick, brand, productName, imgSrc, sales, ratingAvg, reviewCnt}) {
     // 별점
     const rating = ratingAvg;
 
     return (
         <div className='productListItem-container' onClick={onClick}>
             <div className='productListItem-img'>
-                <img src={productImg} alt={productName}/>
+                <img src={imgSrc} alt={productName}/>
             </div>
             <div className='productListItem-info'>
                 <div className='productListItem-brand'>{brand}</div>
@@ -34,4 +34,5 @@ function ProductListItem({onClick, brand, productName, productImg, sales, rating
     );
 }
 
-export default ProductListItem;
+export default ProductItem;
+
