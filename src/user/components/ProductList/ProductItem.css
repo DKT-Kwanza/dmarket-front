@@ -43,7 +43,12 @@
     color: #FFD465;
 }
 
+.productListItem-review {
+    display: flex;
+}
+
 .productListItem-reviews {
+    margin-left: 5px;
     font-size: 14px;
     font-weight: 400;
     color: #000;

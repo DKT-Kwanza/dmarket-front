@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
 
 import './App.css';
 import Header from './user/components/Header/Header'
@@ -29,8 +29,8 @@ import Qna from "./user/pages/MyPage/MyActivity/Qna/Qna";
 import HistoryMileage from "./user/pages/MyPage/Mileage/HistoryMileage";
 
 function App() {
-  const location = useLocation();
-  const hideHeaderFooter = location.pathname === '/signin/form';
+    const location = useLocation();
+    const hideHeaderFooter = location.pathname === '/signin/form';
 
   return (
     <div className="App">
