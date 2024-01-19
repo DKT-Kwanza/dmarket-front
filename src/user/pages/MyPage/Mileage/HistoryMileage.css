@@ -1,0 +1,112 @@
+.history-mileage {
+    padding-bottom: 200px;
+}
+
+.mileage-contents-reigon{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.mileage-contents-main{
+    display: flex;
+    width: 1280px;
+    margin: 0 auto;
+}
+
+.mileage-contents-title{
+    height: 60px;
+    display: flex;
+}
+
+.mileage-contents-title-div{
+    width: 1040px;
+    align-items: center;
+    border-bottom: 3px solid #000;
+    margin-left: 22px;
+    display: flex;
+    color: #000;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.mileage-contents-title-bar{
+    align-items: center;
+    margin-right: 20px;
+    width: 5px;
+    height: 34px;
+    flex-shrink: 0;
+    background: #191919;
+}
+
+.mileage-contents-right{
+    margin-top: 10px;
+    margin-left: 22px;
+}
+
+.mileage-contents-right-intro{
+    width: 1036px;
+    height: 110px;
+    margin-top: 10px;
+    margin-bottom: 60px;
+}
+
+.mileage-contents-right-intro-contents{
+    margin-top: 20px;
+}
+
+.mileage-contents-right-intro-contents-style{
+    color: #4D5256;
+    font-size: 15px;
+    font-family: Noto Sans KR;
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+.Mileage-contents-content-data {
+    margin-top: 30px;
+    width: 1040px;
+    /* height: 56px; */
+}
+
+.Mileage-contents-content-data-hr {
+    border: none;
+    height: 1px;
+    margin: 0;
+    background-color: #919191;
+}
+
+.Mileage-contents-content-data-title {
+    height: 56px;
+    background-color: #FAFAFA;
+    display: flex;
+}
+
+.Mileage-contents-content-data-1 {
+    margin-top: 18px;
+    margin-left: 24px;
+    width: 265px;
+    height: 20px;
+}
+
+.Mileage-contents-content-data-2 {
+    margin-top: 18px;
+    width: 377px;
+    height: 20px;
+    align-items: center;
+    display: flex;
+}
+
+.Mileage-contents-content-data-3 {
+    margin-top: 18px;
+    width: 214px;
+    height: 20px;
+}
+
+.Mileage-contents-content-data-4 {
+    margin-top: 18px;
+    width: 160px;
+    height: 20px;
+}

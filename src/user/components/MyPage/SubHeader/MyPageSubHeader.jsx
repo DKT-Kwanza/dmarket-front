@@ -9,6 +9,14 @@ const MyPageSubHeader = () => {
         navigate('/');
     }
 
+    const navigateToCharge = () => {
+        navigate('/mypage/chargemileage');
+    }
+
+    const navigateToHistory = () => {
+        navigate('/mypage/mileagehistory');
+    }
+
     return (
         <div className='myPage-subHeader'>
             <div className='myPage-subHeader-wrapper'>
@@ -21,11 +29,11 @@ const MyPageSubHeader = () => {
                     <div className='myPage-subHeader-wrapper-mileage-content'>0원</div>
                 </div>
                 <div className='myPage-subHeader-box'>
-                    <button className='myPage-subHeader-button' onClick={temp}>
+                    <button className='myPage-subHeader-button' onClick={navigateToCharge}>
                         <span>충전하기</span>
                         <span className='myPage-subHeader-button-right'><img src={right} alt='>'/></span>
                     </button>
-                    <button className='myPage-subHeader-button' onClick={temp}>
+                    <button className='myPage-subHeader-button' onClick={navigateToHistory}>
                         <span>사용내역 조회</span>
                         <span className='myPage-subHeader-button-right'><img src={right} alt='>'/></span>
                     </button>

@@ -1,11 +1,7 @@
 import React from 'react';
 import './InquiryItem.css'
 
-const InquiryItem = ({ category, title, createdAt, status, isExpanded, onToggle, contents, replyContents, inquiryReplyDate }) => {
-    const formatDate = (datetime) => { // 날짜만 남기기
-        const date = new Date(datetime);
-        return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
-      };
+const InquiryItem = ({ category, title, contents, img, createdAt, status, replyContents, inquiryReplyDate, isExpanded, onToggle }) => {
       
     return (
         <ul className='Inquiry-contents-content-data-list'>
@@ -19,16 +15,21 @@ const InquiryItem = ({ category, title, createdAt, status, isExpanded, onToggle,
             {isExpanded && (
                 <div className='Inquiry-contents-content-data-list-detail'>
                     <div className='Inquiry-contents-content-data-list-data'>
+                        {img && (
+                            <div className="Inquiry-contents-div-review-content-img">
+                            <img src={img} className='Inquiry-contents-img-review-content-img' alt="리뷰 이미지"/>
+                            </div>
+                        )}
                         {contents}
                     </div>
                     <hr className='Inquiry-contents-content-data-list-hr' />
                     {status === '답변 완료' ? (
-                        <div className='Inquiry-contents-content-data-list-data'>
+                        <div className='Inquiry-contents-content-data-list-data2'>
                             <div className='Inquiry-contents-content-data-list-data-info'>
                                 <div className='Inquiry-contents-content-data-list-data-info-profile'>관리자</div>
-                                <div className='Inquiry-contents-content-data-list-data-info-date'>{formatDate(inquiryReplyDate)}</div>
+                                <div className='Inquiry-contents-content-data-list-data-info-date'>{inquiryReplyDate}</div>
                             </div>
-                            <div className='Inquiry-contents-content-data-list-data-answer'>{replyContents}.</div>
+                            <div className='Inquiry-contents-content-data-list-data-answer'>{replyContents}</div>
                         </div>
                     ) : (
                         <div className='Inquiry-contents-content-data-list-data'>

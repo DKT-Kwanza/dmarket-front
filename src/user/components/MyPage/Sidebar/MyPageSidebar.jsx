@@ -20,6 +20,10 @@ const MyPageSidebar = () => {
         navigate('/mypage/reviewlist');
     }
 
+    const navigateToQna = () => {
+        navigate('/mypage/qna');
+    }
+
     const navigateToInquiry = () => {
         navigate('/mypage/inquiry');
     }
@@ -52,7 +56,7 @@ const MyPageSidebar = () => {
                     <button className='myPage-sideBar-wrapper-contents-button' onClick={navigateToCart}>장바구니</button>
                     <button className='myPage-sideBar-wrapper-contents-button' onClick={navigateToWishList}>위시리스트</button>
                     <button className='myPage-sideBar-wrapper-contents-button' onClick={navigateToReviewList}>상품리뷰</button>
-                    <button className='myPage-sideBar-wrapper-contents-button' onClick={temp}>상품 Q&A</button>
+                    <button className='myPage-sideBar-wrapper-contents-button' onClick={navigateToQna}>상품 Q&A</button>
                     <button className='myPage-sideBar-wrapper-contents-button' onClick={navigateToInquiry}>고객 문의</button>
                 </div>
 

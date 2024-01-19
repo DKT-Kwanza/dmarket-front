@@ -26,6 +26,7 @@ import OrderHistory from './user/pages/MyPage/MyOrder/OrderHistory';
 import OrderHistoryDetail from "./user/pages/MyPage/MyOrder/OrderHistoryDetail";
 import Inquiry from "./user/pages/MyPage/MyActivity/CustomerInquiry/Inquiry";
 import Qna from "./user/pages/MyPage/MyActivity/Qna/Qna";
+import HistoryMileage from "./user/pages/MyPage/Mileage/HistoryMileage";
 
 function App() {
   const location = useLocation();
@@ -40,6 +41,7 @@ function App() {
               <Route path='/signin/form' element={<SignInForm/>} />
               <Route path='/mypage/changeinfo' element={<ChangeInfo/>} />
               <Route path='/mypage/chargemileage' element={<ChargeMileage/>} />
+              <Route path='/mypage/mileagehistory' element={<HistoryMileage/>} />
               <Route path='/main' element={<Main/>} />
               <Route path='/mypage/reviewlist' element={<ReviewList/>} />
               <Route path='/main/detail' element={<Detail/>} />

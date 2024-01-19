@@ -1,0 +1,53 @@
+.Mileage-contents-content-data-list {
+    margin: 0;
+    list-style: none;
+    padding-left: 0;
+}
+
+.Mileage-contents-content-data-list-temp {
+    display: flex;
+    height: 56px;
+    cursor: pointer;
+}
+
+.Mileage-contents-content-data-1 {
+    margin-top: 18px;
+    margin-left: 24px;
+    width: 265px;
+    height: 20px;
+}
+
+.Mileage-contents-content-data-2 {
+    margin-top: 18px;
+    width: 377px;
+    height: 20px;
+    align-items: center;
+    display: flex;
+}
+
+.Mileage-contents-content-data-3 {
+    margin-top: 18px;
+    width: 214px;
+    height: 20px;
+}
+
+.Mileage-contents-content-data-4 {
+    margin-top: 18px;
+    width: 160px;
+    height: 20px;
+}
+
+.Mileage-contents-content-data-3-positive {
+    color: #6F97FF;
+}
+
+.Mileage-contents-content-data-3-negative {
+    color: #FF0000;
+}
+
+.Mileage-contents-content-data-list-hr {
+    border: none;
+    height: 1px;
+    margin: 0;
+    background-color: #DBDBDB;
+}

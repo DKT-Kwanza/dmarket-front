@@ -28,6 +28,17 @@ const Inquiry = () => {
             replyContents : null,
             inquiryReplyDate: null
         },
+        {
+            InqueryId: 3,
+            category: "반품/환불",
+            title: "반품 신청했는데 언제 환불 되나요?",
+            contents: "포인트 충전 어떻게 하나요? 여기서 이렇게 하면 되나요?",
+            img: null,
+            createdAt: "2024-01-08 09:48:00",
+            status: "답변 대기",
+            replyContents : null,
+            inquiryReplyDate: null
+        },
     ]
 
     const [expandedInquiry, setExpandedInquiry] = useState({});
@@ -42,17 +53,6 @@ const Inquiry = () => {
     const formatDate = (datetime) => { // 날짜만 남기기
         const date = new Date(datetime);
         return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
-    };
-
-    const [isExpanded1, setIsExpanded1] = useState(false);
-    const [isExpanded2, setIsExpanded2] = useState(false);
-
-    const handleToggle1 = () => {
-        setIsExpanded1(!isExpanded1);
-    };
-    
-    const handleToggle2 = () => {
-        setIsExpanded2(!isExpanded2);
     };
 
     return (
@@ -84,13 +84,14 @@ const Inquiry = () => {
                                     key={index}
                                     category={inquiry.category}
                                     title={inquiry.title}
+                                    contents={inquiry.contents}
+                                    img={inquiry.img}
                                     createdAt={formatDate(inquiry.createdAt)}
                                     status={inquiry.status}
+                                    replyContents={inquiry.replyContents}
+                                    inquiryReplyDate={formatDate(inquiry.inquiryReplyDate)}
                                     isExpanded={!!expandedInquiry[inquiry.InqueryId]}
                                     onToggle={() => toggleInquiry(inquiry.InqueryId)}
-                                    contents={inquiry.contents}
-                                    replyContents={inquiry.replyContents}
-                                    inquiryReplyDate={inquiry.inquiryReplyDate}
                                 />
                             ))}
                         </div>
