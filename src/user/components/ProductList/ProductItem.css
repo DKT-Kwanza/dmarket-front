@@ -34,6 +34,11 @@
     color: #000;
 }
 
+.productListItem-rating {
+    display: flex;
+    gap: 5px;
+}
+
 .productListItem-star-lg {
     color: #FFD465;
 }

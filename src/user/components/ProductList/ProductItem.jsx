@@ -5,6 +5,7 @@ function ProductListItem({onClick, brand, productName, productImg, sales, rating
     // 별점
     const rating = ratingAvg;
 
+function ProductListItem({ imgSrc, brand, name, price, rating, reviews }) {
     return (
         <div className='productListItem-container' onClick={onClick}>
             <div className='productListItem-img'>
@@ -31,7 +32,7 @@ function ProductListItem({onClick, brand, productName, productImg, sales, rating
                 }
             </div>
         </div>
-    )
+    );
 }
 
 export default ProductListItem;

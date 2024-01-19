@@ -1,6 +1,7 @@
 import React from "react";
+import './PaymentListItem.css'
 
-export default function OrderListItem(props){
+export default function PaymentListItem(props){
     return(
         <div className="payment-product-wrap">
             <table>
@@ -19,10 +20,11 @@ export default function OrderListItem(props){
                         <td className="payment-product-td-info">
                             <p className="payment-product-brand">{props.brand}</p>
                             <p className="payment-product-productName">{props.productName}</p>
-                            <p className="payment-product-option">
-                                <span className="payment-product-option-op">옵션</span>
-                                <span>{props.option}</span>
-                            </p>
+                            <div className='payment-product-description-bar'></div>
+                            <div className='payment-product-option'>
+                                <div>{props.option}</div>
+                                <div className='cartItem-option-value'>{props.quantity}</div>
+                            </div>
                         </td>
                         <td className="payment-product-td-price">
                             <div className="payment-product-sales-div">
@@ -35,8 +37,6 @@ export default function OrderListItem(props){
                                 </del>
                                 <span className="payment-product-tx">원</span>
                             </div>
-                            <span className="payment-product-line"></span>
-                            <span className="payment-product-quantity">수량 {props.quantity}개</span>
                         </td>
                     </tr>
                 </tbody>

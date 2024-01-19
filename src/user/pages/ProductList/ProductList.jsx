@@ -1,9 +1,14 @@
 import './ProductList.css'
+import { useState } from 'react';
 // import { PiStarFill, PiStarLight } from "react-icons/pi";
-import ProductListItem from './ProductListItem';
-import Filter from './Filter';
+import ProductListItem from '../../components/ProductList/ProductItem';
+import Filter from '../../components/ProductList/Filter';
+import Dropdown from '../../components/ProductList/Dropdown';
+import datas from "../../../assets/ProductListData.json";
 
 function ProductList(){
+    const [items, setItems] = useState(datas);
+
     return (
         <div className="productList-body">
             <div className='productList-category'>홈데코 / 문구 / 가구</div>
@@ -73,24 +78,20 @@ function ProductList(){
                 <button className='productList-clear-btn'>전체해제</button>
             </div> */}
             <div className='productList-bar'></div>
-            <div className='productList-dropdown-container'>
-                <select className='productList-dropdown'>
-                    <option>최신순</option>
-                    <option>판매순</option>
-                    <option>별점순</option>
-                    <option>리뷰개수순</option>
-                </select>
-            </div>
+            <Dropdown />
             <div className='productList-bar'></div>
             <div className='productList-container'>
-                <ProductListItem/>
-                <ProductListItem/>
-                <ProductListItem/>
-                <ProductListItem/>
-                <ProductListItem/>
-                <ProductListItem/>
-                <ProductListItem/>
-                <ProductListItem/>
+                {items.map((item, index) => (
+                    <ProductListItem 
+                        key={index}
+                        imgSrc={item.imgSrc}
+                        brand={item.brand}
+                        name={item.name}
+                        price={item.price}
+                        rating={item.rating}
+                        reviews={item.reviews}
+                    />
+                ))}
             </div>
         </div>
     )

@@ -1,0 +1,113 @@
+.Qna-contents-content-data-1 {
+    margin-top: 18px;
+    margin-left: 24px;
+    width: 265px;
+    height: 20px;
+}
+
+.Qna-contents-content-data-2 {
+    margin-top: 18px;
+    width: 377px;
+    height: 20px;
+    align-items: center;
+    display: flex;
+}
+
+.Qna-contents-content-data-3 {
+    margin-top: 18px;
+    width: 214px;
+    height: 20px;
+}
+
+.Qna-contents-content-data-4 {
+    margin-top: 18px;
+    width: 160px;
+    height: 20px;
+}
+
+.Qna-contents-content-data-5 {
+    margin-top: 18px;
+    width: 160px;
+    height: 20px;
+    color: #FF0000;
+}
+.Qna-contents-content-data-6 {
+    margin-top: 18px;
+    width: 160px;
+    height: 20px;
+    color: #6F97FF;
+}
+
+.Qna-contents-content-data-list {
+    margin: 0;
+    list-style: none;
+    padding-left: 0;
+}
+
+.Qna-contents-content-data-list-hr {
+    border: none;
+    height: 1px;
+    margin: 0;
+    background-color: #DBDBDB;
+}
+
+.Qna-contents-content-data-list-temp {
+    display: flex;
+    height: 56px;
+    cursor: pointer;
+}
+
+.Qna-contents-content-data-list-data {
+    margin: 20px;
+}
+
+.Qna-contents-content-data-list-data-info {
+    display: flex;
+    margin-bottom: 20px;
+}
+.Qna-contents-content-data-list-data-info-profile {
+    color: #000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-right: 20px;
+}
+
+.Qna-contents-content-data-list-data-info-date {
+    color: #000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.Qna-contents-content-data-list-data-answer {
+    color: #000;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.Qna-contents-content-data-list-btn-wrap {
+    text-align: right;
+}
+
+.Qna-contents-content-data-list-btn {
+    width: 160px;
+    height: 48px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #FFD465;
+    cursor: pointer;
+}
+
+.Qna-contents-content-data-list-btn-hr {
+    border: none;
+    height: 1px;
+    margin: 0;
+    background-color: #D9D9D9;
+}

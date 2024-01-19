@@ -4,119 +4,91 @@ import eximg from '../../../../../assets/images/720X720.jpg'
 import MyPageSidebar from "../../../../components/MyPage/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../../components/MyPage/SubHeader/MyPageSubHeader";
 import {useState} from "react";
-import { useNavigate } from 'react-router-dom';
 import OrderList from "../../../../components/Review/OrderList";
 import OrderReviewList from "../../../../components/Review/OrderReviewList";
 
 const ReviewList = () => {
     const ordersData = [
         {
-          orderDate: "2026.04.05",
-          orderTime: "20시 10분",
-          orderNumber: "20210105123456",
-          items: [
+          orderDate: "2024-01-09 09:48:00",
+          orderId: "20210105123456",
+          orderDetail: [
             {
+                orderDetailId: 34,
                 brand: "JAJU",
-                name: "쿠시노 코지 저상형 침대(패브릭,SS)",
+                productName: "쿠시노 코지 저상형 침대(패브릭,SS)",
+                productImg: "https://placehold.co/130x130",
                 option: "GREY BEIGE L",
-                count: "1",
-                price: "1,208,000"
+                sales: "1,208,000"
             },
             {
+                orderDetailId: 35,
                 brand: "nike",
-                name: "후드티",
+                productName: "후드티",
+                productImg: "https://placehold.co/130x130",
                 option: "black",
-                count: "100",
-                price: "1,000,000"
+                sales: "1,000,000"
             },
           ]
         },
         {
-            orderDate: "2024.01.05",
-            orderTime: "20시 10분",
-            orderNumber: "20210105123456",
-            items: [
-                {
-                    brand: "JAJU",
-                    name: "쿠시노 코지 저상형 침대(패브릭,SS)",
-                    option: "GREY BEIGE L",
-                    count: "1",
-                    price: "1,208,000"
-                },
-              ]
+            orderDate: "2024-01-09 09:48:00",
+            orderId: "20210105123456",
+            orderDetail: [
+              {
+                  orderDetailId: 34,
+                  brand: "JAJU",
+                  productName: "쿠시노 코지 저상형 침대(패브릭,SS)",
+                  productImg: "https://placehold.co/130x130",
+                  option: "GREY BEIGE L",
+                  sales: "1,208,000"
+              },
+            ]
         },
-        {
-            orderDate: "2024.01.05",
-            orderTime: "20시 10분",
-            orderNumber: "20210105123456",
-            items: [
-                {
-                    brand: "nike",
-                    name: "후드티",
-                    option: "black",
-                    count: "100",
-                    price: "1,000,000"
-                },
-                {
-                    brand: "JAJU",
-                    name: "쿠시노 코지 저상형 침대(패브릭,SS)",
-                    option: "GREY BEIGE L",
-                    count: "1",
-                    price: "1,208,000"
-                },
-                {
-                    brand: "nike",
-                    name: "후드티",
-                    option: "black",
-                    count: "100",
-                    price: "1,000,000"
-                },
-              ]
-        },
-    ];
+    ]
 
     const reviewsData = [
         {
-          orderDate: "2026.04.05",
-          orderTime: "20시 10분",
-          orderNumber: "20210105123456",
-          brand: "JAJU",
-          name: "쿠시노 코지 저상형 침대(패브릭,SS)",
-          option: "GREY BEIGE L",
-          count: "1",
-          price: "1,208,000",
-          reviews: [
-            {
-              imgSrc: eximg,
-              rating: 2,
-              reviewText:  "조금 크지만 그냥 입으려구요",
-              reviewDate: "2024-01-10",
-            },
-          ],
-        },
-        {
-            orderDate: "2024.01.05",
-            orderTime: "20시 10분",
-            orderNumber: "20210105123456",
-            brand: "JAJU",
-            name: "쿠시노 코지 저상형 침대(패브릭,SS)",
-            option: "GREY BEIGE L",
-            count: "1",
-            price: "1,208,000",
-            reviews: [
-              {
-                imgSrc: null,
-                rating: 5,
-                reviewText:  "너무좋아요 최고~~!",
-                reviewDate: "2024-01-10",
-              },
+            orderDate: "2024-01-09 09:48:00",
+            orderId: "20210105123456",
+            "reviewList": [
+               {
+                    orderDetailId: 34,
+                    brand: "JAJU",
+                    productName: "쿠시노 코지 저상형 침대(패브릭,SS)",
+                    productImg: "https://placehold.co/130x130",
+                    option: "GREY BEIGE L",
+                    sales: "1,208,000",
+                    reviews: [
+                        {
+                        reviewId: 1,
+                        contents: "커버 잘 되고 좋아요",
+                        rating: 4,
+                        reviewCreatedDate : "2024-01-09 09:48:00",
+                        reviewImg: null,
+                        },
+                    ]
+                },
+                {
+                    orderDetailId: 35,
+                    brand: "nike",
+                    productName: "후드티",
+                    productImg: "https://placehold.co/130x130",
+                    option: "black",
+                    sales: "1,208,000",
+                    reviews: [
+                        {
+                        reviewId: 1,
+                        contents: "잘맞아요",
+                        rating: 5,
+                        reviewCreatedDate : "2024-02-09 09:48:00",
+                        reviewImg: "https://placehold.co/130x130",
+                        },
+                    ]
+                }
             ],
         },
     ];
-
-    const navigate = useNavigate();
-    const [rating, setRating] = useState(5);
-    const [rating2, setRating2] = useState(2);
 
     const [review, setReview] = useState(true);
     const [reviewed, setReviewed] = useState(false);
@@ -128,10 +100,6 @@ const ReviewList = () => {
     const onClickReviewed = () => {
         setReview(false);
         setReviewed(true);
-    }
-
-    const navigateToWrite = () => {
-        navigate("../mypage/writereview");
     }
     
     return (
@@ -155,11 +123,11 @@ const ReviewList = () => {
                             <>
                                 <OrderList orders={ordersData} />
                             </>
-                            ) : 
-                            (
-                                <>
-                                    <OrderReviewList orders={reviewsData} />
-                                </>
+                        ) : 
+                        (
+                            <>
+                                <OrderReviewList orders={reviewsData} />
+                            </>
                         )
                     }
                 </div>

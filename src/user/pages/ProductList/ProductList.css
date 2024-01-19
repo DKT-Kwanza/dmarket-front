@@ -1,6 +1,7 @@
 .productList-body {
     width: 1280px;
     margin: 0 auto;
+    padding-bottom: 200px;
 }
 
 .productList-category {
@@ -118,19 +119,6 @@
     font-weight: 500;
     cursor: pointer;
 } */
-
-.productList-dropdown-container {
-    text-align: right;
-}
-
-.productList-dropdown {
-    font-size: 16px;
-    color: #505050;
-    font-weight: 700;
-    border: 0;
-    margin: 44px 8px 6px 0;
-    cursor: pointer;
-}
 
 .productList-bar {
     background: #DBDBDB;

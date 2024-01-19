@@ -1,29 +1,29 @@
 import './CartItem.css';
-import CheckBox from '../../../../components/CheckBox/CheckBox';
+import CheckBox from '../CheckBox/CheckBox';
 
-function CartItem(){
+function CartItem ({ imgSrc, brand, name, price, option, count, checked, onCheck }){
 
     return(
         <div className='cartItem-container'>
             <div className='cartItem-checkbox'>
-                    <CheckBox />
+                <CheckBox checked={checked} onChange={onCheck} />
                 </div>
             <div className='cartItem-item'>
                 <div className='cartItem-img'>
-                    이미지
+                    <img src={imgSrc} alt={name} style={{ width: "100px", height: "100px" }}/>
                 </div>
                 <div className='cartItem-description'>
-                    <div className='cartItem-brand'>브랜드</div>
-                    <div className='cartItem-name'>상품명</div>
+                    <div className='cartItem-brand'>{brand}</div>
+                    <div className='cartItem-name'>{name}</div>
                     <div className='cartItem-description-bar'></div>
                     <div className='cartItem-option'>
-                        <div>옵션</div>
-                        <div className='cartItem-option-value'>GREY L</div>
+                        <div>{option}</div>
+                        <div className='cartItem-option-value'>{count}</div>
                     </div>
                 </div>
             </div>
             <div className='cartItem-bar'></div>
-            <div className='cartItem-price'>88,536원</div>
+            <div className='cartItem-price'>{price}원</div>
         </div>
     )
 }

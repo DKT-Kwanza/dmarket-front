@@ -1,27 +1,45 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import './CustomerCenterNotice.css';
-import { ReactComponent as ChevronDown } from "../../../assets/icons/chevron-down.svg";
-import { ReactComponent as ChevronUp } from "../../../assets/icons/chevron-up.svg";
+import CustomerCenterNoticeItem from '../../components/CustomerCenter/CustomerCenterNoticeItem';
 
 function CustomerCenterNotice() {
 
+  const noticeData = [
+    {
+      noticeId : 1,
+      title : "온라인 해외직구&구매대행 캠핑용 가스용품 구매 시 주의사항",
+      contents : "나라마다 제품을 만드는 기준이 모두 다르기 때문에 제품 구매 전 국내 사용이 가능한 제품인지 정확한 파악이 필요합니다. 특히 전자제품은 국내에서 사용하는 전압, 주파수, 규격 등과 다를 수 있습니다. 옷이나 신발도 국내 사이즈와 다를 수 있으므로 사이즈를 잘 알아본 후에 구매가 필요합니다.",
+      createdAt: "2023-12-27 09:48:00",
+    },
+    {
+      noticeId : 2,
+      title : "개인정보처리방침 개정 안내 [개정일 : 2023.02.22]",
+      contents : "개인정보자기결정권 등 서문 추가 개인정보 취급방침 → 개인정보처리방침 변경 목차 및 제목 등 문구수정 개인정보의 제3자 제공 문구 수정",
+      createdAt : "2024-02-02 09:48:00"
+    },
+    {
+      noticeId : 3,
+      title : "온라인 해외직구&구매대행 캠핑용 가스용품 구매 시 주의사항",
+      contents : "온라인 해외직구&구매대행 캠핑용 가스용품 구매 시 주의하세요 블라블라",
+      createdAt : "2024-05-01 09:48:00"
+    },
+  ]
+
   const navigate = useNavigate();
 
-  const [isExpanded_1, setIsExpanded_1] = useState(false);
-  const [isExpanded_2, setIsExpanded_2] = useState(false);
-  const [isExpanded_3, setIsExpanded_3] = useState(false);
+  const [expandedNotices, setExpandedNotices] = useState({});
 
-  const handleToggle_1 = () => {
-    setIsExpanded_1(!isExpanded_1);
+  const formatDate = (datetime) => { // 날짜만 남기기
+    const date = new Date(datetime);
+    return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
   };
 
-  const handleToggle_2 = () => {
-    setIsExpanded_2(!isExpanded_2);
-  };
-
-  const handleToggle_3 = () => {
-    setIsExpanded_3(!isExpanded_3);
+  const toggleNotice = (noticeId) => {
+    setExpandedNotices(prev => ({
+      ...prev,
+      [noticeId]: !prev[noticeId]
+    }));
   };
 
   const navigateToFaQ = (menu) => {
@@ -38,7 +56,7 @@ function CustomerCenterNotice() {
         </div>
         <div className="notice-bar"/>
         <div className="notice-submenu">
-          <button className='notice-submenu-content-left' onClick={() => navigateToFaQ('회원문의')}>회원 문의</button>
+          <button className='notice-submenu-content-left' onClick={() => navigateToFaQ('회원 문의')}>회원 문의</button>
           <div className="submenu-line"/>
           <button className='notice-submenu-content-mid' onClick={() => navigateToFaQ('주문/결제 문의')}>주문/결제 문의</button>
           <div className="submenu-line"/>
@@ -59,93 +77,21 @@ function CustomerCenterNotice() {
               공지사항   
             </div>
           </div>
-
           <div className='notice-main-menu'>
-
-            <div className='notice-main-menu-display' onClick={handleToggle_1}>
-              <div className='notice-main-menu-text'>
-                온라인 해외직구&구매대행 캠핑용 가스용품 구매 시 주의사항
-              </div>
-
-              <div className='notice-main-menu-date'>
-                2023.12.27
-              </div>
-              <div className='notice-main-menu-button'>
-                {isExpanded_1 ? <ChevronUp/> : <ChevronDown/>}
-              </div>
-            </div>
-
-            {
-              isExpanded_1 && (
-              <div className='notice-main-menu-expanded-content'>
-                <li>나라마다 제품을 만드는 기준이 모두 다르기 때문에 제품 구매 전 국내 사용이 가능한 제품인지 정확한 파악이 필요합니다.</li>
-                <li>특히 전자제품은 국내에서 사용하는 전압, 주파수, 규격 등과 다를 수 있습니다.</li>
-                <li>옷이나 신발도 국내 사이즈와 다를 수 있으므로 사이즈를 잘 알아본 후에 구매가 필요합니다.</li>
-              </div>
-            )}
-
-            <div className='notice-main-menu-line'/>
-          
-            <div className='notice-main-menu-display' onClick={handleToggle_2}>
-              <div className='notice-main-menu-text'>
-                개인정보처리방침 개정 안내 [개정일 : 2023.02.22]
-              </div>
-
-              <div className='notice-main-menu-date'>
-                2023.12.27
-              </div>
-              <div className='notice-main-menu-button'>
-                {isExpanded_2 ? <ChevronUp/> : <ChevronDown/>}
-              </div>
-            </div>
-
-            {
-              isExpanded_2 && (
-              <div className='notice-main-menu-expanded-content'>
-                <li>개인정보자기결정권 등 서문 추가</li>
-                <li>개인정보 취급방침 → 개인정보처리방침 변경</li>
-                <li>목차 및 제목 등 문구수정</li>
-                <li>개인정보의 제3자 제공 문구 수정</li>
-              </div>
-            )}
-
-            <div className='notice-main-menu-line'/>
-
-            <div className='notice-main-menu-display' onClick={handleToggle_3}>
-              <div className='notice-main-menu-text'>
-                개인정보처리방침 개정 안내 [개정일 : 2023.02.22]
-              </div>
-              <div className='notice-main-menu-date'>
-                2023.12.27
-              </div>
-              <div className='notice-main-menu-button'>
-                {isExpanded_3 ? <ChevronUp/> : <ChevronDown/>}
-              </div>    
-            </div>
-
-            {
-              isExpanded_3 && (
-              <div className='notice-main-menu-expanded-content'>
-                <li>대검찰청 사이버 범죄수사단 연락처 수정</li>
-                <li>개인정보 파기절차 및 방법 수정</li> 
-                <li>이용자와 법정대리인의 권리·의무 및 그 행사방법 내용 수정</li>
-                <li>개인정보의 안전성 확보조치 내용 수정</li>                
-              </div>
-            )}
-
-            <div className='notice-main-menu-line'/>
-            
-
-
-
-
-
+            {noticeData.map(notice => (
+              <CustomerCenterNoticeItem
+                key={notice.noticeId}
+                question={notice.title}
+                isExpanded={!!expandedNotices[notice.noticeId]}
+                onToggle={() => toggleNotice(notice.noticeId)}
+                createdAt={formatDate(notice.createdAt)}
+              >
+                {/* 내용을 children으로 전달 */}
+                <div dangerouslySetInnerHTML={{ __html: notice.contents }} />
+              </CustomerCenterNoticeItem>
+            ))}
           </div>
         </div>
-        
-        
-
-
       </div>
     </div>
   );

@@ -1,0 +1,102 @@
+.payment-product-wrap{
+    display: block;
+    margin: 0;
+    margin-top: 20px;
+    border: 1px solid #CED3D6;
+    box-sizing: border-box;
+    width: 990px;
+}
+.payment-product-wrap table{ /*양쪽 정렬 때문에 %사용했는데 괜찮을까요*/
+    border-collapse: collapse;
+    border: 0 none;
+    width: 100%;
+}
+.payment-products-table:first-child{
+    display: table-row;
+}
+.payment-product-td-img{
+    position: relative;
+    padding: 20px;
+    padding-right: 0;
+    vertical-align: top;
+}
+.payment-product-td1-div{
+    position: relative;
+    vertical-align: top;
+}
+.payment-product-td1-span{
+    display: block;
+    width: 100px;
+    height: 100px;
+}
+
+.payment-product-td-info{
+    position: relative;
+    padding: 20px;
+    vertical-align: top;
+}
+
+.payment-product-brand{
+    font-size: 18px;
+    font-weight: bold;
+    height: 26px;
+    margin: 0;
+}
+.payment-product-productName {
+    font-size: 14px;
+    color: #505050;
+    margin: 0;
+    margin-top: 7px;
+}
+
+.payment-product-description-bar {
+    width: 22px;
+    height: 1px;
+    background: #878D91;
+    margin-top: 12px;
+}
+
+.payment-product-option {
+    color: #878D91;
+    font-size: 12px;
+    font-weight: 400;
+    display: flex;
+    gap: 8px;
+    
+}
+
+.payment-product-td-price {
+    border-left: 1px solid #CED3D6;
+    position: relative;
+    padding: 20px 5px 20px 20px;
+}
+.payment-product-sales-div{
+    padding: 0;
+    margin: 0;
+}
+.payment-product-sales{
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 500;
+    vertical-align: -2px;
+    line-height: 25px;
+    letter-spacing: -0.5px;
+}
+.payment-product-tx{
+    display: inline-block;
+    padding-left: 1px;
+    font-size: 11px;
+    color: #222;
+    vertical-align: -1px;
+    line-height: 15px;
+}
+.payment-product-prodPrice{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    color: #505050;
+    text-decoration: line-through;
+    vertical-align: middle;
+    line-height: 16px;
+    letter-spacing: -0.5px;
+}

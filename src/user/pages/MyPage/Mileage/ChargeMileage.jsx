@@ -21,7 +21,7 @@ function ChargeMileage(){
                             <div className='contents-right-intro'>
                                 <div className='contents-right-intro-title'>마일리지</div>
                                 <div className='contents-right-intro-contents'>
-                                    <div className='contents-right-intro-contents-style'>마일리지 *마일리지는 매년 1월 1일 연 120만원 자동 충전 됩니다.</div>
+                                    <div className='contents-right-intro-contents-style'>*마일리지는 매년 1월 1일 연 120만원 자동 충전 됩니다.</div>
                                     <div className='contents-right-intro-contents-style'>*신규 입사자에 한 하여 입사 분기에 따라 마일리지 지급 금액이 달라집니다. (한 분기당 30만원)</div>
                                     <div className='contents-right-intro-contents-style'>*사용하지 않은 마일리지는 매년 말일에 자동 소멸 됩니다.</div>
                                 </div>
