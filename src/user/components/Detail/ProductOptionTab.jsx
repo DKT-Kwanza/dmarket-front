@@ -55,6 +55,7 @@ const TabArea = styled.div`
   width: 538px;
   background: #F1F1F1;
   padding: 16px 16px 20px 23px;
+  margin-bottom: 10px;
 `;
 
 const InfoArea = styled.div`

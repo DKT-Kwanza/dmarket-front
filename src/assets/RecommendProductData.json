@@ -1,0 +1,38 @@
+[
+  {
+    "productId": 32542,
+    "brand": "바비브라운",
+    "productName": "바비브라운 파운데이션",
+    "productImg": "https://amazonaws.com/image.png",
+    "sales": "25,000",
+    "ratingAvg": 3,
+    "reviewCnt": 30
+  },
+  {
+    "productId": 32543,
+    "brand": "바비브라운",
+    "productName": "바비브라운 파운데이션",
+    "productImg": "https://amazonaws.com/image.png",
+    "sales": "25,000",
+    "ratingAvg": null,
+    "reviewCnt": 30
+  },
+  {
+    "productId": 32544,
+    "brand": "바비브라운",
+    "productName": "바비브라운 파운데이션",
+    "productImg": "https://amazonaws.com/image.png",
+    "sales": "25,000",
+    "ratingAvg": 3,
+    "reviewCnt": 30
+  },
+  {
+    "productId": 32545,
+    "brand": "바비브라운",
+    "productName": "바비브라운 파운데이션",
+    "productImg": "https://amazonaws.com/image.png",
+    "sales": "25,000",
+    "ratingAvg": 3,
+    "reviewCnt": 30
+  }
+]

@@ -1,16 +1,10 @@
-button {
-  font-family: 'Noto Sans KR', sans-serif;
-}
-
 #container1 {
-    font-family: 'Noto Sans KR', sans-serif;
-	width: 1280px; 
+	width: 1280px;
 	margin: 0 auto;
 }
 
 #container2 {
-    font-family: 'Noto Sans KR', sans-serif;
-	width: 1060px; 
+	width: 1060px;
 	margin: 0 auto;
 }
 
@@ -32,7 +26,7 @@ button {
     height: 550px;
 }
 .subImg {
-    display: flex; 
+    display: flex;
     width: 100px;
     height: 100px;
     margin-left: 10px;
@@ -61,11 +55,7 @@ button {
     height: 35px;
     margin-top: 8px;
     font-weight: 400;
-}
-
-.starSolid {
-    margin-right: 5px;
-    color: gold;
+    display: flex;
 }
 
 .price {
@@ -195,7 +185,6 @@ button {
     font-weight: 500;
     border: none;
     border-radius: 0;
-    border-right: none;
     cursor: pointer;
     background-color: #FFD465;
 }
@@ -215,9 +204,10 @@ button {
     background-color: #FFFFFF;
     cursor: pointer;
 }
-.buttonArea button:hover,
-.buttonArea button:active {
+.buttonArea li:hover,
+.buttonArea li:active {
     color: #000000;
+    font-weight: 600;
 }
 
 .productDetailButton {
@@ -310,7 +300,7 @@ a {color: #333; text-decoration: none;}
     font-weight: 500;
 }
 
-.ratingStar{ 
+.ratingStar{
     margin-top: 39px;
     margin-left: 33px;
     font-size: 24px;
@@ -337,24 +327,6 @@ a {color: #333; text-decoration: none;}
     font-weight: 700;
 }
 
-.review {
-    margin-top: 14px;
-    margin-left: 16px;
-    font-size: 15px;
-    font-weight: 400;
-}
-.reviewContents {
-    margin-top: 30px;
-}
-
-.reviewImg {
-    width: 100px;
-    height: 100px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: #D9D9D9;
-}
-
 .qnaTitle {
     margin-top: 57px;
     font-size: 32px;
@@ -369,11 +341,23 @@ a {color: #333; text-decoration: none;}
 }
 
 .qnaCategory {
-    width: 1060px;
     display: flex;
     margin-top: 32px;
-    height: 29px;
     color: #919191;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.qna-category-btn-area {
+    display: flex;
+    align-items: center;
+}
+
+.qna-category-line {
+    width: 1px;
+    height: 16px;
+    background: #919191;
+    margin: 0 16px;
 }
 
 .qnaCategory button {
@@ -390,59 +374,28 @@ a {color: #333; text-decoration: none;}
 }
 
 .qnaAll {
-    height: 22px;
     border: none;
 }
 
 .qnaReplyDone {
-    height: 22px;
     border: none;
-
 }
 
 .qnaReplyWaiting {
-    height: 22px;
     border: none;
 }
 
 .qnaEnroll {
-    display: flex; 
+    display: flex;
     align-items: center;
-    margin-left: 655px;
     height: 22px;
     border: none;
-}
-
-.qnaAttributes {
-    margin-top: 15px;
-    border-top: 1px solid #b3b3b3;
-    display: flex;
-    height: 56px;
-    background-color: #FAFAFA;
-    font-size: 14px;
-    font-weight: 500;
-    color: #444444;
-}
-
-.qnaAttributesTitle {
-    margin-top: 18px;
-    margin-left: 0;
-}
-
-.qnaAttributesDate {
-    margin-top: 18px;
-    margin-left: 374px;
-}
-
-.qnaAttributesState {
-    margin-top: 18px;
-    margin-left: 153px;
 }
 
 .question {
     height: 58px;
     border-bottom: 2px solid #c4c4c4;
-    display: flex; 
+    display: flex;
     align-items: center;
 }
 
@@ -480,145 +433,12 @@ a {color: #333; text-decoration: none;}
     color: #6F97FF;
 }
 
-.questionWrite {
-    height: 324px;
-    border-bottom: 1px solid #c4c4c4;
-}
-
-.questionWriteTitle {
-    margin-top: 26px;
-    height: 30px;
-    font-size: 15px;
-    font-weight: 500;
-    padding-left: 5px;
-}
-
-.questionTitleInput {
-    font-family: 'Noto Sans KR', sans-serif;
-    margin-left: 38px;
-    padding-left: 25px;
-    width: 950px;
-    height: 36px;
-    font-size: 15px;
-    border: 1px solid #C6C6C6;
-    border-radius: 0;
-}
-
-.questionWriteContents {
-    display: flex;
-    margin-top: 26px;
-    height: 110px;
-    font-size: 15px;
-    font-weight: 500;
-    padding-left: 5px;
-}
-
-.questionContentsleft {
-    width: 28px;
-    height: 22px;
-    padding-top: 5px;
-}
-
-.questionContentsInput {
-    margin-left: 37px;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 15px;
-    padding-left: 25px;
-    padding-top: 5px;
-    width: 950px;
-    height: 110px;
-    border: 1px solid #C6C6C6;
-    border-radius: 0;
-}
-
-.secretState {
-    display: flex;
-    margin-top: 25px;
-    height: 26px;
-    font-size: 15px;
-    font-weight: 400;
-}
-
-.secretArticle {
-    margin-left: 800px;
-    font-weight: 500;
-}
-.public {
-    display: inline-block;
-    position: relative;
-    padding-left: 20px;
-    cursor: pointer;
-    font-size: 15px;
-}
-
-.private {
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    font-size: 15px;
-}
-
-.enrollButton {
-    margin-left: 963px;
-    margin-top: 43px;
-    border: none;
-    border-radius: 5px;
-    width: 97px;
-    height: 38px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #444444;
-    background-color: #FFD465;
-    cursor: pointer;
-  }
-
 .recommandTitle {
     margin-top: 57px;
     width: 258px;
     height: 46px;
     font-size: 32px;
     font-weight: 500;
-  }
-
-.recommandArea {
-    display: flex;
-    margin-top: 22px;
-    height: 357px;
-  }
-
-.recommandElement {
-    width: 230px;
-    margin-left: 45px;
-  }
-
-.recommandElementImg {
-    width: 230px;
-    height: 230px;
-    background-color: #D9D9D9;
-  }
-
-.recomandElementTitle {
-    font-size: 20px;
-    font-weight: 500;
-    margin-top: 5px;
-  }
-
-.recomandElementSubTitle {
-    font-size: 14px;
-    font-weight: 400;
-    margin-top: 5px;
-  }
-
-.recomandElementPrice {
-    font-size: 24px;
-    font-weight: 500;
-    margin-top: 10px;
-  }
-
-.recomandElementStar {
-    font-size: 14px;
-    font-weight: 400;
-    margin-top: 3px;
   }
 
 .deliveryTitle {
@@ -734,7 +554,7 @@ a {color: #333; text-decoration: none;}
     font-weight: 300;
     line-height: 1.8;
     color: #505050;
-    padding: 0px;
+    padding: 0;
     background-color: white;
     text-decoration: underline;
     cursor: pointer;

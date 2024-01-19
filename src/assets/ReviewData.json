@@ -1,0 +1,34 @@
+{
+  "productId": 452,
+  "reviewCnt": 3,
+  "ratingAvg": 3.8,
+  "reviewList": [
+    {
+      "reviewId": 2,
+      "rating": 4,
+      "writer": "홍**",
+      "option": "21호/바닐라",
+      "createdAt": "2024-01-09 09:48:00",
+      "content": "색상이 엄청 밝네요",
+      "reviewImg": "https://amazonaws.com/image.png"
+    },
+    {
+      "reviewId": 3,
+      "rating": 5,
+      "writer": "홍**",
+      "option": "21호/바닐라",
+      "createdAt": "2024-01-09 09:48:00",
+      "content": "색상이 엄청 밝네요",
+      "reviewImg": null
+    },
+    {
+      "reviewId": 5,
+      "rating": 4,
+      "writer": "홍**",
+      "option": "21호/바닐라",
+      "createdAt": "2024-01-09 09:48:00",
+      "content": "색상이 엄청 밝네요",
+      "reviewImg": "https://amazonaws.com/image.png"
+    }
+  ]
+}
