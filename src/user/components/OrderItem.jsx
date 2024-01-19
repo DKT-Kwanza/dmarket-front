@@ -5,28 +5,28 @@ import styled from 'styled-components';
 function OrderItem({img, brand, name, option, price, children}) {
     return (
         <Item>
-            <img src={img} className='productreview-img-review-content-img' alt="상품 이미지"/>
+            <img src={img} className='productreview-img-review-content-img' alt="상품 이미지"/> {/* 상품 이미지 */}
             <Info>
                 <tr>
                     <InfoTitle>브랜드</InfoTitle>
-                    <InfoContent>{brand}</InfoContent>
+                    <InfoContent>{brand}</InfoContent> {/* 상품 브랜드*/}
                 </tr>
                 <tr>
                     <InfoTitle>상품명</InfoTitle>
-                    <InfoContent>{name}</InfoContent>
+                    <InfoContent>{name}</InfoContent> {/* 상품 이름 */}
                 </tr>
                 <tr>
                     <InfoTitle>옵션</InfoTitle>
                     <InfoContent>
-                        <div>{option}</div>
+                        <div>{option}</div> {/* 상품 옵션 */}
                     </InfoContent>
                 </tr>
                 <tr>
                     <InfoTitle>결제금액</InfoTitle>
-                    <InfoContent>{price} 원</InfoContent>
+                    <InfoContent>{price} 원</InfoContent> {/* 상품 금액 */}
                 </tr>
             </Info>
-            <InfoProcess>{children}</InfoProcess>
+            <InfoProcess>{children}</InfoProcess> {/* 리뷰 작성 버튼 */}
         </Item>
     );
 }
@@ -48,6 +48,7 @@ const Info = styled.table`
   text-align: left;
   margin-left: 24px;
   border-spacing: 8px;
+  min-width: 340px;
 `
 
 const InfoTitle = styled.td`
