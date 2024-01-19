@@ -1,5 +1,5 @@
 import {PiStarFill, PiStarLight} from "react-icons/pi";
-import './ProductItem.css'
+import './ProductListItem.css'
 
 function ProductListItem({onClick, brand, productName, productImg, sales, ratingAvg, reviewCnt}) {
     // 별점
@@ -31,7 +31,7 @@ function ProductListItem({onClick, brand, productName, productImg, sales, rating
                 }
             </div>
         </div>
-    );
+    )
 }
 
 export default ProductListItem;
