@@ -7,6 +7,7 @@ import ReviewItem from './ReviewItem';
 const OrderList = ({ orders }) => {
   const navigate = useNavigate();
 
+  /* 상품 정보 리뷰 작성 페이지로 전달 */
   const navigateToWrite = (orderDetail) => {
     navigate('/mypage/writereview', { state: { orderDetail } });
   };
