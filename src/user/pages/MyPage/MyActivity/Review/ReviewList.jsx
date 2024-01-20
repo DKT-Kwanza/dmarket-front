@@ -78,7 +78,7 @@ const ReviewList = () => {
                     sales: "1,208,000",
                     reviews: [
                         {
-                        reviewId: 1,
+                        reviewId: 2,
                         contents: "잘맞아요",
                         rating: 5,
                         reviewCreatedDate : "2024-02-09 09:48:00",

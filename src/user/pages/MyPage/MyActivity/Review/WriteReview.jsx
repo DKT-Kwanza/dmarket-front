@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import "./WriteReview.css";
 import MyPageSidebar from "../../../../components/MyPage/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../../components/MyPage/SubHeader/MyPageSubHeader";
 
 function WriteReview() {
 
+    const { state } = useLocation();
+    const { orderDetail } = state;
     const [rating, setRating] = useState(0);
 
     const handleStarClick = (clickedRating) => {
@@ -35,23 +38,23 @@ function WriteReview() {
                                     <table className="mypageProductReview-item-info">
                                         <tr>
                                             <td className="mypageProductReview-item-info-tit">브랜드</td>
-                                            <td className="mypageProductReview-item-info-cont">JAJU</td>
+                                            <td className="mypageProductReview-item-info-cont">{orderDetail.brand}</td>
                                         </tr>
                                         <tr>
                                             <td className="mypageProductReview-item-info-tit">상품명</td>
-                                            <td className="mypageProductReview-item-info-cont">쿠시노 코지 저상형 침대(패브릭,SS)</td>
+                                            <td className="mypageProductReview-item-info-cont">{orderDetail.productName}</td>
                                         </tr>
                                         <tr>
                                             <td className="mypageProductReview-item-info-tit">옵션</td>
                                             <td className="mypageProductReview-item-info-cont">
-                                                <div>GREY BEIGE L</div>
+                                                <div>{orderDetail.option}</div>
                                                 <div className="mypageProductReview-item-info-bar"/>
                                                 
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="mypageProductReview-item-info-tit">결제금액</td>
-                                            <td className="mypageProductReview-item-info-cont">1,208,000 원</td>
+                                            <td className="mypageProductReview-item-info-cont">{orderDetail.sales}</td>
                                         </tr>
                                     </table>
                                 </div>
