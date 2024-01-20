@@ -121,12 +121,12 @@ const ReviewList = () => {
                     {
                         review ? (
                             <>
-                                <OrderList orders={ordersData} />
+                                <OrderList orders={ordersData} /> {/* 작성 가능한 리뷰 */}
                             </>
                         ) : 
                         (
                             <>
-                                <OrderReviewList orders={reviewsData} />
+                                <OrderReviewList orders={reviewsData} /> {/* 작성한 리뷰 */}
                             </>
                         )
                     }

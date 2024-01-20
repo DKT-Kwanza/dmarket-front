@@ -4,40 +4,37 @@ import './MyPageSidebar.css';
 const MyPageSidebar = () => {
 
     const navigate = useNavigate();
+    // onClick 발생 시 각각의 page 로 navigate
     const navigateToOrderHistory = () => {
-        navigate('/mypage/orderhistory');
+        navigate('/mypage/orderhistory');   // NavigateToOrderHistory
     }
 
     const navigateToCart = () => {
-        navigate('/mypage/cart');
+        navigate('/mypage/cart');   // navigateToCart
     }
 
     const navigateToWishList = () => {
-        navigate('/mypage/wishlist');
+        navigate('/mypage/wishlist');   // navigateToWishList
     }
 
     const navigateToReviewList = () => {
-        navigate('/mypage/reviewlist');
+        navigate('/mypage/reviewlist'); //navigateToReviewList
     }
 
     const navigateToQna = () => {
-        navigate('/mypage/qna');
+        navigate('/mypage/qna');    // navigateToQna
     }
 
     const navigateToInquiry = () => {
-        navigate('/mypage/inquiry');
+        navigate('/mypage/inquiry');    // navigateToInquiry
     }
 
     const navigateToChangeInfo = () => {
-        navigate('/mypage/changeinfo');
+        navigate('/mypage/changeinfo'); // navigateToChangeInfo
     }
 
     const navigateToChangePwd = () => {
-        navigate('/mypage/changepwd');
-    }
-
-    const temp = () => {
-        navigate('/');
+        navigate('/mypage/changepwd');  // navigateToChangePwd
     }
 
     return (

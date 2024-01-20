@@ -22,12 +22,12 @@ const OrderInfo = ({ orderDate, orderId }) => {
   return (
     <div className="productreview-div-review-orderwrapper">
       <div className="productreview-div-review-ordertime">
-        <p className="productreview-p-review-orderdate">{formatDate(orderDate)}</p>
-        <p className="productreview-p-review-ordertime">({formatTime(orderDate)})</p>
+        <p className="productreview-p-review-orderdate">{formatDate(orderDate)}</p> {/* 주문 날짜 */}
+        <p className="productreview-p-review-ordertime">({formatTime(orderDate)})</p> {/* 주문 시간 */}
       </div>
       <div className="productreview-div-review-ordernum">
         <p className="productreview-p-review-ordernum">주문번호</p>
-        <p className="productreview-p-review-ordernum-num">{orderId}</p>
+        <p className="productreview-p-review-ordernum-num">{orderId}</p> {/* 주문 번호 */}
       </div>
     </div>
   );

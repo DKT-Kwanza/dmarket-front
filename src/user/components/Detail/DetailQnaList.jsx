@@ -7,22 +7,25 @@ function DetailQnaList({datas}) {
 
     const [openReplyIndexes, setOpenReplyIndexes] = useState([]);
 
-    const qnaClickHandler = (index) => {
+    // DetailQnaListItem 에 onClick 이 일어나면 DetailQnaReply 가 보이도록
+    const qnaClickHandler = (index) => {    // 각 item 의 index
         const isOpen = openReplyIndexes.includes(index);
         if (isOpen) {
-            setOpenReplyIndexes(openReplyIndexes.filter((i) => i !== index));
+            setOpenReplyIndexes(openReplyIndexes.filter((i) => i !== index));   // 체크 해제
         } else {
-            setOpenReplyIndexes([...openReplyIndexes, index]);
+            setOpenReplyIndexes([...openReplyIndexes, index]);  // 배열에 추가
         }
     };
 
     return (
         <>
+            {/*표의 title 부분*/}
             <Area>
                 <Title>제목</Title>
                 <Date>작성일</Date>
                 <State>답변상태</State>
             </Area>
+            {/*표의 내용 부분*/}
             {
                 datas.map((data, index) => (
                     <div key={index}>
@@ -38,7 +41,8 @@ function DetailQnaList({datas}) {
     );
 }
 
-const Area = styled.div`
+// styled-component 선언
+const Area = styled.div` 
   margin-top: 15px;
   border-top: 1px solid #b3b3b3;
   display: flex;

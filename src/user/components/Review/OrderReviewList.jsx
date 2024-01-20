@@ -13,6 +13,7 @@ const OrderReviewsList = ({ orders }) => {
       <div>
           {orders.map((order, index) => (
               <div key={index}>
+                {/* 주문 정보 */}
                   <OrderInfo 
                       orderDate={order.orderDate} 
                       orderId={order.orderId}
@@ -21,7 +22,8 @@ const OrderReviewsList = ({ orders }) => {
                   {order.reviewList.map((reviewItem, reviewItemIndex) => (
                       <React.Fragment key={reviewItemIndex}>
                           <div className="productreview-div-review-content-wrapper">
-                              <OrderItem
+                            {/* 상품 정보 */}
+                              <OrderItem 
                                 img={reviewItem.productImg}
                                 brand={reviewItem.brand}
                                 name={reviewItem.productName}
@@ -32,6 +34,7 @@ const OrderReviewsList = ({ orders }) => {
                           {reviewItem.reviews.map((review, reviewIndex) => (
                               <React.Fragment key={reviewIndex}>
                                   <hr className="productreview-hr-line3"/>
+                                  {/* 리뷰 내용 */}
                                   <ReviewItem
                                       imgSrc={review.reviewImg}
                                       rating={review.rating}
