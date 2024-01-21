@@ -1,8 +1,8 @@
+import * as React from "react";
 import LeftNav from "../../components/LeftNav";
 import Header from "../../components/Header";
-import {createTheme} from "@mui/material/styles";
+import SearchBar from "../../components/SearchBar";
 import {Box, Typography} from "@mui/material";
-import * as React from "react";
 import { indigo } from '@mui/material/colors';
 
 const primary = indigo[50];
@@ -17,7 +17,8 @@ function Product() {
             <Box
                 bgcolor={primary}
                 component="main"
-                sx={{display: 'flex', flexGrow: 1, p: 3, mt: 9, ml: `${drawerWidth}px`}}>
+                sx={{display: 'flex', flexDirection: 'column', flexGrow: 1, p: 3, mt: 9, ml: `${drawerWidth}px`}}>
+                <SearchBar />
                 <Typography paragraph>
                     Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
                     eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
