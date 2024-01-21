@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
@@ -9,6 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 export default function SearchBar() {
     return (
         <Paper
+            elevation={3}
             component="form"
             sx={{ p: '2px 4px', mb: 4, display: 'flex', alignItems: 'center', width: '100%' }}
         >
