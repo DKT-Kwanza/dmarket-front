@@ -1,13 +1,25 @@
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 import './ProductList.css'
-import { useState } from 'react';
 // import { PiStarFill, PiStarLight } from "react-icons/pi";
 import ProductItem from '../../components/ProductList/ProductItem';
 import Filter from '../../components/ProductList/Filter';
 import Dropdown from '../../components/ProductList/Dropdown';
-import datas from "../../../assets/ProductListData.json";
 
 function ProductList(){
-    const [items, setItems] = useState(datas);
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/ProductListData.json");
+                setProducts(response.data);
+            } catch (e) {
+                console.error("Error fetching data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
 
     return (
         <div className="productList-body">
@@ -81,7 +93,7 @@ function ProductList(){
             <Dropdown />
             <div className='productList-bar'></div>
             <div className='productList-container'>
-                {items.map((item, index) => (
+                {products.map((item, index) => (
                     <ProductItem 
                         key={index}
                         imgSrc={item.imgSrc}

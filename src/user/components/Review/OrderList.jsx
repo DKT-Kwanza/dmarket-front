@@ -7,9 +7,11 @@ import ReviewItem from './ReviewItem';
 const OrderList = ({ orders }) => {
   const navigate = useNavigate();
 
-  const navigateToWrite = () => {
-    navigate('/mypage/writereview');
-  }
+  /* 상품 정보 리뷰 작성 페이지로 전달 */
+  const navigateToWrite = (orderDetail) => {
+    navigate('/mypage/writereview', { state: { orderDetail } });
+  };
+
   return (
     <div>
       {orders.map((order, index) => (
@@ -31,7 +33,7 @@ const OrderList = ({ orders }) => {
                 price={item.sales}
               >
                 <div className="productreview-div-review-content-btn-wrapper">
-                  <button onClick={navigateToWrite} className="productreview-btn-review-content-btn">작성하기</button>
+                  <button onClick={() => navigateToWrite(item)} className="productreview-btn-review-content-btn">작성하기</button>
                 </div>
               </OrderItem>
             </div>

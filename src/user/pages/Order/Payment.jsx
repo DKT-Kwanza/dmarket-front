@@ -1,14 +1,15 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useEffect} from "react";
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 import "./Payment.css";
 import useDetectClose from "./UseDetectClose";
 import { MsgDropDown } from "../../components/MsgDropDown";
 import {ReactComponent as DropDownImg} from "../../../assets/icons/dropdown.svg";
-import OrderList from "../../components/Payment/PaymentList";
+import PaymentList from "../../components/Payment/PaymentList";
 import PaymentInfo from "../../components/Payment/PaymentInfo";
-import datas from "../../../assets/PaymentProductsData.json";
 
 function Payment(){
-
+    const navigate = useNavigate();
     const dropDownRef = useRef();
     const [msgIdentify, setMsgIdentify] = useState('배송기사에게 전달되는 메시지 입니다. 선택해 주세요.');
     const delReqList = ['배송기사에게 전달되는 메시지 입니다. 선택해 주세요.',
@@ -17,7 +18,24 @@ function Payment(){
                         '배송전에 연락주세요', '문 앞에 두고 가주세요'];  
 
     const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
+    const [paymentProducts, setPaymentProducts] = useState([]);
     
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/PaymentProductsData.json");
+                setPaymentProducts(response.data);
+            } catch (e) {
+                console.error("Error fetching data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
+
+    const navigateToOrderComplete = () => {
+        navigate("./complete");
+    }
+
     return(
         <div>
         <div className="payment-background">
@@ -84,15 +102,16 @@ function Payment(){
                     </div>
                 </div>
                 <div className="payment-products">
-                    <span className="payment-products-title">주문상품: {datas.totCnt}개</span> {/*주문 상품 개수 불러오기*/}
+                    <span className="payment-products-title">주문상품: {paymentProducts.orderCnt}개</span> {/*주문 상품 개수 불러오기*/}
                     <div>
-                        <OrderList/> {/*상품 목록*/}
+                        <PaymentList items={paymentProducts.orderList || []} />
                     </div>
                 </div>
-                
-                <div>
-                    <PaymentInfo/> {/*결제 정보 컴포넌트*/}
-                </div>
+                <PaymentInfo
+                    totalPrice={paymentProducts.totalPrice}
+                    discount={paymentProducts.discount}
+                    totalPay={paymentProducts.totalPay}
+                />
             </div>
         </div>
     </div>

@@ -1,97 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import "./ReviewList.css";
-import eximg from '../../../../../assets/images/720X720.jpg'
 import MyPageSidebar from "../../../../components/MyPage/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../../components/MyPage/SubHeader/MyPageSubHeader";
-import {useState} from "react";
 import OrderList from "../../../../components/Review/OrderList";
 import OrderReviewList from "../../../../components/Review/OrderReviewList";
 
 const ReviewList = () => {
-    const ordersData = [
-        {
-          orderDate: "2024-01-09 09:48:00",
-          orderId: "20210105123456",
-          orderDetail: [
-            {
-                orderDetailId: 34,
-                brand: "JAJU",
-                productName: "쿠시노 코지 저상형 침대(패브릭,SS)",
-                productImg: "https://placehold.co/130x130",
-                option: "GREY BEIGE L",
-                sales: "1,208,000"
-            },
-            {
-                orderDetailId: 35,
-                brand: "nike",
-                productName: "후드티",
-                productImg: "https://placehold.co/130x130",
-                option: "black",
-                sales: "1,000,000"
-            },
-          ]
-        },
-        {
-            orderDate: "2024-01-09 09:48:00",
-            orderId: "20210105123456",
-            orderDetail: [
-              {
-                  orderDetailId: 34,
-                  brand: "JAJU",
-                  productName: "쿠시노 코지 저상형 침대(패브릭,SS)",
-                  productImg: "https://placehold.co/130x130",
-                  option: "GREY BEIGE L",
-                  sales: "1,208,000"
-              },
-            ]
-        },
-    ]
-
-    const reviewsData = [
-        {
-            orderDate: "2024-01-09 09:48:00",
-            orderId: "20210105123456",
-            "reviewList": [
-               {
-                    orderDetailId: 34,
-                    brand: "JAJU",
-                    productName: "쿠시노 코지 저상형 침대(패브릭,SS)",
-                    productImg: "https://placehold.co/130x130",
-                    option: "GREY BEIGE L",
-                    sales: "1,208,000",
-                    reviews: [
-                        {
-                        reviewId: 1,
-                        contents: "커버 잘 되고 좋아요",
-                        rating: 4,
-                        reviewCreatedDate : "2024-01-09 09:48:00",
-                        reviewImg: null,
-                        },
-                    ]
-                },
-                {
-                    orderDetailId: 35,
-                    brand: "nike",
-                    productName: "후드티",
-                    productImg: "https://placehold.co/130x130",
-                    option: "black",
-                    sales: "1,208,000",
-                    reviews: [
-                        {
-                        reviewId: 1,
-                        contents: "잘맞아요",
-                        rating: 5,
-                        reviewCreatedDate : "2024-02-09 09:48:00",
-                        reviewImg: "https://placehold.co/130x130",
-                        },
-                    ]
-                }
-            ],
-        },
-    ];
-
+    
+    const [availableReviews, setAvailableReviews] = useState([]);
+    const [writtenReviews, setWrittenReviews] = useState([]);
     const [review, setReview] = useState(true);
     const [reviewed, setReviewed] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/AvailableReviewsData.json");
+                
+                setAvailableReviews(response.data);
+
+            } catch (e) {
+                console.error("Error fetching data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/WrittenReviewsData.json");
+                
+                setWrittenReviews(response.data);
+
+            } catch (e) {
+                console.error("Error fetching data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
 
     const onClickReview = () => {
         setReview(true);
@@ -121,12 +69,12 @@ const ReviewList = () => {
                     {
                         review ? (
                             <>
-                                <OrderList orders={ordersData} /> {/* 작성 가능한 리뷰 */}
+                                <OrderList orders={availableReviews} /> {/* 작성 가능한 리뷰 */}
                             </>
                         ) : 
                         (
                             <>
-                                <OrderReviewList orders={reviewsData} /> {/* 작성한 리뷰 */}
+                                <OrderReviewList orders={writtenReviews} /> {/* 작성한 리뷰 */}
                             </>
                         )
                     }

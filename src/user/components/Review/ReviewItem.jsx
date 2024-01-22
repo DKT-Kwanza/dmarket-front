@@ -3,7 +3,7 @@ import { PiStarFill, PiStarLight } from "react-icons/pi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import './ReviewItem.css';
 
-const ReviewItem = ({ imgSrc, rating, reviewText, reviewDate }) => {
+const ReviewItem = ({ imgSrc, rating, reviewText, reviewDate, onDelete }) => {
   return (
     <div className="productreview-div-review-content-wrapper">
       {imgSrc && (
@@ -33,7 +33,7 @@ const ReviewItem = ({ imgSrc, rating, reviewText, reviewDate }) => {
         <div>
           <p className="productreview-p-review-postdate">{reviewDate}</p> {/* 리뷰 작성 날짜 */}
         </div>
-        <button className="productreview-btn-delete-icon"><RiDeleteBinLine /></button> {/* 삭제 버튼 */}
+        <button onClick={() => onDelete()} className="productreview-btn-delete-icon"><RiDeleteBinLine /></button> {/* 삭제 버튼 */}
       </div>
     </div>
   );

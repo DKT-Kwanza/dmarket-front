@@ -9,6 +9,11 @@ const OrderReviewsList = ({ orders }) => {
     return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
   };
 
+  /* 리뷰 삭제 구현 필요 */
+  const deleteReview = (reviewId) => {
+    alert(`${reviewId} 삭제하시겠습니까?`)
+  };
+
   return (
       <div>
           {orders.map((order, index) => (
@@ -40,6 +45,7 @@ const OrderReviewsList = ({ orders }) => {
                                       rating={review.rating}
                                       reviewText={review.contents}
                                       reviewDate={formatDate(review.reviewCreatedDate)}
+                                      onDelete={() => deleteReview(review.reviewId)}
                                   />
                                   <hr className="productreview-hr-line3"/>
                               </React.Fragment>

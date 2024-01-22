@@ -2,7 +2,7 @@ import React from 'react';
 import { CiLock } from "react-icons/ci";
 import './QnaItem.css'
 
-const QnaItem = ({ productName, title, contents, createdAt, isSecret, status, replyContents, inquiryReplyDate, isExpanded, onToggle  }) => {
+const QnaItem = ({ productName, title, contents, createdAt, isSecret, status, replyContents, qnaReplyDate, isExpanded, onToggle  }) => {
       
     return (
         <ul className='Qna-contents-content-data-list'>
@@ -26,7 +26,7 @@ const QnaItem = ({ productName, title, contents, createdAt, isSecret, status, re
                         <div className='Qna-contents-content-data-list-data'>
                             <div className='Qna-contents-content-data-list-data-info'>
                                 <div className='Qna-contents-content-data-list-data-info-profile'>관리자</div>
-                                <div className='Qna-contents-content-data-list-data-info-date'>{inquiryReplyDate}</div>
+                                <div className='Qna-contents-content-data-list-data-info-date'>{qnaReplyDate}</div>
                             </div>
                             <div className='Qna-contents-content-data-list-data-answer'>{replyContents}</div>
                         </div>

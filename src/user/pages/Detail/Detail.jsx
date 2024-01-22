@@ -1,9 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 import './Detail.css';
-import recommendProductData from "../../../assets/RecommendProductData.json";
-import productQnaData from "../../../assets/RroductQnaData.json";
-import reviewData from "../../../assets/ReviewData.json";
 import DetailQnaList from "../../components/Detail/DetailQnaList";
 import DetailReviewsList from "../../components/Detail/DetailReviewsList";
 import ProductOptionTab from "../../components/Detail/ProductOptionTab";
@@ -18,6 +16,45 @@ import parcelIcon from '../../../assets/icons/truck-02.png';
 function Detail() {
 
     const navigate = useNavigate();
+    const [reviews, setReviews] = useState([]);
+    const [qnas, setQnas] = useState([]);
+    const [recommendProducts, setRecommendProducts] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/ReviewData.json");
+                setReviews(response.data);
+            } catch (e) {
+                console.error("Error fetching data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/ProductQnaData.json");
+                setQnas(response.data);
+            } catch (e) {
+                console.error("Error fetching data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/RecommendProductData.json");
+                setRecommendProducts(response.data);
+            } catch (e) {
+                console.error("Error fetching data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
 
     const navigateToMypage = (menu) => {
         navigate(`../mypage/${menu}`); // 각각의 메뉴 탭으로 바로 이동
@@ -73,8 +110,8 @@ function Detail() {
                             <text>여 다운필 루즈핏 퀼팅 점퍼 J103401008099</text>
                         </div>
                         <div className="rating">
-                            <StarRating rating={reviewData.ratingAvg}/>
-                            <text style={{marginLeft: '10px'}}>({reviewData.reviewCnt}건)</text>
+                            <StarRating rating={reviews.ratingAvg}/>
+                            <text style={{marginLeft: '10px'}}>({reviews.reviewCnt}건)</text>
                         </div>
                         <div className='price'>
                             <text>59,900원</text>
@@ -134,8 +171,8 @@ function Detail() {
             <div id='container2'>
                 <ul className='buttonArea'>
                     <li className='productDetailButton'><a href="#productDetailButtonScroll">상품상세정보</a></li>
-                    <li className='reviewButton'><a href="#reviewButtonScroll">고객리뷰({reviewData.reviewCnt})</a></li>
-                    <li className='qnaButton'><a href="#qnaButtonScroll">상품 Q&A(0)</a></li>
+                    <li className='reviewButton'><a href="#reviewButtonScroll">고객리뷰({reviews.reviewCnt})</a></li>
+                    <li className='qnaButton'><a href="#qnaButtonScroll">상품 Q&A({qnas.qnaCount})</a></li>
                     <li className='recommandButton'><a href="#recommandButtonScroll">추천 상품</a></li>
                     <li className='returnInfoButton'><a href="#scroll5">배송/반품/교환 안내</a></li>
                 </ul>
@@ -153,38 +190,38 @@ function Detail() {
 
 
                 <div className='reviewTitle'>
-                    <div className="reviewButtonScroll" id="reviewButtonScroll">고객리뷰({reviewData.reviewCnt})</div>
+                    <div className="reviewButtonScroll" id="reviewButtonScroll">고객리뷰({reviews.reviewCnt})</div>
                 </div>
                 <div className='ratingBox'>
                     <div className='ratingNum'>
-                        <text>{reviewData.ratingAvg}</text>
+                        <text>{reviews.ratingAvg}</text>
                     </div>
                     <div className='ratingStar'>
-                        <StarRating rating={reviewData.ratingAvg} style={"none"}/>
-                        <text style={{fontSize: '16px'}}>총 {reviewData.reviewCnt}건 리뷰</text>
+                        <StarRating rating={reviews.ratingAvg} style={"none"}/>
+                        <text style={{fontSize: '16px'}}>총 {reviews.reviewCnt}건 리뷰</text>
                     </div>
                 </div>
                 <div className='reviewAnnounce'>
                     <text>※ 리뷰 등록, 수정, 삭제 및 상세 내용은 [마이페이지 &gt; 나의 활동관리 &gt; 상품 리뷰]에서 확인하실 수 있습니다.</text>
                 </div>
                 <div className='reviewCategory'>
-                    <text>전체({reviewData.reviewCnt})</text>
+                    <text>전체({reviews.reviewCnt})</text>
                 </div>
                 <hr style={{marginTop: '8px', borderWidth: '2px'}}/>
                 <div className='reviewList'>
                     {
-                        <DetailReviewsList reviews={reviewData.reviewList}/>
+                        <DetailReviewsList reviews={reviews.reviewList || []}/>
                     }
                 </div>
                 <div className='qnaTitle'>
-                    <div className="qnaButtonScroll" id="qnaButtonScroll">Q&A({productQnaData.qnaCount})</div>
+                    <div className="qnaButtonScroll" id="qnaButtonScroll">Q&A({qnas.qnaCount})</div>
                 </div>
                 <div className='qnaAnnounce'>
                     <text>상품 외 배송, 교환/반품 등에 관한 문의사항은 고객센터에서 확인하실 수 있습니다.</text>
                 </div>
                 <div className='qnaCategory'>
                     <div className='qna-category-btn-area'>
-                        <button className='qnaAll'>전체({productQnaData.qnaCount})</button>
+                        <button className='qnaAll'>전체({qnas.qnaCount})</button>
                         <div className='qna-category-line'/>
                         <button className='qnaReplyDone'>답변완료(0)</button>
                         <div className='qna-category-line'/>
@@ -192,7 +229,7 @@ function Detail() {
                     </div>
                     <button onClick={handleToggle} className='qnaEnroll'>Q&A 작성하기 <img src={arrowRight}/></button>
                 </div>
-                <DetailQnaList datas={productQnaData.qnaList}/>
+                <DetailQnaList qnas={qnas.qnaList || []}/>
                 {
                     isExpanded && <DetailWriteQna onClick={handleToggle}/>
                 }
@@ -200,7 +237,7 @@ function Detail() {
                 <div className='recommandTitle'>
                     <div className="recommandButtonScroll" id="recommandButtonScroll">함께 보면 좋은 상품</div>
                 </div>
-                <RecommendProductList data={recommendProductData}/>
+                <RecommendProductList recommendProducts={recommendProducts}/>
 
                 <div className='deliveryTitle'>
                     <div className="deliveryTitleScroll" id="deliveryTitleScroll">배송 안내</div>

@@ -1,0 +1,36 @@
+{
+    "cartCount": 3,
+    "totalPrice": "100,000",
+    "cartList":[
+        {
+            "cartId": 10,
+            "productId": 32542,
+            "brand": "JAJU",
+            "productName": "쿠시노 코지 저상형 침대(패브릭,SS)",
+            "productImg": "https://placehold.co/100x100",
+            "option": "GREY BEIGE L",
+            "quantity" : 1,
+            "price": "1,208,000"
+        },
+        {
+            "cartId": 11,
+            "productId": 325412,
+            "brand": "나이키",
+            "productName": "여성 나이키 코르테즈 DN1791-105",
+            "productImg": "https://placehold.co/100x100",
+            "option": "black",
+            "quantity" : 1,
+            "price": "85,680"
+        },
+        {
+            "cartId": 12,
+            "productId": 325414,
+            "brand": "마리끌레르",
+            "productName": "렘스 퍼 무스 집업 점퍼(MSDDJP08SA)",
+            "productImg": "https://placehold.co/100x100",
+            "option": "s",
+            "quantity" : 1,
+            "price": "55,200"
+        }
+    ]
+}

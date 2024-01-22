@@ -3,7 +3,7 @@ import ProductListItem from "../../pages/ProductList/ProductListItem";
 import React from "react";
 import {useNavigate} from "react-router-dom";
 
-function RecommendProductList({data}) {
+function RecommendProductList({recommendProducts}) {
 
     const navigate = useNavigate();
     const navigateToProductDetail = (productId) => {
@@ -13,7 +13,7 @@ function RecommendProductList({data}) {
     return (
         <Area>
             {
-                data.map((value, index) => (
+                recommendProducts.map((value, index) => (
                     <ProductListItem key={index} onClick={() => navigateToProductDetail(value.productId)}
                                      brand={value.brand} productName={value.productName} sales={value.sales}
                                      ratingAvg={value.ratingAvg} reviewCnt={value.reviewCnt}/>

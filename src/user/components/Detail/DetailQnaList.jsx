@@ -3,7 +3,7 @@ import DetailQnaListItem from "./DetailQnaListItem";
 import React, {useState} from "react";
 import DetailQnaReply from "./DetailQnaReply";
 
-function DetailQnaList({datas}) {
+function DetailQnaList({qnas}) {
 
     const [openReplyIndexes, setOpenReplyIndexes] = useState([]);
 
@@ -16,7 +16,7 @@ function DetailQnaList({datas}) {
             setOpenReplyIndexes([...openReplyIndexes, index]);  // 배열에 추가
         }
     };
-
+    
     return (
         <>
             {/*표의 title 부분*/}
@@ -27,7 +27,7 @@ function DetailQnaList({datas}) {
             </Area>
             {/*표의 내용 부분*/}
             {
-                datas.map((data, index) => (
+                qnas.map((data, index) => (
                     <div key={index}>
                         <DetailQnaListItem onClick={() => qnaClickHandler(index)} title={data.title}
                                            createdAt={data.createdAt} status={data.status}/>

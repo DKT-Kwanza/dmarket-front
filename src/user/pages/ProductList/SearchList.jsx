@@ -1,13 +1,25 @@
-import { useState } from 'react';
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 import './SearchList.css';
 // import { PiStarFill, PiStarLight } from "react-icons/pi";
 import ProductItem from '../../components/ProductList/ProductItem';
 import Filter from '../../components/ProductList/Filter';
 import Dropdown from '../../components/ProductList/Dropdown';
-import datas from "../../../assets/ProductListData.json";
 
 function SearchList(){
-    const [items, setItems] = useState(datas);
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/ProductListData.json");
+                setProducts(response.data);
+            } catch (e) {
+                console.error("Error fetching data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
 
     return (
         <div className="searchList-body">
@@ -79,7 +91,7 @@ function SearchList(){
             <Dropdown />
             <div className='searchList-bar'></div>
             <div className='searchList-container'>
-                {items.map((item, index) => (
+                {products.map((item, index) => (
                     <ProductItem 
                         key={index}
                         imgSrc={item.imgSrc}

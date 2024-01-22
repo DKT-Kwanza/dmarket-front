@@ -1,0 +1,8 @@
+{
+    "orderId" : "202401059270",
+    "orderDate" : "2024-01-08 09:48:00",
+    "userName" : "홍길동",
+    "totalPrice" : "123,000",
+    "discount" : "10,000",
+    "totalPay" : "113,000"
+}
