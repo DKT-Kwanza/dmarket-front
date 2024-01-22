@@ -1,0 +1,56 @@
+{
+    "orderId": "12",
+    "orderDate": "2024-01-11 20:20:00",
+    "totalPrice":"100,000",
+    "receiver": "홍길동", 
+    "phoneNum": "010-1234-5678",
+    "postalCode" : "13120",
+    "address": "경기도 성남시 수정구 성남대로 1342 (복정동, 가천대학교)",
+    "detailedAddress": "AI공학관 411호",
+    "orderDetailList": [
+        {
+            "detailId": "42",
+            "productId": "32",
+            "brand": "바비브라운",
+            "productName": "바비브라운 파운데이션",
+            "productImg": "https://placehold.co/130x130",
+            "option": "21호",
+            "quantity" : 1,
+            "sales": "23,000", 
+            "status": "결제 완료"
+        },
+        {
+            "detailId": "43",
+            "productId": "30",
+            "brand": "JAJU",
+            "productName": "쿠시노 코지 저상형 침대(패브릭,SS)",
+            "productImg": "https://placehold.co/130x130",
+            "option": "GREY BEIGE L",
+            "quantity" : 1,
+            "sales": "1,208,000",
+            "status": "배송 준비 중"
+        },
+        {
+            "detailId": "43",
+            "productId": "30",
+            "brand": "JAJU",
+            "productName": "쿠시노 코지 저상형 침대(패브릭,SS)",
+            "productImg": "https://placehold.co/130x130",
+            "option": "GREY BEIGE L",
+            "quantity" : 1,
+            "sales": "1,208,000",
+            "status": "배송 완료"
+        },
+        {
+            "detailId": "43",
+            "productId": "30",
+            "brand": "JAJU",
+            "productName": "쿠시노 코지 저상형 침대(패브릭,SS)",
+            "productImg": "https://placehold.co/130x130",
+            "option": "GREY BEIGE L",
+            "quantity" : 1,
+            "sales": "1,208,000",
+            "status": "배송 준비 중"
+        }
+    ]
+}

@@ -1,25 +1,27 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './HistoryMileage.css'
 import MyPageSubHeader from "../../../components/MyPage/SubHeader/MyPageSubHeader";
 import MyPageSidebar from "../../../components/MyPage/Sidebar/MyPageSidebar";
 import MileageHistoryItem from "../../../components/Mileage/MileageHistoryItem";
 
 function HistoryMileage(){
-    const mileageData = [
-        {
-            mileageId: 1,
-            date: "2024-01-08 09:48:00",
-            contents: "충전",
-            addMileage: "+60,000",
-            curMileage: "126,000"
-        },
-        {
-            mileageId: 2,
-            date: "2024-01-08 09:48:00",
-            contents: "구매",
-            addMileage: "-30,000",
-            curMileage: "96,000"
-        },
-    ]
+
+    const [historyMileages, setHistoryMileages] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/HistoryMileageData.json");
+
+                setHistoryMileages(response.data);
+
+            } catch (e) {
+                console.error("Error fetching data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
 
     const formatDate = (datetime) => { // 날짜만 남기기
         const date = new Date(datetime);
@@ -57,7 +59,7 @@ function HistoryMileage(){
                                 <div className='Mileage-contents-content-data-3'>마일리지</div>
                                 <div className='Mileage-contents-content-data-4'>잔여 마일리지</div>
                             </div>
-                            {mileageData.map((mileage, index) => (
+                            {historyMileages.map((mileage, index) => (
                                 <MileageHistoryItem
                                     key={index}
                                     date={formatDate(mileage.date)}

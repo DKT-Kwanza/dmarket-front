@@ -1,17 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Main.css';
 import { FaAngleLeft, FaAngleRight, FaPause } from "react-icons/fa6";
-import { useState } from 'react';
 import MainProductItem from '../../components/Main/MainProductItem';
-import PopularProductData from "../../../assets/PopularProductData.json";
-import NewProductData from "../../../assets/NewProductData.json";
 
 
 const Main = () => { 
 
     const [showMore, setShowMore] = useState(false);
+    const [newProducts, setNewProducts] = useState([]);
+    const [popularProducts, setPopularProducts] = useState([]);
 
-    const displayedProducts = showMore ? NewProductData : NewProductData.slice(0, 8); // 데이터 8개만
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/NewProductData.json");
+                
+                setNewProducts(response.data);
+
+            } catch (e) {
+                console.error("Error fetching data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/PopularProductData.json");
+
+                setPopularProducts(response.data);
+
+            } catch (e) {
+                console.error("Error fetching data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
+
+    const displayedProducts = showMore ? newProducts : newProducts.slice(0, 8); // 데이터 8개만
 
     const onClickShowMore = () => {
         setShowMore(!showMore);
@@ -65,7 +93,7 @@ const Main = () => {
                 </div>
                 
                 <div className='main-div-products-wrapper'>
-                {PopularProductData.map((product, index) => (
+                {popularProducts.map((product, index) => (
                     <MainProductItem 
                         key={index}
                         brand={product.brand}

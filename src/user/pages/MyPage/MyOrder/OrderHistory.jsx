@@ -1,14 +1,25 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import "./OrderHistory.css";
-import OrderItem from "../../../components/OrderItem";
+import OrderHistoryItem from '../../../components/MyOrder/OrderHistoryItem';
 import MyPageSubHeader from "../../../components/MyPage/SubHeader/MyPageSubHeader";
 import MyPageSidebar from "../../../components/MyPage/Sidebar/MyPageSidebar";
-import {useNavigate} from "react-router-dom";
-function OrderHistory() {
-    const navigate = useNavigate();
 
-    const navigateToOrderHistoryDetail = () => {
-        navigate("./detail");
-    }
+function OrderHistory() {
+
+    const [orderHistoryProducts, setOrderHistoryProducts] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/OrderHistoryData.json");
+                setOrderHistoryProducts(response.data);
+            } catch (e) {
+                console.error("Error fetching data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
 
     return (
         <div className="orderHistory">
@@ -31,22 +42,22 @@ function OrderHistory() {
                         <div className="orderHistory-process-list">
                             <div className="orderHistory-process-item-wrap">
                                 <div className="orderHistory-process-title">결제확인</div>
-                                <div className="orderHistory-process-count">0</div>
+                                <div className="orderHistory-process-count">{orderHistoryProducts.confPayCnt}</div>
                             </div>
                             <div className="orderHistory-process-bar"/>
                             <div className="orderHistory-process-item-wrap">
                                 <div className="orderHistory-process-title">배송준비 중</div>
-                                <div className="orderHistory-process-count">0</div>
+                                <div className="orderHistory-process-count">{orderHistoryProducts.preShipCnt}</div>
                             </div>
                             <div className="orderHistory-process-bar"/>
                             <div className="orderHistory-process-item-wrap">
                                 <div className="orderHistory-process-title">배송중</div>
-                                <div className="orderHistory-process-count">0</div>
+                                <div className="orderHistory-process-count">{orderHistoryProducts.inTransitCnt}</div>
                             </div>
                             <div className="orderHistory-process-bar"/>
                             <div className="orderHistory-process-item-wrap">
                                 <div className="orderHistory-process-title">배송완료</div>
-                                <div className="orderHistory-process-count">0</div>
+                                <div className="orderHistory-process-count">{orderHistoryProducts.delivCompCnt}</div>
                             </div>
                         </div>
                     </div>
@@ -55,87 +66,25 @@ function OrderHistory() {
                         <div className="orderHistory-process-list">
                             <div className="orderHistory-process-item-wrap">
                                 <div className="orderHistory-process-cancel-title">주문취소</div>
-                                <div className="orderHistory-process-count">1</div>
+                                <div className="orderHistory-process-count">{orderHistoryProducts.orderCancelCnt}</div>
                             </div>
                             <div className="orderHistory-process-bar"/>
                             <div className="orderHistory-process-item-wrap">
                                 <div className="orderHistory-process-cancel-title">반품/환불</div>
-                                <div className="orderHistory-process-count">1</div>
+                                <div className="orderHistory-process-count">{orderHistoryProducts.returnCnt}</div>
                             </div>
                         </div>
                     </div>
 
                     {/*주문 내역이 나오는 영역 입니다.*/}
-                    <div className="orderHistory-order-list">
-                        <div className="orderHistory-order-head">
-                            <div className="orderHistory-order-date">2024.01.05</div>
-                            <div className="orderHistory-order-time">(20시 10분)</div>
-                            <div className="orderHistory-order-number-tit">주문번호</div>
-                            <div className="orderHistory-order-number">20240105-790DA1</div>
-                            <button
-                                className="orderHistory-order-detail-btn"
-                                onClick={navigateToOrderHistoryDetail}>
-                                <div className="orderHistory-order-detail-tit">주문내역상세보기</div>
-                                <svg
-                                    className="orderHistory-order-detail-icon"
-                                    xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 8 14" fill="none">
-                                    <path d="M1 1L7 7L1 13" stroke="#767676"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div className="orderHistory-order-line"/>
-                        {/*주문 아이템 영역 입니다.*/}
-                        <OrderItem
-                            brand="JAJU"
-                            name="쿠시노 코지 저상형 침대(패브릭,SS)"
-                            option="GREY BEIGE L"
-                            count="1"
-                            price="1,208,000">
-                            배송완료
-                        </OrderItem>
-
-                        <OrderItem
-                            brand="JAJU"
-                            name="쿠시노 코지 저상형 침대(패브릭,SS)"
-                            option="GREY BEIGE L"
-                            count="1"
-                            price="1,208,000">
-                            반품완료
-                        </OrderItem>
-                    </div>
-
-
-
-                    {/*주문 내역이 나오는 영역 입니다.*/}
-                    <div className="orderHistory-order-list">
-                        <div className="orderHistory-order-head">
-                            <div className="orderHistory-order-date">2024.01.05</div>
-                            <div className="orderHistory-order-time">(20시 10분)</div>
-                            <div className="orderHistory-order-number-tit">주문번호</div>
-                            <div className="orderHistory-order-number">20240105-790DA1</div>
-                            <button
-                                className="orderHistory-order-detail-btn"
-                                onClick={navigateToOrderHistoryDetail}>
-                                <div className="orderHistory-order-detail-tit">주문내역상세보기</div>
-                                <svg
-                                    className="orderHistory-order-detail-icon"
-                                    xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 8 14" fill="none">
-                                    <path d="M1 1L7 7L1 13" stroke="#767676"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div className="orderHistory-order-line"/>
-
-                        {/*주문 아이템 영역 입니다.*/}
-                        <OrderItem
-                            brand="JAJU"
-                            name="쿠시노 코지 저상형 침대(패브릭,SS)"
-                            option="GREY BEIGE L"
-                            count="1"
-                            price="1,208,000">
-                            주문취소
-                        </OrderItem>
-                    </div>
+                    {orderHistoryProducts && orderHistoryProducts.orderList && orderHistoryProducts.orderList.map((order, index) => (
+                        <OrderHistoryItem
+                            key={order.orderId || index}
+                            orderDate={order.orderDate}
+                            orderId={order.orderId}
+                            orderItems={order.orderDetailList}
+                        />
+                    ))}
                 </div>
             </div>
         </div>

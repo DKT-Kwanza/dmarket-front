@@ -1,51 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import MyPageSidebar from "../../../../components/MyPage/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../../components/MyPage/SubHeader/MyPageSubHeader";
 import './Qna.css';
 import QnaItem from '../../../../components/Qna/QnaItem';
 
 const Qna = () => { 
-    const qnaData = [
-        {
-            qnaId: 1,
-            productId: 1,
-            productName: "코트시리즈 N224TH040P",
-            title: "사이즈 질문 드립니다.",
-            contents: "상세 사이즈 알고싶어용",
-            createdAt: "2023-12-08 09:48:00",
-            isSecret: true,
-            status: "답변 완료",
-            replyContents : "답변 입니다.",
-            inquiryReplyDate: "2024-01-08 09:48:00"
-        },
-        {
-            qnaId: 2,
-            productId: 10,
-            productName: "여성 나이키 코르테즈 DN1791-105",
-            title: "급한데 배송이 언제 올까요?????",
-            contents: "설날 전에 받을 수 있을까요???",
-            createdAt: "2024-01-22 09:48:00",
-            isSecret: false,
-            status: "답변 대기",
-            replyContents : null,
-            inquiryReplyDate: null
-        },
-        {
-            qnaId: 3,
-            productId: 10,
-            productName: "후드티셔츠 N224TH040P",
-            title: "티셔츠 다른 색상 입고되나요?",
-            contents: "회색도 팔아주세요",
-            createdAt: "2024-03-22 09:48:00",
-            isSecret: false,
-            status: "답변 대기",
-            replyContents : null,
-            inquiryReplyDate: null
-        },
-    ]
-
-    // 현재 확장된 질문의 ID를 저장하는 상태
+    const [qnas, setQnas] = useState([])
     const [expandedQnaId, setExpandedQnaId] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/QnaData.json");
+                
+                setQnas(response.data);
+
+            } catch (e) {
+                console.error("Error fetching data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
 
     // 질문을 토글하는 함수
     const toggleQna = (qnaId) => {
@@ -81,7 +57,7 @@ const Qna = () => {
                                 <div className='Qna-contents-content-data-3'>작성일</div>
                                 <div className='Qna-contents-content-data-4'>답변 상태</div>
                             </div>
-                            {qnaData.map((qna, index) => (
+                            {qnas.map((qna, index) => (
                                 <QnaItem
                                     key={index}
                                     productName={qna.productName}
@@ -90,8 +66,8 @@ const Qna = () => {
                                     createdAt={formatDate(qna.createdAt)}
                                     isSecret={qna.isSecret}
                                     status={qna.status}
-                                    replyContents={qna.replyContents}
-                                    qnaReplyDate={formatDate(qna.qnaReplyDate)}
+                                    replyContents={qna.replycontents}
+                                    qnaReplyDate={formatDate(qna.inquiryReplyDate)}
                                     isExpanded={expandedQnaId === qna.qnaId}
                                     onToggle={() => toggleQna(qna.qnaId)}
                                 />

@@ -1,10 +1,9 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import datas from "../../../assets/PaymentProductsData.json";
 import {ReactComponent as ShoppingBag} from "../../../assets/icons/shopping-bag-03.svg";
 import './PaymentInfo.css'
 
-export default function PaymentInfo(){
+export default function PaymentInfo({ totalPrice, discount, totalPay }){
     const navigate = useNavigate();
 
     const navigateToOrderComplete = () => {
@@ -22,15 +21,15 @@ export default function PaymentInfo(){
                 <div className="payment-info-prices">
                     <dl className="payment-info-dl">
                         <dt className="payment-info-dt">주문금액</dt>
-                        <dd className="payment-info-dd">{datas.totProdPrice}원</dd>{/*원가 합산 받아오기*/}
+                        <dd className="payment-info-dd">{totalPrice}원</dd>{/*원가 합산 받아오기*/}
                     </dl>
                     <dl className="payment-info-dl">
                         <dt className="payment-info-dt">할인금액</dt>
-                        <dd className="payment-info-dd">-{datas.totDiscPrice}원</dd>{/*할인금액 합산 받아오기*/}
+                        <dd className="payment-info-dd">-{discount}원</dd>{/*할인금액 합산 받아오기*/}
                     </dl>
                     <dl className="payment-info-dl tot">
                         <dt className="payment-info-dt">총 결제금액</dt>
-                        <dd className="payment-info-dd">{datas.totSales}원</dd>{/*결제할 금액 합산 받아오기*/}
+                        <dd className="payment-info-dd">{totalPay}원</dd>{/*결제할 금액 합산 받아오기*/}
                     </dl>
                 </div>
                 <div className="payment-info-order">

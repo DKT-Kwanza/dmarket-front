@@ -7,11 +7,11 @@ const CartList = ({ items, checkedItems, onItemCheck }) => {
           {items.map((item, index) => (
             <CartItem
               key={index}
-              imgSrc={item.imgSrc}
+              productImg={item.productImg}
               brand={item.brand}
-              name={item.name}
+              productName={item.productName}
               option={item.option}
-              count={item.count}
+              quantity={item.quantity}
               price={item.price}
               checked={checkedItems[index]}
               onCheck={() => onItemCheck(index)}

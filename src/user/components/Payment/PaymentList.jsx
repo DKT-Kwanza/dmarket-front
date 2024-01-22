@@ -1,16 +1,22 @@
 import React from "react";
 import PaymentListItem from "./PaymentListItem";
-import datas from "../../../assets/PaymentProductsData.json";
 
-export default function OrderList(props){
-
+const PaymentList = ({ items }) => {
     return(
         <div>
-            {datas.productList.map((product)=>{
-                return(<PaymentListItem key={product.id} image={product.image} brand={product.brand}
-                productName={product.productName} option={product.option} sales={product.sales}
-                productPrice={product.productPrice} quantity={product.quantity}/>);
-            })}
+            {items.map((item, index) => (
+                <PaymentListItem 
+                key={index} 
+                img={item.productImg} 
+                brand={item.brand}
+                productName={item.productName} 
+                option={item.optionId} 
+                sales={item.sales}
+                productPrice={item.productPrice} 
+                quantity={item.quantity}/>
+            ))}
         </div>
     );
 }
+
+export default PaymentList;

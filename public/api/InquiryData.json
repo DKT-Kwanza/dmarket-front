@@ -1,0 +1,35 @@
+[
+    {
+        "InquiryId": 1,
+        "category": "주문/결제",
+        "title": "포인트 충전 어떻게 하나요?",
+        "contents": "포인트 충전 어떻게 하나요? 여기서 이렇게 하면 되나요?",
+        "img": "https://placehold.co/130x130",
+        "createdAt": "2024-01-08 09:48:00",
+        "status": "답변 완료",
+        "replycontents" : "답변 입니다.",
+        "inquiryReplyDate": "2024-01-08 09:48:00"
+    },
+    {
+        "InquiryId": 2,
+        "category": "반품/환불",
+        "title": "반품 신청했는데 언제 환불 되나요?",
+        "contents": "포인트 충전 어떻게 하나요? 여기서 이렇게 하면 되나요?",
+        "img": null,
+        "createdAt": "2024-01-08 09:48:00",
+        "status": "답변 대기",
+        "replycontents" : null,
+        "inquiryReplyDate": null
+    },
+    {
+        "InquiryId": 3,
+        "category": "반품/환불",
+        "title": "반품 신청했는데 언제 환불 되나요?",
+        "contents": "포인트 충전 어떻게 하나요? 여기서 이렇게 하면 되나요?",
+        "img": null,
+        "createdAt": "2024-01-08 09:48:00",
+        "status": "답변 대기",
+        "replycontents" : null,
+        "inquiryReplyDate": null
+    }
+]
