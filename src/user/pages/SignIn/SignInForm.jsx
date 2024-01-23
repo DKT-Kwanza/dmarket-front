@@ -5,6 +5,22 @@ import './SignInForm.css';
 
 function SignInForm() {
     const navigate = useNavigate();
+    const [phoneNumber, setPhoneNumber] = React.useState("");
+
+    /* 핸드폰 번호 입력 시 - 추가 */
+    const handlePhoneChange = (event) => {
+        const input = event.target.value.replace(/\D/g, ''); // 숫자가 아닌 모든 문자 제거
+        const formattedPhoneNumber = input.replace(/(\d{3})(\d{0,4})(\d{0,4})/, (match, p1, p2, p3) => {
+            if (p3) {
+                return `${p1}-${p2}-${p3}`;
+            } else if (p2) {
+                return `${p1}-${p2}`;
+            } else {
+                return p1;
+            }
+        });
+        setPhoneNumber(formattedPhoneNumber);
+    };
 
     const navigateToMain = () => {
         navigate("../main");
@@ -66,6 +82,19 @@ function SignInForm() {
                                 required
                                 className='signInForm-input'
                                 placeholder='이름을 입력하세요.'
+                            />
+                        </div>
+                        <div className='signInForm-form'>
+                            <label htmlFor='name'>핸드폰 번호</label>
+                            <input
+                                type='tel'
+                                id='name'
+                                name='name'
+                                required
+                                className='signInForm-input'
+                                placeholder='핸드폰 번호를 입력하세요.'
+                                value={phoneNumber}
+                                onChange={handlePhoneChange}
                             />
                         </div>
                         <div className='signInForm-form'>
