@@ -9,7 +9,7 @@ function SignInForm() {
 
     /* 핸드폰 번호 입력 시 - 추가 */
     const handlePhoneChange = (event) => {
-        const input = event.target.value.replace(/\D/g, ''); // 숫자가 아닌 모든 문자 제거
+        const input = event.target.value.replace(/\D/g, '');
         const formattedPhoneNumber = input.replace(/(\d{3})(\d{0,4})(\d{0,4})/, (match, p1, p2, p3) => {
             if (p3) {
                 return `${p1}-${p2}-${p3}`;
