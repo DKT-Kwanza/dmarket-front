@@ -28,9 +28,12 @@ import Inquiry from "./user/pages/MyPage/MyActivity/CustomerInquiry/Inquiry";
 import Qna from "./user/pages/MyPage/MyActivity/Qna/Qna";
 import HistoryMileage from "./user/pages/MyPage/Mileage/HistoryMileage";
 
+import Product from "./admin/pages/product/Product";
+import AdminList from "./admin/pages/adminlist/AdminList";
+
 function App() {
     const location = useLocation();
-    const hideHeaderFooter = location.pathname === '/signin/form';
+    const hideHeaderFooter = (location.pathname === '/signin/form' || location.pathname.startsWith('/admin'));
 
   return (
     <div className="App">
@@ -61,6 +64,14 @@ function App() {
               <Route path='/mypage/orderhistory' element={<OrderHistory/>}/>
               <Route path='/mypage/orderhistory/detail' element={<OrderHistoryDetail/>}/>
               <Route path='/mypage/inquiry' element={<Inquiry />} />
+
+              <Route path='/admin/product'>
+                  <Route path='product' element={<Product />} />
+              </Route>
+              <Route path='/admin/admin'>
+                  <Route path='adminlist' element={<AdminList />} />
+              </Route>
+
           </Routes>
           {!hideHeaderFooter && <Footer />}
     </div>
