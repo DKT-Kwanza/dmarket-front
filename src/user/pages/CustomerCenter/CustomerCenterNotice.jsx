@@ -72,13 +72,13 @@ function CustomerCenterNotice() {
             {custoemrCenterNotices.map(notice => (
               <CustomerCenterNoticeItem
                 key={notice.noticeId}
-                question={notice.title}
+                noticeTitle={notice.noticeTitle}
                 isExpanded={!!expandedNotices[notice.noticeId]}
                 onToggle={() => toggleNotice(notice.noticeId)}
-                createdAt={formatDate(notice.createdAt)}
+                noticeCreatedDate={formatDate(notice.noticeCreatedDate)}
               >
                 {/* 내용을 children으로 전달 */}
-                <div dangerouslySetInnerHTML={{ __html: notice.contents }} />
+                <div dangerouslySetInnerHTML={{ __html: notice.noticeContents }} />
               </CustomerCenterNoticeItem>
             ))}
           </div>

@@ -81,7 +81,6 @@ function CustomerCenterInquiry() {
             />
           </div>
           <div className='inquiry-menu-submenu'>
-            <div className='inquiry-menu-submenu-redstar'>*</div>
             <div className='inquiry-menu-submenu-title'>
               사진
             </div>

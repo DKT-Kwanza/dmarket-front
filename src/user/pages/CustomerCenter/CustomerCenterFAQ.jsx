@@ -28,7 +28,7 @@ function CustomerCenterFAQ() {
 
   /* 선택된 카테고리에 해당하는 FAQ 목록을 필터링 */
   useEffect(() => {
-    const filtered = custoemrCenterFaqs.filter(faq => `${faq.faqCategory} 문의` === selectedMenu);
+    const filtered = custoemrCenterFaqs.filter(faq => `${faq.faqType} 문의` === selectedMenu);
     setFilteredFaqs(filtered);
     console.log(filteredFaqs)
   }, [selectedMenu, custoemrCenterFaqs]);
