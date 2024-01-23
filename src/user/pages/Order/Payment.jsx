@@ -1,5 +1,4 @@
 import React, {useRef, useState, useEffect} from "react";
-import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./Payment.css";
 import useDetectClose from "./UseDetectClose";
@@ -9,7 +8,6 @@ import PaymentList from "../../components/Payment/PaymentList";
 import PaymentInfo from "../../components/Payment/PaymentInfo";
 
 function Payment(){
-    const navigate = useNavigate();
     const dropDownRef = useRef();
     const [msgIdentify, setMsgIdentify] = useState('배송기사에게 전달되는 메시지 입니다. 선택해 주세요.');
     const delReqList = ['배송기사에게 전달되는 메시지 입니다. 선택해 주세요.',
@@ -19,6 +17,8 @@ function Payment(){
 
     const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
     const [paymentProducts, setPaymentProducts] = useState([]);
+    const productListCnt = paymentProducts.productList ? paymentProducts.productList.length : 0;
+    const discount = paymentProducts.totalPrice - paymentProducts.totalPay;
     
     useEffect(() => {
         const fetchData = async () => {
@@ -31,10 +31,6 @@ function Payment(){
         };
         fetchData();
     }, []);
-
-    const navigateToOrderComplete = () => {
-        navigate("./complete");
-    }
 
     return(
         <div>
@@ -56,12 +52,12 @@ function Payment(){
                         </span>
                         <div className="payment-deliveryAddr-input">
                             <div className="payment-deliverAddr-input-add1">
-                                <input id="name" type="text" name="name" placeholder="성함" style={{width:"100px"}}/> {/*사용자의 이름 받아오거나 입력받기*/}
-                                <input id="tel" type="tel" name="tel" placeholder="전화번호" style={{width:"132px"}}/> {/*사용자의 전화번호 받아오거나 입력받기*/}
+                                <div>{paymentProducts.userName}</div>
+                                <div>{paymentProducts.userPhoneNum}</div>
                             </div>
                             <div className="payment-deliverAddr-input-add2">
-                                <input id="postalCode" type="text" name="postalCode" placeholder="우편번호" style={{width:"70px"}}/> {/*사용자의 우편번호 받아오거나 입력받기*/}
-                                <input id="address" type="text" name="address" placeholder="주소를 입력하세요" style={{width:"340px"}}/> {/*사용자의 주소 받아오거나 입력받기*/}
+                                <div>{paymentProducts.userPostalCode}</div>
+                                <div>{paymentProducts.userAddress} {paymentProducts.userDetailAddress}</div>
                             </div>
                         </div>
                     </div>
@@ -90,26 +86,27 @@ function Payment(){
                         </div>                  
                     </div>
 
-                    <div className="payment-deliveryInfo">
+                    {/* <div className="payment-deliveryInfo">
                         <div className="payment-deliveryInfo-num">
                             <span className="payment-deliveryInfo-num-span">휴대폰</span>
-                            <span>010-1234-1234</span> {/*사용자의 번호 받아오기*/}
+                            <span>010-1234-1234</span>
                         </div>
                         <div className="payment-deliveryInfo-name">
                             <span className="payment-deliveryInfo-name-span">주문자명 / 이메일</span>
-                            <span>홍길동 / gildong@dktechin.com</span> {/*사용자의 이름,이메일 받아오기*/}
+                            <span>홍길동 / gildong@dktechin.com</span>
                         </div>  
-                    </div>
+                    </div> */}
                 </div>
                 <div className="payment-products">
-                    <span className="payment-products-title">주문상품: {paymentProducts.orderCnt}개</span> {/*주문 상품 개수 불러오기*/}
+                    <span className="payment-products-title">주문상품: {productListCnt}개</span> {/*주문 상품 개수 불러오기*/}
                     <div>
-                        <PaymentList items={paymentProducts.orderList || []} />
+                        <PaymentList items={paymentProducts.productList || []} />
                     </div>
                 </div>
                 <PaymentInfo
+                    userName={paymentProducts.userName}
                     totalPrice={paymentProducts.totalPrice}
-                    discount={paymentProducts.discount}
+                    discount={discount}
                     totalPay={paymentProducts.totalPay}
                 />
             </div>

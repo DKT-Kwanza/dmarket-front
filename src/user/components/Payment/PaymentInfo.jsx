@@ -3,12 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import {ReactComponent as ShoppingBag} from "../../../assets/icons/shopping-bag-03.svg";
 import './PaymentInfo.css'
 
-export default function PaymentInfo({ totalPrice, discount, totalPay }){
+export default function PaymentInfo({ userName, totalPrice, discount, totalPay }){
     const navigate = useNavigate();
 
     const navigateToOrderComplete = () => {
-        navigate("./complete");
+        navigate("./complete", {
+            state: {
+                userName: userName,
+                totalPrice: totalPrice,
+                discount: discount,
+                totalPay: totalPay
+            }
+        });
     }
+
     return(
         <div className="payment-info">
             <div className="payment-info-title">

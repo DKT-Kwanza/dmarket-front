@@ -46,7 +46,6 @@
     display: flex;
 }
 .payment-delivery{
-    height: 378px;
     width: 990px;
     border-top-style: solid;
     border-width: 2px;
@@ -79,6 +78,7 @@
     border-bottom-style: solid;
     border-width: 2px;
     border-color: #dbdbdb;
+    padding-bottom: 20px;
 }
 .payment-deliveryAddr-span{
     font-size: 16px;
@@ -106,7 +106,6 @@
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    border-bottom-style: solid;
     border-width: 2px;
     border-color: #dbdbdb;
 }
