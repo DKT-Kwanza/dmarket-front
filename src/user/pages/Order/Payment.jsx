@@ -1,5 +1,6 @@
 import React, {useRef, useState, useEffect} from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 import "./Payment.css";
 import useDetectClose from "./UseDetectClose";
 import { MsgDropDown } from "../../components/MsgDropDown";
@@ -8,6 +9,7 @@ import PaymentList from "../../components/Payment/PaymentList";
 import PaymentInfo from "../../components/Payment/PaymentInfo";
 
 function Payment(){
+    const navigate = useNavigate();
     const dropDownRef = useRef();
     const [msgIdentify, setMsgIdentify] = useState('배송기사에게 전달되는 메시지 입니다. 선택해 주세요.');
     const delReqList = ['배송기사에게 전달되는 메시지 입니다. 선택해 주세요.',
@@ -25,12 +27,17 @@ function Payment(){
             try {
                 const response = await axios.get("/api/PaymentProductsData.json");
                 setPaymentProducts(response.data);
+
+                if (!response.data.userPostalCode || !response.data.userAddress || !response.data.userDetailAddress) {
+                    alert("배송지를 먼저 등록해주세요!");
+                    navigate('/mypage/changeinfo');
+                }
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
         fetchData();
-    }, []);
+    }, [navigate]);
 
     return(
         <div>
