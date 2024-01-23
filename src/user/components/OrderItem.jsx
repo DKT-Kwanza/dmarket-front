@@ -1,8 +1,9 @@
 // 주문한 아이템 입니다.
 // 사진, 정보, 배송 상태
 import styled from 'styled-components';
+import React from "react";
 
-function OrderItem({img, brand, name, option, price, children}) {
+function OrderItem({img, brand, name, option, price, children, count}) {
     return (
         <Item>
             <img src={img} className='productreview-img-review-content-img' alt="상품 이미지"/> {/* 상품 이미지 */}
@@ -18,7 +19,12 @@ function OrderItem({img, brand, name, option, price, children}) {
                 <tr>
                     <InfoTitle>옵션</InfoTitle>
                     <InfoContent>
-                        <div>{option}</div> {/* 상품 옵션 */}
+                        {/* 상품 옵션 */}
+                        <div>{option}</div>
+                        <Line />
+                        {/* 상품 수량 */}
+                        <OptionTitle>수량</OptionTitle>
+                        <div>{count}</div>
                     </InfoContent>
                 </tr>
                 <tr>
@@ -38,12 +44,6 @@ const Item = styled.div`
   align-items: center;
 `
 
-const ItemImg = styled.div`
-  width: 129px;
-  height: 129px;
-  background: #D9D9D9;
-`
-
 const Info = styled.table`
   text-align: left;
   margin-left: 24px;
@@ -53,6 +53,15 @@ const Info = styled.table`
 
 const InfoTitle = styled.td`
   width: 80px;
+  color: #A9AFB3;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`
+
+const OptionTitle = styled.td`
+  width: 40px;
   color: #A9AFB3;
   font-size: 14px;
   font-style: normal;

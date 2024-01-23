@@ -7,12 +7,12 @@ const DetailReviewsList = ({reviews}) => {
                 reviews.map((review, index) => (
                     <div key={index}>
                         <DetailReviewItem
-                            rating={review.rating}
-                            writer={review.writer}
-                            reviewDate={review.createdAt.split(' ')[0]}
-                            option={review.option}
+                            rating={review.reviewRating}
+                            writer={review.reviewWriter}
+                            reviewDate={review.reviewCreatedDate.split(' ')[0]}
+                            option={review.productOption}
                             imageSrc={review.reviewImg}
-                            content={review.content}/>
+                            content={review.reviewContents}/>
                     </div>
                 ))
             }

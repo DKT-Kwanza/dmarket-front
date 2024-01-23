@@ -109,13 +109,6 @@
     background: #DBDBDB;
 }
 
-.InfoChange-address-name {
-    width: 160px;
-    height: 28px;
-    border-radius: 5px;
-    border: 1px solid #EAEEEF;
-}
-
 .InfoChange-address-essential {
     margin-left: 10px;
     color: #BDBDBD;
@@ -123,14 +116,6 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-}
-
-.InfoChange-address-phone{
-    width: 68px;
-    height: 28px;
-    border-radius: 5px;
-    border: 1px solid #EAEEEF;
-    text-align: center;
 }
 
 .InfoChange-address-minus {

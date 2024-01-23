@@ -56,6 +56,8 @@ function Detail() {
         fetchData();
     }, []);
 
+    console.log(recommendProducts); // 확인용 로그
+
     const navigateToMypage = (menu) => {
         navigate(`../mypage/${menu}`); // 각각의 메뉴 탭으로 바로 이동
     };
@@ -76,6 +78,11 @@ function Detail() {
     const handleToggle = () => { // qna 작성창 열기
         setIsExpanded(!isExpanded);
     };
+
+    // "답변 완료"인 객체의 개수를 세기
+    const qnaCompletedAnswersCount = qnas.qnaList ? qnas.qnaList.filter(item => item.qnaStatus === "답변 완료").length : 0;
+    // "답변 대기"인 객체의 개수
+    const qnaPendingAnswersCount = qnas.qnaCount-qnaCompletedAnswersCount;
 
     // const handleCheckboxChange = (newState) => { // qna 작성 공개 여부 체크박스
     //     console.log(newState);
@@ -110,7 +117,7 @@ function Detail() {
                             <text>여 다운필 루즈핏 퀼팅 점퍼 J103401008099</text>
                         </div>
                         <div className="rating">
-                            <StarRating rating={reviews.ratingAvg}/>
+                            <StarRating rating={reviews.productRating}/>
                             <text style={{marginLeft: '10px'}}>({reviews.reviewCnt}건)</text>
                         </div>
                         <div className='price'>
@@ -124,9 +131,6 @@ function Detail() {
                             <text>배송정보</text>
                             <div className='transportation'>
                                 <text>택배배송</text>
-                                <div className='arrivalTime'>
-                                    <text>1/4 도착 예정</text>
-                                </div>
                             </div>
                         </div>
                         <div className='deliveryFee'>
@@ -194,10 +198,10 @@ function Detail() {
                 </div>
                 <div className='ratingBox'>
                     <div className='ratingNum'>
-                        <text>{reviews.ratingAvg}</text>
+                        <text>{reviews.productRating}</text>
                     </div>
                     <div className='ratingStar'>
-                        <StarRating rating={reviews.ratingAvg} style={"none"}/>
+                        <StarRating rating={reviews.productRating} style={"none"}/>
                         <text style={{fontSize: '16px'}}>총 {reviews.reviewCnt}건 리뷰</text>
                     </div>
                 </div>
@@ -221,11 +225,11 @@ function Detail() {
                 </div>
                 <div className='qnaCategory'>
                     <div className='qna-category-btn-area'>
-                        <button className='qnaAll'>전체({qnas.qnaCount})</button>
+                        <button className='qnaAll'>전체 ({qnas.qnaCount})</button>
                         <div className='qna-category-line'/>
-                        <button className='qnaReplyDone'>답변완료(0)</button>
+                        <button className='qnaReplyDone'>답변완료 ({qnaCompletedAnswersCount})</button>
                         <div className='qna-category-line'/>
-                        <button className='qnaReplyWaiting'>답변대기(0)</button>
+                        <button className='qnaReplyWaiting'>답변대기 ({qnaPendingAnswersCount})</button>
                     </div>
                     <button onClick={handleToggle} className='qnaEnroll'>Q&A 작성하기 <img src={arrowRight}/></button>
                 </div>

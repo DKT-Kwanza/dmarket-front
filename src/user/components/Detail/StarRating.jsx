@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {useState} from "react";
 import { IoStarHalfSharp, IoStarSharp, IoStarOutline } from "react-icons/io5";
 
 function StarRating({rating, style}) {

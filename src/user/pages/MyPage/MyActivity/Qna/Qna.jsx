@@ -61,13 +61,13 @@ const Qna = () => {
                                 <QnaItem
                                     key={index}
                                     productName={qna.productName}
-                                    title={qna.title}
-                                    contents={qna.contents}
-                                    createdAt={formatDate(qna.createdAt)}
-                                    isSecret={qna.isSecret}
-                                    status={qna.status}
-                                    replyContents={qna.replycontents}
-                                    qnaReplyDate={formatDate(qna.inquiryReplyDate)}
+                                    title={qna.qnaTitle}
+                                    contents={qna.qnaContents}
+                                    createdAt={formatDate(qna.qnaCreatedDate)}
+                                    isSecret={qna.qnaIsSecret}
+                                    status={qna.qnaStatus}
+                                    replyContents={qna.qnaReplyContents}
+                                    qnaReplyDate={formatDate(qna.qnaReplyDate)}
                                     isExpanded={expandedQnaId === qna.qnaId}
                                     onToggle={() => toggleQna(qna.qnaId)}
                                 />

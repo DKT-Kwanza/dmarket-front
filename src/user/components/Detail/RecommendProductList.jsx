@@ -14,9 +14,14 @@ function RecommendProductList({recommendProducts}) {
         <Area>
             {
                 recommendProducts.map((value, index) => (
-                    <ProductListItem key={index} onClick={() => navigateToProductDetail(value.productId)}
-                                     brand={value.brand} productName={value.productName} sales={value.sales}
-                                     ratingAvg={value.ratingAvg} reviewCnt={value.reviewCnt}/>
+                    <ProductListItem key={index}
+                                     onClick={() => navigateToProductDetail(value.productId)}
+                                     brand={value.productBrand}
+                                     productName={value.productName}
+                                     productImg={value.productImg}
+                                     sales={value.productSalePrice}
+                                     ratingAvg={value.productRatingAvg}
+                                     reviewCnt={value.productReviewCount}/>
                 ))
             }
         </Area>
