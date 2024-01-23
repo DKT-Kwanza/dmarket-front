@@ -1,34 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import './CustomerCenterNotice.css';
 import CustomerCenterNoticeItem from '../../components/CustomerCenter/CustomerCenterNoticeItem';
 
 function CustomerCenterNotice() {
 
-  const noticeData = [
-    {
-      noticeId : 1,
-      title : "온라인 해외직구&구매대행 캠핑용 가스용품 구매 시 주의사항",
-      contents : "나라마다 제품을 만드는 기준이 모두 다르기 때문에 제품 구매 전 국내 사용이 가능한 제품인지 정확한 파악이 필요합니다. 특히 전자제품은 국내에서 사용하는 전압, 주파수, 규격 등과 다를 수 있습니다. 옷이나 신발도 국내 사이즈와 다를 수 있으므로 사이즈를 잘 알아본 후에 구매가 필요합니다.",
-      createdAt: "2023-12-27 09:48:00",
-    },
-    {
-      noticeId : 2,
-      title : "개인정보처리방침 개정 안내 [개정일 : 2023.02.22]",
-      contents : "개인정보자기결정권 등 서문 추가 개인정보 취급방침 → 개인정보처리방침 변경 목차 및 제목 등 문구수정 개인정보의 제3자 제공 문구 수정",
-      createdAt : "2024-02-02 09:48:00"
-    },
-    {
-      noticeId : 3,
-      title : "온라인 해외직구&구매대행 캠핑용 가스용품 구매 시 주의사항",
-      contents : "온라인 해외직구&구매대행 캠핑용 가스용품 구매 시 주의하세요 블라블라",
-      createdAt : "2024-05-01 09:48:00"
-    },
-  ]
-
   const navigate = useNavigate();
 
   const [expandedNotices, setExpandedNotices] = useState({});
+  const [custoemrCenterNotices, setCustoemrCenterNotices] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await axios.get("/api/CustomerCenterNoticeData.json");
+
+            setCustoemrCenterNotices(response.data);
+
+        } catch (e) {
+            console.error("Error fetching data: ", e);
+        }
+    };
+    fetchData();
+  }, []);
 
   const formatDate = (datetime) => { // 날짜만 남기기
     const date = new Date(datetime);
@@ -78,7 +73,7 @@ function CustomerCenterNotice() {
             </div>
           </div>
           <div className='notice-main-menu'>
-            {noticeData.map(notice => (
+            {custoemrCenterNotices.map(notice => (
               <CustomerCenterNoticeItem
                 key={notice.noticeId}
                 question={notice.title}

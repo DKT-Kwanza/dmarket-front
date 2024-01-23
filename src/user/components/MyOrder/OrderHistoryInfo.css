@@ -1,0 +1,58 @@
+.orderHistory-order-head {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.orderHistory-order-date {
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.orderHistory-order-time {
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 8px;
+}
+
+.orderHistory-order-number-tit {
+    color: #A9AFB3;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 24px;
+}
+
+.orderHistory-order-number {
+    color: #191919;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 12px;
+}
+
+.orderHistory-order-detail-btn {
+    display: flex;
+    align-items: center;
+    border: none;
+    outline: none;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.orderHistory-order-detail-tit {
+    color: #767676;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

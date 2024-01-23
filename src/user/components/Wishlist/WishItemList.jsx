@@ -7,10 +7,10 @@ const WishItemList = ({ items, checkedItems, onItemCheck }) => {
           {items.map((item, index) => (
             <WishItem
               key={index}
-              imgSrc={item.imgSrc}
+              productImg={item.productImg}
               brand={item.brand}
-              name={item.name}
-              price={item.price}
+              productName={item.productName}
+              sales={item.sales}
               checked={checkedItems[index]}
               onCheck={() => onItemCheck(index)}
             />

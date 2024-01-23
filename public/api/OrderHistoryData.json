@@ -1,0 +1,53 @@
+{
+    "confPayCnt": 1, 
+    "preProdCnt": 0,
+    "preShipCnt":0,
+    "inTransitCnt": 0, 
+    "delivCompCnt" :1,
+    "orderCancelCnt": 1,
+    "returnCnt": 0,
+    "orderList": [ 
+        {
+            "orderId": "12",
+            "orderDate": "2024-01-11 20:20:00",
+            "orderDetailList": [
+                {
+                    "detailId": "42",
+                    "productId": "32",
+                    "brand": "바비브라운",
+                    "productName": "바비브라운 파운데이션",
+                    "productImg": "https://placehold.co/130x130",
+                    "option": "21호",
+                    "sales": "23,000", 
+                    "status": "결제확인"
+                },
+                {
+                    "detailId": "42",
+                    "productId": "32",
+                    "brand": "바비브라운",
+                    "productName": "바비브라운 파운데이션",
+                    "productImg": "https://placehold.co/130x130",
+                    "option": "21호",
+                    "sales": "23,000", 
+                    "status": "배송완료"
+                }
+            ]
+        },
+        {
+            "orderId": "13",
+            "orderDate": "2024-01-11 20:20:00",
+            "orderDetailList": [
+                {
+                    "detailId": "42",
+                    "productId": "32",
+                    "brand": "바비브라운",
+                    "productName": "바비브라운 파운데이션",
+                    "productImg": "https://placehold.co/130x130",
+                    "option": "21호",
+                    "sales": "23,000", 
+                    "status": "주문취소"
+                }
+            ]
+        }
+    ]
+}

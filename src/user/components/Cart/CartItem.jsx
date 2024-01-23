@@ -1,7 +1,7 @@
 import './CartItem.css';
 import CheckBox from '../CheckBox/CheckBox';
 
-function CartItem ({ imgSrc, brand, name, price, option, count, checked, onCheck }){
+function CartItem ({ productImg, brand, productName, price, option, quantity, checked, onCheck }){
 
     return(
         <div className='cartItem-container'>
@@ -10,15 +10,15 @@ function CartItem ({ imgSrc, brand, name, price, option, count, checked, onCheck
                 </div>
             <div className='cartItem-item'>
                 <div className='cartItem-img'>
-                    <img src={imgSrc} alt={name} style={{ width: "100px", height: "100px" }}/>
+                    <img src={productImg} style={{ width: "100px", height: "100px" }}/>
                 </div>
                 <div className='cartItem-description'>
                     <div className='cartItem-brand'>{brand}</div>
-                    <div className='cartItem-name'>{name}</div>
+                    <div className='cartItem-name'>{productName}</div>
                     <div className='cartItem-description-bar'></div>
                     <div className='cartItem-option'>
                         <div>{option}</div>
-                        <div className='cartItem-option-value'>{count}</div>
+                        <div className='cartItem-option-value'>{quantity}</div>
                     </div>
                 </div>
             </div>

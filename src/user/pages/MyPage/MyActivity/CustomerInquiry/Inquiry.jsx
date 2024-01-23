@@ -1,53 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import MyPageSidebar from "../../../../components/MyPage/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../../components/MyPage/SubHeader/MyPageSubHeader";
 import './Inquiry.css';
 import InquiryItem from '../../../../components/CustomerInquiry/InquiryItem';
 
 const Inquiry = () => {
-    const inquiryData = [
-        {
-            InqueryId: 1,
-            category: "주문/결제",
-            title: "포인트 충전 어떻게 하나요?",
-            contents: "포인트 충전 어떻게 하나요? 여기서 이렇게 하면 되나요?",
-            img: "https://placehold.co/130x130",
-            createdAt: "2024-01-08 09:48:00",
-            status: "답변 완료",
-            replyContents : "답변 입니다.",
-            inquiryReplyDate: "2024-01-08 09:48:00"
-        },
-        {
-            InqueryId: 2,
-            category: "반품/환불",
-            title: "반품 신청했는데 언제 환불 되나요?",
-            contents: "포인트 충전 어떻게 하나요? 여기서 이렇게 하면 되나요?",
-            img: null,
-            createdAt: "2024-01-08 09:48:00",
-            status: "답변 대기",
-            replyContents : null,
-            inquiryReplyDate: null
-        },
-        {
-            InqueryId: 3,
-            category: "반품/환불",
-            title: "반품 신청했는데 언제 환불 되나요?",
-            contents: "포인트 충전 어떻게 하나요? 여기서 이렇게 하면 되나요?",
-            img: null,
-            createdAt: "2024-01-08 09:48:00",
-            status: "답변 대기",
-            replyContents : null,
-            inquiryReplyDate: null
-        },
-    ]
+    const [inquiries, setInquiries] = useState([])
+    const [expandedInquiryId, setExpandedInquiryId] = useState(null);
 
-    const [expandedInquiry, setExpandedInquiry] = useState({});
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/InquiryData.json");
+                
+                setInquiries(response.data);
+
+            } catch (e) {
+                console.error("Error fetching data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
 
     const toggleInquiry = (inquiryId) => {
-        setExpandedInquiry(prev => ({
-            ...prev,
-            [inquiryId]: !prev[inquiryId]
-        }));
+        setExpandedInquiryId(prevInquiryId => prevInquiryId === inquiryId ? null : inquiryId);
     };
 
     const formatDate = (datetime) => { // 날짜만 남기기
@@ -79,19 +56,19 @@ const Inquiry = () => {
                                 <div className='Inquiry-contents-content-data-3'>작성일</div>
                                 <div className='Inquiry-contents-content-data-4'>답변 상태</div>
                             </div>
-                            {inquiryData.map((inquiry, index) => (
+                            {inquiries.map((inquiry, index) => (
                                 <InquiryItem
-                                    key={index}
+                                    key={inquiry.InquiryId}
                                     category={inquiry.category}
                                     title={inquiry.title}
                                     contents={inquiry.contents}
                                     img={inquiry.img}
                                     createdAt={formatDate(inquiry.createdAt)}
                                     status={inquiry.status}
-                                    replyContents={inquiry.replyContents}
+                                    replyContents={inquiry.replycontents}
                                     inquiryReplyDate={formatDate(inquiry.inquiryReplyDate)}
-                                    isExpanded={!!expandedInquiry[inquiry.InqueryId]}
-                                    onToggle={() => toggleInquiry(inquiry.InqueryId)}
+                                    isExpanded={expandedInquiryId === inquiry.InquiryId}
+                                    onToggle={() => toggleInquiry(inquiry.InquiryId)}
                                 />
                             ))}
                         </div>

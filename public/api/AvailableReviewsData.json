@@ -1,0 +1,68 @@
+[
+    {
+        "orderDate": "2024-01-09 09:48:00",
+        "orderId": "20210105123456",
+        "orderDetail": [
+            {
+                "orderDetailId": 34,
+                "brand": "JAJU",
+                "productName": "쿠시노 코지 저상형 침대(패브릭,SS)",
+                "productImg": "https://placehold.co/130x130",
+                "option": "GREY BEIGE L",
+                "sales": "1,208,000"
+            },
+            {
+                "orderDetailId": 35,
+                "brand": "nike",
+                "productName": "후드티",
+                "productImg": "https://placehold.co/130x130",
+                "option": "black",
+                "sales": "1,000,000"
+            }
+        ]
+    },
+    {
+        "orderDate": "2024-01-09 09:48:00",
+        "orderId": "20210105123456",
+        "orderDetail": [
+            {
+                "orderDetailId": 34,
+                "brand": "JAJU",
+                "productName": "쿠시노 코지 저상형 침대(패브릭,SS)",
+                "productImg": "https://placehold.co/130x130",
+                "option": "GREY BEIGE L",
+                "sales": "1,208,000"
+            }
+            ]
+    },
+    {
+        "orderDate": "2024-01-09 09:48:00",
+        "orderId": "20210105123456",
+        "orderDetail": [
+            {
+                "orderDetailId": 34,
+                "brand": "JAJU",
+                "productName": "쿠시노 코지 저상형 침대(패브릭,SS)",
+                "productImg": "https://placehold.co/130x130",
+                "option": "GREY BEIGE L",
+                "sales": "1,208,000"
+            },
+            {
+                "orderDetailId": 35,
+                "brand": "nike",
+                "productName": "후드티",
+                "productImg": "https://placehold.co/130x130",
+                "option": "black",
+                "sales": "1,000,000"
+            },
+            {
+                "orderDetailId": 35,
+                "brand": "nike",
+                "productName": "후드티",
+                "productImg": "https://placehold.co/130x130",
+                "option": "black",
+                "sales": "1,000,000"
+            }
+        ]
+    }
+]

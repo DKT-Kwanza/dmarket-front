@@ -1,0 +1,58 @@
+[
+    {
+        "productId": 42542,
+        "brand": "나이키",
+        "productName": "나이키 후드집업",
+        "productImg": "https://placehold.co/314x314",
+        "sales": "50,000"
+    },
+    {
+        "productId": 52542,
+        "brand": "나이키",
+        "productName": "나이키 후드집업",
+        "productImg": "https://placehold.co/314x314",
+        "sales": "50,000"
+    },
+    {
+        "productId": 62542,
+        "brand": "나이키",
+        "productName": "나이키 후드집업",
+        "productImg": "https://placehold.co/314x314",
+        "sales": "50,000"
+    },
+    {
+        "productId": 72542,
+        "brand": "나이키",
+        "productName": "나이키 후드집업",
+        "productImg": "https://placehold.co/314x314",
+        "sales": "50,000"
+    },
+    {
+        "productId": 82542,
+        "brand": "나이키",
+        "productName": "나이키 후드집업",
+        "productImg": "https://placehold.co/314x314",
+        "sales": "50,000"
+    },
+    {
+        "productId": 92542,
+        "brand": "나이키",
+        "productName": "나이키 후드집업",
+        "productImg": "https://placehold.co/314x314",
+        "sales": "50,000"
+    },
+    {
+        "productId": 102542,
+        "brand": "나이키",
+        "productName": "나이키 후드집업",
+        "productImg": "https://placehold.co/314x314",
+        "sales": "50,000"
+    },
+    {
+        "productId": 112542,
+        "brand": "나이키",
+        "productName": "나이키 후드집업",
+        "productImg": "https://placehold.co/314x314",
+        "sales": "50,000"
+    }
+]
