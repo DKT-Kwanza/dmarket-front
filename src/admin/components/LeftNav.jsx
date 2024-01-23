@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Toolbar, List, Divider, ListItemButton, ListSubheader} from '@mui/material';
 import {Container, Drawer, CssBaseline, ListItemIcon, ListItemText, Collapse} from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -9,24 +8,17 @@ import CampaignIcon from '@mui/icons-material/Campaign';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {createTheme} from '@mui/material/styles';
+import {useState} from "react";
 
 const drawerWidth = 260;
 
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#EBF0F4'
-        },
-    },
-});
-
 export const LeftNav = () => {
 
-    const [openIndex, setOpenIndex] = React.useState<number | null>(null);
+    const [openIndex, setOpenIndex] = useState(null);
 
     // 메뉴를 클릭할 때 호출되는 함수
-    const handleClick = (index: number) => {
+    const handleClick = (index) => {
         // 클릭된 메뉴의 인덱스와 현재 열려 있는 메뉴의 인덱스를 비교하여 상태 업데이트
         setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
     };

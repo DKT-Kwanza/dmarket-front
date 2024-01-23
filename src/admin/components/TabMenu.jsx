@@ -3,13 +3,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
-type MenuProps = {
-    menu: any;
-}
-export default function TabMenu({menu}:MenuProps) {
+export default function TabMenu({menu}) {
 
     const [value, setValue] = React.useState(0);
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
@@ -21,7 +18,7 @@ export default function TabMenu({menu}:MenuProps) {
                 aria-label="Tabs where each tab needs to be selected manually"
             >
                 {
-                    menu.map((object:any, index:number) => (
+                    menu.map((object, index) => (
                         <Tab key={index} label={`${object.title} ${object.count}`} />
                     ))
                 }

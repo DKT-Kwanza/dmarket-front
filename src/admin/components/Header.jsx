@@ -1,14 +1,9 @@
 import * as React from 'react';
 import {AppBar, Toolbar, Typography} from '@mui/material';
-import {grey} from '@mui/material/colors';
 
 const drawerWidth = 260;
 
-interface HeaderTitle {
-    title: string;
-}
-
-const Header = ({title}: HeaderTitle) => {
+const Header = ({title}) => {
     return (
         <AppBar
             color="inherit"
