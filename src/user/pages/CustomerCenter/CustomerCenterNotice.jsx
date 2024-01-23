@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { formatDate } from '../../../utils/formatDate';
+import { formatDate } from '../../../utils/Format';
 import './CustomerCenterNotice.css';
 import CustomerCenterNoticeItem from '../../components/CustomerCenter/CustomerCenterNoticeItem';
 

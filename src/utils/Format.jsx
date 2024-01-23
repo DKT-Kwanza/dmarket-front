@@ -16,3 +16,17 @@ export const formatTime = (datetime) => {
 
     return `${hours}:${formattedMinutes}`;
 };
+
+/* 콤마 추가 */
+export const formatPrice = (value) => {
+    if (value == null) return '0';
+
+    const stringValue = value.toString();
+
+    return stringValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+/* 콤마 제거 */
+export const removeCommas = (value) => {
+    return value.replace(/,/g, '');
+};

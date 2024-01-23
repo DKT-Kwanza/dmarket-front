@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { formatDate } from '../../../utils/formatDate';
+import { formatDate } from '../../../utils/Format';
 
 function DetailQnaReply({onClose, content, qnaReplyContent, replyAt}) {
 

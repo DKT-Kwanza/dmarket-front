@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { formatPrice, removeCommas } from '../../../utils/formatPrice';
+import { formatPrice } from '../../../utils/Format';
 import './Filter.css';
 import { PiStarFill, PiStarLight } from "react-icons/pi";
 

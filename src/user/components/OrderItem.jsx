@@ -1,29 +1,29 @@
-// 주문한 아이템 입니다.
-// 사진, 정보, 배송 상태
 import styled from 'styled-components';
 
-function OrderItem({img, brand, name, option, price, children}) {
+function OrderItem({productImg, productBrand, productName, productOption, productCount, productTotalSalePrice, children}) {
     return (
         <Item>
-            <img src={img} className='productreview-img-review-content-img' alt="상품 이미지"/> {/* 상품 이미지 */}
+            <img src={productImg} className='productreview-img-review-content-img' alt="상품 이미지"/> {/* 상품 이미지 */}
             <Info>
                 <tr>
                     <InfoTitle>브랜드</InfoTitle>
-                    <InfoContent>{brand}</InfoContent> {/* 상품 브랜드*/}
+                    <InfoContent>{productBrand}</InfoContent> {/* 상품 브랜드*/}
                 </tr>
                 <tr>
                     <InfoTitle>상품명</InfoTitle>
-                    <InfoContent>{name}</InfoContent> {/* 상품 이름 */}
+                    <InfoContent>{productName}</InfoContent> {/* 상품 이름 */}
                 </tr>
                 <tr>
                     <InfoTitle>옵션</InfoTitle>
                     <InfoContent>
-                        <div>{option}</div> {/* 상품 옵션 */}
+                        <div>{productOption}</div> {/* 상품 옵션 */}
+                        <div className="mypageProductReview-item-info-bar"/>
+                        <div>{productCount}</div>
                     </InfoContent>
                 </tr>
                 <tr>
                     <InfoTitle>결제금액</InfoTitle>
-                    <InfoContent>{price} 원</InfoContent> {/* 상품 금액 */}
+                    <InfoContent>{productTotalSalePrice} 원</InfoContent> {/* 상품 금액 */}
                 </tr>
             </Info>
             <InfoProcess>{children}</InfoProcess> {/* 리뷰 작성 버튼 */}

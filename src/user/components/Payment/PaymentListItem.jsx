@@ -1,5 +1,6 @@
 import React from "react";
 import './PaymentListItem.css'
+import { formatPrice } from "../../../utils/Format";
 
 export default function PaymentListItem({ productImg, productBrand, productName, productOption, productTotalSalePrice, productTotalPrice, productCount }){
     return(
@@ -28,12 +29,12 @@ export default function PaymentListItem({ productImg, productBrand, productName,
                         </td>
                         <td className="payment-product-td-price">
                             <div className="payment-product-sales-div">
-                                <span className="payment-product-sales">{productTotalSalePrice}</span>
+                                <span className="payment-product-sales">{formatPrice(productTotalSalePrice)}</span>
                                 <span className="payment-product-tx">원</span>
                             </div>
                             <div style={{display: "block"}}>
                                 <del>
-                                    <span className="payment-product-prodPrice">{productTotalPrice}</span>
+                                    <span className="payment-product-prodPrice">{formatPrice(productTotalPrice)}</span>
                                 </del>
                                 <span className="payment-product-tx">원</span>
                             </div>

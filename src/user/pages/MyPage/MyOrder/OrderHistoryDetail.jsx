@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { formatDate, formatTime } from '../../../../utils/formatDate';
+import { formatDate, formatTime } from '../../../../utils/Format';
 import "./OrderHistoryDetail.css";
 import OrderDetailItem from '../../../components/MyOrder/OrderDetailItem';
 import MyPageSubHeader from "../../../components/MyPage/SubHeader/MyPageSubHeader";
