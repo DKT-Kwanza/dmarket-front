@@ -2,12 +2,9 @@ import React from 'react';
 import OrderInfo from './OrderInfo';
 import OrderItem from '../OrderItem';
 import ReviewItem from './ReviewItem';
+import { formatDate } from '../../../utils/formatDate';
 
 const OrderReviewsList = ({ orders }) => {
-  const formatDate = (datetime) => { // 날짜만 남기기
-    const date = new Date(datetime);
-    return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
-  };
 
   /* 리뷰 삭제 구현 필요 */
   const deleteReview = (reviewId) => {

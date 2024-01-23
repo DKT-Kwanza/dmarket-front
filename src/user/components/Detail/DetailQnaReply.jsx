@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import { formatDate } from '../../../utils/formatDate';
 
 function DetailQnaReply({onClose, content, qnaReplyContent, replyAt}) {
 
@@ -7,11 +8,6 @@ function DetailQnaReply({onClose, content, qnaReplyContent, replyAt}) {
         onClose();
     };
 
-    const formatDate = (datetime) => { // 날짜만 남기기
-      const date = new Date(datetime);
-      return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
-    };
-    
     return (
         <Area>
             <Content>{content}</Content>
@@ -21,7 +17,7 @@ function DetailQnaReply({onClose, content, qnaReplyContent, replyAt}) {
                     <ReplyArea>
                         <ReplyWriter>
                             <div>관리자</div>
-                            <ReplyDate>{replyAt}</ReplyDate>
+                            <ReplyDate>{formatDate(replyAt)}</ReplyDate>
                         </ReplyWriter>
                         <div style={{marginTop: "20px"}}>{qnaReplyContent}</div>
                         <ConfirmBtn onClick={handleConfirmClick}>확인</ConfirmBtn>
