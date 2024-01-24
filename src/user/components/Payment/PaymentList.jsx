@@ -7,13 +7,13 @@ const PaymentList = ({ items }) => {
             {items.map((item, index) => (
                 <PaymentListItem 
                 key={index} 
-                img={item.productImg} 
-                brand={item.brand}
+                productImg={item.productImg} 
+                productBrand={item.productBrand}
                 productName={item.productName} 
-                option={item.optionId} 
-                sales={item.sales}
-                productPrice={item.productPrice} 
-                quantity={item.quantity}/>
+                productOption={item.productOption}
+                productTotalSalePrice={item.productTotalSalePrice}  
+                productTotalPrice={item.productTotalPrice}
+                productCount={item.productCount}/>
             ))}
         </div>
     );

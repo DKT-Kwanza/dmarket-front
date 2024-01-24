@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { formatPrice } from '../../../utils/Format';
 import './Filter.css';
 import { PiStarFill, PiStarLight } from "react-icons/pi";
 
@@ -6,13 +7,6 @@ function Filter(){
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
     const [selectedRating, setSelectedRating] = useState(null);
-
-    const formatPrice = (value) => {
-        // 콤마를 제거하고 숫자만 추출
-        const number = value.replace(/,/g, '');
-        // 숫자를 콤마 포맷으로 변환
-        return number.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    };
 
     const handlePriceChange = (e, setPrice) => {
         const formattedPrice = formatPrice(e.target.value);

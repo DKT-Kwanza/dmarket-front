@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { formatPrice } from '../../../../../utils/Format';
 import "./WriteReview.css";
 import MyPageSidebar from "../../../../components/MyPage/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../../components/MyPage/SubHeader/MyPageSubHeader";
@@ -7,7 +8,7 @@ import MyPageSubHeader from "../../../../components/MyPage/SubHeader/MyPageSubHe
 function WriteReview() {
 
     const { state } = useLocation();
-    const { orderDetail } = state;
+    const { orderDetailList } = state;
     const [rating, setRating] = useState(0);
 
     const handleStarClick = (clickedRating) => {
@@ -38,23 +39,23 @@ function WriteReview() {
                                     <table className="mypageProductReview-item-info">
                                         <tr>
                                             <td className="mypageProductReview-item-info-tit">브랜드</td>
-                                            <td className="mypageProductReview-item-info-cont">{orderDetail.brand}</td>
+                                            <td className="mypageProductReview-item-info-cont">{orderDetailList.productBrand}</td>
                                         </tr>
                                         <tr>
                                             <td className="mypageProductReview-item-info-tit">상품명</td>
-                                            <td className="mypageProductReview-item-info-cont">{orderDetail.productName}</td>
+                                            <td className="mypageProductReview-item-info-cont">{orderDetailList.productName}</td>
                                         </tr>
                                         <tr>
                                             <td className="mypageProductReview-item-info-tit">옵션</td>
                                             <td className="mypageProductReview-item-info-cont">
-                                                <div>{orderDetail.option}</div>
+                                                <div>{orderDetailList.productOption}</div>
                                                 <div className="mypageProductReview-item-info-bar"/>
-                                                
+                                                <div>{orderDetailList.productCount}</div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="mypageProductReview-item-info-tit">결제금액</td>
-                                            <td className="mypageProductReview-item-info-cont">{orderDetail.sales}</td>
+                                            <td className="mypageProductReview-item-info-cont">{formatPrice(orderDetailList.productTotalSalePrice)}원</td>
                                         </tr>
                                     </table>
                                 </div>

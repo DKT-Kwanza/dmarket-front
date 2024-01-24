@@ -34,7 +34,7 @@ function SignIn() {
     setTimer(600); // 타이머를 10분으로 설정
     };
 
-    const formatTime = () => { // 시간을 MM:SS 형식으로 변환하는 함수
+    const changeTime = () => { // 시간을 MM:SS 형식으로 변환하는 함수
         const minutes = Math.floor(timer / 60);
         const seconds = timer % 60;
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
@@ -84,7 +84,7 @@ function SignIn() {
                             />
                             {showVerification && (
                                 <div className='signIn-timer'>
-                                    {formatTime()}
+                                    {changeTime()}
                                 </div>
                             )}
                         </div>
@@ -104,7 +104,7 @@ function SignIn() {
             </div>
         </div>
     </div>
-  );
+    );
 }
 
 export default SignIn;

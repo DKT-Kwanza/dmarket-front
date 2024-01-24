@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { formatDate } from '../../../../../utils/Format';
 import MyPageSidebar from "../../../../components/MyPage/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../../components/MyPage/SubHeader/MyPageSubHeader";
 import './Qna.css';
@@ -26,11 +27,6 @@ const Qna = () => {
     // 질문을 토글하는 함수
     const toggleQna = (qnaId) => {
         setExpandedQnaId(prevQnaId => prevQnaId === qnaId ? null : qnaId);
-    };
-
-    const formatDate = (datetime) => { // 날짜만 남기기
-        const date = new Date(datetime);
-        return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
     };
 
     return (

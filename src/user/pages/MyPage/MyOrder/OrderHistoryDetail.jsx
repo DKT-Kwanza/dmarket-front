@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { formatDate, formatTime } from '../../../../utils/Format';
 import "./OrderHistoryDetail.css";
 import OrderDetailItem from '../../../components/MyOrder/OrderDetailItem';
 import MyPageSubHeader from "../../../components/MyPage/SubHeader/MyPageSubHeader";
@@ -26,23 +27,6 @@ function OrderHistoryDetail() {
         };
         fetchData();
     }, []);
-
-    const formatDate = (datetime) => { // 날짜만 남기기
-        const date = new Date(datetime);
-        return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
-      };
-    
-      const formatTime = (datetime) => { // 시간만 남기기
-        const date = new Date(datetime);
-        let hours = date.getHours();
-        const minutes = date.getMinutes();
-    
-        // 시간을 2자리 형식으로 포매팅
-        hours = hours.toString().padStart(2, '0');
-        const formattedMinutes = minutes.toString().padStart(2, '0');
-    
-        return `${hours}:${formattedMinutes}`;
-      };
 
     return(
         <div className="orderHistoryDetail">

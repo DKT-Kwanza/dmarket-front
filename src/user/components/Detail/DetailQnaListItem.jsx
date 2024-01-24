@@ -1,15 +1,12 @@
 import styled from "styled-components";
 import React from "react";
+import { formatDate } from "../../../utils/Format";
 
 function DetailQnaListItem({onClick, title, createdAt, status}) {
-  const formatDate = (datetime) => { // 날짜만 남기기
-    const date = new Date(datetime);
-    return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
-  };
     return (
         <QnaArea onClick={onClick}>
             <Title>{title}</Title>
-            <Date>{createdAt}</Date>
+            <Date>{formatDate(createdAt)}</Date>
             <State status={status}>{status}</State>
         </QnaArea>
     );
