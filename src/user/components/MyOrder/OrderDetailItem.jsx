@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import GreyBtn from '../Button/GreyBtn';
 import styled from 'styled-components';
 import ConfirmCancelModal from '../Modal/ConfirmCancelModal'
+import SelectBox from "../Select/SelectBox";
 
 function OrderDetailItem({img, brand, name, option, count, price, status}) {
     const [statusText, setStatusText] = useState("");
@@ -9,7 +10,7 @@ function OrderDetailItem({img, brand, name, option, count, price, status}) {
     const [isConfirming, setIsConfirming] = useState(false);
 
     useEffect(() => {
-        if (status === "결제 완료") {
+        if (status === "결제 확인") {
             setStatusText("주문취소");
         } else if (status === "배송 완료") {
             setStatusText("반품신청");
@@ -59,7 +60,7 @@ function OrderDetailItem({img, brand, name, option, count, price, status}) {
                             <InfoContent>{price} 원</InfoContent> {/* 상품 금액 */}
                         </tr>
                     </Info>
-                    {status === "결제 완료" || status === "배송 완료" ? (
+                    {status === "결제 확인" || status === "배송 완료" ? (
                         <GreyBtn onClick={openModalHandler}>{statusText}</GreyBtn>
                     ) : (
                         <InfoProcess>{status}</InfoProcess>
@@ -72,9 +73,10 @@ function OrderDetailItem({img, brand, name, option, count, price, status}) {
                         statusText === "주문취소"
                             ? <div>해당 상품에 대한 주문이 취소됩니다.</div>
                             :
-                            <>
+                            <div style={{display: 'flex', flexDirection: 'column'}}>
                                 <div>해당 상품을 반품신청 합니다.</div>
-                            </>
+                                <SelectBox />
+                            </div>
                     }
                 </ConfirmCancelModal>
             )}
