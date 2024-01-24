@@ -1,38 +1,42 @@
 [
   {
+    "cateId": 32,
     "productId": 32542,
-    "brand": "바비브라운",
+    "productBrand": "바비브라운",
     "productName": "바비브라운 파운데이션",
     "productImg": "https://amazonaws.com/image.png",
-    "sales": "25,000",
-    "ratingAvg": 3,
-    "reviewCnt": 30
+    "productSalePrice": "25,000",
+    "productRatingAvg": 3.0,
+    "productReviewCount": 30
   },
   {
+    "cateId": 32,
     "productId": 32543,
-    "brand": "바비브라운",
-    "productName": "바비브라운 파운데이션",
+    "productBrand": "에스쁘아",
+    "productName": "에스쁘아 파운데이션",
     "productImg": "https://amazonaws.com/image.png",
-    "sales": "25,000",
-    "ratingAvg": null,
-    "reviewCnt": 30
+    "productSalePrice": "25,000",
+    "productRatingAvg": null,
+    "productReviewCount": null
   },
   {
+    "cateId": 32,
     "productId": 32544,
-    "brand": "바비브라운",
+    "productBrand": "바비브라운",
     "productName": "바비브라운 파운데이션",
     "productImg": "https://amazonaws.com/image.png",
-    "sales": "25,000",
-    "ratingAvg": 3,
-    "reviewCnt": 30
+    "productSalePrice": "25,000",
+    "productRatingAvg": 4.3,
+    "productReviewCount": 12
   },
   {
+    "cateId": 32,
     "productId": 32545,
-    "brand": "바비브라운",
+    "productBrand": "바비브라운",
     "productName": "바비브라운 파운데이션",
     "productImg": "https://amazonaws.com/image.png",
-    "sales": "25,000",
-    "ratingAvg": 3,
-    "reviewCnt": 30
+    "productSalePrice": "25,000",
+    "productRatingAvg": 4.3,
+    "productReviewCount": 12
   }
 ]

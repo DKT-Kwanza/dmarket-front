@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import React from "react";
 
 function OrderItem({productImg, productBrand, productName, productOption, productCount, productTotalSalePrice, children}) {
     return (
@@ -16,8 +17,11 @@ function OrderItem({productImg, productBrand, productName, productOption, produc
                 <tr>
                     <InfoTitle>옵션</InfoTitle>
                     <InfoContent>
-                        <div>{productOption}</div> {/* 상품 옵션 */}
-                        <div className="mypageProductReview-item-info-bar"/>
+                        {/* 상품 옵션 */}
+                        <div>{productOption}</div>
+                        <Line />
+                        {/* 상품 수량 */}
+                        <OptionTitle>수량</OptionTitle>
                         <div>{productCount}</div>
                     </InfoContent>
                 </tr>
@@ -38,12 +42,6 @@ const Item = styled.div`
   align-items: center;
 `
 
-const ItemImg = styled.div`
-  width: 129px;
-  height: 129px;
-  background: #D9D9D9;
-`
-
 const Info = styled.table`
   text-align: left;
   margin-left: 24px;
@@ -53,6 +51,15 @@ const Info = styled.table`
 
 const InfoTitle = styled.td`
   width: 80px;
+  color: #A9AFB3;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`
+
+const OptionTitle = styled.td`
+  width: 40px;
   color: #A9AFB3;
   font-size: 14px;
   font-style: normal;

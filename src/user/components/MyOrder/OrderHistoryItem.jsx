@@ -23,11 +23,12 @@ const OrderHistoryItem = ({ orderDate, orderId, orderItems }) => {
                 <OrderItem
                     key={index}
                     img={item.productImg}
-                    brand={item.brand}
+                    brand={item.productBrand}
                     name={item.productName}
-                    option={item.option}
-                    price={item.sales}
-                    children={item.status}
+                    option={item.productOption}
+                    price={item.productTotalSalePrice}
+                    children={item.productStatus}
+                    count={item.productCount}
                 />
             ))}
         </div>

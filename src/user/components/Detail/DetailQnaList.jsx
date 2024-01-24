@@ -22,6 +22,7 @@ function DetailQnaList({qnas}) {
             {/*표의 title 부분*/}
             <Area>
                 <Title>제목</Title>
+                <Writer>작성자</Writer>
                 <Date>작성일</Date>
                 <State>답변상태</State>
             </Area>
@@ -29,11 +30,11 @@ function DetailQnaList({qnas}) {
             {
                 qnas.map((data, index) => (
                     <div key={index}>
-                        <DetailQnaListItem onClick={() => qnaClickHandler(index)} title={data.title}
-                                           createdAt={data.createdAt} status={data.status}/>
+                        <DetailQnaListItem onClick={() => qnaClickHandler(index)} title={data.qnaTitle}
+                                           createdAt={data.qnaCreatedDate} status={data.qnaStatus} writer={data.qnaWriter} />
                         {openReplyIndexes.includes(index) &&
-                            <DetailQnaReply onClose={() => qnaClickHandler(index)} content={data.content}
-                                            qnaReplyContent={data.qnaReplyContent} replyAt={data.replyAt}/>}
+                            <DetailQnaReply onClose={() => qnaClickHandler(index)} content={data.qnaContents}
+                                            qnaReplyContent={data.qnaReplyDate} replyAt={data.qnaReplyContents}/>}
                     </div>
                 ))
             }
@@ -58,14 +59,19 @@ const Title = styled.div`
   margin-left: 5px;
 `;
 
+const Writer = styled.div`
+  margin-top: 18px;
+  margin-left: 500px;
+`;
+
 const Date = styled.div`
   margin-top: 18px;
-  margin-left: 365px;
+  margin-left: 150px;
 `;
 
 const State = styled.div`
   margin-top: 18px;
-  margin-left: 153px;
+  margin-left: 150px;
 `;
 
 export default DetailQnaList;

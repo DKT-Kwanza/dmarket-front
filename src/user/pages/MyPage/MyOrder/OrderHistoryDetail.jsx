@@ -56,23 +56,23 @@ function OrderHistoryDetail() {
                         <tr>
                             <td className="orderHistoryDetail-info-tit">받으시는 분</td>
                             <td className="orderHistoryDetail-info-cont">
-                                <div className="orderHistoryDetail-info-name">{orderDetailProducts.receiver}</div>
-                                <div>{orderDetailProducts.phoneNum}</div>
+                                <div className="orderHistoryDetail-info-name">{orderDetailProducts.userName}</div>
+                                <div>{orderDetailProducts.userPhoneNum}</div>
                             </td>
                         </tr>
                         <tr>
                             <td className="orderHistoryDetail-info-tit">받으시는 주소</td>
-                            <td className="orderHistoryDetail-info-cont">{orderDetailProducts.postalCode}</td>
+                            <td className="orderHistoryDetail-info-cont">{orderDetailProducts.userPostalCode}</td>
                         </tr>
                         <tr>
                             <td className="orderHistoryDetail-info-tit" />
-                            <td className="orderHistoryDetail-info-cont">{orderDetailProducts.address} {orderDetailProducts.detailedAddress}</td>
+                            <td className="orderHistoryDetail-info-cont">{orderDetailProducts.userAddress} {orderDetailProducts.userDetailedAddress}</td>
                         </tr>
                     </table>
 
                     <div className="orderHistoryDetail-price">
                         <div className="orderHistoryDetail-price-tit">최종결제금액</div>
-                        <div className="orderHistoryDetail-price-cont">{orderDetailProducts.totalPrice}</div>
+                        <div className="orderHistoryDetail-price-cont">{orderDetailProducts.userDetailedAddress}</div>
                     </div>
 
                     <div className="orderHistoryDetail-line"/>
@@ -80,13 +80,13 @@ function OrderHistoryDetail() {
                     {orderDetailProducts?.orderDetailList?.map((product, index) => (
                         <OrderDetailItem
                             key={index}
-                            brand={product.brand}
+                            brand={product.productBrand}
                             name={product.productName}
                             img={product.productImg}
-                            option={product.option}
-                            count={product.quantity}
-                            price={product.sales}
-                            status={product.status} 
+                            option={product.productOption}
+                            count={product.productCount}
+                            price={product.productTotalSalePrice}
+                            status={product.orderStatus}
                         />
                     ))}
                 </div>

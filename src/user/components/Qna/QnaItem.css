@@ -44,10 +44,15 @@
     padding-left: 0;
 }
 
+.Qna-contents-content-data-list-detail {
+    background: #f8fafb;
+}
+
 .Qna-contents-content-data-list-hr {
     border: none;
     height: 1px;
     margin: 0;
+    padding: 0;
     background-color: #DBDBDB;
 }
 
@@ -58,7 +63,7 @@
 }
 
 .Qna-contents-content-data-list-data {
-    margin: 20px;
+    padding: 20px;
 }
 
 .Qna-contents-content-data-list-data-info {

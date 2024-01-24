@@ -88,7 +88,7 @@ const MyPageSidebar = () => {
                         onClick={() => navigateToPage('changeinfo')}
                         style={getButtonStyle('changeinfo')}
                     >
-                        회원정보 변경
+                        배송지 변경
                     </button>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
