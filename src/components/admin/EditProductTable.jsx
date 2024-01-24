@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { formatDate, formatPrice } from '../../utils/Format';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,6 +11,17 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
 export default function EditProductTable({headers, rows}) {
+    const navigate = useNavigate();
+
+    const navigateToEdit = () => {
+        navigate("../edit")
+    }
+
+    const handleDeleteProduct = (productId) => {
+        alert(`${productId} 삭제됩니다`);
+    }
+
+
     return (
         <TableContainer component={Paper} sx={{mb: 2}}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -31,6 +44,7 @@ export default function EditProductTable({headers, rows}) {
                                 <TableCell component="th" scope="row">
                                     {row.productId}
                                 </TableCell>
+                                <TableCell>{row.brand}</TableCell>
                                 <TableCell>
                                     <div style={{display: 'flex', alignItems: 'center'}}>
                                         <img
@@ -44,13 +58,24 @@ export default function EditProductTable({headers, rows}) {
                                     </div>
                                 </TableCell>
                                 <TableCell>{item.optionValue}</TableCell>
-                                <TableCell>{row.sales}</TableCell>
+                                <TableCell>{formatPrice(row.sales)}</TableCell>
                                 <TableCell>{row.cateid2}</TableCell>
                                 <TableCell>{item.productStatus}</TableCell>
                                 <TableCell>{item.quantity}</TableCell>
-                                <TableCell>{row.registDate}</TableCell>
+                                <TableCell>{formatDate(row.registDate)}</TableCell>
                                 <TableCell>
-                                    <Button href="#text-buttons">수정</Button>
+                                    <Button 
+                                        onClick={navigateToEdit}
+                                        sx={{ bgcolor: '#3377FF', color: 'white', mr: "20px"}}
+                                    >
+                                        수정
+                                    </Button>
+                                    <Button
+                                        onClick={() => handleDeleteProduct(row.productId)}
+                                        sx={{ bgcolor: '#FF5D5D', color: 'white'}}
+                                    >
+                                        삭제
+                                    </Button>
                                 </TableCell>
                             </TableRow>
                         ))

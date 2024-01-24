@@ -29,6 +29,8 @@ import Qna from "./pages/user/Qna/Qna";
 import HistoryMileage from "./pages/user/Mileage/HistoryMileage";
 
 import Product from "./pages/admin/product/Product";
+import AddProduct from "./pages/admin/product/AddProduct"
+import EditProduct from "./pages/admin/product/EditProduct"
 import AdminList from "./pages/admin/adminlist/AdminList";
 
 function App() {
@@ -97,6 +99,8 @@ function App() {
 
             <Route path='/admin/product'>
                 <Route path='product' element={<Product />} />
+                <Route path='add' element={<AddProduct />} />
+                <Route path='edit' element={<EditProduct />} />
             </Route>
             <Route path='/admin/admin'>
                 <Route path='adminlist' element={<AdminList />} />
