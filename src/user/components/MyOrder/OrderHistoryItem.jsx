@@ -22,13 +22,13 @@ const OrderHistoryItem = ({ orderDate, orderId, orderItems }) => {
             {orderItems.map((item, index) => (
                 <OrderItem
                     key={index}
-                    img={item.productImg}
-                    brand={item.productBrand}
-                    name={item.productName}
-                    option={item.productOption}
-                    price={item.productTotalSalePrice}
+                    productImg={item.productImg}
+                    productBrand={item.productBrand}
+                    productName={item.productName}
+                    productOption={item.productOption}
+                    productTotalSalePrice={item.productTotalSalePrice}
                     children={item.productStatus}
-                    count={item.productCount}
+                    productCount={item.productCount}
                 />
             ))}
         </div>
