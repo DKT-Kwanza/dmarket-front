@@ -48,7 +48,8 @@
 
 .myPage-subHeader-wrapper-mileage-content {
     margin-top: 57px;
-    margin-left: 198px;
+    text-align: right;
+    margin-right: 20px;
 }
 
 .myPage-subHeader-box {

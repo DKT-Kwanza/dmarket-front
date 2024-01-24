@@ -2,12 +2,10 @@ import React from 'react';
 import OrderInfo from './OrderInfo';
 import OrderItem from '../OrderItem';
 import ReviewItem from './ReviewItem';
+import { formatDate } from '../../../utils/Format';
+import './OrderReviewList.css'
 
 const OrderReviewsList = ({ orders }) => {
-  const formatDate = (datetime) => { // 날짜만 남기기
-    const date = new Date(datetime);
-    return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
-  };
 
   /* 리뷰 삭제 구현 필요 */
   const deleteReview = (reviewId) => {
@@ -17,39 +15,36 @@ const OrderReviewsList = ({ orders }) => {
   return (
       <div>
           {orders.map((order, index) => (
-              <div key={index}>
+              <div key={index} className='orderReviewList-box'>
                 {/* 주문 정보 */}
                   <OrderInfo 
                       orderDate={order.orderDate} 
                       orderId={order.orderId}
                   />
                   <hr className="productreview-hr-line2"/>
-                  {order.reviewList.map((reviewItem, reviewItemIndex) => (
-                      <React.Fragment key={reviewItemIndex}>
+                  {order.orderDetailList.map((item, itemIndex) => (
+                      <React.Fragment key={itemIndex}>
                           <div className="productreview-div-review-content-wrapper">
                             {/* 상품 정보 */}
-                              <OrderItem 
-                                img={reviewItem.productImg}
-                                brand={reviewItem.brand}
-                                name={reviewItem.productName}
-                                option={reviewItem.option}
-                                price={reviewItem.sales}
-                              />
+                            <OrderItem 
+                              productImg={item.productImg}
+                              productBrand={item.productBrand}
+                              productName={item.productName}
+                              productOption={item.productOption}
+                              productCount={item.productCount}
+                              productTotalSalePrice={item.productTotalSalePrice}
+                            />
                           </div>
-                          {reviewItem.reviews.map((review, reviewIndex) => (
-                              <React.Fragment key={reviewIndex}>
-                                  <hr className="productreview-hr-line3"/>
-                                  {/* 리뷰 내용 */}
-                                  <ReviewItem
-                                      imgSrc={review.reviewImg}
-                                      rating={review.rating}
-                                      reviewText={review.contents}
-                                      reviewDate={formatDate(review.reviewCreatedDate)}
-                                      onDelete={() => deleteReview(review.reviewId)}
-                                  />
-                                  <hr className="productreview-hr-line3"/>
-                              </React.Fragment>
-                          ))}
+                            <hr className="productreview-hr-line3"/>
+                            {/* 리뷰 내용 */}
+                            <ReviewItem
+                                reviewImg={item.reviewImg}
+                                reviewRating={item.reviewRating}
+                                reviewContents={item.reviewContents}
+                                reviewCreatedDate={formatDate(item.reviewCreatedDate)}
+                                onDelete={() => deleteReview(item.reviewId)}
+                            />
+                            <hr className="productreview-hr-line3"/>
                       </React.Fragment>
                   ))}
               </div>

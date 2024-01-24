@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import React from "react";
+import { formatDate } from "../../../utils/Format";
+
 
 function DetailQnaListItem({onClick, title, createdAt, status, writer}) {
     const formatDate = (datetime) => { // 날짜만 남기기
@@ -10,7 +12,7 @@ function DetailQnaListItem({onClick, title, createdAt, status, writer}) {
         <QnaArea onClick={onClick}>
             <Title>{title}</Title>
             <Writer>{writer}</Writer>
-            <Date>{createdAt}</Date>
+            <Date>{formatDate(createdAt)}</Date>
             <State status={status}>{status}</State>
         </QnaArea>
     );

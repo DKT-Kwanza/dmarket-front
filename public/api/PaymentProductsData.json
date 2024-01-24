@@ -1,29 +1,34 @@
 {
-    "orderCnt": 2,
-    "totalPrice": "318,000",
-    "discount": "31,100",
-    "totalPay": "286,900",
-    "orderList":
-    [
-        { 
-            "productId": 1, 
+    "userName" : "박상웅",
+    "userPhoneNum" : "010-1234-1234",
+    "userEmail" : "qwer@qerwer",
+    "userPostalCode" : 31209,
+    "userAddress" : "서울 은평구 불광로 16길 22-35",
+    "userDetailAddress" : "초록 대문 집",
+    "totalPrice" : 113000,
+    "totalPay" : 112000,
+    "productList" : [
+        {
+            "productId": 32542,
+            "productBrand": "바비브라운",
+            "productName": "바비브라운 파운데이션",
+            "optionId": 29834,
+            "productOption": "21호",
+            "productCount": 1,
             "productImg": "https://placehold.co/100x100", 
-            "brand": "바비브라운",
-            "productName": "파운데이션",
-            "optionId": "21호",
-            "sales": "25,000",
-            "productPrice": "27,000",
-            "quantity": 2 
+            "productTotalPrice": 28000,
+            "productTotalSalePrice": 25000
         },
-        { 
-            "productId": 2, 
-            "productImg": "https://placehold.co/100x100", 
-            "brand": "룩캐스트",
+        {
+            "productId": 32542,
+            "productBrand": "룩캐스트",
             "productName": "윈터 울 코트",
-            "optionId": "BLACK",
-            "sales": "261,900",
-            "productPrice": "291,000",
-            "quantity": 1 
+            "optionId": 29834,
+            "productOption": "BLACK",
+            "productCount": 2,
+            "productImg": "https://placehold.co/100x100", 
+            "productTotalPrice": 300000,
+            "productTotalSalePrice": 291000
         }
     ]
 }

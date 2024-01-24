@@ -135,7 +135,7 @@ function Detail() {
                         </div>
                         <div className='deliveryFee'>
                             <text>배송비</text>
-                            <text style={{marginLeft: '77px'}}>무료 (4만원 이상 무료)</text>
+                            <text style={{marginLeft: '77px'}}>무료</text>
                         </div>
                         <div className='colorSelect'>
                             <text style={{marginTop: '2px'}}>색상</text>

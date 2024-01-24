@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { formatDate } from "../../../../utils/Format"
 import './HistoryMileage.css'
 import MyPageSubHeader from "../../../components/MyPage/SubHeader/MyPageSubHeader";
 import MyPageSidebar from "../../../components/MyPage/Sidebar/MyPageSidebar";
@@ -22,11 +23,6 @@ function HistoryMileage(){
         };
         fetchData();
     }, []);
-
-    const formatDate = (datetime) => { // 날짜만 남기기
-        const date = new Date(datetime);
-        return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
-    };
 
     return(
         <div className='history-mileage'>

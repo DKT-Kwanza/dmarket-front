@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { formatDate } from '../../../utils/Format';
 import './CustomerCenterNotice.css';
 import CustomerCenterNoticeItem from '../../components/CustomerCenter/CustomerCenterNoticeItem';
 
@@ -24,11 +25,6 @@ function CustomerCenterNotice() {
     };
     fetchData();
   }, []);
-
-  const formatDate = (datetime) => { // 날짜만 남기기
-    const date = new Date(datetime);
-    return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
-  };
 
   const toggleNotice = (noticeId) => {
     setExpandedNotices(prev => ({
@@ -76,13 +72,13 @@ function CustomerCenterNotice() {
             {custoemrCenterNotices.map(notice => (
               <CustomerCenterNoticeItem
                 key={notice.noticeId}
-                question={notice.title}
+                noticeTitle={notice.noticeTitle}
                 isExpanded={!!expandedNotices[notice.noticeId]}
                 onToggle={() => toggleNotice(notice.noticeId)}
-                createdAt={formatDate(notice.createdAt)}
+                noticeCreatedDate={formatDate(notice.noticeCreatedDate)}
               >
                 {/* 내용을 children으로 전달 */}
-                <div dangerouslySetInnerHTML={{ __html: notice.contents }} />
+                <div dangerouslySetInnerHTML={{ __html: notice.noticeContents }} />
               </CustomerCenterNoticeItem>
             ))}
           </div>

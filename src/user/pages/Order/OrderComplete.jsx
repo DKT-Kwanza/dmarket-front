@@ -1,9 +1,15 @@
 import React, {useState, useEffect} from "react";
+import { useLocation } from 'react-router-dom';
 import axios from "axios";
+import { formatDate, formatTime, formatPrice } from '../../../utils/Format';
 import "./OrderComplete.css";
 
 
-function OrderComplete(){
+function OrderComplete() {
+
+    const location = useLocation();
+    const { userName, totalPrice, discount, totalPay } = location.state || {};
+
     const [paymentProducts, setPaymentProducts] = useState([])
     
     useEffect(() => {
@@ -11,30 +17,12 @@ function OrderComplete(){
             try {
                 const response = await axios.get("/api/OrderCompleteData.json");
                 setPaymentProducts(response.data);
-                console.log(paymentProducts)
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
         fetchData();
     }, []);
-
-    const formatDate = (datetime) => { // 날짜만 남기기
-        const date = new Date(datetime);
-        return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
-    };
-    
-      const formatTime = (datetime) => { // 시간만 남기기
-        const date = new Date(datetime);
-        let hours = date.getHours();
-        const minutes = date.getMinutes();
-    
-        // 시간을 2자리 형식으로 포매팅
-        hours = hours.toString().padStart(2, '0');
-        const formattedMinutes = minutes.toString().padStart(2, '0');
-    
-        return `${hours}:${formattedMinutes}`;
-      };
 
     return(
         <div>
@@ -45,7 +33,7 @@ function OrderComplete(){
                     </div>   
                     <div className="orderComplete-div">
                         <div className="orderComplete-info">
-                            <p>{paymentProducts.userName} 고객님, 주문이 완료되었습니다.</p>
+                            <p>{userName} 고객님, 주문이 완료되었습니다.</p>
                         </div> {/*사용자의 이름 받아오기*/}
                         <div className="orderComplete-ordernum">
                             <span>{formatDate(paymentProducts.orderDate)} {formatTime(paymentProducts.orderDate)}에 주문하신 주문의  
@@ -56,21 +44,21 @@ function OrderComplete(){
                             <div>
                                 <span className="orderComplete-price-des">주문금액&nbsp;</span>
                                 <span className="orderComplete-price-des">
-                                    <strong>{paymentProducts.totalPrice}</strong><span>원</span>
+                                    <strong>{formatPrice(totalPrice)}</strong><span>원</span>
                                 </span> {/*해당 주문의 금액들 받아오기*/}
                             </div>
                             <div>
                                 <span className="orderComplete-price-symbol">-</span>
                                 <span className="orderComplete-price-des">자사몰 할인&nbsp;</span>
                                 <span className="orderComplete-price-des">
-                                    <strong>{paymentProducts.discount}</strong><span>원</span>
+                                    <strong>{formatPrice(discount)}</strong><span>원</span>
                                 </span>
                             </div>
                             <div>
                                 <span className="orderComplete-price-symbol">=</span>
                                 <strong className="orderComplete-price-sales">최종결제금액&nbsp;</strong>
                                 <strong className="orderComplete-price-sales">
-                                    <strong style={{fontSize:"30px"}}>{paymentProducts.totalPay}</strong><span>원</span>
+                                    <strong style={{fontSize:"30px"}}>{formatPrice(totalPay)}</strong><span>원</span>
                                 </strong>
                             </div>
                         </div>

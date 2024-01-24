@@ -3,15 +3,15 @@ import { ReactComponent as ChevronDown } from "../../../assets/icons/chevron-dow
 import { ReactComponent as ChevronUp } from "../../../assets/icons/chevron-up.svg";
 import './CustomerCenterNoticeItem.css'
 
-function CustomerCenterNoticeItem({ question, isExpanded, onToggle, createdAt, children }) {
+function CustomerCenterNoticeItem({ noticeTitle, isExpanded, onToggle, noticeCreatedDate, children }) {
     return (
         <div>
             <div className='notice-main-menu-display'>
                 <div onClick={onToggle} className='notice-main-menu-text'>
-                    {question}
+                    {noticeTitle}
                 </div>
                 <div className='notice-main-menu-date'>
-                    {createdAt}
+                    {noticeCreatedDate}
                 </div>
                 <div className='notice-main-menu-button'>
                     {isExpanded ? <ChevronUp /> : <ChevronDown />}

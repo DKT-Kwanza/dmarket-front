@@ -13,11 +13,11 @@ function CustomerCenterFAQList({ items }) {
       {items.map((item, index) => (
         <CustomerCenterFAQListItem 
           key={index}
-          title={item.title}
+          faqTitle={item.faqTitle}
           isExpanded={expandedItem === index}
           onToggle={() => handleToggle(index)}
         >
-          {item.content}
+          {item.faqContents}
         </CustomerCenterFAQListItem>
       ))}
     </div>
