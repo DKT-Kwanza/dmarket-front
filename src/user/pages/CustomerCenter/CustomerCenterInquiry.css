@@ -1,17 +1,11 @@
-
 .CustomerCenterInquiry{
   width: 1280px;
   margin: 0 auto;
   padding-bottom: 200px;
 }
 
-.CustomerCenterInquiry-body{
-
-}
-
 .CustomerCenterName{
   color: #000;
-  font-family: Noto Sans KR;
   font-size: 40px;
   font-style: normal;
   font-weight: 500;
@@ -54,7 +48,6 @@
 
 .inquiry-menu-submenu-title{
   color: #000;
-  font-family: Noto Sans KR;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -66,7 +59,6 @@
 
 .inquiry-menu-submenu-title-contents{
   color: #000;
-  font-family: Noto Sans KR;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -95,7 +87,6 @@
   justify-content: center;
   flex-shrink: 0;
   color: #000;
-  font-family: Noto Sans KR;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -118,7 +109,6 @@
 
 .dropdown-options div {
   padding: 10px;
-  font-family: Noto Sans KR;
   font-size: 16px;
   color: #000;
   cursor: pointer;
