@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./ReviewList.css";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import MyPageSubHeader from "../../../components/user/SubHeader/MyPageSubHeader";
-import OrderList from "../../../components/user/Review/OrderList";
-import OrderReviewList from "../../../components/user/Review/OrderReviewList";
+import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
+import OrderList from "../../../components/user/List/OrderList";
+import OrderReviewList from "../../../components/user/List/OrderReviewList";
 
 const ReviewList = () => {
     

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { formatDate } from '../../../utils/Format';
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import MyPageSubHeader from "../../../components/user/SubHeader/MyPageSubHeader";
+import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import './Inquiry.css';
-import InquiryItem from "../../../components/user/CustomerInquiry/InquiryItem";
+import InquiryItem from "../../../components/user/Item/InquiryItem";
 
 const Inquiry = () => {
     const [inquiries, setInquiries] = useState([])

@@ -1,10 +1,10 @@
 import * as React from "react";
-import LeftNav from "../../components/LeftNav";
-import Header from "../../components/Header";
-import SearchBar from "../../components/SearchBar";
-import TabMenu from "../../components/TabMenu";
-import BasicTable from "../../components/EditProductTable";
-import Category from "../../components/Category";
+import LeftNav from "../../../components/admin/LeftNav";
+import Header from "../../../components/admin/Header";
+import SearchBar from "../../../components/admin/SearchBar";
+import TabMenu from "../../../components/admin/TabMenu";
+import BasicTable from "../../../components/admin/EditProductTable";
+import Category from "../../../components/admin/Category";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {Paper, Box, Button} from "@mui/material";
 import {indigo} from '@mui/material/colors';

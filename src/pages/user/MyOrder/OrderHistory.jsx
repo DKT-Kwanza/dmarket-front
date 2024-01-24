@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import "./OrderHistory.css";
-import OrderHistoryItem from '../../../components/user/MyOrder/OrderHistoryItem';
-import MyPageSubHeader from "../../../components/user/SubHeader/MyPageSubHeader";
+import OrderHistoryItem from '../../../components/user/Item/OrderHistoryItem';
+import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 
 function OrderHistory() {

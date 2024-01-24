@@ -1,7 +1,7 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-import OrderItem from "../../../components/user/OrderItem";
-import OrderHistoryInfo from './OrderHistoryInfo';
+import OrderItem from "./OrderItem";
+import OrderHistoryInfo from '../Info/OrderHistoryInfo';
 import './OrderHistoryItem.css'
 
 const OrderHistoryItem = ({ orderDate, orderId, orderItems }) => {

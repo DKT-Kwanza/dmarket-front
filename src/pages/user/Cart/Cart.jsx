@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Cart.css';
-import CheckBox from "../../../components/user/CheckBox/CheckBox";
-import CartList from "../../../components/user/Cart/CartList";
-import CartOrderInfo from "../../../components/user/Cart/CartOrderInfo";
+import CheckBox from "../../../components/user/Common/CheckBox";
+import CartList from "../../../components/user/List/CartList";
+import CartOrderInfo from "../../../components/user/Info/CartOrderInfo";
 
 function Cart(){
     const navigate = useNavigate();

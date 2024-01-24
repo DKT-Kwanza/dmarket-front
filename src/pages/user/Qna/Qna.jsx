@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { formatDate } from '../../../utils/Format';
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import MyPageSubHeader from "../../../components/user/SubHeader/MyPageSubHeader";
+import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import './Qna.css';
-import QnaItem from '../../../components/user/Qna/QnaItem';
+import QnaItem from '../../../components/user/Item/QnaItem';
 
 const Qna = () => { 
     const [qnas, setQnas] = useState([])

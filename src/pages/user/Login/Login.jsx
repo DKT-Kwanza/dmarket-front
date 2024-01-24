@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import CheckBox from "../../../components/user/CheckBox/CheckBox";
+import CheckBox from "../../../components/user/Common/CheckBox";
 import './Login.css';
 import logo from '../../../assets/images/logo.png'
 import chevronRight from '../../../assets/icons/chevron-right.svg'

@@ -3,10 +3,10 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import "./Payment.css";
 import useDetectClose from "./UseDetectClose";
-import { MsgDropDown } from "../../../components/user/MsgDropDown";
+import { MsgDropDown } from "../../../components/user/Common/MsgDropDown";
 import {ReactComponent as DropDownImg} from "../../../assets/icons/dropdown.svg";
-import PaymentList from "../../../components/user/Payment/PaymentList";
-import PaymentInfo from "../../../components/user/Payment/PaymentInfo";
+import PaymentList from "../../../components/user/List/PaymentList";
+import PaymentInfo from "../../../components/user/Info/PaymentInfo";
 
 function Payment(){
     const navigate = useNavigate();

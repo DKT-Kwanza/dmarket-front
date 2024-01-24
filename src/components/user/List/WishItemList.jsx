@@ -1,5 +1,5 @@
 import React from 'react';
-import WishItem from './WishItem'
+import WishItem from '../Item/WishItem'
 
 const WishItemList = ({ items, checkedItems, onItemCheck }) => {
     return (

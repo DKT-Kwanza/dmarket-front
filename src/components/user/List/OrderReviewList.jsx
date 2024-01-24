@@ -1,7 +1,7 @@
 import React from 'react';
-import OrderInfo from './OrderInfo';
-import OrderItem from '../OrderItem';
-import ReviewItem from './ReviewItem';
+import OrderInfo from '../Info/OrderInfo';
+import OrderItem from '../Item/OrderItem';
+import ReviewItem from '../Item/ReviewItem';
 import { formatDate } from '../../../utils/Format';
 import './OrderReviewList.css'
 

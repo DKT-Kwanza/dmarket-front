@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Main.css';
 import { FaAngleLeft, FaAngleRight, FaPause } from "react-icons/fa6";
-import MainProductItem from "../../../components/user/Main/MainProductItem";
+import MainProductItem from "../../../components/user/Item/MainProductItem";
 
 
 const Main = () => { 

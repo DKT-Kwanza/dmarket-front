@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import CheckBox from "../../../components/user/CheckBox/CheckBox";
+import CheckBox from "../../../components/user/Common/CheckBox";
 import './SignInForm.css';
 
 function SignInForm() {

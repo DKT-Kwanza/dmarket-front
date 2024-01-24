@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CustomerCenterFAQListItem from './CustomerCenterFAQItem';
+import CustomerCenterFAQListItem from '../Item/CustomerCenterFAQItem';
 
 function CustomerCenterFAQList({ items }) {
   const [expandedItem, setExpandedItem] = useState(null);

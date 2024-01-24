@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import './SearchList.css';
-import ProductItem from '../../../components/user/ProductList/ProductItem';
-import Filter from '../../../components/user/ProductList/Filter';
-import Dropdown from '../../../components/user/ProductList/Dropdown';
+import ProductItem from '../../../components/user/Item/ProductItem';
+import Filter from '../../../components/user/Common/Filter';
+import Dropdown from '../../../components/user/Common/Dropdown';
 
 function SearchList(){
     const [products, setProducts] = useState([]);

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import DetailQnaListItem from "./DetailQnaListItem";
+import DetailQnaListItem from "../Item/DetailQnaListItem";
 import React, {useState} from "react";
-import DetailQnaReply from "./DetailQnaReply";
+import DetailQnaReply from "../DetailQnaReply";
 
 function DetailQnaList({qnas}) {
 

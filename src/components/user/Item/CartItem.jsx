@@ -1,5 +1,5 @@
 import './CartItem.css';
-import CheckBox from '../CheckBox/CheckBox';
+import CheckBox from '../Common/CheckBox';
 
 function CartItem ({ productImg, brand, productName, price, option, quantity, checked, onCheck }){
 

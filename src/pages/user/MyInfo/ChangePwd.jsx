@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./ChangePwd.css";
-import MyPageSubHeader from "../../../components/user/SubHeader/MyPageSubHeader";
+import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 
 function ChangePwd() {

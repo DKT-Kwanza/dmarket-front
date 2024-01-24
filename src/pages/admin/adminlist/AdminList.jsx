@@ -1,10 +1,10 @@
 import * as React from "react";
-import LeftNav from "../../components/LeftNav";
-import Header from "../../components/Header";
-import SearchBar from "../../components/SearchBar";
-import TabMenu from "../../components/TabMenu";
-import CheckBoxTable from "../../components/CheckBoxTable";
-import DeleteBtn from "../../components/DeleteBtn";
+import LeftNav from "../../../components/admin/LeftNav";
+import Header from "../../../components/admin/Header";
+import SearchBar from "../../../components/admin/SearchBar";
+import TabMenu from "../../../components/admin/TabMenu";
+import CheckBoxTable from "../../../components/admin/CheckBoxTable";
+import DeleteBtn from "../../../components/admin/DeleteBtn";
 import {Paper, Box} from "@mui/material";
 import {indigo} from '@mui/material/colors';
 

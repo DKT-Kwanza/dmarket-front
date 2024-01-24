@@ -1,5 +1,5 @@
 import React from "react";
-import PaymentListItem from "./PaymentListItem";
+import PaymentListItem from "../Item/PaymentListItem";
 
 const PaymentList = ({ items }) => {
     return(

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { formatDate, formatTime, formatPrice } from '../../../utils/Format';
 import "./OrderHistoryDetail.css";
-import OrderDetailItem from "../../../components/user/MyOrder/OrderDetailItem";
-import MyPageSubHeader from "../../../components/user/SubHeader/MyPageSubHeader";
+import OrderDetailItem from "../../../components/user/Item/OrderDetailItem";
+import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 
 function OrderHistoryDetail() {

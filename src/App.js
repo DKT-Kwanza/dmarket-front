@@ -28,8 +28,8 @@ import Inquiry from "./pages/user/CustomerInquiry/Inquiry";
 import Qna from "./pages/user/Qna/Qna";
 import HistoryMileage from "./pages/user/Mileage/HistoryMileage";
 
-import Product from "./admin/pages/product/Product";
-import AdminList from "./admin/pages/adminlist/AdminList";
+import Product from "./pages/admin/product/Product";
+import AdminList from "./pages/admin/adminlist/AdminList";
 
 function App() {
     const location = useLocation();

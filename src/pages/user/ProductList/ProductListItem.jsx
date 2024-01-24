@@ -1,4 +1,4 @@
-import StarRating from "../../../components/user/Detail/StarRating";
+import StarRating from "../../../components/user/Common/StarRating";
 import './ProductListItem.css'
 
 function ProductListItem({onClick, brand, productName, productImg, sales, ratingAvg, reviewCnt}) {

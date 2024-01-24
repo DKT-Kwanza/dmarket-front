@@ -1,5 +1,5 @@
 import React from 'react';
-import CartItem from './CartItem'
+import CartItem from '../Item/CartItem'
 
 const CartList = ({ items, checkedItems, onItemCheck }) => {
     return (

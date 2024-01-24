@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {formatDate} from "../../../utils/Format";
 import './HistoryMileage.css'
-import MyPageSubHeader from "../../../components/user/SubHeader/MyPageSubHeader";
+import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import MileageHistoryItem from "../../../components/user/Mileage/MileageHistoryItem";
+import MileageHistoryItem from "../../../components/user/Item/MileageHistoryItem";
 
 function HistoryMileage(){
 

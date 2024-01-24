@@ -1,4 +1,4 @@
-import DetailReviewItem from "./DetailReviewItem";
+import DetailReviewItem from "../Item/DetailReviewItem";
 
 const DetailReviewsList = ({reviews}) => {
     return (

@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { formatPrice } from '../../../utils/Format';
 import "./WriteReview.css";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import MyPageSubHeader from "../../../components/user/SubHeader/MyPageSubHeader";
+import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 
 function WriteReview() {
 

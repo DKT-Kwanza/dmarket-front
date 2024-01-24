@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { formatDate } from '../../../utils/Format';
 import './CustomerCenterNotice.css';
-import CustomerCenterNoticeItem from "../../../components/user/CustomerCenter/CustomerCenterNoticeItem";
+import CustomerCenterNoticeItem from "../../../components/user/Item/CustomerCenterNoticeItem";
 
 function CustomerCenterNotice() {
 
