@@ -9,7 +9,7 @@ const MyPageSidebar = () => {
     const [activePage, setActivePage] = useState('');
 
     useEffect(() => {
-        const path = location.pathname.split('/mypage/')[1];
+        const path = location.pathname.split('/mydkt/')[1];
         setActivePage(path);
     }, [location]);
 
@@ -20,7 +20,7 @@ const MyPageSidebar = () => {
 
     // onClick 발생 시 각각의 page 로 navigate
     const navigateToPage = (path) => {
-        navigate(`/mypage/${path}`);
+        navigate(`/mydkt/${path}`);
     }
 
     return (
@@ -31,8 +31,8 @@ const MyPageSidebar = () => {
                     <p className='myPage-sideBar-wrapper-contents-title'>나의 주문관리</p>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('orderhistory')}
-                        style={getButtonStyle('orderhistory')}
+                        onClick={() => navigateToPage('orderMng/orderInfo')}
+                        style={getButtonStyle('orderMng/orderInfo')}
                     >
                         주문/배송 조회
                     </button>
@@ -44,36 +44,36 @@ const MyPageSidebar = () => {
                     <p className='myPage-sideBar-wrapper-contents-title'>나의 활동관리</p>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('cart')}
-                        style={getButtonStyle('cart')}
+                        onClick={() => navigateToPage('activityMng/mycart')}
+                        style={getButtonStyle('activityMng/mycart')}
                     >
                         장바구니
                     </button>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('wishlist')}
-                        style={getButtonStyle('wishlist')}
+                        onClick={() => navigateToPage('activityMng/mywish')}
+                        style={getButtonStyle('activityMng/mywish')}
                     >
                         위시리스트
                     </button>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('reviewlist')} 
-                        style={getButtonStyle('reviewlist')}
+                        onClick={() => navigateToPage('activityMng/review')} 
+                        style={getButtonStyle('activityMng/review')}
                     >
                         상품리뷰
                     </button>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('qna')}
-                        style={getButtonStyle('qna')}
+                        onClick={() => navigateToPage('activityMng/qna')}
+                        style={getButtonStyle('activityMng/qna')}
                     >
                         상품 Q&A
                     </button>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('inquiry')}
-                        style={getButtonStyle('inquiry')}
+                        onClick={() => navigateToPage('activityMng/inquiry')}
+                        style={getButtonStyle('activityMng/inquiry')}
                     >
                         고객 문의
                     </button>
@@ -85,15 +85,15 @@ const MyPageSidebar = () => {
                     <p className='myPage-sideBar-wrapper-contents-title'>나의 정보관리</p>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('changeinfo')}
-                        style={getButtonStyle('changeinfo')}
+                        onClick={() => navigateToPage('memberMng/changeInfo')}
+                        style={getButtonStyle('memberMng/changeInfo')}
                     >
                         배송지 변경
                     </button>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('changepwd')}
-                        style={getButtonStyle('changepwd')}
+                        onClick={() => navigateToPage('memberMng/changePwd')}
+                        style={getButtonStyle('memberMng/changePwd')}
                     >
                         비밀번호 변경
                     </button>

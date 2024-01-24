@@ -1,4 +1,4 @@
-import {Route, Routes, useLocation} from "react-router-dom";
+import {Router, Route, Routes, useLocation} from "react-router-dom";
 
 import './App.css';
 import Header from './user/components/Header/Header'
@@ -11,7 +11,7 @@ import ChargeMileage from "./user/pages/MyPage/Mileage/ChargeMileage";
 import Main from "./user/pages/Main/Main";
 import ReviewList from "./user/pages/MyPage/MyActivity/Review/ReviewList";
 import Detail from "./user/pages/Detail/Detail";
-import WishList from "./user/pages/MyPage/MyActivity/WishList/WishList";
+import Mywish from "./user/pages/MyPage/MyActivity/WishList/Mywish";
 import Cart from "./user/pages/MyPage/MyActivity/Cart/Cart";
 import ProductList from "./user/pages/ProductList/ProductList";
 import SearchList from "./user/pages/ProductList/SearchList";
@@ -33,47 +33,77 @@ import AdminList from "./admin/pages/adminlist/AdminList";
 
 function App() {
     const location = useLocation();
-    const hideHeaderFooter = (location.pathname === '/signin/form' || location.pathname.startsWith('/admin'));
+    const hideHeaderFooter = (location.pathname === '/member/signin/form' || location.pathname.startsWith('/admin'));
 
   return (
     <div className="App">
         {!hideHeaderFooter && <Header />}
           <Routes>
-              <Route path='/login' element={<Login/>} />
-              <Route path='/signin' element={<SignIn/>}/>
-              <Route path='/signin/form' element={<SignInForm/>} />
-              <Route path='/mypage/changeinfo' element={<ChangeInfo/>} />
-              <Route path='/mypage/chargemileage' element={<ChargeMileage/>} />
-              <Route path='/mypage/mileagehistory' element={<HistoryMileage/>} />
-              <Route path='/main' element={<Main/>} />
-              <Route path='/mypage/reviewlist' element={<ReviewList/>} />
-              <Route path='/main/detail/:productId' element={<Detail/>}/>
-              <Route path='/main/detail' element={<Detail/>}/>
-              <Route path='/mypage/wishlist' element={<WishList/>} />
-              <Route path='/mypage/cart' element={<Cart />} />
-              <Route path='/mypage/Qna' element={<Qna />} />
-              <Route path='/main/productlist' element={<ProductList/>}/>
-              <Route path='/main/searchlist' element={<SearchList/>}/>
-              <Route path='/order' element={<Payment/>}/>
-              <Route path='/order/complete' element={<OrderComplete/>} />
-              <Route path='/mypage/changepwd' element={<ChangePwd/>} />
-              <Route path='/customercenter' element={<CustomerCenterNotice/>} />
-              <Route path='/customercenter/faq/:tab' element={<CustomerCenterFAQ/>}/> 
-              <Route path='/customercenter/inquiry' element={<CustomerCenterInquiry/>}/>
-              <Route path='/mypage/writereview' element={<WriteReview/>} />
-              <Route path='/mypage/orderhistory' element={<OrderHistory/>}/>
-              <Route path='/mypage/orderhistory/detail' element={<OrderHistoryDetail/>}/>
-              <Route path='/mypage/inquiry' element={<Inquiry />} />
 
-              <Route path='/admin/product'>
-                  <Route path='product' element={<Product />} />
+            <Route path='/member'>
+              <Route path='login' element={<Login />} />
+              <Route path='signin' element={<SignIn/>}/>
+              <Route path='signin/form' element={<SignInForm/>} />
+            </Route>
+
+            <Route path='/'>
+              <Route path='' element={<Main/>} />
+              <Route path='category' element={<ProductList/>}/>
+              <Route path='search' element={<SearchList/>}/>
+            </Route>
+
+            <Route path='/product'>
+              <Route path='productDetail/:productId' element={<Detail/>}/>
+              <Route path='detail' element={<Detail/>}/>
+            </Route>
+            
+            <Route path='/order'>
+              <Route path='orderPage' element={<Payment/>}/>
+              <Route path='complete' element={<OrderComplete/>} />
+            </Route>
+
+            <Route path='/mydkt'>
+              <Route path='orderMng'>
+                <Route path='orderInfo' element={<OrderHistory/>}/>
+                <Route path='orderInfoDetail' element={<OrderHistoryDetail/>} />
               </Route>
-              <Route path='/admin/admin'>
-                  <Route path='adminlist' element={<AdminList />} />
+
+              <Route path='activityMng'>
+                <Route path='mycart' element={<Cart />} />
+                <Route path='mywish' element={<Mywish/>} />
+                <Route path='review' element={<ReviewList/>} />
+                <Route path='review/write' element={<WriteReview/>} />
+                <Route path='qna' element={<Qna />} />
+                <Route path='inquiry' element={<Inquiry />} />
               </Route>
+            
+              <Route path='memberMng'>
+                <Route path='changeInfo' element={<ChangeInfo/>} />
+                <Route path='changePwd' element={<ChangePwd/>} />
+              </Route>
+
+              <Route path='mileageMng'>
+              <Route path='charge' element={<ChargeMileage/>} />
+              <Route path='mileageInfo' element={<HistoryMileage/>} />
+              </Route>
+            </Route>
+
+
+            <Route path='/customer'>
+              <Route path='' element={<CustomerCenterNotice/>} />
+              <Route path='faq/:tab' element={<CustomerCenterFAQ/>}/> 
+              <Route path='inquiry/write' element={<CustomerCenterInquiry/>}/>
+            </Route>
+
+            <Route path='/admin/product'>
+                <Route path='product' element={<Product />} />
+            </Route>
+            <Route path='/admin/admin'>
+                <Route path='adminlist' element={<AdminList />} />
+            </Route>
 
           </Routes>
-          {!hideHeaderFooter && <Footer />}
+        {!hideHeaderFooter && <Footer />}
     </div>
   );
 }

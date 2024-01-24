@@ -27,13 +27,17 @@ function Header() {
     }, []);
 
     // svg 클릭 이벤트 만들어야함
-    const exclick = (e) => {
-        alert("버튼 클릭");
+    const navigateToSearch = () => {
+        navigate('./search')
     }
 
     // 아이콘 클릭 이후 페이지 변경
-    const iconClick = (menu) => {
-        navigate(`./mypage/${menu}`);
+    const navigateToOrderMng = (menu) => {
+        navigate(`./mydkt/orderMng/${menu}`);
+    }
+
+    const navigateToActivityMng = (menu) => {
+        navigate(`./mydkt/ActivityMng/${menu}`);
     }
 
     const handleMouseOver = () => {
@@ -46,7 +50,11 @@ function Header() {
     }
 
     const navigateToMain = () => {
-        navigate(`./main`);
+        navigate(`./`);
+    }
+
+    const navigateToCustomer = () => {
+        navigate('./customer');
     }
 
     return (
@@ -56,7 +64,7 @@ function Header() {
                 <div className='search-box-div'>
                     <input className="search-box" placeholder='2023년 봄날 가벼워진 패션으로 나들이 가보자~'>
                     </input>
-                    <div className='search-box-svg' onClick={exclick}>
+                    <div className='search-box-svg' onClick={navigateToSearch}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                              fill="none">
                             <path
@@ -66,10 +74,10 @@ function Header() {
                     </div>
                 </div>
                 <div className="icons">
-                    <div className='mypage' onClick={() => iconClick('orderhistory')}>
+                    <div className='mypage' onClick={() => navigateToOrderMng('orderInfo')}>
                         <img src={user}/>
                     </div>
-                    <div className='bucket' onClick={() => iconClick('cart')}>
+                    <div className='bucket' onClick={() => navigateToActivityMng('mycart')}>
                         <img src={shoppingBag}/>
                         <div className='bucket-count'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 21 20"
@@ -81,7 +89,7 @@ function Header() {
                             </svg>
                         </div>
                     </div>
-                    <div className='likes' onClick={() => iconClick('wishlist')}>
+                    <div className='likes' onClick={() => navigateToActivityMng('mywish')}>
                         <img
                             alt={"heart-icon"}
                             src={heart}/>
@@ -111,7 +119,7 @@ function Header() {
                         <button>디지털/가전</button>
                         <button>스포츠/건강</button>
                     </div>
-                    <div className="user-center">고객센터</div>
+                    <div onClick={navigateToCustomer} className="user-center">고객센터</div>
                 </div>
             </div>
             {isSubDivHovered && <SubCategory onMouseLeave={handleMouseLeaveSubCategory}/>}

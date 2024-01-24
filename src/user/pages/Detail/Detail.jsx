@@ -59,11 +59,11 @@ function Detail() {
     console.log(recommendProducts); // 확인용 로그
 
     const navigateToMypage = (menu) => {
-        navigate(`../mypage/${menu}`); // 각각의 메뉴 탭으로 바로 이동
+        navigate(`../../mydkt/activityMng/${menu}`); // 각각의 메뉴 탭으로 바로 이동
     };
 
     const navigateToOrder = () => {
-        navigate("../order");
+        navigate("../../order/orderPage");
     }
 
     const [selected, setSelected] = useState([]);
@@ -165,9 +165,9 @@ function Detail() {
                     </div>
                 </div>
                 <div className='purchaseArea'>
-                    <button onClick={() => navigateToMypage('wishlist')} className='wishlistButton'><img src={heart}/>
+                    <button onClick={() => navigateToMypage('mywish')} className='wishlistButton'><img src={heart}/>
                     </button>
-                    <button onClick={() => navigateToMypage('cart')} className='cartButton'>장바구니</button>
+                    <button onClick={() => navigateToMypage('mycart')} className='cartButton'>장바구니</button>
                     <button onClick={navigateToOrder} className='purchaseButton'>바로구매</button>
                 </div>
             </div>

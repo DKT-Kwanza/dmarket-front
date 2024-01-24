@@ -34,7 +34,7 @@ function DetailQnaList({qnas}) {
                                            createdAt={data.qnaCreatedDate} status={data.qnaStatus} writer={data.qnaWriter} />
                         {openReplyIndexes.includes(index) &&
                             <DetailQnaReply onClose={() => qnaClickHandler(index)} content={data.qnaContents}
-                                            qnaReplyContent={data.qnaReplyDate} replyAt={data.qnaReplyContents}/>}
+                                            qnaReplyContent={data.qnaReplyContents} replyAt={data.qnaReplyDate}/>}
                     </div>
                 ))
             }
