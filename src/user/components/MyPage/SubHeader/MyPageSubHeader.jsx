@@ -24,11 +24,11 @@ const MyPageSubHeader = () => {
     }, []);
 
     const navigateToCharge = () => {
-        navigate('/mypage/chargemileage');
+        navigate('/mydkt/mileageMng/charge');
     }
 
     const navigateToHistory = () => {
-        navigate('/mypage/mileagehistory');
+        navigate('/mydkt/mileageMng/mileageInfo');
     }
 
     return (

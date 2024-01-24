@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React from "react";
+import { formatPrice } from '../../utils/Format';
 
 function OrderItem({productImg, productBrand, productName, productOption, productCount, productTotalSalePrice, children}) {
     return (
@@ -27,7 +28,7 @@ function OrderItem({productImg, productBrand, productName, productOption, produc
                 </tr>
                 <tr>
                     <InfoTitle>결제금액</InfoTitle>
-                    <InfoContent>{productTotalSalePrice} 원</InfoContent> {/* 상품 금액 */}
+                    <InfoContent>{formatPrice(productTotalSalePrice)} 원</InfoContent> {/* 상품 금액 */}
                 </tr>
             </Info>
             <InfoProcess>{children}</InfoProcess> {/* 리뷰 작성 버튼 */}

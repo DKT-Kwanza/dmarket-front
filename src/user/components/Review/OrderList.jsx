@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { formatPrice } from '../../../utils/Format';
 import OrderInfo from './OrderInfo';
 import OrderItem from '../OrderItem';
 import './OrderList.css'
@@ -10,7 +9,7 @@ const OrderList = ({ orders }) => {
 
   /* 상품 정보 리뷰 작성 페이지로 전달 */
   const navigateToWrite = (orderDetailList) => {
-    navigate('/mypage/writereview', { state: { orderDetailList } });
+    navigate('./write', { state: { orderDetailList } });
   };
 
   return (
@@ -32,7 +31,7 @@ const OrderList = ({ orders }) => {
                 productName={item.productName}
                 productOption={item.productOption}
                 productCount={item.productCount}
-                productTotalSalePrice={formatPrice(item.productTotalSalePrice)}
+                productTotalSalePrice={item.productTotalSalePrice}
               >
                 <div className="productreview-div-review-content-btn-wrapper">
                   <button onClick={() => navigateToWrite(item)} className="productreview-btn-review-content-btn">작성하기</button>

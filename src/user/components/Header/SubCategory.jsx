@@ -1,15 +1,21 @@
 import './SubCategory.css'
 import {useState} from "react";
+import {useNavigate} from 'react-router-dom';
 
 const SubCategory = ({onMouseLeave}) =>{
+    const navigate = useNavigate();
     const [isHoverd, setIsHovered] = useState(true);
+
+    const navigateToCategory = () => {
+        navigate(`./category`);
+    }
 
     return(
     <div className='sub-sub-category-container' onMouseLeave={onMouseLeave}>
         <div className='sub-sub-category-contents'>
             <div className='sub-sub-category-contents-details'>
                 <div className='sub-sub-category-contents-details-style'>
-                    <button>여성 의류</button>
+                    <button onClick={navigateToCategory}>여성 의류</button>
                 </div>
                 <div className='sub-sub-category-contents-details-style'>
                     <button>남성 의류</button>

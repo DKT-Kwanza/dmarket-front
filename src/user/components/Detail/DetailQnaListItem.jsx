@@ -4,10 +4,7 @@ import { formatDate } from "../../../utils/Format";
 
 
 function DetailQnaListItem({onClick, title, createdAt, status, writer}) {
-    const formatDate = (datetime) => { // 날짜만 남기기
-        const date = new Date(datetime);
-        return date.toLocaleDateString('ko-KR', {year: 'numeric', month: '2-digit', day: '2-digit'});
-    };
+  
     return (
         <QnaArea onClick={onClick}>
             <Title>{title}</Title>

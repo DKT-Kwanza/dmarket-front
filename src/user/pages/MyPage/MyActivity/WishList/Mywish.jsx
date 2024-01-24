@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import WishItemList from '../../../../components/Wishlist/WishItemList';
 import CheckBox from '../../../../components/CheckBox/CheckBox';
-import './WishList.css';
+import './Mywish.css';
 
 function WishList() {
     const [wishLists, setWishLists] = useState([]);

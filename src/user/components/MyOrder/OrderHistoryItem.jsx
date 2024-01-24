@@ -8,7 +8,7 @@ const OrderHistoryItem = ({ orderDate, orderId, orderItems }) => {
     const navigate = useNavigate();
 
     const navigateToOrderHistoryDetail = () => {
-        navigate("./detail");
+        navigate("../orderInfoDetail");
     }
     return (
         <div className="orderHistory-order-list">
