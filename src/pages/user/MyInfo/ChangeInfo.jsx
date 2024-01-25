@@ -32,7 +32,7 @@ function ChangeInfo() {
     };
 
     const handleConfirm = () => {
-        // modal 의 확인 을 누르면 button 이 disabled
+        /* modal 의 확인 을 누르면 button 이 disabled */
         setIsConfirming(true);
     };
 

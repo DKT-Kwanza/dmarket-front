@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import SelectBox from "../../commmon/SelectBox";
 
-export default function OrderRefundTable({headers, rows}) {
+export default function OrderRefundTable({headers, rows, onApplyClick}) {
     return (
         <TableContainer component={Paper} sx={{mb: 2}}>
             <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -51,6 +51,7 @@ export default function OrderRefundTable({headers, rows}) {
                                     text={'100% 환불'}
                                     options={['100% 환불', '90% 환불']} />
                                 <Button
+                                    onClick={()=>{onApplyClick(row.orderId)}}
                                     sx={{ml: 2}}
                                     variant="outlined"
                                     href="#text-buttons">신청</Button>

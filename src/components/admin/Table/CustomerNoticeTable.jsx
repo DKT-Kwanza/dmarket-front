@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import SelectBox from "../../commmon/SelectBox";
 
-export default function CustomerNoticeTable({headers, rows}) {
+export default function CustomerNoticeTable({headers, rows, onDeleteClick}) {
     return (
         <TableContainer component={Paper} sx={{mb: 2}}>
             <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -32,6 +32,7 @@ export default function CustomerNoticeTable({headers, rows}) {
                             <TableCell>{row.noticeCreatedDate}</TableCell>
                             <TableCell>
                                 <Button
+                                    onClick={()=>{onDeleteClick(row.noticeId)}}
                                     variant="outlined"
                                     color="error"
                                     href="#text-buttons">삭제</Button>

@@ -3,16 +3,19 @@ import Header from "../../../components/admin/Header";
 import CustomerNoticeTable from "../../../components/admin/Table/CustomerNoticeTable";
 import {Paper, Box, Button} from "@mui/material";
 import {indigo} from '@mui/material/colors';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import * as React from "react";
+import ConfirmModal from "../../../components/commmon/ConfirmModal";
 
 const primary = indigo[50];
 const drawerWidth = 260;
 function CustomerNotice() {
     const [notice, setNotice] = useState([]);
     const tableHeader = ['제목', '작성자', '작성일', ''];
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [isConfirming, setIsConfirming] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,6 +29,19 @@ function CustomerNotice() {
         fetchData();
     }, []);
 
+    const openModalHandler = (row) => {
+        setIsOpen(true);
+    };
+
+    const closeModalHandler = () => {
+        setIsOpen(false);
+    };
+
+    const handleConfirm = () => {
+        /* modal 의 확인 을 누르면 button 이 disabled */
+        setIsConfirming(true);
+    };
+
     return (
         <Box>
             <LeftNav/>
@@ -37,7 +53,7 @@ function CustomerNotice() {
                 sx={{height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px`}}>
                 <Paper square elevation={2}
                        sx={{p: '20px 30px'}}>
-                    <CustomerNoticeTable headers={tableHeader} rows={notice} />
+                    <CustomerNoticeTable headers={tableHeader} rows={notice} onDeleteClick={openModalHandler} />
                     <Button
                         sx={{float: 'right'}}
                         variant="contained"
@@ -46,10 +62,13 @@ function CustomerNotice() {
                     </Button>
                 </Paper>
             </Box>
+            {isOpen && (
+                <ConfirmModal color={'#FF5D5D'} isOpen={isOpen} onClose={closeModalHandler} onConfirm={handleConfirm}>
+                    <div>해당 글을 삭제합니다.</div>
+                </ConfirmModal>
+            )}
         </Box>
-
     );
-
 }
 
 export default CustomerNotice;
