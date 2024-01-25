@@ -28,7 +28,9 @@ export default function TabMenu({menu, selectedTab, onTabChange}) {
                 value={value}
                 aria-label="Tabs where each tab needs to be selected manually">
                 {menu.map((object, index) => (
-                    <Tab key={index} label={`${object.title} ${object.count}`}/>
+                    object.count
+                        ? <Tab key={index} label={`${object.title} ${object.count}`}/>
+                        : <Tab key={index} label={`${object.title}`}/>
                 ))}
             </Tabs>
         </Box>
