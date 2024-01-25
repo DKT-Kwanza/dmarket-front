@@ -1,0 +1,53 @@
+{
+  "returnReqCount" : 5,
+  "returnColCount" : 2,
+  "colConfCount" : 2,
+  "returnConfcount" : 1,
+  "returnList" : [
+    {
+      "returnId" : 23421,
+      "returnReqDate" : "2024-01-06 09:48:00",
+      "orderId" : 1425,
+      "orderDate" : "2024-01-01 09:48:00",
+      "productId" : 12425,
+      "productBrand": "바비브라운",
+      "productName" : "바비브라운 파운데이션",
+      "productImg" : "https://amazonaws.com/image.png",
+      "optionName" : "색상",
+      "optionValue" : "RED",
+      "productCount" : 1,
+      "returnStatus" : "반품 준비중",
+      "returnContents" : "단순 변심"
+    },
+    {
+      "returnId" : 23421,
+      "returnReqDate" : "2024-01-06 09:48:00",
+      "orderId" : 1425,
+      "orderDate" : "2024-01-01 09:48:00",
+      "productId" : 12425,
+      "productBrand": "에스쁘아",
+      "productName" : "에스쁘아 파운데이션",
+      "productImg" : "https://amazonaws.com/image.png",
+      "optionName" : "색상",
+      "optionValue" : "BLUE",
+      "productCount" : 3,
+      "returnStatus" : "반품 준비중",
+      "returnContents" : "단순 변심"
+    },
+    {
+      "returnId" : 23421,
+      "returnReqDate" : "2024-01-06 09:48:00",
+      "orderId" : 1425,
+      "orderDate" : "2024-01-01 09:48:00",
+      "productId" : 12425,
+      "productBrand": "바비브라운",
+      "productName" : "바비브라운 파운데이션",
+      "productImg" : "https://amazonaws.com/image.png",
+      "optionName" : "색상",
+      "optionValue" : "RED",
+      "productCount" : 3,
+      "returnStatus" : "반품 준비중",
+      "returnContents" : "단순 변심"
+    }
+  ]
+}

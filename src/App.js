@@ -34,6 +34,7 @@ import OrderStatus from "./pages/admin/orderMng/OrderStatus";
 import OrderCancel from "./pages/admin/orderMng/OrderCancel";
 import Refund from "./pages/admin/orderMng/Refund";
 import CustomerNotice from "./pages/admin/customer/CustomerNotice";
+import ReturnStatus from "./pages/admin/orderMng/ReturnStatus";
 
 function App() {
     const location = useLocation();
@@ -108,6 +109,7 @@ function App() {
             <Route path='/admin/orderMng'>
                 <Route path='orderStatus' element={<OrderStatus/>} />
                 <Route path='cancel' element={<OrderCancel/>} />
+                <Route path='returnStatus' element={<ReturnStatus />} />
                 <Route path='refund' element={<Refund/>} />
             </Route>
 
