@@ -1,10 +1,9 @@
-import * as React from 'react';
 import {useState} from "react";
 import styled from "styled-components";
-import { ReactComponent as ChevronDown } from "../../../assets/icons/chevron-down.svg";
+import { ReactComponent as ChevronDown } from "../../assets/icons/chevron-down.svg";
 
 
-export default function SelectBox() {
+export default function SelectBox({text, options}) {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(''); // 선택된 옵션을 추적하기 위한 상태 추가
 
@@ -21,16 +20,18 @@ export default function SelectBox() {
         <Content>
             <DropDown onClick={toggleDropdown}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
-                    {selectedOption || '반품신청 사유를 선택하세요'}
+                    {selectedOption || text}
                     <Button>
                         <ChevronDown/>
                     </Button>
                 </div>
                 {isDropdownOpen && (
                     <Options>
-                        <Option onClick={() => handleOptionSelect('단순변심')}>단순변심</Option>
-                        <Option onClick={() => handleOptionSelect('제품하자')}>제품하자</Option>
-                        <Option onClick={() => handleOptionSelect('오배송')}>오배송</Option>
+                        {
+                            options.map((option, index)=>(
+                                <Option onClick={() => handleOptionSelect(option)}>{option}</Option>
+                            ))
+                        }
                     </Options>
                 )}
             </DropDown>
@@ -44,33 +45,27 @@ const Button = styled.div`
 `
 
 const Content = styled.div`
-  display: flex;
   justify-content: center;
   color: #000;
-  font-size: 16px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   align-items: center;
   display: flex;
-  margin-top: 17px;
-  margin-left: 3px;
 `
 
 const DropDown = styled.div`
   display: flex;
-  padding: 6px 12px;
+  padding: 3px 12px;
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
   color: #000;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
   line-height: normal;
   position: relative;
   cursor: pointer;
-  border: 1px solid #919191;
+  border: 1px solid #C6C6C6;
   background: #FFF;
 `
 
@@ -86,8 +81,9 @@ const Options = styled.div`
 `
 
 const Option = styled.div`
+  text-align: center;
   padding: 4px;
-  font-size: 16px;
+  font-size: 15px;
   color: #000;
   cursor: pointer;
   transition: background-color 0.3s;
