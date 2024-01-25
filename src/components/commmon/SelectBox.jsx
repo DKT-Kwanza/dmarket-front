@@ -45,7 +45,6 @@ const Button = styled.div`
 `
 
 const Content = styled.div`
-  justify-content: center;
   color: #000;
   font-size: 15px;
   font-style: normal;

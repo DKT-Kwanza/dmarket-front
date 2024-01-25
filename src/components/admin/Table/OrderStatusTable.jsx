@@ -5,6 +5,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import SelectBox from "../../commmon/SelectBox";
+import {formatDate} from "../../../utils/Format";
 
 export default function OrderStatusTable({headers, rows}) {
     return (
@@ -20,12 +22,10 @@ export default function OrderStatusTable({headers, rows}) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {/*데이터 확인용 로그*/}
-                    {console.log(rows)}
-                    {rows.map((row, index) => (
+                    {rows && rows.map((row, index) => (
                         <TableRow
                             key={index}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
                         >
                             <TableCell>{row.orderId}</TableCell>
                             <TableCell>{row.productId}</TableCell>
@@ -44,7 +44,10 @@ export default function OrderStatusTable({headers, rows}) {
                             </TableCell>
                             <TableCell>{row.optionValue}</TableCell>
                             <TableCell>{row.productCount}</TableCell>
-                            <TableCell>{row.orderDate}</TableCell>
+                            <TableCell>{formatDate(row.orderDate)}</TableCell>
+                            <TableCell>
+                                <SelectBox text={row.orderStatus} options={['결제완료', '배송준비', '배송중', '배송 완료']}/>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

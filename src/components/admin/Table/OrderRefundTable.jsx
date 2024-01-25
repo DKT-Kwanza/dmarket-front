@@ -46,9 +46,12 @@ export default function OrderRefundTable({headers, rows}) {
                             <TableCell>{row.productCount}</TableCell>
                             <TableCell>{row.returnContents}</TableCell>
                             <TableCell>
-                                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                                <SelectBox text={'100% 환불'} options={['100% 환불', '90% 환불']} />
+                                <div style={{display: 'flex', alignItems: 'center'}}>
+                                <SelectBox
+                                    text={'100% 환불'}
+                                    options={['100% 환불', '90% 환불']} />
                                 <Button
+                                    sx={{ml: 2}}
                                     variant="outlined"
                                     href="#text-buttons">신청</Button>
                                 </div>
