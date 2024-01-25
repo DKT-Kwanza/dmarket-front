@@ -2,18 +2,22 @@ import React, {useEffect, useState} from "react";
 import "./ChangePwd.css";
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
+import ConfirmModal from "../../../components/commmon/ConfirmModal";
 
 function ChangePwd() {
-    // 현재 비밀번호 변수
+    /* 현재 비밀번호 변수 */
     const [currentPassword, setCurrentPassword] = useState("");
-    // 새 비밀번호 변수
+    /* 새 비밀번호 변수 */
     const [newPassword, setNewPassword] = useState("");
-    // 새 비밀번호 확인 변수
+    /* 새 비밀번호 확인 변수 */
     const [confirmPassword, setConfirmPassword] = useState("");
     const [passwordsMatch, setPasswordsMatch] = useState(false);
 
+    const [isOpen, setIsOpen] = useState(false);
+    const [isConfirming, setIsConfirming] = useState(false);
+
     useEffect(() => {
-        // 비밀번호와 비밀번호 확인이 일치하는지 확인
+        /* 비밀번호와 비밀번호 확인이 일치하는지 확인 */
         setPasswordsMatch(newPassword === confirmPassword);
     }, [newPassword, confirmPassword]);
 
@@ -25,11 +29,18 @@ function ChangePwd() {
         setConfirmPassword(e.target.value);
     };
 
-    const handleCurrentPasswordChange = (e) => {
-        setCurrentPassword(e.target.value);
+    const openModalHandler = () => {
+        setIsOpen(true);
     };
 
+    const closeModalHandler = () => {
+        setIsOpen(false);
+    };
 
+    const handleConfirm = () => {
+        // modal 의 확인 을 누르면 button 이 disabled
+        setIsConfirming(true);
+    };
 
     return (
         <div className='changePwd'>
@@ -89,7 +100,7 @@ function ChangePwd() {
                                             <input type="password" value={confirmPassword}
                                                    onChange={handleConfirmPasswordChange}></input>
                                             {
-                                                passwordsMatch
+                                                newPassword && passwordsMatch
                                                     ? <span style={{color: 'blue'}}>비밀번호가 일치합니다.</span>
                                                     : <span style={{color: 'red'}}>비밀번호가 일치하지 않습니다.</span>
                                             }
@@ -100,11 +111,23 @@ function ChangePwd() {
                             </div>
                         </div>
                         <div className="changePwd-button-div">
-                            <button className="changePwd-button-conf" disabled={!passwordsMatch}>확인</button>
+                            <button
+                                className="changePwd-button-conf"
+                                disabled={!passwordsMatch}
+                                onClick={openModalHandler}>확인
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+            {isOpen && (
+                <ConfirmModal isOpen={isOpen} onClose={closeModalHandler} onConfirm={handleConfirm}>
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                        <div>비밀번호 변경이 완료되었습니다.</div>
+                        <div>자동으로 로그아웃됩니다.</div>
+                    </div>
+                </ConfirmModal>
+            )}
         </div>
     );
 }
