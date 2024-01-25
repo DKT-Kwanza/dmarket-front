@@ -33,6 +33,7 @@ import AdminList from "./pages/admin/adminlist/AdminList";
 import OrderStatus from "./pages/admin/orderMng/OrderStatus";
 import OrderCancel from "./pages/admin/orderMng/OrderCancel";
 import Refund from "./pages/admin/orderMng/Refund";
+import CustomerNotice from "./pages/admin/customer/CustomerNotice";
 
 function App() {
     const location = useLocation();
@@ -108,6 +109,10 @@ function App() {
                 <Route path='orderStatus' element={<OrderStatus/>} />
                 <Route path='cancel' element={<OrderCancel/>} />
                 <Route path='refund' element={<Refund/>} />
+            </Route>
+
+            <Route path='/admin/customer'>
+              <Route path='' element={<CustomerNotice />}/>
             </Route>
 
           </Routes>
