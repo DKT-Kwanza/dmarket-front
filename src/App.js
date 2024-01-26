@@ -48,7 +48,7 @@ import CustomerFAQ from "./pages/admin/Customer/CustomerFaqPage";
 
 function App() {
     const location = useLocation();
-    const hideHeaderFooter = (location.pathname === '/member/signinForm' || location.pathname.startsWith('/admin'));
+    const hideHeaderFooter = (location.pathname === '/member/signin/form' || location.pathname.startsWith('/memberMng') || location.pathname.startsWith('/productMng') || location.pathname.startsWith('/orderMng') || location.pathname.startsWith('/customerMng'));
 
   return (
     <div className="App">
