@@ -34,8 +34,7 @@ function CustomerCenterNotice() {
   };
 
   const navigateToFaQ = (menu) => {
-    const path = encodeURIComponent(menu); // 띄어쓰기 인코딩
-    navigate(`./faq/${path}`); // 각각의 메뉴 탭으로 바로 이동
+    navigate(`./faq/${encodeURIComponent(menu)}`); // 띄어쓰기 인코딩 후 각각의 메뉴 탭으로 바로 이동
   };
 
   return (

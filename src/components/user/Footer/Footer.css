@@ -2,6 +2,7 @@
 .footer {
     height: 340px;
     background-color: #fff;
+    width: 1920px;
 }
 
 
@@ -9,9 +10,7 @@
 .up-footer ,.down-footer{
     max-width: 1280px;
     margin: 0 auto;
-
     display: flex;
-    justify-content: space-between;
 
 }
 .up-footer{

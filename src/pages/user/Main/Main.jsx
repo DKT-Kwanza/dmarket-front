@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Main.css';
 import { FaAngleLeft, FaAngleRight, FaPause } from "react-icons/fa6";
 import MainProductItem from "../../../components/user/Item/MainProductItem";
+import ScrollToTopBtn from '../../../components/user/Common/Button/ScrollToTopBtn';
 
 
 const Main = () => { 
@@ -106,6 +107,7 @@ const Main = () => {
                 <div>
                     <button className='main-btn-button'>전체보기 {' > '}</button>  {/* 더보기 버튼 */}
                 </div>
+                <ScrollToTopBtn />
             </div>
         </div>
     )

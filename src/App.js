@@ -53,83 +53,85 @@ function App() {
   return (
     <div className="App">
         {!hideHeaderFooter && <Header />}
-          <Routes>
+        <div className="body">
+            <Routes>
 
-            <Route path='/member'>
-              <Route path='login' element={<Login />} />
-              <Route path='signin' element={<SignIn/>}/>
-              <Route path='signinForm' element={<SignInForm/>} />
-            </Route>
+              <Route path='/member'>
+                <Route path='login' element={<Login />} />
+                <Route path='signin' element={<SignIn/>}/>
+                <Route path='signinForm' element={<SignInForm/>} />
+              </Route>
 
-            <Route path='/'>
-              <Route path='' element={<Main/>} />
-              <Route path='category' element={<ProductList/>}/>
-              <Route path='search' element={<SearchList/>}/>
-            </Route>
+              <Route path='/'>
+                <Route path='' element={<Main/>} />
+                <Route path='category' element={<ProductList/>}/>
+                <Route path='search' element={<SearchList/>}/>
+              </Route>
 
-            <Route path='/product'>
-              <Route path='detail/:productId' element={<Detail/>}/>
-              <Route path='detail' element={<Detail/>}/>
-            </Route>
+              <Route path='/product'>
+                <Route path='detail/:productId' element={<Detail/>}/>
+                <Route path='detail' element={<Detail/>}/>
+              </Route>
 
-            <Route path='/order'>
-              <Route path='' element={<Payment/>}/>
-              <Route path='complete' element={<OrderComplete/>} />
-            </Route>
+              <Route path='/order'>
+                <Route path='' element={<Payment/>}/>
+                <Route path='complete' element={<OrderComplete/>} />
+              </Route>
 
-            <Route path='/mydkt'>
-              <Route path='orderInfo' element={<OrderHistory/>}/>
-              <Route path='orderInfoDetail' element={<OrderHistoryDetail/>} />
-              <Route path='mycart' element={<Cart />} />
-              <Route path='mywish' element={<Mywish/>} />
-              <Route path='review' element={<ReviewList/>} />
-              <Route path='writeReview' element={<WriteReview/>} />
-              <Route path='qna' element={<Qna />} />
-              <Route path='inquiry' element={<Inquiry />} />
-              <Route path='changeInfo' element={<ChangeInfo/>} />
-              <Route path='changePwd' element={<ChangePwd/>} />
-              <Route path='charge' element={<ChargeMileage/>} />
-              <Route path='mileageInfo' element={<HistoryMileage/>} />
-            </Route>
-            
-            <Route path='/customer'>
-              <Route path='' element={<CustomerCenterNotice/>} />
-              <Route path='faq/:tab' element={<CustomerCenterFAQ/>}/>
-              <Route path='writeInquiry' element={<CustomerCenterInquiry/>}/>
-            </Route>
+              <Route path='/mydkt'>
+                <Route path='orderInfo' element={<OrderHistory/>}/>
+                <Route path='orderInfoDetail' element={<OrderHistoryDetail/>} />
+                <Route path='mycart' element={<Cart />} />
+                <Route path='mywish' element={<Mywish/>} />
+                <Route path='review' element={<ReviewList/>} />
+                <Route path='writeReview' element={<WriteReview/>} />
+                <Route path='qna' element={<Qna />} />
+                <Route path='inquiry' element={<Inquiry />} />
+                <Route path='changeInfo' element={<ChangeInfo/>} />
+                <Route path='changePwd' element={<ChangePwd/>} />
+                <Route path='charge' element={<ChargeMileage/>} />
+                <Route path='mileageInfo' element={<HistoryMileage/>} />
+              </Route>
+              
+              <Route path='/customer'>
+                <Route path='' element={<CustomerCenterNotice/>} />
+                <Route path='faq/:tab' element={<CustomerCenterFAQ/>}/>
+                <Route path='writeInquiry' element={<CustomerCenterInquiry/>}/>
+              </Route>
 
-            <Route path='/admin/admin'>
-                <Route path='adminlist' element={<AdminList />} />
-            </Route>
-            <Route path='/admin/orderMng'>
-                <Route path='orderStatus' element={<OrderStatus/>} />
-                <Route path='cancel' element={<OrderCancel/>} />
-                <Route path='returnStatus' element={<ReturnStatus />} />
-                <Route path='refund' element={<Refund/>} />
-            </Route>
+              <Route path='/admin/admin'>
+                  <Route path='adminlist' element={<AdminList />} />
+              </Route>
+              <Route path='/admin/orderMng'>
+                  <Route path='orderStatus' element={<OrderStatus/>} />
+                  <Route path='cancel' element={<OrderCancel/>} />
+                  <Route path='returnStatus' element={<ReturnStatus />} />
+                  <Route path='refund' element={<Refund/>} />
+              </Route>
 
-            <Route path='/admin/customer'>
-              <Route path='' element={<CustomerNotice />}/>
-              <Route path='inquiry' element={<CustomerInquiry />}/>
-              <Route path='faq' element={<CustomerFAQ />} />
-            </Route>
+              <Route path='/admin/customer'>
+                <Route path='' element={<CustomerNotice />}/>
+                <Route path='inquiry' element={<CustomerInquiry />}/>
+                <Route path='faq' element={<CustomerFAQ />} />
+              </Route>
 
-            <Route path='/admin/userMng'>
-                <Route path='memberlist' element={<MemberList />} />
-                <Route path='register' element={<RegisterMember />} />
-                <Route path='mileage' element={<MemberMileage />} />
-            </Route>
+              <Route path='/admin/userMng'>
+                  <Route path='memberlist' element={<MemberList />} />
+                  <Route path='register' element={<RegisterMember />} />
+                  <Route path='mileage' element={<MemberMileage />} />
+              </Route>
 
-            <Route path='/admin/productMng'>
-                <Route path='product' element={<Product />} />
-                <Route path='add' element={<AddProduct />} />
-                <Route path='edit' element={<EditProduct />} />
-                <Route path='qna' element={<ProductQna />} />
-                <Route path='optionquantity' element={<OptionQuantity />} />
-                <Route path='review' element={<ProductReview />} />
-            </Route>
+              <Route path='/admin/productMng'>
+                  <Route path='product' element={<Product />} />
+                  <Route path='add' element={<AddProduct />} />
+                  <Route path='edit' element={<EditProduct />} />
+                  <Route path='qna' element={<ProductQna />} />
+                  <Route path='optionquantity' element={<OptionQuantity />} />
+                  <Route path='review' element={<ProductReview />} />
+              </Route>
 
-          </Routes>
+            </Routes>
+          </div>
         {!hideHeaderFooter && <Footer />}
     </div>
   );

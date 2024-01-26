@@ -4,6 +4,7 @@ import './ProductPage.css'
 import ProductItem from '../../../components/user/Item/ProductItem';
 import Filter from '../../../components/user/Common/Filter/Filter';
 import Dropdown from '../../../components/user/Common/Select/Dropdown';
+import ScrollToTopBtn from "../../../components/user/Common/Button/ScrollToTopBtn";
 
 function ProductList(){
     const [products, setProducts] = useState([]);
@@ -43,6 +44,7 @@ function ProductList(){
                     />
                 ))}
             </div>
+            <ScrollToTopBtn />
         </div>
     )
 }
