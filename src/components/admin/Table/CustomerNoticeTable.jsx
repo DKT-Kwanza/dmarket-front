@@ -6,7 +6,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import SelectBox from "../../commmon/SelectBox";
+import SelectBox from "../../commmon/SelectBox/SelectBox";
 
 export default function CustomerNoticeTable({headers, rows, onDeleteClick}) {
     return (

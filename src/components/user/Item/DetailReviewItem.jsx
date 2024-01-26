@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import StarRating from "../Common/StarRating";
+import StarRating from "../Common/Rating/StarRating";
 
 function DetailReviewItem({rating, writer, reviewDate, option, imageSrc, content}) {
     return (

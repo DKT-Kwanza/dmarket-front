@@ -5,7 +5,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import SelectBox from "../../commmon/SelectBox";
+import SelectBox from "../../commmon/SelectBox/SelectBox";
 import {formatDate} from "../../../utils/Format";
 
 export default function ReturnStatusTable({headers, rows}) {

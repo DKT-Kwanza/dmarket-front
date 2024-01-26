@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import "./ChangePwd.css";
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import ConfirmModal from "../../../components/commmon/ConfirmModal";
+import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 
 function ChangePwd() {
     /* 현재 비밀번호 변수 */
