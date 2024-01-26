@@ -30,6 +30,13 @@ import HistoryMileage from "./pages/user/Mileage/HistoryMileage";
 
 import Product from "./pages/admin/product/Product";
 import AdminList from "./pages/admin/adminlist/AdminList";
+import OrderStatus from "./pages/admin/orderMng/OrderStatus";
+import OrderCancel from "./pages/admin/orderMng/OrderCancel";
+import Refund from "./pages/admin/orderMng/Refund";
+import CustomerNotice from "./pages/admin/customer/CustomerNotice";
+import ReturnStatus from "./pages/admin/orderMng/ReturnStatus";
+import CustomerInquiry from "./pages/admin/customer/CustomerInquiry";
+import CustomerFAQ from "./pages/admin/customer/CustomerFAQ";
 
 function App() {
     const location = useLocation();
@@ -56,7 +63,7 @@ function App() {
               <Route path='productDetail/:productId' element={<Detail/>}/>
               <Route path='detail' element={<Detail/>}/>
             </Route>
-            
+
             <Route path='/order'>
               <Route path='orderPage' element={<Payment/>}/>
               <Route path='complete' element={<OrderComplete/>} />
@@ -76,7 +83,7 @@ function App() {
                 <Route path='qna' element={<Qna />} />
                 <Route path='inquiry' element={<Inquiry />} />
               </Route>
-            
+
               <Route path='memberMng'>
                 <Route path='changeInfo' element={<ChangeInfo/>} />
                 <Route path='changePwd' element={<ChangePwd/>} />
@@ -91,7 +98,7 @@ function App() {
 
             <Route path='/customer'>
               <Route path='' element={<CustomerCenterNotice/>} />
-              <Route path='faq/:tab' element={<CustomerCenterFAQ/>}/> 
+              <Route path='faq/:tab' element={<CustomerCenterFAQ/>}/>
               <Route path='inquiry/write' element={<CustomerCenterInquiry/>}/>
             </Route>
 
@@ -100,6 +107,18 @@ function App() {
             </Route>
             <Route path='/admin/admin'>
                 <Route path='adminlist' element={<AdminList />} />
+            </Route>
+            <Route path='/admin/orderMng'>
+                <Route path='orderStatus' element={<OrderStatus/>} />
+                <Route path='cancel' element={<OrderCancel/>} />
+                <Route path='returnStatus' element={<ReturnStatus />} />
+                <Route path='refund' element={<Refund/>} />
+            </Route>
+
+            <Route path='/admin/customer'>
+              <Route path='' element={<CustomerNotice />}/>
+              <Route path='inquiry' element={<CustomerInquiry />}/>
+              <Route path='faq' element={<CustomerFAQ />} />
             </Route>
 
           </Routes>

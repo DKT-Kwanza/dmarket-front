@@ -1,0 +1,16 @@
+[
+  {
+    "faqId" : 23,
+    "faqTitle" : "마일리지가 모자라요",
+    "faqContents" : "마일리지가 모자란데 어떻게해야돼요?",
+    "faqCreatedDate" : "2024-01-26 08:24:00",
+    "faqType" : "마일리지"
+  },
+  {
+    "faqId" : 23,
+    "faqTitle" : "마일리지가 모자라요",
+    "faqContents" : "마일리지가 모자란데 어떻게해야돼요?",
+    "faqCreatedDate" : "2024-01-26 08:24:00",
+    "faqType" : "마일리지"
+  }
+]

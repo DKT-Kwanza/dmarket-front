@@ -1,0 +1,78 @@
+{
+  "confPayCount": 2,
+  "preShipCount": 1,
+  "inTransitCount": 1,
+  "delivCompCount": 1,
+  "orderList": [
+    {
+      "orderId": 3,
+      "orderDate": "2024-01-08 09:48:00",
+      "detailId": 5,
+      "productId": 6,
+      "optionId": "2",
+      "optionName": "21호",
+      "optionValue": "사이즈",
+      "productBrand": "바비브라운",
+      "productName": "바비브라운 파운데이션",
+      "productImg": "https://amazonaws.com/image.png",
+      "productCount": 4,
+      "orderStatus": "결제완료"
+    },
+    {
+      "orderId": 5,
+      "orderDate": "2024-01-08 09:48:00",
+      "detailId": 5,
+      "productId": 6,
+      "optionId": "2",
+      "optionName": "21호",
+      "optionValue": "사이즈",
+      "productBrand": "에스쁘아",
+      "productName": "에스쁘아 파운데이션",
+      "productImg": "https://amazonaws.com/image.png",
+      "productCount": 2,
+      "orderStatus": "결제완료"
+    },
+    {
+      "orderId": 6,
+      "orderDate": "2024-01-08 09:48:00",
+      "detailId": 5,
+      "productId": 6,
+      "optionId": "2",
+      "optionName": "21호",
+      "optionValue": "사이즈",
+      "productBrand": "바비브라운",
+      "productName": "바비브라운 파운데이션",
+      "productImg": "https://amazonaws.com/image.png",
+      "productCount": 4,
+      "orderStatus": "배송준비 중"
+    },
+    {
+      "orderId": 6,
+      "orderDate": "2024-01-08 09:48:00",
+      "detailId": 5,
+      "productId": 6,
+      "optionId": "2",
+      "optionName": "21호",
+      "optionValue": "사이즈",
+      "productBrand": "바비브라운",
+      "productName": "바비브라운 파운데이션",
+      "productImg": "https://amazonaws.com/image.png",
+      "productCount": 4,
+      "orderStatus": "배송 중"
+    },
+    {
+      "orderId": 6,
+      "orderDate": "2024-01-08 09:48:00",
+      "detailId": 5,
+      "productId": 6,
+      "optionId": "2",
+      "optionName": "21호",
+      "optionValue": "사이즈",
+      "productBrand": "바비브라운",
+      "productName": "바비브라운 파운데이션",
+      "productImg": "https://amazonaws.com/image.png",
+      "productCount": 4,
+      "orderStatus": "배송 완료"
+    }
+  ]
+}
