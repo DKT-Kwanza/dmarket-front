@@ -15,7 +15,7 @@
             "optionId": 29834,
             "productOption": "21호",
             "productCount": 1,
-            "productImg": "https://placehold.co/100x100", 
+            "productImg": "//placehold.co/100x100", 
             "productTotalPrice": 28000,
             "productTotalSalePrice": 25000
         },
@@ -26,7 +26,7 @@
             "optionId": 29834,
             "productOption": "BLACK",
             "productCount": 2,
-            "productImg": "https://placehold.co/100x100", 
+            "productImg": "//placehold.co/100x100", 
             "productTotalPrice": 300000,
             "productTotalSalePrice": 291000
         }

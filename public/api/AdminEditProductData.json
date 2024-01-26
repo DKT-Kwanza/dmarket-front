@@ -1,0 +1,22 @@
+{  
+    "productBrand": "바비브라운",
+    "productName": "바비브라운 파운데이션",
+    "cateId": "메이크업",
+    "productPrice": 125000,
+    "productSalePrice": 120000,
+    "productDes" : "무결점 커버 어쩌구 상세",
+    "optionList" : [
+        {
+            "optionName" : "호수",
+            "optionValue" : "21호",
+            "optionQuantity" : 20
+        },
+        {
+            "optionName" : "호수",
+            "optionValue" : "22호",
+            "optionQuantity" : 10
+        }
+    ],
+    "imgList" : ["https://placehold.co/130x130","https://placehold.co/100x100","https://placehold.co/130x130","https://placehold.co/100x100","https://placehold.co/130x130"]
+
+}

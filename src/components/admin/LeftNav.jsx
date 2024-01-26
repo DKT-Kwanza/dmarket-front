@@ -9,13 +9,32 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import {createTheme} from '@mui/material/styles';
-import {useState} from "react";
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const drawerWidth = 260;
 
 export const LeftNav = () => {
 
     const [openIndex, setOpenIndex] = useState(null);
+    const navigate = useNavigate();
+    const location = useLocation(); // 현재 페이지의 위치
+    const [activePage, setActivePage] = useState('');
+
+    useEffect(() => {
+        const path = location.pathname.split('/admin/')[1];
+        setActivePage(path);
+    }, [location]);
+
+    /* 해당 페이지일 경우 해당 버튼 black */
+    const getButtonStyle = (buttonPath) => {
+        return activePage === buttonPath ? { color: 'black' } : { color: '#A9AFB3' };
+    }
+
+    // onClick 발생 시 각각의 page 로 navigate
+    const navigateToPage = (path) => {
+        navigate(`/admin/${path}`);
+    }
 
     // 메뉴를 클릭할 때 호출되는 함수
     const handleClick = (index) => {
@@ -26,7 +45,7 @@ export const LeftNav = () => {
     const MENU_LIST = [
         {title: '관리자 관리', list: ['관리자 목록']},
         {title: '사용자 관리', list: ['사용자 목록', '사용자 마일리지']},
-        {title: '상품 관리', list: ['상품', '상품 Q&A', '상품리뷰', '재고']},
+        {title: '상품 관리', list: ['상품', '상품 Q&A', '상품리뷰', '재고/입고']},
         {title: '주문/배송 관리', list: ['배송상태 관리', '취소 요청', '반품 요청', '환불 요청']},
         {title: '고객센터 관리', list: ['문의 게시판', '공지사항', 'FAQ']},
     ];
@@ -86,6 +105,7 @@ export const LeftNav = () => {
                                             object.list.map((list, listIndex) => (
                                                 <ListItemButton
                                                     key={listIndex}
+                                                    // onClick={navigateToPage('productMng/product')}
                                                     sx={{
                                                         '&:hover, &:focus': {color: 'text.primary'}
                                                     }}>

@@ -1,0 +1,52 @@
+[
+  {
+    "productId": 32542,
+    "productBrand": "바비브라운",
+    "productName": "바비브라운 파운데이션",
+    "productSalePrice": "25,000",
+    "productCategory": "화장품",
+    "optionList" : [
+      {
+        "optionId" : "12",
+        "optionName" : "호수",
+        "optionValue" : "21호",
+        "optionQuantity" : 20,
+        "optionStatus" : "판매중"
+      },
+      {
+      "optionId" : "13",
+      "optionName" : "호수",
+      "optionValue" : "22호",
+      "optionQuantity" : 100,
+      "optionStatus" : "판매중"
+      }
+    ],
+    "productRegistDate":"2023-01-12 09:00:00",
+    "productImg" : ["https://placehold.co/100x100","https://placehold.co/100x100","https://placehold.co/100x100"]
+  },
+  {
+    "productId": 42542,
+    "productBrand": "나이키",
+    "productName": "나이키 후드티",
+    "productSalePrice": "125,000",
+    "productCategory": "화장품",
+    "optionList" : [
+      {
+        "optionId" : "22",
+        "optionName" : "색상",
+        "optionValue" : "black",
+        "optionQuantity" : 10,
+        "optionStatus" : "판매중"
+      },
+      {
+      "optionId" : "23",
+      "optionName" : "색상",
+      "optionValue" : "white",
+      "optionQuantity" : 0,
+      "optionStatus" : "품절"
+      }
+    ],
+    "productRegistDate":"2023-01-12 09:00:00",
+    "productImg" : ["https://placehold.co/100x100","https://placehold.co/100x100","https://placehold.co/100x100"]
+  }
+]

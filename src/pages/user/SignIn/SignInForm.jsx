@@ -1,29 +1,70 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import CheckBox from "../../../components/user/Common/CheckBox";
 import './SignInForm.css';
 
 function SignInForm() {
     const navigate = useNavigate();
-    const [phoneNumber, setPhoneNumber] = React.useState("");
-
-    /* 핸드폰 번호 입력 시 - 추가 */
-    const handlePhoneChange = (event) => {
-        const input = event.target.value.replace(/\D/g, '');
-        const formattedPhoneNumber = input.replace(/(\d{3})(\d{0,4})(\d{0,4})/, (match, p1, p2, p3) => {
-            if (p3) {
-                return `${p1}-${p2}-${p3}`;
-            } else if (p2) {
-                return `${p1}-${p2}`;
-            } else {
-                return p1;
-            }
-        });
-        setPhoneNumber(formattedPhoneNumber);
+    const [state, setState] = useState({
+        inputId: '',
+        inputPw: '',
+        inputName: '',
+        phoneNumber: '',
+        dktNum: '',
+        joinDate: '',
+        postalCode: '',
+        address: '',
+        detailedAddress: ''
+    });
+    
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+    
+        if (name === 'phoneNumber') {
+            const input = value.replace(/\D/g, '');
+            const formattedPhoneNumber = input.replace(/(\d{3})(\d{0,4})(\d{0,4})/, (match, p1, p2, p3) => {
+                if (p3) {
+                    return `${p1}-${p2}-${p3}`;
+                } else if (p2) {
+                    return `${p1}-${p2}`;
+                } else {
+                    return p1;
+                }
+            });
+            setState({ ...state, [name]: formattedPhoneNumber });
+        } else {
+            setState({ ...state, [name]: value });
+        }
     };
+    
 
-    const navigateToMain = () => {
-        navigate("../main");
+    const handleSignUpSubmit = () => {
+        console.log("click signup");
+        axios
+            .post(`${process.env.REACT_APP_MEMBER_API_KEY}/signup`,{
+                userEmail: state.inputId,
+                userPassword: state.inputPw,
+                userDktNum: state.dktNum,
+                userName: state.inputName,
+                userJoinDate: state.joinDate,
+                userPhoneNum: state.phoneNumber,
+                userPostalCode: state.postalCode,
+                userAddress: state.address,
+                userDetailedAddress: state.detailedAddress
+            })
+            .then((res)=> {
+                if(res.data.success){
+                    alert("회원가입에 성공했습니다!");
+                    sessionStorage.setItem('previousPage', 'signup');
+                    navigate("../main",{replace : true});    // login으로 navigate 이후 뒤로가기 불가
+                } else {
+                    alert("회원가입에 실패했습니다!")
+                }
+            })
+            .catch(function(error){
+                console.log(error);
+            })
     }
 
     return (
@@ -43,7 +84,9 @@ function SignInForm() {
                             <input
                                 type='email'
                                 id='email'
-                                name='email'
+                                name='inputId'
+                                value={state.inputId} 
+                                onChange={handleInputChange}
                                 required
                                 className='signInForm-input'
                             />
@@ -53,7 +96,9 @@ function SignInForm() {
                             <input
                                 type='password'
                                 id='password'
-                                name='password'
+                                name='inputPw'
+                                value={state.inputPw}
+                                onChange={handleInputChange}
                                 required
                                 className='signInForm-input'
                                 placeholder='비밀번호를 입력하세요.'
@@ -78,7 +123,9 @@ function SignInForm() {
                             <input
                                 type='text'
                                 id='name'
-                                name='name'
+                                name='inputName'
+                                value={state.inputName}
+                                onChange={handleInputChange}
                                 required
                                 className='signInForm-input'
                                 placeholder='이름을 입력하세요.'
@@ -88,13 +135,13 @@ function SignInForm() {
                             <label htmlFor='name'>핸드폰 번호</label>
                             <input
                                 type='tel'
-                                id='name'
-                                name='name'
+                                id='tel'
+                                name='phoneNumber'
                                 required
                                 className='signInForm-input'
                                 placeholder='핸드폰 번호를 입력하세요.'
-                                value={phoneNumber}
-                                onChange={handlePhoneChange}
+                                value={state.phoneNumber}
+                                onChange={handleInputChange}
                             />
                         </div>
                         <div className='signInForm-form'>
@@ -102,10 +149,12 @@ function SignInForm() {
                             <input
                                 type='text'
                                 id='employeeNumber'
-                                name='employeeNumber'
+                                name='dktNum'
                                 required
                                 className='signInForm-input'
                                 placeholder='사원번호를 입력하세요.'
+                                value={state.dktNum}
+                                onChange={handleInputChange}
                             />
                         </div>
                         <div className='signInForm-form'>
@@ -113,10 +162,12 @@ function SignInForm() {
                             <input
                                 type='date'
                                 id='employeeDate'
-                                name='employeeDate'
+                                name='joinDate'
                                 required
                                 className='signInForm-input'
                                 placeholder='입사일을 입력하세요.'
+                                value={state.joinDate}
+                                onChange={handleInputChange}
                             />
                         </div>
                         <div className='signInForm-form'>
@@ -124,10 +175,12 @@ function SignInForm() {
                             <input
                                 type='text'
                                 id='zipCode'
-                                name='zipCode'
+                                name='postalCode'
                                 required
                                 className='signInForm-input'
                                 placeholder='우편번호'
+                                value={state.postalCode}
+                                onChange={handleInputChange}
                             />
                         </div>
                         <div className='signInForm-form'>
@@ -139,6 +192,8 @@ function SignInForm() {
                                 required
                                 className='signInForm-input'
                                 placeholder='기본주소'
+                                value={state.address}
+                                onChange={handleInputChange}
                             />
                         </div>
                         <div className='signInForm-form'>
@@ -146,10 +201,12 @@ function SignInForm() {
                             <input
                                 type='text'
                                 id='addressDetail'
-                                name='addressDetail'
+                                name='detailedAddress'
                                 required
                                 className='signInForm-input'
                                 placeholder='상세주소를 입력하세요'
+                                value={state.detailedAddress}
+                                onChange={handleInputChange}
                             />
                         </div>
                         <div className='signInForm-agreement'>
@@ -173,7 +230,7 @@ function SignInForm() {
                             </div>
                         </div>
                         <div className='signInForm-btn-container'>
-                            <button type='submit' onClick={navigateToMain} className='signInForm-btn'>회원가입</button>
+                            <button type='submit' onClick={handleSignUpSubmit} className='signInForm-btn'>회원가입</button>
                         </div>
                     </form>
                 </div>

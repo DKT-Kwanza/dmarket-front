@@ -1,0 +1,20 @@
+[
+    {
+        "qnaId": 123,
+        "productName": "베이직 울 자켓 J101401045048",
+        "qnaTitle": "상품의 정확한 크기가 어떻게 되나요?",
+        "qnaWriter": "신짱구",
+        "qnaCreatedDate": "2024-01-11 14:30:00",
+        "qnaStatus": "답변 완료",
+        "qnaIsSecret": true
+    },
+    {
+        "qnaId": 124,
+        "productName": "YourProduct",
+        "qnaTitle": "문의드립니다",
+        "qnaWriter": "신짱아",
+        "qnaCreatedDate": "2024-01-15 14:30:00",
+        "qnaStatus": "답변 대기",
+        "qnaIsSecret": false
+    }
+]

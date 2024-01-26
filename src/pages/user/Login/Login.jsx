@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import CheckBox from "../../../components/user/Common/CheckBox";
 import './Login.css';
@@ -6,14 +8,36 @@ import logo from '../../../assets/images/logo.png'
 import chevronRight from '../../../assets/icons/chevron-right.svg'
 
 function Login() {
+  const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [passwordValid, setPasswordValid] = useState(true);
+  const [inputId,setInputId] = useState("");
+  const [inputPw,setInputPw] = useState("");
 
-  const handlePasswordChange = (e) => { // 입력한 비밀번호와 임시 비밀번호 "1234"와 비교
-    const newPassword = e.target.value;
-    setPassword(newPassword);
-    setPasswordValid(newPassword === "1234");
+  const formData = new FormData();
+
+  formData.append("email", inputId);
+  formData.append("password", inputPw);
+
+  const handleInputIdChange = (e) => {
+    setInputId(e.target.value);
   };
+    
+  const handlePasswordChange = (e) => { 
+    setInputPw(e.target.value);
+  };
+
+  const onClickLogin = () => {
+    axios
+        .post('http://172.16.210.136:8080/api/users/login', formData)
+        .then(res =>{
+            console.log(res.data);
+        })
+        .catch(error => {
+            console.error("Login failed:", error);
+            alert("로그인 정보를 확인해주세요");
+        });
+    };
 
   return (
     <div className="login-container">
@@ -22,9 +46,11 @@ function Login() {
           <img src={logo} alt="Logo" className="login-logo" />
           <div className='login-form'>
             <input
-              type="text"
+              type="email"
               className="login-id-input"
+              value={inputId}
               placeholder="아이디를 입력하세요"
+              onChange={handleInputIdChange}
             />
             <div className="login-possible">
               *사내 이메일로 로그인이 가능합니다.
@@ -33,26 +59,26 @@ function Login() {
               type="password"
               className={`login-pw-input ${!passwordValid ? 'login-pw-input-error' : ''}`}
               placeholder="비밀번호를 입력하세요"
-              value={password}
+              value={inputPw}
               onChange={handlePasswordChange}
             />
-            {!passwordValid && (
+            {/* {!passwordValid && (
               <div className="password-error-msg">
                 비밀번호가 일치하지 않습니다
               </div>
-            )}
+            )} */}
             <div className="login-maintain">
               <CheckBox />
               <label className='login-checkbox-label'>
                 로그인 상태 유지
               </label>
             </div>
-            <button type="submit" className="login-btn">
+            <button type="submit" className="login-btn" onClick={onClickLogin}>
               로그인
             </button>
             <div className="login-signup">
               <span>회원이 아니신가요?</span>
-              <Link to="/signin" className="login-signup-btn">
+              <Link to="../signin" className="login-signup-btn">
                 회원가입<img src={chevronRight} alt="Logo" className="login-chevronRight" />
               </Link>
             </div>
