@@ -8,7 +8,6 @@ import { Box, Paper, TextField, Button, Chip, Table, TableBody, TableCell, Table
 import Stack from '@mui/material/Stack';
 import { indigo } from '@mui/material/colors';
 import ImageIcon from '@mui/icons-material/Image';
-import Typography from '@mui/material/Typography';
 import Write from "../../../components/admin/Common/Input/Write";
 
 const primary = indigo[50];

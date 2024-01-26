@@ -134,7 +134,7 @@ function App() {
                 </Route>
 
                 <Route path='/customerMng'>
-                    <Route path='' element={<CustomerNotice/>}/>
+                    <Route path='notice' element={<CustomerNotice/>}/>
                     <Route path='inquiry' element={<CustomerInquiry/>}/>
                     <Route path='faq' element={<CustomerFAQ/>}/>
                 </Route>

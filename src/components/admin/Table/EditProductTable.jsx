@@ -14,7 +14,7 @@ export default function EditProductTable({headers, rows}) {
     const navigate = useNavigate();
 
     const navigateToEdit = () => {
-        navigate("../edit")
+        navigate("./edit")
     }
 
     const handleDeleteProduct = (productId) => {
