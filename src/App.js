@@ -36,6 +36,7 @@ import Refund from "./pages/admin/orderMng/Refund";
 import CustomerNotice from "./pages/admin/customer/CustomerNotice";
 import ReturnStatus from "./pages/admin/orderMng/ReturnStatus";
 import CustomerInquiry from "./pages/admin/customer/CustomerInquiry";
+import CustomerFAQ from "./pages/admin/customer/CustomerFAQ";
 
 function App() {
     const location = useLocation();
@@ -117,6 +118,7 @@ function App() {
             <Route path='/admin/customer'>
               <Route path='' element={<CustomerNotice />}/>
               <Route path='inquiry' element={<CustomerInquiry />}/>
+              <Route path='faq' element={<CustomerFAQ />} />
             </Route>
 
           </Routes>
