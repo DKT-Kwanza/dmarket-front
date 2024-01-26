@@ -32,7 +32,7 @@ function MemberList() {
     }, []);
 
     const navigateToRegister = () => {
-        navigate('../register');
+        navigate('../addUser');
     }
 
 

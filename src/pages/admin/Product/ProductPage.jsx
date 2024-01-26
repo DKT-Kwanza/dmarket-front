@@ -59,7 +59,7 @@ function Product() {
     
     
     const navigateToAdd = () => {
-        navigate("../add")
+        navigate("./add")
     }
 
     return (
