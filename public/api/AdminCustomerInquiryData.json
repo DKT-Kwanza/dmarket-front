@@ -1,0 +1,32 @@
+[
+  {
+    "inquiryId" : 23,
+    "inquiryTitle" : "마일리지가 모자라요",
+    "inquiryContents" : "마일리지가 모자란데 어떻게해야돼요?",
+    "inquiryWriter": "봉미선",
+    "inquiryType" : "마일리지",
+    "inquiryStatus" : false,
+    "inquiryImg" : "www.amazon.s3/asd.png",
+    "inquiryCreateDate" : "2024-01-07 13:48:00"
+  },
+  {
+    "inquiryId" : 23,
+    "inquiryTitle" : "마일리지가 모자라요",
+    "inquiryContents" : "마일리지가 모자란데 어떻게해야돼요?",
+    "inquiryWriter": "신짱구",
+    "inquiryType" : "마일리지",
+    "inquiryStatus" : true,
+    "inquiryImg" : "www.amazon.s3/asd.png",
+    "inquiryCreateDate" : "2024-01-07 13:48:00"
+  },
+  {
+    "inquiryId" : 23,
+    "inquiryTitle" : "마일리지가 모자라요",
+    "inquiryContents" : "마일리지가 모자란데 어떻게해야돼요?",
+    "inquiryWriter": "신짱아",
+    "inquiryType" : "마일리지",
+    "inquiryStatus" : false,
+    "inquiryImg" : "www.amazon.s3/asd.png",
+    "inquiryCreateDate" : "2024-01-07 13:48:00"
+  }
+]

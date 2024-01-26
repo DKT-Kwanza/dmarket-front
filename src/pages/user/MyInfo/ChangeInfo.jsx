@@ -3,9 +3,13 @@ import axios from "axios";
 import './ChangeInfo.css';
 import MyPageSubHeader from '../../../components/user/Header/MyPageSubHeader';
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
+import ConfirmModal from "../../../components/commmon/ConfirmModal";
 
 function ChangeInfo() {
     const [userInfo, setUserInfo] = useState({});
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [isConfirming, setIsConfirming] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,6 +22,19 @@ function ChangeInfo() {
         };
         fetchData();
     }, []);
+
+    const openModalHandler = () => {
+        setIsOpen(true);
+    };
+
+    const closeModalHandler = () => {
+        setIsOpen(false);
+    };
+
+    const handleConfirm = () => {
+        /* modal 의 확인 을 누르면 button 이 disabled */
+        setIsConfirming(true);
+    };
 
     return (
         <div className='InfoChange'>
@@ -90,12 +107,19 @@ function ChangeInfo() {
                                 <div className="InfoChange-address-essential">나머지주소</div>
                             </div>
                             <div className='InfoChange-btn-container'>
-                                <button type='submit' className='InfoChange-btn'>수정</button>
+                                <button
+                                    type='submit' className='InfoChange-btn'
+                                    onClick={openModalHandler}>수정</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {isOpen && (
+                <ConfirmModal isOpen={isOpen} onClose={closeModalHandler} onConfirm={handleConfirm}>
+                    <div>배송지가 변경되었습니다.</div>
+                </ConfirmModal>
+            )}
         </div>
     );
 }

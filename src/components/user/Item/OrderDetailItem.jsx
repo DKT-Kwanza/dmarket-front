@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import GreyBtn from '../Common/GreyBtn';
 import styled from 'styled-components';
 import ConfirmCancelModal from '../Common/ConfirmCancelModal'
-import SelectBox from "../Common/SelectBox";
+import SelectBox from "../../commmon/SelectBox";
 
 function OrderDetailItem({img, brand, name, option, count, price, status}) {
     const [statusText, setStatusText] = useState("");
@@ -75,7 +75,7 @@ function OrderDetailItem({img, brand, name, option, count, price, status}) {
                             :
                             <div style={{display: 'flex', flexDirection: 'column'}}>
                                 <div>해당 상품을 반품신청 합니다.</div>
-                                <SelectBox />
+                                <SelectBox text={'반품신청 사유를 선택하세요'} options={['단순변심', '제품하자', '오배송']}/>
                             </div>
                     }
                 </ConfirmCancelModal>
