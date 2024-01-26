@@ -18,7 +18,7 @@ const categories = ['여성 의류', '남성 의류', '유아 의류', '신발',
                     '모바일/태블릿', '영상가전', '음향가전', '주방가전', '생활가전', '휘트니스', '등산/수영', 
                     '구기', '골프', '캠핑', '자전거/기타레저'];
                     
-function Product() {
+function AddProduct () {
     const [productDes, setProductDes] = useState("");
     const [images, setImages] = useState(Array(5).fill(null));
     const [category, setCategory] = useState('');
@@ -260,23 +260,19 @@ function Product() {
                         }}
                         />
                     </Box>
-                    <Button
-                        sx={{
-                            bgcolor: '#3377FF',
-                            color: 'white',
-                            mt: 2 
-                        }}
-                        variant="contained"
-                        onClick={() => {
-                        }}
-                    >
-                        등록
-                    </Button>
                 </Box>
+                <Button
+                    sx={{ float: 'right'}}
+                    variant="outlined"
+                    onClick={() => {
+                    }}
+                >
+                    등록
+                </Button>
             </Paper>
         </Box>
     </Box>
     );
 }
                             
-export default Product;
+export default AddProduct;

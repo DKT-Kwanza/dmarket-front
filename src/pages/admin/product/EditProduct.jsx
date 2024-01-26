@@ -19,7 +19,7 @@ const categories = ['여성 의류', '남성 의류', '유아 의류', '신발',
                     '모바일/태블릿', '영상가전', '음향가전', '주방가전', '생활가전', '휘트니스', '등산/수영', 
                     '구기', '골프', '캠핑', '자전거/기타레저'];
                     
-function Product() {
+function EditProduct() {
     const [productDes, setProductDes] = useState("");
     const [images, setImages] = useState(Array(5).fill(null));
     const [category, setCategory] = useState('');
@@ -31,12 +31,11 @@ function Product() {
     const [optionValueInput, setOptionValueInput] = useState('');
     const [optionTags, setOptionTags] = useState([]);
     const [price, setPrice] = useState({ cost: '', sale: '' });
-    const [product, setProduct] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("/api/EditProductData.json");
+                const response = await axios.get("/api/AdminEditProductData.json");
                 
                 setBrand(response.data.productBrand);
                 setProductName(response.data.productName);
@@ -278,23 +277,19 @@ function Product() {
                         }}
                         />
                     </Box>
-                    <Button
-                        sx={{
-                            bgcolor: '#3377FF',
-                            color: 'white',
-                            mt: 2 
-                        }}
-                        variant="contained"
-                        onClick={() => {
-                        }}
-                    >
-                        저장
-                    </Button>
                 </Box>
+                <Button
+                    sx={{ float: 'right'}}
+                    variant="outlined"
+                    onClick={() => {
+                    }}
+                >
+                    저장
+                </Button>
             </Paper>
         </Box>
     </Box>
     );
 }
                             
-export default Product;
+export default EditProduct;

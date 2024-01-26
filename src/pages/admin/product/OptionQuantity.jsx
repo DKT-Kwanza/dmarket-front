@@ -3,7 +3,7 @@ import LeftNav from "../../../components/admin/LeftNav";
 import Header from "../../../components/admin/Header";
 import SearchBar from "../../../components/admin/SearchBar";
 import TabMenu from "../../../components/admin/TabMenu";
-import EditProductTable from "../../../components/admin/EditProductTable";
+import OptionQuantityTable from "../../../components/admin/OptionQuantityTable";
 import Category from "../../../components/admin/Category";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {Paper, Box, Button} from "@mui/material";
@@ -15,17 +15,19 @@ import { useNavigate } from 'react-router-dom';
 const primary = indigo[50];
 const drawerWidth = 260;
 
-function Product() {
+function OptionQuantity() {
     const navigate = useNavigate();
     const [selectedTab, setSelectedTab] = React.useState(0);
     const [rows, setRows] = useState([]);
+
+    const tableHeader = ['상품번호', '브랜드', '상품', '옵션', '판매가', '카테고리', '상태', '재고', '입고', '등록일', '등록', ''];
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get("/api/AdminProductList.json");
                 setRows(response.data);
-
+                
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -33,39 +35,19 @@ function Product() {
         fetchData();
     }, []);
 
-
-    const MENU_LIST = [
-        {title: '전체'},
-        {title: '판매중'},
-        {title: '품절'},
-    ];
-
-    const tableHeader = ['상품번호', '브랜드', '상품', '옵션', '판매가', '카테고리', '상태', '재고', '등록일', ''];
-
     const handleTabChange = (newValue) => {
         setSelectedTab(newValue);
     };
-
-    const filteredProducts = rows.filter((row) => {
-        if (selectedTab === 0) {
-            return true;
-        } else if (selectedTab === 1) {
-            return row.optionList.some((item) => item.optionStatus === '판매중');
-        } else if (selectedTab === 2) {
-            return row.optionList.some((item) => item.optionStatus === '품절');
-        }
-        return false;
-    });
-    
     
     const navigateToAdd = () => {
         navigate("../add")
     }
 
+
     return (
         <Box>
             <LeftNav/>
-            <Header title={'상품상세'}/>
+            <Header title={'재고/입고'}/>
             {/*컨텐츠 영역입니다.*/}
             <Box
                 bgcolor={primary}
@@ -75,15 +57,7 @@ function Product() {
                 <SearchBar/>
                 <Paper square elevation={2}
                     sx={{p: '20px 30px'}}>
-                    <TabMenu menu={MENU_LIST} selectedTab={selectedTab} onTabChange={handleTabChange} />
-                    <EditProductTable headers={tableHeader} rows={{ product: filteredProducts }} />
-                    <Button
-                        variant="outlined"
-                        sx={{float: 'right'}}
-                        endIcon={<BorderColorIcon />}
-                        onClick={navigateToAdd}>
-                        상품추가
-                    </Button>
+                    <OptionQuantityTable headers={tableHeader} rows={rows} />
                 </Paper>
             </Box>
         </Box>
@@ -91,4 +65,4 @@ function Product() {
     );
 }
 
-export default Product;
+export default OptionQuantity;

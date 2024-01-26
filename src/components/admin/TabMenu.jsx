@@ -16,11 +16,11 @@ export default function TabMenu({ menu, selectedTab, onTabChange }) {
                 value={selectedTab}
                 aria-label="Tabs where each tab needs to be selected manually"
             >
-                {
-                    menu.map((object, index) => (
-                        <Tab key={index} label={`${object.title} ${object.count}`} />
-                    ))
-                }
+                {menu.map((object, index) => (
+                    object.count
+                        ? <Tab key={index} label={`${object.title} ${object.count}`}/>
+                        : <Tab key={index} label={`${object.title}`}/>
+                ))}
             </Tabs>
         </Box>
     );

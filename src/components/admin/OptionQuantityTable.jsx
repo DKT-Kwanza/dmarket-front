@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { formatDate, formatPrice } from '../../utils/Format';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,20 +6,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
 export default function EditProductTable({headers, rows}) {
-    const navigate = useNavigate();
-
-    const navigateToEdit = () => {
-        navigate("../edit")
-    }
-
-    const handleDeleteProduct = (productId) => {
-        alert(`${productId} 삭제됩니다`);
-    }
-
 
     return (
         <TableContainer component={Paper} sx={{mb: 2}}>
@@ -35,7 +25,7 @@ export default function EditProductTable({headers, rows}) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.product.map((row, index ) => (
+                    {rows.map((row, index ) => (
                         row.optionList.map((item, index) => (
                             <TableRow
                                 key={index}
@@ -66,21 +56,17 @@ export default function EditProductTable({headers, rows}) {
                                     {item.optionStatus}
                                 </TableCell>
                                 <TableCell>{item.optionQuantity}</TableCell>
+                                <TableCell>
+                                    <TextField
+                                        type="number"
+                                        sx={{ width: "70px"}}
+                                    /></TableCell>
                                 <TableCell>{formatDate(row.productRegistDate)}</TableCell>
                                 <TableCell>
                                     <Button 
                                         variant="outlined"
-                                        onClick={navigateToEdit}
-                                        sx={{ mr: "20px"}}
                                     >
-                                        수정
-                                    </Button>
-                                    <Button
-                                        variant="outlined"
-                                        onClick={() => handleDeleteProduct(row.productId)}
-                                        color="error"
-                                    >
-                                        삭제
+                                        등록
                                     </Button>
                                 </TableCell>
                             </TableRow>
