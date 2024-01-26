@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './WishItem.css';
-import CheckBox from '../Common/CheckBox';
+import CheckBox from '../Common/CheckBox/CheckBox';
 
 function WishItem({ productImg, brand, productName, sales, checked, onCheck }) {
     return(

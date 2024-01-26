@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import WishItemList from '../../../components/user/List/WishItemList';
-import CheckBox from "../../../components/user/Common/CheckBox";
+import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
 import './Mywish.css';
 
 function WishList() {

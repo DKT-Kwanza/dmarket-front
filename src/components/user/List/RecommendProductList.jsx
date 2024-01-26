@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ProductListItem from "../../../pages/user/ProductList/ProductListItem";
+import ProductListItem from "../../../pages/user/Product/ProductListItem";
 import React from "react";
 import {useNavigate} from "react-router-dom";
 

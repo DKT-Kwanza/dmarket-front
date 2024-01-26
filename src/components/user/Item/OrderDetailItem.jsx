@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import GreyBtn from '../Common/GreyBtn';
+import GreyBtn from '../Common/Button/GreyBtn';
 import styled from 'styled-components';
-import ConfirmCancelModal from '../Common/ConfirmCancelModal'
-import SelectBox from "../../commmon/SelectBox";
+import ConfirmCancelModal from '../../user/Common/Modal/ConfirmCancelModal'
+import SelectBox from "../../commmon/SelectBox/SelectBox";
 
 function OrderDetailItem({img, brand, name, option, count, price, status}) {
     const [statusText, setStatusText] = useState("");

@@ -3,7 +3,7 @@ import axios from "axios";
 import './ChangeInfo.css';
 import MyPageSubHeader from '../../../components/user/Header/MyPageSubHeader';
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import ConfirmModal from "../../../components/commmon/ConfirmModal";
+import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 
 function ChangeInfo() {
     const [userInfo, setUserInfo] = useState({});
