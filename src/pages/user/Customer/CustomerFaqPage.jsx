@@ -42,7 +42,7 @@ function CustomerCenterFAQ() {
   };
 
   const navigateToInquiry= () => {
-    navigate("../inquiry/write");
+    navigate("../writeInquiry");
   };
 
   return (

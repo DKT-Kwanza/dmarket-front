@@ -28,7 +28,7 @@ function Cart(){
     }, []);
 
     const navigateToOrder = () => {
-        navigate("../order");
+        navigate("../../order");
     }
 
     const handleSelectAll = () => { // 전체 선택 체크박스 상태

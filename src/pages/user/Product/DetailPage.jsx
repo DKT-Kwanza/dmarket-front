@@ -63,7 +63,7 @@ function Detail() {
     };
 
     const navigateToOrder = () => {
-        navigate("../../order/orderPage");
+        navigate("../../order");
     }
 
     const [selected, setSelected] = useState([]);
