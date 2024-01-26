@@ -32,12 +32,8 @@ function Header() {
     }
 
     // 아이콘 클릭 이후 페이지 변경
-    const navigateToOrderMng = (menu) => {
-        navigate(`./mydkt/orderMng/${menu}`);
-    }
-
-    const navigateToActivityMng = (menu) => {
-        navigate(`./mydkt/ActivityMng/${menu}`);
+    const navigateToPage= (menu) => {
+        navigate(`./mydkt/${menu}`);
     }
 
     const handleMouseOver = () => {
@@ -74,10 +70,10 @@ function Header() {
                     </div>
                 </div>
                 <div className="icons">
-                    <div className='mypage' onClick={() => navigateToOrderMng('orderInfo')}>
+                    <div className='mypage' onClick={() => navigateToPage('orderInfo')}>
                         <img src={user}/>
                     </div>
-                    <div className='bucket' onClick={() => navigateToActivityMng('mycart')}>
+                    <div className='bucket' onClick={() => navigateToPage('mycart')}>
                         <img src={shoppingBag}/>
                         <div className='bucket-count'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 21 20"
@@ -89,7 +85,7 @@ function Header() {
                             </svg>
                         </div>
                     </div>
-                    <div className='likes' onClick={() => navigateToActivityMng('mywish')}>
+                    <div className='likes' onClick={() => navigateToPage('mywish')}>
                         <img
                             alt={"heart-icon"}
                             src={heart}/>

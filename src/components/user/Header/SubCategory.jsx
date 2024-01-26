@@ -41,7 +41,7 @@ const SubCategory = ({onMouseLeave}) =>{
                     <button>메이크업</button>
                 </div>
                 <div className='sub-sub-category-contents-details-style'>
-                    <button>바디/헤어</button>
+                    <button>바디&#47;헤어</button>
                 </div>
             </div>
             <div className='sub-sub-category-contents-details'>
@@ -55,15 +55,15 @@ const SubCategory = ({onMouseLeave}) =>{
                     <button>인테리어</button>
                 </div>
                 <div className='sub-sub-category-contents-details-style'>
-                    <button>문구/사무용품</button>
+                    <button>문구&#47;사무용품</button>
                 </div>
             </div>
             <div className='sub-sub-category-contents-details'>
                 <div className='sub-sub-category-contents-details-style'>
-                    <button>데스크탑/노트북</button>
+                    <button>데스크탑&#47;노트북</button>
                 </div>
                 <div className='sub-sub-category-contents-details-style'>
-                    <button>모바일/태블릿</button>
+                    <button>모바일&#47;태블릿</button>
                 </div>
                 <div className='sub-sub-category-contents-details-style'>
                     <button>영상가전</button>
@@ -83,7 +83,7 @@ const SubCategory = ({onMouseLeave}) =>{
                     <button>휘트니스</button>
                 </div>
                 <div className='sub-sub-category-contents-details-style'>
-                    <button>등산/수영</button>
+                    <button>등산&#47;수영</button>
                 </div>
                 <div className='sub-sub-category-contents-details-style'>
                     <button>구기</button>
@@ -95,7 +95,7 @@ const SubCategory = ({onMouseLeave}) =>{
                     <button>캠핑</button>
                 </div>
                 <div>
-                    <button>자전거/기타레저</button>
+                    <button>자전거&#47;기타레저</button>
                 </div>
             </div>
         </div>

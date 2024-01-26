@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     background: #FFF;
+    border-bottom: 1px solid #BDBDBD;
 }
 
 .sub-sub-category-contents{
@@ -26,7 +27,13 @@
     border:none;
     background-color: #FFF;
     cursor: pointer;
+    color: #848484
 }
+
+.sub-sub-category-contents-details button:hover {
+    color: black;
+}
+
 .sub-sub-category-contents-details button:hover{
     font-weight: 700;
 }

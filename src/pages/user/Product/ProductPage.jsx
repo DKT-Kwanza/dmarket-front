@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import './ProductPage'
+import './ProductPage.css'
 import ProductItem from '../../../components/user/Item/ProductItem';
 import Filter from '../../../components/user/Common/Filter/Filter';
 import Dropdown from '../../../components/user/Common/Select/Dropdown';
