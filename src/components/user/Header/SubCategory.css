@@ -1,15 +1,17 @@
 .sub-sub-category-container {
     height: 210px;
     display: flex;
-    justify-content: center;
     background: #FFF;
+    border-bottom: 1px solid #BDBDBD;
+    margin: 0 auto;
+    min-width: 1280px;
 }
 
 .sub-sub-category-contents{
     width: 770px;
     display: flex;
-    margin-top: 20px;
     justify-content: space-between;
+    margin: 20px auto;
 }
 
 .sub-sub-category-contents-details{
@@ -26,7 +28,13 @@
     border:none;
     background-color: #FFF;
     cursor: pointer;
+    color: #848484
 }
+
+.sub-sub-category-contents-details button:hover {
+    color: black;
+}
+
 .sub-sub-category-contents-details button:hover{
     font-weight: 700;
 }

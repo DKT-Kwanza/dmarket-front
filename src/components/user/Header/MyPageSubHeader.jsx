@@ -23,12 +23,8 @@ const MyPageSubHeader = () => {
         fetchData();
     }, []);
 
-    const navigateToCharge = () => {
-        navigate('/mydkt/mileageMng/charge');
-    }
-
-    const navigateToHistory = () => {
-        navigate('/mydkt/mileageMng/mileageInfo');
+    const navigateToPage = (path) => {
+        navigate(`/mydkt/${path}`);
     }
 
     return (
@@ -43,11 +39,11 @@ const MyPageSubHeader = () => {
                     <div className='myPage-subHeader-wrapper-mileage-content'>{formatPrice(info.userMileage)}원</div>
                 </div>
                 <div className='myPage-subHeader-box'>
-                    <button className='myPage-subHeader-button' onClick={navigateToCharge}>
+                    <button className='myPage-subHeader-button' onClick={() => navigateToPage('charge')}>
                         <span>충전하기</span>
                         <span className='myPage-subHeader-button-right'><img src={right} alt='>'/></span>
                     </button>
-                    <button className='myPage-subHeader-button' onClick={navigateToHistory}>
+                    <button className='myPage-subHeader-button' onClick={() => navigateToPage('mileageInfo')}>
                         <span>사용내역 조회</span>
                         <span className='myPage-subHeader-button-right'><img src={right} alt='>'/></span>
                     </button>

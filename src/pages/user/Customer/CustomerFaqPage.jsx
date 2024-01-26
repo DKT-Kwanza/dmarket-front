@@ -13,27 +13,31 @@ function CustomerCenterFAQ() {
   const [filteredFaqs, setFilteredFaqs] = useState([]);
   const [pageName, setPageName] = useState("");
   
-
   useEffect(() => {
     const fetchData = async () => {
-        try {
-            const response = await axios.get("/api/CustomerCenterFaqData.json");
-            setCustoemrCenterFaqs(response.data);
-        } catch (e) {
-            console.error("Error fetching data: ", e);
-        }
+      try {
+        const response = await axios.get("/api/CustomerCenterFaqData.json");
+        setCustoemrCenterFaqs(response.data);
+      } catch (e) {
+        console.error("Error fetching data: ", e);
+      }
     };
     fetchData();
   }, []);
-
-  /* 선택된 카테고리에 해당하는 FAQ 목록을 필터링 */
+  
+  useEffect(() => {
+    if (params.tab) {
+      const decodedTab = decodeURIComponent(params.tab);
+      setSelectedMenu(decodedTab);
+    }
+  }, [params.tab]);
+  
+    /* 선택된 카테고리에 해당하는 FAQ 목록을 필터링 */
   useEffect(() => {
     const filtered = custoemrCenterFaqs.filter(faq => `${faq.faqType} 문의` === selectedMenu);
     setFilteredFaqs(filtered);
-    console.log(filteredFaqs)
   }, [selectedMenu, custoemrCenterFaqs]);
-
-
+  
   const handleMenuClick = (menu) => { // 탭 선택 시 url 변경
     setSelectedMenu(menu);
     const path = encodeURIComponent(menu); // 띄어쓰기 인코딩
@@ -42,7 +46,7 @@ function CustomerCenterFAQ() {
   };
 
   const navigateToInquiry= () => {
-    navigate("../inquiry/write");
+    navigate("../writeInquiry");
   };
 
   return (

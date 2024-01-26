@@ -4,6 +4,7 @@ import './SearchPage.css';
 import ProductItem from '../../../components/user/Item/ProductItem';
 import Filter from '../../../components/user/Common/Filter/Filter';
 import Dropdown from '../../../components/user/Common/Select/Dropdown';
+import ScrollToTopBtn from "../../../components/user/Common/Button/ScrollToTopBtn";
 
 function SearchList(){
     const [products, setProducts] = useState([]);
@@ -102,6 +103,7 @@ function SearchList(){
                     />
                 ))}
             </div>
+            <ScrollToTopBtn />
         </div>
     )
 }

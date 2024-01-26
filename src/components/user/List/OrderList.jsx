@@ -9,7 +9,7 @@ const OrderList = ({ orders }) => {
 
   /* 상품 정보 리뷰 작성 페이지로 전달 */
   const navigateToWrite = (orderDetailList) => {
-    navigate('./write', { state: { orderDetailList } });
+    navigate('../writeReview', { state: { orderDetailList } });
   };
 
   return (

@@ -8,7 +8,7 @@ export default function PaymentInfo({ userName, totalPrice, discount, totalPay }
     const navigate = useNavigate();
 
     const navigateToOrderComplete = () => {
-        navigate("../complete", {
+        navigate("./complete", {
             state: {
                 userName: userName,
                 totalPrice: totalPrice,

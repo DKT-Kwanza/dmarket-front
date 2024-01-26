@@ -12,6 +12,7 @@ import heart from '../../../assets/icons/heart.svg';
 import productDetail from '../../../assets/images/productDetail.png';
 import arrowRight from '../../../assets/icons/chevron-right.svg';
 import parcelIcon from '../../../assets/icons/truck-02.png';
+import ScrollToTopBtn from '../../../components/user/Common/Button/ScrollToTopBtn';
 
 function Detail() {
 
@@ -63,7 +64,7 @@ function Detail() {
     };
 
     const navigateToOrder = () => {
-        navigate("../../order/orderPage");
+        navigate("../../order");
     }
 
     const [selected, setSelected] = useState([]);
@@ -291,6 +292,7 @@ function Detail() {
                 </div>
             </div>
             <div style={{marginBottom: '200px'}}/>
+            <ScrollToTopBtn />
         </>
     );
 }

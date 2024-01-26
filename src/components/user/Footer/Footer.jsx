@@ -67,7 +67,7 @@ function Footer(){
                             고객님은 안전거래를 위해 현금 등으로 결제 시 저희 쇼핑몰에서 가입한 구매 안전서비스로 소비자 피해보상 보험 서비스를 이용하실 수 있습니다.
                             </div>
                             <div className='down-footer-left-second-content-B'>
-                            COPYRIGHT © 2023 관자디자인.. LTD ALL RIGHTS RESERVED.
+                            COPYRIGHT &copy; 2023 관자디자인.. LTD ALL RIGHTS RESERVED.
                             </div>
                         </div>
                     </div>

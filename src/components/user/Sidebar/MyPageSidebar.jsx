@@ -31,8 +31,8 @@ const MyPageSidebar = () => {
                     <p className='myPage-sideBar-wrapper-contents-title'>나의 주문관리</p>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('orderMng/orderInfo')}
-                        style={getButtonStyle('orderMng/orderInfo')}
+                        onClick={() => navigateToPage('orderInfo')}
+                        style={getButtonStyle('orderInfo')}
                     >
                         주문/배송 조회
                     </button>
@@ -44,36 +44,36 @@ const MyPageSidebar = () => {
                     <p className='myPage-sideBar-wrapper-contents-title'>나의 활동관리</p>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('activityMng/mycart')}
-                        style={getButtonStyle('activityMng/mycart')}
+                        onClick={() => navigateToPage('mycart')}
+                        style={getButtonStyle('mycart')}
                     >
                         장바구니
                     </button>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('activityMng/mywish')}
-                        style={getButtonStyle('activityMng/mywish')}
+                        onClick={() => navigateToPage('mywish')}
+                        style={getButtonStyle('mywish')}
                     >
                         위시리스트
                     </button>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('activityMng/review')} 
-                        style={getButtonStyle('activityMng/review')}
+                        onClick={() => navigateToPage('review')} 
+                        style={getButtonStyle('review')}
                     >
                         상품리뷰
                     </button>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('activityMng/qna')}
-                        style={getButtonStyle('activityMng/qna')}
+                        onClick={() => navigateToPage('qna')}
+                        style={getButtonStyle('qna')}
                     >
                         상품 Q&A
                     </button>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('activityMng/inquiry')}
-                        style={getButtonStyle('activityMng/inquiry')}
+                        onClick={() => navigateToPage('inquiry')}
+                        style={getButtonStyle('inquiry')}
                     >
                         고객 문의
                     </button>
@@ -85,15 +85,15 @@ const MyPageSidebar = () => {
                     <p className='myPage-sideBar-wrapper-contents-title'>나의 정보관리</p>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('memberMng/changeInfo')}
-                        style={getButtonStyle('memberMng/changeInfo')}
+                        onClick={() => navigateToPage('changeInfo')}
+                        style={getButtonStyle('changeInfo')}
                     >
                         배송지 변경
                     </button>
                     <button 
                         className='myPage-sideBar-wrapper-contents-button' 
-                        onClick={() => navigateToPage('memberMng/changePwd')}
-                        style={getButtonStyle('memberMng/changePwd')}
+                        onClick={() => navigateToPage('changePwd')}
+                        style={getButtonStyle('changePwd')}
                     >
                         비밀번호 변경
                     </button>

@@ -41,7 +41,7 @@ function SignIn() {
     };
 
     const navigateToSignForm = () => {
-        navigate("./form");
+        navigate("../signinForm");
     }
 
     return (
