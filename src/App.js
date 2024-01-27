@@ -15,7 +15,7 @@ import Mywish from "./pages/user/WishList/Mywish";
 import Cart from "./pages/user/Cart/CartPage";
 import ProductList from "./pages/user/Product/ProductPage";
 import SearchList from "./pages/user/Product/SearchPage";
-import Payment from "./pages/user/Payment/Payment";
+import PaymentPage from "./pages/user/Payment/PaymentPage";
 import OrderComplete from './pages/user/Payment/OrderComplete';
 import ChangePwd from './pages/user/MyInfo/ChangePwd';
 import CustomerCenterNotice from "./pages/user/Customer/CustomerNoticePage";
@@ -74,7 +74,7 @@ function App() {
               </Route>
 
               <Route path='/order'>
-                <Route path='' element={<Payment/>}/>
+                <Route path='' element={<PaymentPage/>}/>
                 <Route path='complete' element={<OrderComplete/>} />
               </Route>
 
