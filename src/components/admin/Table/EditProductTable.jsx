@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import { formatDate, formatPrice } from '../../../utils/Format';
 import Table from '@mui/material/Table';
@@ -9,17 +9,30 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import ConfirmCancelModal from "../../../components/commmon/Modal/ConfirmCancelModal";
 
 export default function EditProductTable({headers, rows}) {
     const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState(null);
 
     const navigateToEdit = () => {
         navigate("./edit")
     }
 
-    const handleDeleteProduct = (productId) => {
-        alert(`${productId} 삭제됩니다`);
-    }
+    const handleOpenModal = (productId) => {
+        setSelectedUserId(productId);
+        setIsOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsOpen(false);
+    };
+
+    const handleConfirmDelete = () => {
+        setIsOpen(false);
+        // 삭제 api 추가
+    };
 
 
     return (
@@ -77,7 +90,7 @@ export default function EditProductTable({headers, rows}) {
                                     </Button>
                                     <Button
                                         variant="outlined"
-                                        onClick={() => handleDeleteProduct(row.productId)}
+                                        onClick={() => handleOpenModal(rows.productId)}
                                         color="error"
                                     >
                                         삭제
@@ -88,6 +101,11 @@ export default function EditProductTable({headers, rows}) {
                     ))}
                 </TableBody>
             </Table>
+            {isOpen && (
+                <ConfirmCancelModal isOpen={isOpen} onClose={handleCloseModal} onConfirm={handleConfirmDelete}>
+                    <div>삭제하시겠습니까?</div>
+                </ConfirmCancelModal>
+            )}
         </TableContainer>
     );
 }

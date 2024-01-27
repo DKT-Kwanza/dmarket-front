@@ -2,7 +2,6 @@ import * as React from "react";
 import LeftNav from "../../../components/admin/Sidebar/LeftNav";
 import Header from "../../../components/admin/Header/Header";
 import QnaTable from "../../../components/admin/Table/QnaTable";
-import QnaModal from "../../../components/admin/Modal/QnaModal";
 import {Paper, Box, Button} from "@mui/material";
 import {indigo} from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +11,7 @@ import axios from 'axios';
 const primary = indigo[50];
 const drawerWidth = 260;
 
-function ProductQna() {
+function ProductQnaPage() {
     const navigate = useNavigate();
     const [rows, setRows] = useState([]);
     const [open, setOpen] = useState(false);
@@ -38,10 +37,6 @@ function ProductQna() {
         setOpen(true);
     };
 
-    const handleCloseModal = () => {
-        setOpen(false);
-    };
-
     return (
         <Box>
             <LeftNav/>
@@ -56,12 +51,9 @@ function ProductQna() {
                     <QnaTable headers={tableHeader} rows={rows} onRowClick={handleRowClick} />
                 </Paper>
             </Box>
-            {selectedQnaId !== null && (
-                <QnaModal open={open} handleClose={handleCloseModal} qnaId={selectedQnaId} />
-            )}
         </Box>
 
     );
 }
 
-export default ProductQna;
+export default ProductQnaPage;

@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 const primary = indigo[50];
 const drawerWidth = 260;
 
-function OptionQuantity() {
+function ProductQuantityPage() {
     const navigate = useNavigate();
     const [selectedTab, setSelectedTab] = React.useState(0);
     const [rows, setRows] = useState([]);
@@ -65,4 +65,4 @@ function OptionQuantity() {
     );
 }
 
-export default OptionQuantity;
+export default ProductQuantityPage;
