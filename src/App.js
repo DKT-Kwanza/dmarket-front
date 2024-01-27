@@ -20,8 +20,8 @@ import OrderComplete from './pages/user/Payment/OrderComplete';
 import ChangePwd from './pages/user/MyInfo/ChangePwd';
 import CustomerCenterNotice from "./pages/user/Customer/CustomerNoticePage";
 import CustomerCenterFAQ from "./pages/user/Customer/CustomerFaqPage";
-import CustomerCenterInquiry from "./pages/user/Customer/CustomerInquiryPage";
-import WriteReview from "./pages/user/MyReview/WriteReview";
+import CustomerInquiryPage from "./pages/user/Customer/CustomerInquiryPage";
+import WriteReviewPage from "./pages/user/MyReview/WriteReviewPage";
 import OrderHistory from './pages/user/MyOrder/OrderHistory';
 import OrderHistoryDetail from "./pages/user/MyOrder/OrderHistoryDetail";
 import Inquiry from "./pages/user/CustomerInquiry/Inquiry";
@@ -48,7 +48,7 @@ import CustomerFAQ from "./pages/admin/Customer/CustomerFaqPage";
 
 function App() {
     const location = useLocation();
-    const hideHeaderFooter = (location.pathname === '/member/signin/form' || location.pathname.startsWith('/memberMng') || location.pathname.startsWith('/productMng') || location.pathname.startsWith('/orderMng') || location.pathname.startsWith('/customerMng'));
+    const hideHeaderFooter = (location.pathname.startsWith('/member') || location.pathname.startsWith('/memberMng') || location.pathname.startsWith('/productMng') || location.pathname.startsWith('/orderMng') || location.pathname.startsWith('/customerMng'));
 
   return (
     <div className="App">
@@ -84,7 +84,7 @@ function App() {
                 <Route path='mycart' element={<Cart />} />
                 <Route path='mywish' element={<Mywish/>} />
                 <Route path='review' element={<ReviewList/>} />
-                <Route path='writeReview' element={<WriteReview/>} />
+                <Route path='writeReview' element={<WriteReviewPage/>} />
                 <Route path='qna' element={<Qna />} />
                 <Route path='inquiry' element={<Inquiry />} />
                 <Route path='changeInfo' element={<ChangeInfo/>} />
@@ -96,7 +96,7 @@ function App() {
               <Route path='/customer'>
                 <Route path='' element={<CustomerCenterNotice/>} />
                 <Route path='faq/:tab' element={<CustomerCenterFAQ/>}/>
-                <Route path='writeInquiry' element={<CustomerCenterInquiry/>}/>
+                <Route path='writeInquiry' element={<CustomerInquiryPage/>}/>
               </Route>
 
               {/* 관리자 라우팅 */}

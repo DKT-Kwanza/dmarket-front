@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CustomerInquiryPage.css';
 import { ReactComponent as ChevronDown } from "../../../assets/icons/chevron-down.svg";
+import { LuImagePlus } from "react-icons/lu";
 
-function CustomerCenterInquiry() {
+function CustomerInquiryPage() {
+
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(''); // 선택된 옵션을 추적하기 위한 상태 추가
+  const [inquiryImg, setInquiryImg] = useState(null); // 첨부 이미지 상태 변수
+
+  const uploadInquiryImg = useCallback(async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const previewUrl = URL.createObjectURL(file);
+      setInquiryImg(previewUrl);
+    }
+  }, []);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -84,11 +95,29 @@ function CustomerCenterInquiry() {
             <div className='inquiry-menu-submenu-title'>
               사진
             </div>
-            <div className='inquiry-menu-submenu-content-picture'>
-              <button className="inquiry-menu-stars-button">
-                <span className="inquiry-menu-stars-button-plus">+</span>
-              </button>
+            <div>
+              {inquiryImg ? (
+                <div>
+                  <img src={inquiryImg} alt="Inquiry Preview" className="inquiry-image" />
+                  <div className='inquiry-menu-stars-button'>
+                    <label htmlFor="image-upload" className="inquiry-menu-stars-button-plus">
+                      사진 변경
+                    </label>
+                    <input id="image-upload" type="file" accept='image/*' onChange={uploadInquiryImg} style={{ display: 'none' }} />
+                  </div>
+              </div>
+              ) : (
+                <div className="inquiry-menu-stars-button">
+                  <label htmlFor="image-upload" className="inquiry-menu-stars-button-plus2">
+                    사진 업로드
+                  </label>
+                  <input id="image-upload" type="file" accept='image/*' onChange={uploadInquiryImg} style={{ display: 'none' }} />
+                </div>
+              )}
             </div>
+          </div>
+          <div className="inquiry-menu-pictures-notice">
+              사진첨부는 최대 1장 가능합니다.
           </div>
           <div className='inquiry-main-menu-line'/>      
         </div>
@@ -103,4 +132,4 @@ function CustomerCenterInquiry() {
   );
 }
 
-export default CustomerCenterInquiry;
+export default CustomerInquiryPage;

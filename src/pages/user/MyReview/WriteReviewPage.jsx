@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { formatPrice } from '../../../utils/Format';
-import "./WriteReview.css";
+import "./WriteReviewPage.css";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 
@@ -10,6 +10,15 @@ function WriteReview() {
     const { state } = useLocation();
     const { orderDetailList } = state;
     const [rating, setRating] = useState(0);
+    const [reviewImg, setReviewImg] = useState(null); // 첨부 이미지 상태 변수
+
+    const uploadReviewImg = useCallback(async (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const previewUrl = URL.createObjectURL(file);
+            setReviewImg(previewUrl);
+        }
+    }, []);
 
     const handleStarClick = (clickedRating) => {
         setRating(clickedRating);
@@ -97,9 +106,26 @@ function WriteReview() {
                                 <div className="mypageProductReview-stars-title">
                                     사진
                                 </div>
-                                <button className="mypageProductReview-stars-button">
-                                    <span className="mypageProductReview-stars-button-plus">+</span>
-                                </button>
+                                <div>
+                                    {reviewImg ? (
+                                        <div>
+                                            <img src={reviewImg} alt="Inquiry Preview" className="review-image" />
+                                            <div className='mypageProductReview-stars-button'>
+                                                <label htmlFor="image-upload" className="mypageProductReview-stars-button-plus">
+                                                사진 변경
+                                                </label>
+                                                <input id="image-upload" type="file" accept='image/*' onChange={uploadReviewImg} style={{ display: 'none' }} />
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="mypageProductReview-stars-button">
+                                            <label htmlFor="image-upload" className="mypageProductReview-stars-button-plus2">
+                                                사진 업로드
+                                            </label>
+                                            <input id="image-upload" type="file" accept='image/*' onChange={uploadReviewImg} style={{ display: 'none' }} />
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             <div className="mypageProductReview-pictures-notice">
