@@ -33,7 +33,7 @@ import AddProduct from "./pages/admin/Product/ProductAddPage";
 import EditProduct from "./pages/admin/Product/ProductEditPage";
 import ProductQna from "./pages/admin/Product/ProductQnaPage";
 import OptionQuantity from "./pages/admin/Product/ProductQuantityPage";
-import AdminList from "./pages/admin/Member/AdminPage";
+import Admin from "./pages/admin/Member/AdminPage";
 import ProductReview from "./pages/admin/Product/ProductReviewPage";
 import MemberList from "./pages/admin/Member/UserPage";
 import RegisterMember from "./pages/admin/Member/UserRegisterPage";
@@ -101,7 +101,7 @@ function App() {
 
               {/* 관리자 라우팅 */}
               <Route path='/memberMng'>
-                    <Route path='manager' element={<AdminList/>}/>
+                    <Route path='manager' element={<Admin />}/>
                     <Route path='user' element={<MemberList/>}/>
                     <Route path='addUser' element={<RegisterMember/>}/>
                     <Route path='mileage' element={<MemberMileage/>}/>
