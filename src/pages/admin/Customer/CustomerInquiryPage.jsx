@@ -7,6 +7,7 @@ import {indigo} from '@mui/material/colors';
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
+import InquiryModal from "../../../components/admin/Modal/InquiryModal";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -16,8 +17,12 @@ function CustomerInquiry() {
     const [selectedTab, setSelectedTab] = useState('회원문의');
     const tableHeader = ['구분', '제목', '작성자', '작성일', '답변상태', ''];
 
-    const [isOpen, setIsOpen] = useState(false);
+    /* 모달 상태 관리 변수 */
+    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+    const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+
     const [isConfirming, setIsConfirming] = useState(false);
+    const [selectedInquiryId, setSelectedInquiryId] = useState(null);
 
     const menuList = [
         {title: '회원문의'},
@@ -49,17 +54,27 @@ function CustomerInquiry() {
         }
     };
 
-    const openModalHandler = (row) => {
-        setIsOpen(true);
+    const openConfirmModalHandler = (event, row) => {
+        event.stopPropagation();
+        setIsConfirmModalOpen(true);
     };
 
-    const closeModalHandler = () => {
-        setIsOpen(false);
+    const closeConfirmModalHandler = () => {
+        setIsConfirmModalOpen(false);
     };
 
     const handleConfirm = () => {
         /* modal 의 확인 을 누르면 button 이 disabled */
         setIsConfirming(true);
+    };
+
+    const handleRowClick = (event, inquiryId) => {
+        event.stopPropagation();
+        setSelectedInquiryId(inquiryId);
+        setIsDetailModalOpen(true);
+    };
+    const handleCloseDetailModal = () => {
+        setIsDetailModalOpen(false);
     };
 
     return (
@@ -74,13 +89,17 @@ function CustomerInquiry() {
                 <Paper square elevation={2}
                        sx={{p: '20px 30px'}}>
                     <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange}/>
-                    <CustomerInquiryTable headers={tableHeader} rows={inquiryList} onDeleteClick={openModalHandler} />
+                    <CustomerInquiryTable headers={tableHeader} rows={inquiryList} onDeleteClick={openConfirmModalHandler} onRowClick={handleRowClick}/>
                 </Paper>
             </Box>
-            {isOpen && (
-                <ConfirmModal color={'#FF5D5D'} isOpen={isOpen} onClose={closeModalHandler} onConfirm={handleConfirm}>
+            {isConfirmModalOpen && (
+                <ConfirmModal color={'#FF5D5D'} isOpen={isConfirmModalOpen} onClose={closeConfirmModalHandler} onConfirm={handleConfirm}>
                     <div>해당 글을 삭제합니다.</div>
                 </ConfirmModal>
+            )}
+            {selectedInquiryId !== null && (
+                <InquiryModal
+                    open={isDetailModalOpen} handleClose={handleCloseDetailModal} inquiryId={selectedInquiryId} />
             )}
         </Box>
     );

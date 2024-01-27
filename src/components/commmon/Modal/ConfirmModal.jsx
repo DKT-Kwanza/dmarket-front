@@ -21,8 +21,9 @@ function ConfirmModal({isOpen, onClose, onConfirm, children, color}) {
             <ModalView onClick={(e) => e.stopPropagation()}>
                 <TextArea>{children}</TextArea>
                 <BtnArea>
-                    <ConfirmBtn color={color}
-                                onClick={handleConfirm}>확인</ConfirmBtn>
+                    <ConfirmBtn
+                        color={color}
+                        onClick={handleConfirm}>확인</ConfirmBtn>
                 </BtnArea>
             </ModalView>
         </ModalBackdrop>
