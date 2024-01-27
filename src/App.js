@@ -29,15 +29,15 @@ import Qna from "./pages/user/Qna/Qna";
 import HistoryMileage from "./pages/user/Mileage/HistoryMileage";
 
 import Product from "./pages/admin/Product/ProductPage";
-import AddProduct from "./pages/admin/Product/ProductAddPage";
-import EditProduct from "./pages/admin/Product/ProductEditPage";
-import ProductQna from "./pages/admin/Product/ProductQnaPage";
-import OptionQuantity from "./pages/admin/Product/ProductQuantityPage";
+import ProductAddPage from "./pages/admin/Product/ProductAddPage";
+import ProductEditPage from "./pages/admin/Product/ProductEditPage";
+import ProductQnaPage from "./pages/admin/Product/ProductQnaPage";
+import ProductQuantityPage from "./pages/admin/Product/ProductQuantityPage";
 import AdminList from "./pages/admin/Member/AdminPage";
-import ProductReview from "./pages/admin/Product/ProductReviewPage";
+import ProductReviewPage from "./pages/admin/Product/ProductReviewPage";
 import MemberList from "./pages/admin/Member/UserPage";
-import RegisterMember from "./pages/admin/Member/UserRegisterPage";
-import MemberMileage from "./pages/admin/Member/UserMileagePage";
+import UserRegisterPage from "./pages/admin/Member/UserRegisterPage";
+import UserMileagePage from "./pages/admin/Member/UserMileagePage";
 import OrderStatus from "./pages/admin/Order/OrderPage";
 import OrderCancel from "./pages/admin/Order/OrderCancelPage";
 import Refund from "./pages/admin/Order/OrderRefundPage";
@@ -48,12 +48,14 @@ import CustomerFAQ from "./pages/admin/Customer/CustomerFaqPage";
 
 function App() {
     const location = useLocation();
+    const noBodyStylePaths = ['/memberMng', '/productMng', '/orderMng', '/customerMng'];
+    const applyBodyStyle = !noBodyStylePaths.some(path => location.pathname.startsWith(path));
     const hideHeaderFooter = (location.pathname.startsWith('/member') || location.pathname.startsWith('/memberMng') || location.pathname.startsWith('/productMng') || location.pathname.startsWith('/orderMng') || location.pathname.startsWith('/customerMng'));
 
   return (
     <div className="App">
         {!hideHeaderFooter && <Header />}
-        <div className="body">
+        <div className={applyBodyStyle ? "body" : ""}>
             <Routes>
 
               <Route path='/member'>
@@ -103,17 +105,17 @@ function App() {
               <Route path='/memberMng'>
                     <Route path='manager' element={<AdminList/>}/>
                     <Route path='user' element={<MemberList/>}/>
-                    <Route path='addUser' element={<RegisterMember/>}/>
-                    <Route path='mileage' element={<MemberMileage/>}/>
+                    <Route path='addUser' element={<UserRegisterPage/>}/>
+                    <Route path='mileage' element={<UserMileagePage/>}/>
                 </Route>
 
                 <Route path='/productMng'>
                     <Route path='' element={<Product/>}/>
-                    <Route path='add' element={<AddProduct/>}/>
-                    <Route path='edit' element={<EditProduct/>}/>
-                    <Route path='qna' element={<ProductQna/>}/>
-                    <Route path='quantity' element={<OptionQuantity/>}/>
-                    <Route path='review' element={<ProductReview/>}/>
+                    <Route path='add' element={<ProductAddPage/>}/>
+                    <Route path='edit' element={<ProductEditPage/>}/>
+                    <Route path='qna' element={<ProductQnaPage/>}/>
+                    <Route path='quantity' element={<ProductQuantityPage/>}/>
+                    <Route path='review' element={<ProductReviewPage/>}/>
                 </Route>
 
                 <Route path='/orderMng'>

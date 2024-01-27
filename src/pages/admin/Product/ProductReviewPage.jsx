@@ -13,7 +13,7 @@ import ReviewModal from '../../../components/admin/Modal/ReviewModal.jsx';
 const primary = indigo[50];
 const drawerWidth = 260;
 
-function ProductReview() {
+function ProductReviewPage() {
     const navigate = useNavigate();
     const [rows, setRows] = useState([]);
     const [openModal, setOpenModal] = useState(false);
@@ -65,4 +65,4 @@ function ProductReview() {
     );
 }
 
-export default ProductReview;
+export default ProductReviewPage;
