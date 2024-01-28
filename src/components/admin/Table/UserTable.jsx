@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {useNavigate} from 'react-router-dom';
 import {formatDate} from '../../../utils/Format';
-import { formatDate } from '../../../utils/Format';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -58,7 +57,7 @@ export default function UserTable({headers, rows, children}) {
                 </TableHead>
                 <TableBody>
 
-                    <TableRow key={rows.userId} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                    <TableRow key={rows.userId} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
                         <TableCell>{rows.userName}</TableCell>
                         <TableCell>{rows.userDktNum}</TableCell>
                         <TableCell>{rows.userEmail}</TableCell>
@@ -66,15 +65,15 @@ export default function UserTable({headers, rows, children}) {
                         <TableCell>{formatDate(rows.userJoinDate)}</TableCell>
                         <TableCell>
                             {
-                                ! children
+                                !children
                                     ?
-                                     <Button
-                                variant="outlined"
-                                color="error"
-                                onClick={() => handleOpenModal(rows.userId)}
-                            >
-                                삭제
-                            </Button>
+                                    <Button
+                                        variant="outlined"
+                                        color="error"
+                                        onClick={() => handleOpenModal(rows.userId)}
+                                    >
+                                        삭제
+                                    </Button>
                                     :
                                     <SelectBox text={'유형을 선택하세요'} options={['사용자', '총괄관리자', '시스템관리자', '상품관리자']}/>
                             }
