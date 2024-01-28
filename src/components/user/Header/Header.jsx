@@ -26,13 +26,13 @@ function Header() {
         fetchData();
     }, []);
 
-    // svg 클릭 이벤트 만들어야함
+    /* svg 클릭 이벤트 만들어야함 */
     const navigateToSearch = () => {
         navigate('./search')
     }
 
-    // 아이콘 클릭 이후 페이지 변경
-    const navigateToPage= (menu) => {
+    /* 아이콘 클릭 이후 페이지 변경 */
+    const navigateToPage = (menu) => {
         navigate(`./mydkt/${menu}`);
     }
 
@@ -51,6 +51,10 @@ function Header() {
 
     const navigateToCustomer = () => {
         navigate('./customer');
+    }
+
+    const navigateToAdmin = () => {
+        navigate('./memberMng/manager');
     }
 
     return (
@@ -115,7 +119,10 @@ function Header() {
                         <button>디지털/가전</button>
                         <button>스포츠/건강</button>
                     </div>
-                    <div onClick={navigateToCustomer} className="user-center">고객센터</div>
+                    <div className="user-center">
+                        <div onClick={navigateToAdmin} className="cate-admin">관리자</div>
+                        <div onClick={navigateToCustomer} className="cate-customer">고객센터</div>
+                    </div>
                 </div>
             </div>
             {isSubDivHovered && <SubCategory onMouseLeave={handleMouseLeaveSubCategory}/>}
