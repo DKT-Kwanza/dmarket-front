@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 
-export default function SearchBar() {
+export default function SearchBar({text}) {
     return (
         <Paper
             elevation={3}
@@ -17,7 +17,7 @@ export default function SearchBar() {
             </IconButton>
             <InputBase
                 sx={{ ml: 1, flex: 1 }}
-                placeholder="상품명 검색"
+                placeholder={text ? text : "상품명 검색"}
                 inputProps={{ 'aria-label': '상품명 검색' }}
             />
             <IconButton type="button" sx={{ p: '10px' }} aria-label="search">

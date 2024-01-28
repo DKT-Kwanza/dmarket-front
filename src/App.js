@@ -103,7 +103,7 @@ function App() {
 
               {/* 관리자 라우팅 */}
               <Route path='/memberMng'>
-                    <Route path='manager' element={<AdminList/>}/>
+                    <Route path='manager' element={<Admin />}/>
                     <Route path='user' element={<MemberList/>}/>
                     <Route path='addUser' element={<UserRegisterPage/>}/>
                     <Route path='mileage' element={<UserMileagePage/>}/>

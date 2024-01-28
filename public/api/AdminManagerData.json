@@ -1,0 +1,29 @@
+{
+  "totalMangerCount": 3,
+  "GMCount": 1,
+  "SMCount": 1,
+  "PMCount": 1,
+  "managerList": [
+    {
+      "userId": 1,
+      "userName": "홍길동",
+      "userEmail": "abcd@naver.com",
+      "userRole": "GM",
+      "userJoinDate": "2024-01-08 09:48:00"
+    },
+    {
+      "userId": 2,
+      "userName": "홍길동",
+      "userEmail": "abcd@naver.com",
+      "userRole": "SM",
+      "userJoinDate": "2024-01-08 09:48:00"
+    },
+    {
+      "userId": 3,
+      "userName": "홍길동",
+      "userEmail": "abcd@naver.com",
+      "userRole": "PM",
+      "userJoinDate": "2024-01-08 09:48:00"
+    }
+  ]
+}

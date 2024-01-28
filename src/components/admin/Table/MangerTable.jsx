@@ -5,10 +5,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
 import {formatDate} from "../../../utils/Format";
 
-export default function CustomerFaqTable({headers, rows, onDeleteClick, onRowClick}) {
+export default function ManagerTable({headers, rows, onApplyClick}) {
     return (
         <TableContainer component={Paper} sx={{mb: 2}}>
             <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -22,22 +21,14 @@ export default function CustomerFaqTable({headers, rows, onDeleteClick, onRowCli
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row, index) => (
+                    {rows && rows.map((row, index) => (
                         <TableRow
                             key={index}
-                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                            onClick={(event) => onRowClick(event, row.faqId)}>
-                            <TableCell>{row.faqType}</TableCell>
-                            <TableCell>{row.faqTitle}</TableCell>
-                            <TableCell>관리자</TableCell>
-                            <TableCell>{formatDate(row.faqCreatedDate)}</TableCell>
-                            <TableCell>
-                                <Button
-                                    onClick={(event)=>{onDeleteClick(event, row.faqId)}}
-                                    variant="outlined"
-                                    color="error"
-                                    href="#text-buttons">삭제</Button>
-                            </TableCell>
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                            <TableCell>{row.userName}</TableCell>
+                            <TableCell>{row.userEmail}</TableCell>
+                            <TableCell>{row.userRole}</TableCell>
+                            <TableCell>{formatDate(row.userJoinDate)}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
