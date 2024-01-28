@@ -8,6 +8,8 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import FaqModal from "../../../components/admin/Modal/FaqModal";
+import FaqWriteModal from "../../../components/admin/Modal/FaqWriteModal";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -17,8 +19,13 @@ function CustomerFAQ() {
     const [selectedTab, setSelectedTab] = useState('회원문의');
     const tableHeader = ['구분', '제목', '작성자', '작성일', ''];
 
-    const [isOpen, setIsOpen] = useState(false);
+    /* 모달 상태 관리 변수 */
+    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+    const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+    const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
+
     const [isConfirming, setIsConfirming] = useState(false);
+    const [selectedFaqId, setSelectedFaqId] = useState(null);
 
     const menuList = [
         {title: '회원문의'},
@@ -50,18 +57,38 @@ function CustomerFAQ() {
         }
     };
 
-    const openModalHandler = (row) => {
-        setIsOpen(true);
+    const openConfirmModalHandler = (event, row) => {
+        event.stopPropagation();
+        setIsConfirmModalOpen(true);
     };
 
-    const closeModalHandler = () => {
-        setIsOpen(false);
+    const closeConfirmModalHandler = () => {
+        setIsConfirmModalOpen(false);
     };
 
     const handleConfirm = () => {
         /* modal 의 확인 을 누르면 button 이 disabled */
         setIsConfirming(true);
     };
+
+    const handleCloseDetailModal = () => {
+        setIsDetailModalOpen(false);
+    };
+
+    const handleRowClick = (event, faqId) => {
+        event.stopPropagation();
+        setSelectedFaqId(faqId);
+        setIsDetailModalOpen(true);
+    };
+
+
+    const handleWriteButtonClick = () => {
+        setIsWriteModalOpen(true);
+    }
+
+    const handleCloseWriteModal = () => {
+        setIsWriteModalOpen(false);
+    }
 
     return (
         <Box>
@@ -75,20 +102,31 @@ function CustomerFAQ() {
                 <Paper square elevation={2}
                        sx={{p: '20px 30px'}}>
                     <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange}/>
-                    <CustomerFaqTable headers={tableHeader} rows={faqList} onDeleteClick={openModalHandler} />
+                    <CustomerFaqTable headers={tableHeader} rows={faqList} onDeleteClick={openConfirmModalHandler}
+                                      onRowClick={handleRowClick}/>
                     <Button
                         sx={{float: 'right'}}
                         variant="contained"
-                        endIcon={<BorderColorIcon />}>
+                        endIcon={<BorderColorIcon />}
+                        onClick={handleWriteButtonClick}>
                         작성하기
                     </Button>
                 </Paper>
             </Box>
-            {isOpen && (
-                <ConfirmModal color={'#FF5D5D'} isOpen={isOpen} onClose={closeModalHandler} onConfirm={handleConfirm}>
+            {isConfirmModalOpen && (
+                <ConfirmModal color={'#FF5D5D'} isOpen={isConfirmModalOpen} onClose={closeConfirmModalHandler} onConfirm={handleConfirm}>
                     <div>해당 글을 삭제합니다.</div>
                 </ConfirmModal>
             )}
+            {
+                selectedFaqId !== null && (
+                    <FaqModal open={isDetailModalOpen} handleClose={handleCloseDetailModal} faqId={selectedFaqId}
+                              faqList={faqList}/>
+                )
+            }
+            {
+                <FaqWriteModal open={isWriteModalOpen} handleClose={handleCloseWriteModal} />
+            }
         </Box>
     );
 }

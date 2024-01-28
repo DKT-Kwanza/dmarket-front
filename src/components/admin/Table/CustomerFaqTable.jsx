@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import {formatDate} from "../../../utils/Format";
 
-export default function CustomerFaqTable({headers, rows, onDeleteClick}) {
+export default function CustomerFaqTable({headers, rows, onDeleteClick, onRowClick}) {
     return (
         <TableContainer component={Paper} sx={{mb: 2}}>
             <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -25,14 +25,15 @@ export default function CustomerFaqTable({headers, rows, onDeleteClick}) {
                     {rows.map((row, index) => (
                         <TableRow
                             key={index}
-                            sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                            onClick={(event) => onRowClick(event, row.faqId)}>
                             <TableCell>{row.faqType}</TableCell>
                             <TableCell>{row.faqTitle}</TableCell>
                             <TableCell>관리자</TableCell>
                             <TableCell>{formatDate(row.faqCreatedDate)}</TableCell>
                             <TableCell>
                                 <Button
-                                    onClick={()=>{onDeleteClick(row.faqId)}}
+                                    onClick={(event)=>{onDeleteClick(event, row.faqId)}}
                                     variant="outlined"
                                     color="error"
                                     href="#text-buttons">삭제</Button>

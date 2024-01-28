@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import SelectBox from "../../commmon/SelectBox/SelectBox";
 
-export default function CustomerNoticeTable({headers, rows, onDeleteClick}) {
+export default function CustomerNoticeTable({headers, rows, onDeleteClick, onRowClick}) {
     return (
         <TableContainer component={Paper} sx={{mb: 2}}>
             <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -23,16 +23,17 @@ export default function CustomerNoticeTable({headers, rows, onDeleteClick}) {
                 </TableHead>
                 <TableBody>
                     {rows.map((row, index) => (
-                        <TableRow
-                            key={index}
-                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                        >
+                        <TableRow key={index}
+                                  sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                                  onClick={(event) => onRowClick(event, row.noticeId)}>
                             <TableCell>{row.noticeTitle}</TableCell>
                             <TableCell>관리자</TableCell>
                             <TableCell>{row.noticeCreatedDate}</TableCell>
                             <TableCell>
                                 <Button
-                                    onClick={()=>{onDeleteClick(row.noticeId)}}
+                                    onClick={(event) => {
+                                        onDeleteClick(event, row.noticeId)
+                                    }}
                                     variant="outlined"
                                     color="error"
                                     href="#text-buttons">삭제</Button>
