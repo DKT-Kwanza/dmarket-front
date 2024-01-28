@@ -1,12 +1,13 @@
 import React, {useRef, useState, useEffect} from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import "./Payment.css";
+import "./PaymentPage.css";
 import useDetectClose from "./UseDetectClose";
 import { MsgDropDown } from "../../../components/user/Common/Select/MsgDropDown";
 import {ReactComponent as DropDownImg} from "../../../assets/icons/dropdown.svg";
 import PaymentList from "../../../components/user/List/PaymentList";
 import PaymentInfo from "../../../components/user/Info/PaymentInfo";
+import AddressConfirmModal from "../../../components/user/Common/Modal/AddressConfirmModal";
 
 function Payment(){
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ function Payment(){
 
     const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
     const [paymentProducts, setPaymentProducts] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const productListCnt = paymentProducts.productList ? paymentProducts.productList.length : 0;
     const discount = paymentProducts.totalPrice - paymentProducts.totalPay;
     
@@ -29,8 +31,7 @@ function Payment(){
                 setPaymentProducts(response.data);
 
                 if (!response.data.userPostalCode || !response.data.userAddress || !response.data.userDetailAddress) {
-                    alert("배송지를 먼저 등록해주세요!");
-                    navigate('/mypage/changeinfo');
+                    setIsModalOpen(true);
                 }
             } catch (e) {
                 console.error("Error fetching data: ", e);
@@ -39,20 +40,30 @@ function Payment(){
         fetchData();
     }, [navigate]);
 
+    const closeModal = () => {
+        setIsModalOpen(false);
+        navigate('/mydkt/changeinfo');
+    };
+
     return(
         <div>
-        <div className="payment-background">
-            <div className="payment-wrap">
-                <div className="payment-title-div">
-                    <span className="payment-title-span">결제하기</span>
-                </div>    
-                <div className="payment-delivery">
-                    <div className="payment-delivery-title">
-                        <span className="payment-delivery-title-span1">받는 분 정보</span>
-                        <span className="payment-delivery-title-span2">
-                            기본 배송지 변경은 마이페이지 &gt; 회원정보변경 에서 가능합니다.
-                        </span>
-                    </div>
+            <AddressConfirmModal isOpen={isModalOpen} close={closeModal}>
+                <div className="modal-content">
+                    <p>배송지를 먼저 등록해주세요!</p>
+                </div>
+            </AddressConfirmModal>
+            <div className="payment-background">
+                <div className="payment-wrap">
+                    <div className="payment-title-div">
+                        <span className="payment-title-span">결제하기</span>
+                    </div>    
+                    <div className="payment-delivery">
+                        <div className="payment-delivery-title">
+                            <span className="payment-delivery-title-span1">받는 분 정보</span>
+                            <span className="payment-delivery-title-span2">
+                                기본 배송지 변경은 마이페이지 &gt; 회원정보변경 에서 가능합니다.
+                            </span>
+                        </div>
                     <div className="payment-deliveryAddr-form">
                         <span className="payment-deliveryAddr-span">
                             배송지 정보
@@ -75,23 +86,23 @@ function Payment(){
                         <div className="payment-deliveryReq-div" style={{marginTop:"15px",
                             border: !isOpen ? '1.3px solid #cccccc' :"1.2px solid #565656"}} ref={dropDownRef}>
                             <div>
-                                    <label className="payment-deliveryReq-drop">
-                                    <input onClick={() => setIsOpen(!isOpen)} type='button' 
-                                    value={msgIdentify}></input><DropDownImg/></label>
-                                        <div className="payment-dropdown" style={{display: !isOpen ? 'none' : 'block'}}>
-                                            <div className="payment-dropdown-scroll"> {/*사용자의 배송 요청사항 입력받기*/}
-                                                {isOpen && 
-                                                <ul>
-                                                {delReqList.map((value, index) => (
-                                                    <MsgDropDown key={index} value={value} setIsOpen={setIsOpen} 
-                                                    setMsgIdentify={setMsgIdentify} isOpen={isOpen} />))}
-                                                </ul>
-                                                }
-                                            </div>
+                                <label className="payment-deliveryReq-drop">
+                                <input onClick={() => setIsOpen(!isOpen)} type='button' 
+                                value={msgIdentify}></input><DropDownImg/></label>
+                                    <div className="payment-dropdown" style={{display: !isOpen ? 'none' : 'block'}}>
+                                        <div className="payment-dropdown-scroll"> {/*사용자의 배송 요청사항 입력받기*/}
+                                            {isOpen && 
+                                            <ul>
+                                            {delReqList.map((value, index) => (
+                                                <MsgDropDown key={index} value={value} setIsOpen={setIsOpen} 
+                                                setMsgIdentify={setMsgIdentify} isOpen={isOpen} />))}
+                                            </ul>
+                                            }
                                         </div>
-                            </div>
-                        </div>                  
-                    </div>
+                                    </div>
+                                </div>
+                            </div>                  
+                        </div>
 
                     {/* <div className="payment-deliveryInfo">
                         <div className="payment-deliveryInfo-num">
@@ -103,22 +114,22 @@ function Payment(){
                             <span>홍길동 / gildong@dktechin.com</span>
                         </div>  
                     </div> */}
-                </div>
-                <div className="payment-products">
-                    <span className="payment-products-title">주문상품: {productListCnt}개</span> {/*주문 상품 개수 불러오기*/}
-                    <div>
-                        <PaymentList items={paymentProducts.productList || []} />
                     </div>
+                    <div className="payment-products">
+                        <span className="payment-products-title">주문상품: {productListCnt}개</span> {/*주문 상품 개수 불러오기*/}
+                        <div>
+                            <PaymentList items={paymentProducts.productList || []} />
+                        </div>
+                    </div>
+                    <PaymentInfo
+                        userName={paymentProducts.userName}
+                        totalPrice={paymentProducts.totalPrice}
+                        discount={discount}
+                        totalPay={paymentProducts.totalPay}
+                    />
                 </div>
-                <PaymentInfo
-                    userName={paymentProducts.userName}
-                    totalPrice={paymentProducts.totalPrice}
-                    discount={discount}
-                    totalPay={paymentProducts.totalPay}
-                />
             </div>
         </div>
-    </div>
     );
 }
 

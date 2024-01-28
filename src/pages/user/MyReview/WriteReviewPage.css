@@ -234,33 +234,55 @@
 }
 
 .mypageProductReview-stars-button {
-    width: 100px;
-    height: 100px;
-    background: #EDEDED;
-    flex-shrink: 0;
     border: none;
     cursor: pointer;
     position: relative;
     margin-left: 23px;
-  }
-  
-  .mypageProductReview-stars-button-plus {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #AAA;
-    font-size: 96px;
-    color: #AAA;
-    font-size: 96px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
+}
 
-  .mypageProductReview-pictures-notice{
+.mypageProductReview-stars-button-plus {
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background: #FFD465;
+    font-size: 16px;
+    height: 30px;
+    width: 100px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.mypageProductReview-stars-button-plus2 {
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background: #FFD465;
+    font-size: 16px;
+    height: 30px;
+    width: 100px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.review-image {
+    object-fit: cover;
+    margin-left: 53px;
+    margin-top: 16px;
+    max-width: 500px;
+    max-height: 500px;
+    width: auto;
+    height: auto; 
+    display: block;
+}
+
+.mypageProductReview-pictures-notice{
     margin-top: 10px;
-    margin-left: 45px;
+    margin-left: 50px;
     color: #A9AFB3;
     font-family: Noto Sans KR;
     font-size: 13px;
@@ -290,7 +312,3 @@
     border:none;
     cursor: pointer;
 }
-
-
-
-  

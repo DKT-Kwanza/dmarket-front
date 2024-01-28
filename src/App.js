@@ -15,13 +15,13 @@ import Mywish from "./pages/user/WishList/Mywish";
 import Cart from "./pages/user/Cart/CartPage";
 import ProductList from "./pages/user/Product/ProductPage";
 import SearchList from "./pages/user/Product/SearchPage";
-import Payment from "./pages/user/Payment/Payment";
+import PaymentPage from "./pages/user/Payment/PaymentPage";
 import OrderComplete from './pages/user/Payment/OrderComplete';
 import ChangePwd from './pages/user/MyInfo/ChangePwd';
 import CustomerCenterNotice from "./pages/user/Customer/CustomerNoticePage";
 import CustomerCenterFAQ from "./pages/user/Customer/CustomerFaqPage";
-import CustomerCenterInquiry from "./pages/user/Customer/CustomerInquiryPage";
-import WriteReview from "./pages/user/MyReview/WriteReview";
+import CustomerInquiryPage from "./pages/user/Customer/CustomerInquiryPage";
+import WriteReviewPage from "./pages/user/MyReview/WriteReviewPage";
 import OrderHistory from './pages/user/MyOrder/OrderHistory';
 import OrderHistoryDetail from "./pages/user/MyOrder/OrderHistoryDetail";
 import Inquiry from "./pages/user/CustomerInquiry/Inquiry";
@@ -29,15 +29,15 @@ import Qna from "./pages/user/Qna/Qna";
 import HistoryMileage from "./pages/user/Mileage/HistoryMileage";
 
 import Product from "./pages/admin/Product/ProductPage";
-import AddProduct from "./pages/admin/Product/ProductAddPage";
-import EditProduct from "./pages/admin/Product/ProductEditPage";
-import ProductQna from "./pages/admin/Product/ProductQnaPage";
-import OptionQuantity from "./pages/admin/Product/ProductQuantityPage";
-import Admin from "./pages/admin/Member/AdminPage";
-import ProductReview from "./pages/admin/Product/ProductReviewPage";
+import ProductAddPage from "./pages/admin/Product/ProductAddPage";
+import ProductEditPage from "./pages/admin/Product/ProductEditPage";
+import ProductQnaPage from "./pages/admin/Product/ProductQnaPage";
+import ProductQuantityPage from "./pages/admin/Product/ProductQuantityPage";
+import AdminList from "./pages/admin/Member/AdminPage";
+import ProductReviewPage from "./pages/admin/Product/ProductReviewPage";
 import MemberList from "./pages/admin/Member/UserPage";
-import RegisterMember from "./pages/admin/Member/UserRegisterPage";
-import MemberMileage from "./pages/admin/Member/UserMileagePage";
+import UserRegisterPage from "./pages/admin/Member/UserRegisterPage";
+import UserMileagePage from "./pages/admin/Member/UserMileagePage";
 import OrderStatus from "./pages/admin/Order/OrderPage";
 import OrderCancel from "./pages/admin/Order/OrderCancelPage";
 import Refund from "./pages/admin/Order/OrderRefundPage";
@@ -48,12 +48,14 @@ import CustomerFAQ from "./pages/admin/Customer/CustomerFaqPage";
 
 function App() {
     const location = useLocation();
-    const hideHeaderFooter = (location.pathname === '/member/signin/form' || location.pathname.startsWith('/memberMng') || location.pathname.startsWith('/productMng') || location.pathname.startsWith('/orderMng') || location.pathname.startsWith('/customerMng'));
+    const noBodyStylePaths = ['/memberMng', '/productMng', '/orderMng', '/customerMng'];
+    const applyBodyStyle = !noBodyStylePaths.some(path => location.pathname.startsWith(path));
+    const hideHeaderFooter = (location.pathname.startsWith('/member') || location.pathname.startsWith('/memberMng') || location.pathname.startsWith('/productMng') || location.pathname.startsWith('/orderMng') || location.pathname.startsWith('/customerMng'));
 
   return (
     <div className="App">
         {!hideHeaderFooter && <Header />}
-        <div className="body">
+        <div className={applyBodyStyle ? "body" : ""}>
             <Routes>
 
               <Route path='/member'>
@@ -74,7 +76,7 @@ function App() {
               </Route>
 
               <Route path='/order'>
-                <Route path='' element={<Payment/>}/>
+                <Route path='' element={<PaymentPage/>}/>
                 <Route path='complete' element={<OrderComplete/>} />
               </Route>
 
@@ -84,7 +86,7 @@ function App() {
                 <Route path='mycart' element={<Cart />} />
                 <Route path='mywish' element={<Mywish/>} />
                 <Route path='review' element={<ReviewList/>} />
-                <Route path='writeReview' element={<WriteReview/>} />
+                <Route path='writeReview' element={<WriteReviewPage/>} />
                 <Route path='qna' element={<Qna />} />
                 <Route path='inquiry' element={<Inquiry />} />
                 <Route path='changeInfo' element={<ChangeInfo/>} />
@@ -96,24 +98,24 @@ function App() {
               <Route path='/customer'>
                 <Route path='' element={<CustomerCenterNotice/>} />
                 <Route path='faq/:tab' element={<CustomerCenterFAQ/>}/>
-                <Route path='writeInquiry' element={<CustomerCenterInquiry/>}/>
+                <Route path='writeInquiry' element={<CustomerInquiryPage/>}/>
               </Route>
 
               {/* 관리자 라우팅 */}
               <Route path='/memberMng'>
                     <Route path='manager' element={<Admin />}/>
                     <Route path='user' element={<MemberList/>}/>
-                    <Route path='addUser' element={<RegisterMember/>}/>
-                    <Route path='mileage' element={<MemberMileage/>}/>
+                    <Route path='addUser' element={<UserRegisterPage/>}/>
+                    <Route path='mileage' element={<UserMileagePage/>}/>
                 </Route>
 
                 <Route path='/productMng'>
                     <Route path='' element={<Product/>}/>
-                    <Route path='add' element={<AddProduct/>}/>
-                    <Route path='edit' element={<EditProduct/>}/>
-                    <Route path='qna' element={<ProductQna/>}/>
-                    <Route path='quantity' element={<OptionQuantity/>}/>
-                    <Route path='review' element={<ProductReview/>}/>
+                    <Route path='add' element={<ProductAddPage/>}/>
+                    <Route path='edit' element={<ProductEditPage/>}/>
+                    <Route path='qna' element={<ProductQnaPage/>}/>
+                    <Route path='quantity' element={<ProductQuantityPage/>}/>
+                    <Route path='review' element={<ProductReviewPage/>}/>
                 </Route>
 
                 <Route path='/orderMng'>

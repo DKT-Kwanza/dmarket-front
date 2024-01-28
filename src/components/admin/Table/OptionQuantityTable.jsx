@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { formatDate, formatPrice } from '../../../utils/Format';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,8 +10,38 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import ConfirmCancelModal from '../../commmon/Modal/ConfirmCancelModal';
 
 export default function EditProductTable({headers, rows}) {
+
+    const [addOptionQuantities, setAddOptionQuantities] = useState({}); 
+    const [isOpen, setIsOpen] = useState(false);
+    const [addSubmitted, setAddSubmitted] = useState(false);
+    
+    const handleQuantityChange = (event, optionId) => {
+        const value = event.target.value;
+
+        setAddOptionQuantities(prevQuantities => ({
+            ...prevQuantities,
+            [optionId]: value,
+        }));
+    };
+
+
+    const handleAddSubmit = (optionId) => {
+        const quantity = addOptionQuantities[optionId];
+
+        if (quantity !== undefined) {
+            // 재고 추가 api 
+            setAddSubmitted(true);
+            setIsOpen(true);
+        }
+    };
+
+    const handleCloseModal = () => {
+        setIsOpen(false);
+    };
+
 
     return (
         <TableContainer component={Paper} sx={{mb: 2}}>
@@ -59,16 +90,26 @@ export default function EditProductTable({headers, rows}) {
                                 <TableCell>
                                     <TextField
                                         type="number"
+                                        value={addOptionQuantities[item.optionId] || ''}
+                                        onChange={(event) => handleQuantityChange(event, item.optionId)}
                                         sx={{ width: "70px"}}
-                                    /></TableCell>
+                                    />
+                                </TableCell>
                                 <TableCell>{formatDate(row.productRegistDate)}</TableCell>
                                 <TableCell>
                                     <Button 
+                                        type="submit"
                                         variant="outlined"
+                                        onClick={() => handleAddSubmit(item.optionId)}
                                     >
                                         등록
                                     </Button>
                                 </TableCell>
+                                {addSubmitted && isOpen && (
+                                    <ConfirmCancelModal color={'#3377FF'} isOpen={isOpen} onClose={handleCloseModal} onConfirm={handleCloseModal}>
+                                        <div>재고를 추가하시겠습니까?</div>
+                                    </ConfirmCancelModal>
+                                )}
                             </TableRow>
                         ))
                     ))}

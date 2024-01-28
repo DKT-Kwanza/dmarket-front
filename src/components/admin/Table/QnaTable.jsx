@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
 import { formatDate } from '../../../utils/Format';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,9 +9,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import QnaModal from "../Modal/QnaModal";
+import ConfirmCancelModal from "../../../components/commmon/Modal/ConfirmCancelModal";
 
 const style = {
     position: 'absolute',
@@ -26,15 +25,27 @@ const style = {
     p: 4,
 };
 
-export default function QnaTable({headers, rows, onRowClick}) {
-    const navigate = useNavigate();
+export default function QnaTable({ headers, rows, onRowClick }) {
+    const [selectedQnaId, setSelectedQnaId] = useState(null);
+    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+    const [isQnaDetailModalOpen, setIsQnaDetailModalOpen] = useState(false);
 
-    const handleDeleteProduct = (qnaId) => {
-        alert(`${qnaId} 삭제됩니다`);
-    }
+    const handleQnaDetailModalOpen = (qnaId) => {
+        setSelectedQnaId(qnaId);
+        setIsQnaDetailModalOpen(true);
+    };
+
+    const handleDeleteClick = (qnaId) => {
+        setSelectedQnaId(qnaId);
+        setIsConfirmModalOpen(true);
+    };
+
+    const handleCloseConfirmModal = () => {
+        setIsConfirmModalOpen(false);
+    };
 
     return (
-        <TableContainer component={Paper} sx={{mb: 2}}>
+        <TableContainer component={Paper} sx={{ mb: 2 }}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
@@ -44,13 +55,13 @@ export default function QnaTable({headers, rows, onRowClick}) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((item, index ) => (
-                        <TableRow key={item.reviewId} onClick={() => onRowClick(item.reviewId)}>
+                    {rows.map((item, index) => (
+                        <TableRow key={item.qnaId}>
                             <TableCell component="th" scope="row">
                                 {item.productName}
                             </TableCell>
-                            <TableCell align="center">
-                                <Box sx={{ display: 'flex'}}>
+                            <TableCell align="center" onClick={() => handleQnaDetailModalOpen(item.qnaId)}>
+                                <Box sx={{ display: 'flex' }}>
                                     {item.qnaTitle}
                                     {item.qnaIsSecret && (
                                         <LockOutlinedIcon fontSize="small" sx={{ ml: 0.5 }} />
@@ -68,8 +79,7 @@ export default function QnaTable({headers, rows, onRowClick}) {
                                 <Button
                                     variant="outlined"
                                     color="error"
-                                    href="#text-buttons"
-                                    onClick={() => handleDeleteProduct(item.qnaId)}
+                                    onClick={() => handleDeleteClick(item.qnaId)}
                                 >
                                     삭제
                                 </Button>
@@ -78,6 +88,16 @@ export default function QnaTable({headers, rows, onRowClick}) {
                     ))}
                 </TableBody>
             </Table>
+            {isQnaDetailModalOpen && ( 
+                <QnaModal open={true} handleClose={() => setIsQnaDetailModalOpen(false)} qnaId={selectedQnaId} />
+            )}
+            {isConfirmModalOpen && (
+                <ConfirmCancelModal isOpen={isConfirmModalOpen} onClose={handleCloseConfirmModal} onConfirm={() => {
+                    setIsConfirmModalOpen(false);
+                }}>
+                    <div>해당 Q&A를 삭제합니다.</div>
+                </ConfirmCancelModal>
+            )}
         </TableContainer>
     );
 }

@@ -4,14 +4,16 @@ import Header from "../../../components/admin/Header/Header";
 import { Box, Button, TextField, Paper } from '@mui/material';
 import {indigo} from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 
 const primary = indigo[50];
 const drawerWidth = 260;
 
-function RegisterMember() {
+function UserRegisterPage() {
     const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false);
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
     const [state, setState] = useState({
         inputId: '',
@@ -23,31 +25,28 @@ function RegisterMember() {
     });
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-    
-        if (name === 'phoneNumber') {
-            const input = value.replace(/\D/g, '');
-            const formattedPhoneNumber = input.replace(/(\d{3})(\d{0,4})(\d{0,4})/, (match, p1, p2, p3) => {
-                if (p3) {
-                    return `${p1}-${p2}-${p3}`;
-                } else if (p2) {
-                    return `${p1}-${p2}`;
-                } else {
-                    return p1;
-                }
-            });
-            setState({ ...state, [name]: formattedPhoneNumber });
-        } else {
-            setState({ ...state, [name]: value });
-        }
+
     };
 
-      
+    const handleFormSubmit = (e) => {
+        e.preventDefault(); 
+        // 회원가입 api 연동
+
+        setFormSubmitted(true);
+        setIsOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsOpen(false);
+        navigate('/memberMng/user');
+    };
+
+
+
     return (
         <Box>
             <LeftNav/>
             <Header title={'사용자 등록'}/>
-            {/*컨텐츠 영역입니다.*/}
             <Box
                 bgcolor={primary}
                 component="main"
@@ -133,14 +132,19 @@ function RegisterMember() {
                         type="submit"
                         variant="outlined"
                         sx={{ float: "right", mt: 3, mb: 2 }}
+                        onClick={handleFormSubmit}
                     >
                         등록
                     </Button>
                 </Paper>
             </Box>
+            {formSubmitted && isOpen && (
+                <ConfirmModal color={'#3377FF'} isOpen={isOpen} onClose={handleCloseModal} onConfirm={handleCloseModal}>
+                    <div>사용자 등록이 완료되었습니다.</div>
+                </ConfirmModal>
+            )}
         </Box>
-
     );
 }
 
-export default RegisterMember;
+export default UserRegisterPage;

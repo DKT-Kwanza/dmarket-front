@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import LeftNav from "../../../components/admin/Sidebar/LeftNav";
 import Header from "../../../components/admin/Header/Header";
@@ -9,6 +10,7 @@ import Stack from '@mui/material/Stack';
 import { indigo } from '@mui/material/colors';
 import ImageIcon from '@mui/icons-material/Image';
 import Write from "../../../components/admin/Common/Input/Write";
+import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -18,7 +20,8 @@ const categories = ['여성 의류', '남성 의류', '유아 의류', '신발',
                     '모바일/태블릿', '영상가전', '음향가전', '주방가전', '생활가전', '휘트니스', '등산/수영', 
                     '구기', '골프', '캠핑', '자전거/기타레저'];
                     
-function EditProduct() {
+function ProductEditPage() {
+    const navigate = useNavigate();
     const [productDes, setProductDes] = useState("");
     const [images, setImages] = useState(Array(5).fill(null));
     const [category, setCategory] = useState('');
@@ -30,6 +33,8 @@ function EditProduct() {
     const [optionValueInput, setOptionValueInput] = useState('');
     const [optionTags, setOptionTags] = useState([]);
     const [price, setPrice] = useState({ cost: '', sale: '' });
+    const [isOpen, setIsOpen] = useState(false);
+    const [editSubmitted, setEditSubmitted] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -125,6 +130,19 @@ function EditProduct() {
         if (event.key === ' ' || event.key === 'Enter') {
             handleAddOptionTag();
         }
+    };
+
+    const handleEditSubmit = (e) => {
+        e.preventDefault(); 
+        // 상품 등록 api 연동
+
+        setEditSubmitted(true);
+        setIsOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsOpen(false);
+        navigate('/productMng');
     };
     
 
@@ -280,15 +298,19 @@ function EditProduct() {
                 <Button
                     sx={{ float: 'right'}}
                     variant="outlined"
-                    onClick={() => {
-                    }}
+                    onClick={handleEditSubmit}
                 >
                     저장
                 </Button>
             </Paper>
         </Box>
+        {editSubmitted && isOpen && (
+            <ConfirmModal color={'#3377FF'} isOpen={isOpen} onClose={handleCloseModal} onConfirm={handleCloseModal}>
+                <div>상품 편집이 완료되었습니다.</div>
+            </ConfirmModal>
+        )}
     </Box>
     );
 }
                             
-export default EditProduct;
+export default ProductEditPage;
