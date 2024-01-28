@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { formatDate } from '../../../utils/Format';
+import {useNavigate} from 'react-router-dom';
+import {formatDate} from '../../../utils/Format';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,9 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import SelectBox from "../../commmon/SelectBox/SelectBox";
 
 const style = {
     position: 'absolute',
@@ -25,7 +23,7 @@ const style = {
     p: 4,
 };
 
-export default function UserTable({headers, rows}) {
+export default function UserTable({headers, rows, style, children}) {
     const navigate = useNavigate();
 
     const [open, setOpen] = React.useState(false);
@@ -38,11 +36,11 @@ export default function UserTable({headers, rows}) {
 
     return (
         <TableContainer component={Paper} sx={{mb: 2}}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table sx={{minWidth: 650}} aria-label="simple table">
                 <TableHead>
                     <TableRow>
                         {
-                            headers.map((header)=>(
+                            headers.map((header) => (
                                 <TableCell>{header}</TableCell>
                             ))
                         }
@@ -50,7 +48,7 @@ export default function UserTable({headers, rows}) {
                 </TableHead>
                 <TableBody>
                     <TableRow
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        sx={{'&:last-child td, &:last-child th': {border: 0}}}
                     >
                         <TableCell component="th" scope="row">
                             {rows.userName}
@@ -60,14 +58,19 @@ export default function UserTable({headers, rows}) {
                         <TableCell>{rows.userRole}</TableCell>
                         <TableCell>{formatDate(rows.userJoinDate)}</TableCell>
                         <TableCell>
-                            <Button
-                                variant="outlined"
-                                color="error"
-                                href="#text-buttons"
-                                onClick={() => handleDeleteProduct(rows.userId)}
-                            >
-                                삭제
-                            </Button>
+                            {
+                                ! children
+                                    ?
+                                    <Button
+                                        variant="outlined"
+                                        color="error"
+                                        href="#text-buttons"
+                                        onClick={() => handleDeleteProduct(rows.userId)}>
+                                        삭제
+                                    </Button>
+                                    :
+                                    <SelectBox text={'유형을 선택하세요'} options={['사용자', '총괄관리자', '시스템관리자', '상품관리자']}/>
+                            }
                         </TableCell>
                     </TableRow>
                 </TableBody>
