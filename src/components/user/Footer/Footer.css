@@ -2,16 +2,16 @@
 .footer {
     height: 340px;
     background-color: #fff;
-    width: 100%;
+    width: 1920px;
 }
 
 
 /* footer 세부 내용 공통 사항 */
 .up-footer ,.down-footer{
-    width: 1280px;
+    max-width: 1280px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+
 }
 .up-footer{
     height:56px;
@@ -24,13 +24,17 @@
 /* footer 위쪽 내용 */
 .upfooter-service-basic,.upfooter-service-details{
     color: #000;
+    font-family: Noto Sans KR;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
     display: flex;
     align-items: center;
+
     justify-content: space-between;
+
 }
 
 .upfooter-service-basic button{
