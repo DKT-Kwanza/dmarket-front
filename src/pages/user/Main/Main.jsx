@@ -17,7 +17,11 @@ const Main = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://172.16.210.136:8080/api/products/new-products");
+                const response = await axios.get("http://172.16.210.136:8080/api/products/new-products", {
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    }
+                });
                 setNewProducts(response.data.data);
                 console.log(response.data.data);
             } catch (e) {
@@ -50,7 +54,11 @@ const Main = () => {
     const fetchPopularData = async (categoryId) => {
         console.log(categoryId);
         try {
-            const response = await axios.get(`http://172.16.210.136:8080/api/products/popular/${categoryId || ''}`);
+            const response = await axios.get(`http://172.16.210.136:8080/api/products/popular/${categoryId || ''}`, {
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                }
+            });
             setPopularProducts(response.data.data);
             console.log(response.data);
             console.log(popularProducts);

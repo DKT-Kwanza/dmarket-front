@@ -31,8 +31,8 @@ function OrderStatus() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     },
                 });
-                console.log(response.data);
-                setOrder(response.data);
+                console.log("response: ", response.data.data);
+                setOrder(response.data.data);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -40,27 +40,19 @@ function OrderStatus() {
         fetchData();
     }, [selectedTab]);
 
+    /* orderStatus가 업데이트 되었을 때만 setMenuList 호출 */
     useEffect(() => {
-        // orderStatus가 업데이트되었을 때만 setMenuList 호출
-        if (order && order.orderList) {
+        if (order) {
             setMenuList([
                 {title: '결제 완료', count: order.confPayCount},
                 {title: '배송 준비', count: order.preShipCount},
-                {title: '배송중', count: order.inTransitCount},
-                // {title: '배송완료', count: order.delivCompCount}
+                {title: '배송중', count: order.InTransitCount}
             ]);
         }
     }, [order]);
 
     const handleTabChange = async (tabTitle) => {
         setSelectedTab(tabTitle);
-        // try {
-        //     const response = await axios.get(`/api/AdminOrderStatusTestData.json`);
-        //     // 데이터를 테이블 형식에 맞게 가공하고 orderStatus 업데이트
-        //     setOrder(response.data);
-        // } catch (error) {
-        //     console.error("Error fetching data: ", error);
-        // }
     };
 
     return (
@@ -83,7 +75,9 @@ function OrderStatus() {
                 <Paper square elevation={2}
                        sx={{p: '20px 30px'}}>
                     <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange} />
-                    <OrderStatusTable headers={tableHeader} rows={order.orderList} />
+                    {order && order.orderList && order.orderList.content && (
+                        <OrderStatusTable headers={tableHeader} rows={order.orderList.content} />
+                    )}
                 </Paper>
             </Box>
         </Box>
