@@ -13,26 +13,26 @@ function ProductPage(){
     const { categoryId } = useParams();
     const [category1depthName, setCategory1depthName] = useState("");
     const [category2depthName, setCategory2depthName] = useState("");
+    const [sorter, setSorter] = useState('');
+    const [minPrice, setMinPrice] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
+    const [star, setStar] = useState('');
 
     const token = sessionStorage.getItem('token');
 
     useEffect(() => {
         const fetchData = async () => {
+            const url = `http://172.16.210.136:8080/api/products/categories/${categoryId}?sorter=${sorter}&min-price=${minPrice}&max-price=${maxPrice}&star=${star}`;
             try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/products/categories/${categoryId}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
+                const response = await axios.get(url, {
+                    headers: { 'Authorization': `Bearer ${token}` }
                 });
                 setProducts(response.data.data.productList);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
-    
-        if (categoryId) {
-            fetchData();
-        }
+        fetchData();
     
         const queryParams = new URLSearchParams(location.search);
         const category1depthName = queryParams.get('category1depthName');
@@ -44,7 +44,7 @@ function ProductPage(){
         if (category2depthName) {
             setCategory2depthName(decodeURIComponent(category2depthName));
         }
-    }, [categoryId, location.search]);
+    }, [categoryId, sorter, minPrice, maxPrice, star]);
     
 
     return (
@@ -53,9 +53,9 @@ function ProductPage(){
             <div className='productList-title'>{category2depthName}</div>
             <div className='productList-title-bar'></div>
             {/* //NOTE filter 컴포넌트로 분리했는데 별로면 주석 해제하세요 */}
-            <Filter/>
+            <Filter setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} setStar={setStar} />
             <div className='productList-bar'></div>
-            <Dropdown />
+            <Dropdown setSorter={setSorter} />
             <div className='productList-bar'></div>
             <div className='productList-container'>
                 {products.map((item, index) => (

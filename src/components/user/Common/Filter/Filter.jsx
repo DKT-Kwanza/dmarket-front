@@ -3,24 +3,33 @@ import { formatPrice } from '../../../../utils/Format';
 import './Filter.css';
 import { PiStarFill, PiStarLight } from "react-icons/pi";
 
-function Filter(){
-    const [minPrice, setMinPrice] = useState('');
-    const [maxPrice, setMaxPrice] = useState('');
-    const [selectedRating, setSelectedRating] = useState(null);
+function Filter({ setMinPrice, setMaxPrice, setStar }) {
+    const [localMinPrice, setLocalMinPrice] = useState('');
+    const [localMaxPrice, setLocalMaxPrice] = useState('');
+    const [localStar, setLocalStar] = useState('');
 
-    const handlePriceChange = (e, setPrice) => {
-        const formattedPrice = formatPrice(e.target.value);
-        setPrice(formattedPrice);
+    const applyFilters = () => {
+        setMinPrice(formatPrice(localMinPrice));
+        setMaxPrice(formatPrice(localMaxPrice));
+        setStar(localStar);
     };
 
-    const handleRatingChange = (rating) => { // 별점 상태 업데이트
-        setSelectedRating(rating === selectedRating ? null : rating);
+    const handlePriceChange = (setPriceFunc, value) => {
+        setPriceFunc(value);
     };
 
-    const handleClearFilter = () => { // 필터 전체 해제
+    const handleRatingChange = (rating) => {
+        const newRating = localStar === rating ? '' : rating;
+        setLocalStar(newRating);
+    };
+
+    const handleClearFilter = () => {
+        setLocalMinPrice('');
+        setLocalMaxPrice('');
+        setLocalStar('');
         setMinPrice('');
         setMaxPrice('');
-        setSelectedRating(null);
+        setStar('');
     };
 
     return (
@@ -29,107 +38,51 @@ function Filter(){
                 <div className='filter-price-container'>
                     <div className='filter-label'>가격</div>
                     <input 
+                        type="text"
                         className='filter-price' 
-                        placeholder='0₩' 
-                        value={minPrice}
-                        onChange={(e) => handlePriceChange(e, setMinPrice)}
+                        placeholder='최소 가격' 
+                        value={localMinPrice}
+                        onChange={(e) => handlePriceChange(setLocalMinPrice, e.target.value)}
                     />
                     <div className='filter-font'>~</div>
                     <input 
+                        type="text"
                         className='filter-price' 
-                        placeholder='0₩' 
-                        value={maxPrice}
-                        onChange={(e) => handlePriceChange(e, setMaxPrice)}
+                        placeholder='최대 가격' 
+                        value={localMaxPrice}
+                        onChange={(e) => handlePriceChange(setLocalMaxPrice, e.target.value)}
                     />
                 </div>
                 <div className='filter-rating-container'>
                     <div className='filter-label'>별점</div>
-                    <div>
-                        <input 
-                            type="radio" 
-                            name="rating" 
-                            id="star4" 
-                            className="filter-radio-btn" 
-                            value="4"
-                            checked={selectedRating === '4'} 
-                            onChange={() => handleRatingChange('4')}
-                        />
-                        <label for="star4" className="filter-radio-label">
-                            <div className='filter-star'>
-                                <PiStarFill/>
-                                <PiStarFill/>
-                                <PiStarFill/>
-                                <PiStarFill/>
-                                <PiStarLight/>
-                            </div>
-                            <span> 4점 이상</span>
-                        </label>
-                        <input 
-                            type="radio" 
-                            name="rating" 
-                            id="star3" 
-                            className="filter-radio-btn" 
-                            value="3"
-                            checked={selectedRating === '3'} 
-                            onChange={() => handleRatingChange('3')}
-                        />
-                        <label for="star3" className="filter-radio-label">
-                            <div className='filter-star'>
-                                <PiStarFill/>
-                                <PiStarFill/>
-                                <PiStarFill/>
-                                <PiStarLight/>
-                                <PiStarLight/>
-                            </div>
-                            <span> 3점 이상</span>
-                        </label>
-                        <input 
-                            type="radio" 
-                            name="rating" 
-                            id="star2" 
-                            className="filter-radio-btn" 
-                            value="2"
-                            checked={selectedRating === '2'} 
-                            onChange={() => handleRatingChange('2')}
-                        />
-                        <label for="star2" className="filter-radio-label">
-                            <div className='filter-star'>
-                                <PiStarFill/>
-                                <PiStarFill/>
-                                <PiStarLight/>
-                                <PiStarLight/>
-                                <PiStarLight/>
-                            </div>
-                            <span> 2점 이상</span>
-                        </label>
-                        <input 
-                            type="radio" 
-                            name="rating" 
-                            id="star1" 
-                            className="filter-radio-btn" 
-                            value="1ㄴ"
-                            checked={selectedRating === '1'} 
-                            onChange={() => handleRatingChange('1')}
-                        />
-                        <label for="star1" className="filter-radio-label">
-                            <div className='filter-star'>
-                                <PiStarFill/>
-                                <PiStarLight/>
-                                <PiStarLight/>
-                                <PiStarLight/>
-                                <PiStarLight/>
-                            </div>
-                            <span> 1점 이상</span>
-                        </label>
-                    </div>
+                    {[4, 3, 2, 1].map((starValue) => (
+                        <div key={starValue}>
+                            <input 
+                                type="radio" 
+                                name="rating" 
+                                id={`star${starValue}`} 
+                                className="filter-radio-btn" 
+                                value={starValue}
+                                checked={localStar === starValue.toString()} 
+                                onChange={() => handleRatingChange(starValue.toString())}
+                            />
+                            <label htmlFor={`star${starValue}`} className="filter-radio-label">
+                                <div className='filter-star'>
+                                    {[...Array(starValue)].map((_, i) => <PiStarFill key={i} />)}
+                                    {[...Array(5 - starValue)].map((_, i) => <PiStarLight key={i} />)}
+                                </div>
+                                <span> {starValue}점 이상</span>
+                            </label>
+                        </div>
+                    ))}
                 </div>
             </div>
-            <div className='filter-btn-container'>
-                <button className='filter-search-btn'>검색</button>
-                <button onClick={handleClearFilter} className='filter-clear-btn'>전체해제</button>
+            <div className="filter-btn-container">
+                <button className="filter-search-btn" onClick={applyFilters}>검색</button>
+                <button onClick={handleClearFilter} className="filter-clear-btn">전체해제</button>
             </div>
         </div>
-    )
+    );
 }
 
 export default Filter;

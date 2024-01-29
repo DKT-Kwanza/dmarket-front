@@ -13,6 +13,7 @@ function Header() {
     const [cartCount, setCartCount] = useState({});
     const [categories, setCategories] = useState([]);
     const [levelTwoCategories, setLevelTwoCategories] = useState([]);
+    const [searchInput, setSearchInput] = useState("");
 
     const token = sessionStorage.getItem('token');
     
@@ -55,6 +56,7 @@ function Header() {
         if (e.key === 'Enter') {
             const query = e.target.value;
             navigate(`/search?q=${encodeURIComponent(query)}`);
+            setSearchInput("");
         }
     };
     
@@ -98,6 +100,8 @@ function Header() {
                         className="search-box"
                         placeholder="검색어를 입력하세요"
                         onKeyPress={handleSearch}
+                        value={searchInput}
+                        onChange={(e) => setSearchInput(e.target.value)}
                     />
                     <div className='search-box-svg'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
