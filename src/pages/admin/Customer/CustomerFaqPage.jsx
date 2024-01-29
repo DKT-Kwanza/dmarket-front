@@ -17,7 +17,7 @@ const drawerWidth = 260;
 function CustomerFAQ() {
     const [faqList, setFaqList] = useState([]);
     const [selectedTab, setSelectedTab] = useState('회원문의');
-    const tableHeader = ['구분', '제목', '작성자', '작성일', ''];
+    const tableHeader = ['구분', '제목', '작성자', ''];
 
     /* 모달 상태 관리 변수 */
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
@@ -34,11 +34,19 @@ function CustomerFAQ() {
         {title: '마일리지 문의'}
     ];
 
+    const token = sessionStorage.getItem('token');
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("/api/AdminCustomerFaqData.json");
-                setFaqList(response.data);
+                const response = await axios.get(`http://172.16.210.136:8080/api/admin/board/faq?type=USER`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                console.log(response.data);
+                setFaqList(response.data.data.content);
+                console.log(faqList);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -48,13 +56,13 @@ function CustomerFAQ() {
 
     const handleTabChange = async (tabTitle) => {
         setSelectedTab(tabTitle);
-        try {
-            const response = await axios.get(`/api/AdminCustomerFaqTestData.json`);
-            /* 데이터를 테이블 형식에 맞게 가공하고 inquiryList 업데이트 */
-            setFaqList(response.data);
-        } catch (error) {
-            console.error("Error fetching data: ", error);
-        }
+        // try {
+        //     const response = await axios.get(`/api/AdminCustomerFaqTestData.json`);
+        //     /* 데이터를 테이블 형식에 맞게 가공하고 inquiryList 업데이트 */
+        //     setFaqList(response.data);
+        // } catch (error) {
+        //     console.error("Error fetching data: ", error);
+        // }
     };
 
     const openConfirmModalHandler = (event, row) => {
@@ -90,6 +98,21 @@ function CustomerFAQ() {
         setIsWriteModalOpen(false);
     }
 
+    const onDeleteClick = async (faqId) => {
+        try {
+            const url = `http://172.16.210.136:8080/api/admin/board/faq/${faqId}`;
+            await axios.delete(url, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            alert('해당 faq를 삭제하였습니다.');
+            setFaqList(faqList.filter(faq => faq.faqId !== faqId));
+        } catch (error) {
+            console.log(error);
+        }
+    };    
+
     return (
         <Box>
             <LeftNav/>
@@ -102,7 +125,7 @@ function CustomerFAQ() {
                 <Paper square elevation={2}
                        sx={{p: '20px 30px'}}>
                     <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange}/>
-                    <CustomerFaqTable headers={tableHeader} rows={faqList} onDeleteClick={openConfirmModalHandler}
+                    <CustomerFaqTable headers={tableHeader} rows={faqList} onDeleteClick={onDeleteClick}
                                       onRowClick={handleRowClick}/>
                     <Button
                         sx={{float: 'right'}}
@@ -113,11 +136,11 @@ function CustomerFAQ() {
                     </Button>
                 </Paper>
             </Box>
-            {isConfirmModalOpen && (
+            {/* {isConfirmModalOpen && (
                 <ConfirmModal color={'#FF5D5D'} isOpen={isConfirmModalOpen} onClose={closeConfirmModalHandler} onConfirm={handleConfirm}>
                     <div>해당 글을 삭제합니다.</div>
                 </ConfirmModal>
-            )}
+            )} */}
             {
                 selectedFaqId !== null && (
                     <FaqModal open={isDetailModalOpen} handleClose={handleCloseDetailModal} faqId={selectedFaqId}
