@@ -12,15 +12,26 @@ const drawerWidth = 260;
 
 function OrderStatus() {
     const [order, setOrder] = useState([]);
-    const [selectedTab, setSelectedTab] = useState('결제완료');
+    const [selectedTab, setSelectedTab] = useState('결제 완료');
     const [menuList, setMenuList] = useState([]);
     const tableHeader = ['주문번호', '상품번호', '브랜드', '상품', '옵션', '주문수량', '주문날짜', '배송상태 변경'];
 
+    /* 세션 스토리지에서 토큰 가져오기 */
+    const token = sessionStorage.getItem('token');
+
+    /* orderStatus 에 맞는 데이터 가져오기 */
     useEffect(() => {
+        console.log(selectedTab);
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/admin/orders?status=${selectedTab}`,
-                    );
+                const encodedTab = encodeURIComponent(selectedTab);
+                const response = await axios.get(`http://172.16.210.136:8080/api/admin/orders?status=${encodedTab}`,{
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    },
+                });
+                console.log(response.data);
                 setOrder(response.data);
             } catch (e) {
                 console.error("Error fetching data: ", e);
@@ -33,23 +44,23 @@ function OrderStatus() {
         // orderStatus가 업데이트되었을 때만 setMenuList 호출
         if (order && order.orderList) {
             setMenuList([
-                {title: '결제완료', count: order.confPayCount},
-                {title: '배송준비 중', count: order.preShipCount},
-                {title: '배송 중', count: order.inTransitCount},
-                {title: '배송완료', count: order.delivCompCount}
+                {title: '결제 완료', count: order.confPayCount},
+                {title: '배송 준비', count: order.preShipCount},
+                {title: '배송중', count: order.inTransitCount},
+                // {title: '배송완료', count: order.delivCompCount}
             ]);
         }
     }, [order]);
 
     const handleTabChange = async (tabTitle) => {
         setSelectedTab(tabTitle);
-        try {
-            const response = await axios.get(`/api/AdminOrderStatusTestData.json`);
-            // 데이터를 테이블 형식에 맞게 가공하고 orderStatus 업데이트
-            setOrder(response.data);
-        } catch (error) {
-            console.error("Error fetching data: ", error);
-        }
+        // try {
+        //     const response = await axios.get(`/api/AdminOrderStatusTestData.json`);
+        //     // 데이터를 테이블 형식에 맞게 가공하고 orderStatus 업데이트
+        //     setOrder(response.data);
+        // } catch (error) {
+        //     console.error("Error fetching data: ", error);
+        // }
     };
 
     return (

@@ -42,7 +42,8 @@ export default function CustomerInquiryTable({headers, rows, onDeleteClick, onRo
                             <TableCell>
                                 <Button
                                     onClick={(event) => {
-                                        onDeleteClick(event, row.inquiryId)
+                                        event.stopPropagation();
+                                        onDeleteClick(row.inquiryId);
                                     }}
                                     variant="outlined"
                                     color="error"

@@ -56,55 +56,28 @@ function CustomerInquiry() {
     const [isConfirming, setIsConfirming] = useState(false);
     const [selectedInquiryId, setSelectedInquiryId] = useState(null);
 
-    /* 문의 삭제 모달 handler */
-    // const openConfirmModalHandler = async ()=>{ alert 사용해서 하는 건데 안되면 새로고침 하거나 api 재호출
-    //     try {
-    //         console.log(selectedInquiryId);
-    //         if (selectedInquiryId !== null) {
-    //             /* 삭제 API 호출 */
-    //             const response = await axios.delete(`http://172.16.210.136:8080/api/admin/board/inquiry/${selectedInquiryId}`, {
-    //                 headers: {
-    //                     'Authorization': `Bearer ${token}`,
-    //                     'Content-Type': 'application/json; charset=UTF-8',
-    //                 },
-    //             });
-    //             alert("진짜 삭제합니다.")
-    //             /* 모달을 닫는 로직 */
-    //             // closeConfirmModalHandler();
-    //         }
-    //     } catch (error) {
-    //         console.error('Delete API 호출 실패:', error);
-    //     }
-    // }
-    const openConfirmModalHandler = (event, inquiryId) => {
-        event.stopPropagation();
-        setSelectedInquiryId(inquiryId);
-        setIsConfirmModalOpen(true);
-    };
-    const closeConfirmModalHandler = () => {
-        setIsConfirmModalOpen(false);
-    };
-    const handleConfirm = async () => {
+    /* 문의 삭제 handler */
+    const onDeleteClick = async (selectedInquiryId) => {
         try {
             console.log(selectedInquiryId);
-            if (selectedInquiryId !== null) {
-                /* 삭제 API 호출 */
-                const response = await axios.delete(`http://172.16.210.136:8080/api/admin/board/inquiry/${selectedInquiryId}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json; charset=UTF-8',
-                    },
-                });
-                /* 모달을 닫는 로직 */
-                closeConfirmModalHandler();
-            }
+
+            /* 삭제 API 호출 */
+            const response = await axios.delete(`http://172.16.210.136:8080/api/admin/board/inquiry/${selectedInquiryId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            });
+            alert("해당 문의를 삭제합니다.");
+            setInquiryList(inquiryList.filter(inquiry => inquiry.inquiryId !== selectedInquiryId));
         } catch (error) {
             console.error('Delete API 호출 실패:', error);
         }
-    };
+    }
 
     const handleRowClick = (event, inquiryId) => {
         event.stopPropagation();
+        console.log('handleRowClick called');
         setSelectedInquiryId(inquiryId);
         setIsDetailModalOpen(true);
     };
@@ -133,15 +106,9 @@ function CustomerInquiry() {
                        sx={{p: '20px 30px'}}>
                     <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange}/>
                     <CustomerInquiryTable headers={tableHeader} rows={inquiryList}
-                                          onDeleteClick={openConfirmModalHandler} onRowClick={handleRowClick}/>
+                                          onDeleteClick={onDeleteClick} onRowClick={handleRowClick}/>
                 </Paper>
             </Box>
-            {isConfirmModalOpen && (
-                <ConfirmModal color={'#FF5D5D'} isOpen={isConfirmModalOpen} onClose={closeConfirmModalHandler}
-                              onConfirm={handleConfirm}>
-                    <div>해당 글을 삭제합니다.</div>
-                </ConfirmModal>
-            )}
             {selectedInquiryId !== null && (
                 <InquiryModal
                     open={isDetailModalOpen} handleClose={handleCloseDetailModal} inquiryId={selectedInquiryId}/>
