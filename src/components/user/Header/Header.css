@@ -195,12 +195,10 @@ body, html {
 
 .sub-category{
     width: 770px;
-    height: 30px;
     display: flex;
-    align-items: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    background: white;
     justify-content: space-between;
+    margin-top: 20px;
 }
 
 .sub-category button{
@@ -208,7 +206,6 @@ body, html {
     border:none;
     background-color: #FFF;
     cursor: pointer;
-
     color: #000;
     font-family: Noto Sans KR;
     font-size: 15px;
@@ -247,4 +244,41 @@ body, html {
     line-height: normal;
 
     cursor: pointer;
+}
+
+.sub-category-container {
+    margin-top: 30px;
+    display: flex;
+    background: #FFF;
+}
+
+.sub-category-box-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.sub-category-box-whole {
+    background-color: white;
+    margin-top: 30px;
+}
+
+.sub-category-contents-details-button{
+    border:none;
+    background-color: #FFF;
+    cursor: pointer;
+    color: #848484;
+    width: 120px;
+}
+
+.sub-sub-category-contents-details button:hover {
+    color: black;
+}
+
+.sub-sub-category-contents-details button:hover{
+    font-weight: 700;
+}
+
+.sub-sub-category-contents-details-style{
+    margin-bottom: 9px;
 }
