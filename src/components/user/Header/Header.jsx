@@ -51,10 +51,13 @@ function Header() {
         fetchData();
     }, []);
 
-    // svg 클릭 이벤트 만들어야함
-    const navigateToSearch = () => {
-        navigate('./search')
-    }
+    const handleSearch = (e) => {
+        if (e.key === 'Enter') {
+            const query = e.target.value;
+            navigate(`/search?q=${encodeURIComponent(query)}`);
+        }
+    };
+    
 
     // 아이콘 클릭 이후 페이지 변경
     const navigateToPage= (menu) => {
@@ -91,9 +94,12 @@ function Header() {
             <div className="nav-div">
                 <div onClick={navigateToMain} className="logo"></div>
                 <div className='search-box-div'>
-                    <input className="search-box" placeholder='2023년 봄날 가벼워진 패션으로 나들이 가보자~'>
-                    </input>
-                    <div className='search-box-svg' onClick={navigateToSearch}>
+                    <input
+                        className="search-box"
+                        placeholder="검색어를 입력하세요"
+                        onKeyPress={handleSearch}
+                    />
+                    <div className='search-box-svg'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path
                                 d="M11 19C12.775 18.9996 14.4988 18.4054 15.897 17.312L20.293 21.708L21.707 20.294L17.311 15.898C18.405 14.4997 18.9996 12.7754 19 11C19 6.589 15.411 3 11 3C6.589 3 3 6.589 3 11C3 15.411 6.589 19 11 19ZM11 5C14.309 5 17 7.691 17 11C17 14.309 14.309 17 11 17C7.691 17 5 14.309 5 11C5 7.691 7.691 5 11 5Z"
