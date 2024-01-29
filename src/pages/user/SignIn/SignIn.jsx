@@ -43,7 +43,7 @@ function SignIn() {
         e.preventDefault();
     
         try {
-            const response = await axios.post('http://172.16.232.230:8080/api/users/email', email, {
+            const response = await axios.post('http://172.16.210.136:8080/api/users/email', email, {
                 headers: {
                     'Content-Type': 'text/plain',
                 },
@@ -63,7 +63,7 @@ function SignIn() {
         e.preventDefault();
         try {
             const codeInt = parseInt(code, 10);
-            const response = await axios.post('http://172.16.232.230:8080/api/users/email/verify', {
+            const response = await axios.post('http://172.16.210.136:8080/api/users/email/verify', {
                 userEmail: email,
                 code: codeInt,
             });
