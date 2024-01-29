@@ -10,12 +10,13 @@ import alert from '../../../assets/icons/alert.svg'
 function Header() {
     const navigate = useNavigate();
     const [isMainDivHovered, setMainDivHovered] = useState(false);
-    const [cartCount, setCartCount] = useState({});
+    const [cartCount, setCartCount] = useState('');
     const [categories, setCategories] = useState([]);
     const [levelTwoCategories, setLevelTwoCategories] = useState([]);
     const [searchInput, setSearchInput] = useState("");
 
     const token = sessionStorage.getItem('token');
+    const userId = sessionStorage.getItem('userId');
     
     useEffect(() => {
         const fetchCategories = async () => {
@@ -26,9 +27,7 @@ function Header() {
                     }
                 });
                 if (response.data.code === 200) {
-                console.log(response.data)
                 setCategories(response.data.data);
-                console.log(categories)
                 const levelTwos = response.data.data.reduce((acc, curr) => [...acc, ...curr.child], []);
                 setLevelTwoCategories(levelTwos);
                 }
@@ -43,14 +42,18 @@ function Header() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("/api/CartCountData.json");
-                setCartCount(response.data);
+                const response = await axios.get(`http://172.16.210.136:8080/api/users/${userId}/cart-count`,{
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                setCartCount(response.data.data.cartCount);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
         fetchData();
-    }, []);
+    }, [cartCount]);
 
     const handleSearch = (e) => {
         if (e.key === 'Enter') {
@@ -121,7 +124,7 @@ function Header() {
                             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 21 20" fill="none">
                                 <circle cx="10.8359" cy="10" r="10" fill="black"/>
                                 <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="white" font-size="12">
-                                    {cartCount.cartCount}
+                                    {cartCount}
                                 </text>
                             </svg>
                         </div>
