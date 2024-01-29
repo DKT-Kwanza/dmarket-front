@@ -38,6 +38,7 @@ function CustomerInquiry() {
                     }
                 });
                 setInquiryList(response.data.data.content);
+                // console.log(response.data.data);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -59,8 +60,6 @@ function CustomerInquiry() {
     /* 문의 삭제 handler */
     const onDeleteClick = async (selectedInquiryId) => {
         try {
-            console.log(selectedInquiryId);
-
             /* 삭제 API 호출 */
             const response = await axios.delete(`http://172.16.210.136:8080/api/admin/board/inquiry/${selectedInquiryId}`, {
                 headers: {
@@ -77,7 +76,6 @@ function CustomerInquiry() {
 
     const handleRowClick = (event, inquiryId) => {
         event.stopPropagation();
-        console.log('handleRowClick called');
         setSelectedInquiryId(inquiryId);
         setIsDetailModalOpen(true);
     };

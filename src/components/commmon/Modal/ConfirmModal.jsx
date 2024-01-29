@@ -83,12 +83,12 @@ const ConfirmBtn = styled.button`
   outline: none;
   border: none;
   border-radius: 0 0 5px 5px;
-  background: ${props => props.color || '#FFD465'};
+  background: ${props => (props.color ? props.color : '#FFD465')};
 
   &:active,
   &:hover,
   &:focus {
-    background: ${props => darken(0.1, props.color) || '#ffb84a'};
+    background: ${props => (props.color ? darken(0.1, props.color) : darken(0.1, '#FFD465'))};
   }
 `
 
