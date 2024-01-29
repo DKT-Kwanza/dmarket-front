@@ -14,6 +14,9 @@ function Header() {
     const [isSubDivHovered, setSubDivHovered] = useState(false);
     const [cartCount, setCartCount] = useState({});
 
+    /* 세션 스토리지에서 토큰 가져오기 */
+    const token = sessionStorage.getItem('token');
+
     useEffect(() => {
         const fetchData = async () => {
             try {

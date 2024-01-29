@@ -32,6 +32,7 @@ function Login() {
         .post('http://172.16.210.136:8080/api/users/login', formData)
         .then(res =>{
           const token = res.data.data.accesstoken;
+          const userId = res.data.data.userId;
           sessionStorage.setItem('token', token);
           alert("로그인 되었습니다!");
           navigate("../../");
