@@ -15,7 +15,7 @@ function Cart(){
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("/api/CartData.json");
+                const response = await axios.get("http://172.16.210.136:8080/api/users/{userId}/cart-count");
                 
                 setCarts(response.data);
                 console.log(carts)
