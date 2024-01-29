@@ -31,7 +31,10 @@ function Login() {
     axios
         .post('http://172.16.210.136:8080/api/users/login', formData)
         .then(res =>{
-            console.log(res.data);
+            const token = res.data.data.accesstoken;
+            sessionStorage.setItem('token', token);
+            alert("로구인 되었습니다!");
+            navigate("../../");
         })
         .catch(error => {
             console.error("Login failed:", error);

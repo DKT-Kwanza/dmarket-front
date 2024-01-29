@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './SignIn.css';
 import logo from '../../../assets/images/logo.png'
 
@@ -7,6 +8,7 @@ function SignIn() {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState(''); // 사용자 이메일 상태
+    const [code, setCode] = useState(''); // 인증 코드 입력 상태
     const [showVerification, setShowVerification] = useState(false); // 인증 코드 입력칸 상태
     const [timer, setTimer] = useState(600); // 10분을 초로 환산
 
@@ -17,28 +19,63 @@ function SignIn() {
                 setTimer((prevTimer) => prevTimer - 1);
             }, 1000);
         } else if (timer === 0) {
-            // 타이머가 0이 되면 인증 시간 만료 처리
             clearInterval(interval);
-            // 여기에 타이머 만료시 실행할 로직을 추가합니다.
         }
         return () => clearInterval(interval);
     }, [showVerification, timer]);
+
+    /* MM:SS 형식으로 변환 */
+    const changeTime = () => {
+        const minutes = Math.floor(timer / 60);
+        const seconds = timer % 60;
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    };
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
     
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    setShowVerification(true);
-    setTimer(600); // 타이머를 10분으로 설정
+    const handleCodeChange = (e) => {
+        setCode(e.target.value);
     };
 
-    const changeTime = () => { // 시간을 MM:SS 형식으로 변환하는 함수
-        const minutes = Math.floor(timer / 60);
-        const seconds = timer % 60;
-        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    const handleSubmitEmail = async (e) => {
+        e.preventDefault();
+    
+        try {
+            const response = await axios.post('http://172.16.232.230:8080/api/users/email', email, {
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+            });
+            if (response.status === 200) {
+                setShowVerification(true);
+                setTimer(600);
+            }
+        } catch (error) {
+            console.error('Email verification error:', error);
+        }
     };
+    
+    
+
+    const handleSubmitCode = async (e) => {
+        e.preventDefault();
+        try {
+            const codeInt = parseInt(code, 10);
+            const response = await axios.post('http://172.16.232.230:8080/api/users/email/verify', {
+                userEmail: email,
+                code: codeInt,
+            });
+    
+            if (response.status === 200) {
+                navigate("../signinForm");
+            }
+        } catch (error) {
+            console.error('Code verification error:', error);
+        }
+    };
+    
 
     const navigateToSignForm = () => {
         navigate("../signinForm");
@@ -63,7 +100,7 @@ function SignIn() {
                             value={email}
                             onChange={handleEmailChange}
                         />
-                        <button onClick={handleSubmit} className="signIn-btn1">
+                        <button onClick={handleSubmitEmail} className="signIn-btn1">
                             인증하기
                         </button>
                     </div>
@@ -81,6 +118,8 @@ function SignIn() {
                                 type="text"
                                 className="signIn-code-input"
                                 placeholder="인증코드를 입력해주세요"
+                                value={code}
+                                onChange={handleCodeChange}
                             />
                             {showVerification && (
                                 <div className='signIn-timer'>
@@ -88,7 +127,9 @@ function SignIn() {
                                 </div>
                             )}
                         </div>
-                        <div onClick={navigateToSignForm} className="signIn-btn2">인증하기</div>
+                        <button onClick={handleSubmitCode} className="signIn-btn2">
+                            인증하기
+                        </button>
                     </div>
                 )}
                 <div className='signIn-info'>
