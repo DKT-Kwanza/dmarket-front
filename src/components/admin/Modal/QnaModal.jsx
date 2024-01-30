@@ -15,18 +15,55 @@ const QnaModalStyle = {
     p: 4,
 };
 
-function QnaModal({ open, handleClose, qnaId }) {
+function QnaModal({ open, handleClose, qnaId, fetchQnaList }) {
     const [qna, setQna] = useState(null);
+    const [replyContent, setReplyContent] = useState('');
+    const token = sessionStorage.getItem('token');
 
     useEffect(() => {
-        axios.get("/api/AdminQnaDetailData.json")
-            .then((response) => {
-                setQna(response.data);
-            })
-            .catch((error) => {
-                console.error("Error fetching QnA data: ", error);
+        fetchQnaDetail();
+    }, [qnaId, token]);
+
+    const fetchQnaDetail = async () => {
+        try {
+            const response = await axios.get(`http://172.16.210.136:8080/api/admin/products/qna/${qnaId}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
             });
-    }, [qnaId]);
+            setQna(response.data.data);
+        } catch (error) {
+            console.error("Error fetching QnA data: ", error);
+        }
+    };
+
+    const handleReplySubmit = async () => {
+        try {
+            await axios.post(`http://172.16.210.136:8080/api/admin/products/qna/${qnaId}`, {
+                qnaReplyContents: replyContent
+            }, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            alert("답변이 등록되었습니다.");
+            fetchQnaDetail();
+            fetchQnaList();
+            setReplyContent('');
+        } catch (error) {
+            console.error("Error submitting reply: ", error);
+        }
+    };
+
+    const handleReplyDelete = async () => {
+        try {
+            await axios.delete(`http://172.16.210.136:8080/api/admin/products/qna/reply/${qna.qnaReplyId}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            alert("답변이 삭제되었습니다.");
+            fetchQnaDetail();
+            fetchQnaList();
+            setReplyContent('');
+        } catch (error) {
+            console.error("Error deleting reply: ", error);
+        }
+    };
 
     return (
         <Modal
@@ -38,15 +75,17 @@ function QnaModal({ open, handleClose, qnaId }) {
             <Box sx={QnaModalStyle}>
             {qna && (
                     <>
-                        <Typography id="qna-modal-title" variant="h6" component="h2" sx={{ mt: 2 }}>
-                            {qna.qnaTitle}
+                        <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
+                            <Typography id="qna-modal-title" variant="h6" component="h2">
+                                {qna.qnaTitle}
+                            </Typography>
                             {qna.qnaIsSecret && (
                                 <LockOutlinedIcon fontSize="small" sx={{ ml: 0.5 }} />
                             )}
-                        </Typography>
-                        <Typography sx={{ color: qna.qnaStatus === '답변 완료' ? '#3377FF' : '#FF5D5D', mt: 2 }}>
-                            {qna.qnaStatus}
-                        </Typography>
+                            <Typography sx={{ color: qna.qnaStatus === '답변 완료' ? '#3377FF' : '#FF5D5D', ml: 2 }}>
+                                {qna.qnaStatus}
+                            </Typography>
+                        </Box>
                         <Typography sx={{ mt: 2 }}>{qna.productName}</Typography>
                         <Typography sx={{ mt: 2 }}>
                             {qna.qnaWriter} {formatDate(qna.qnaCreatedDate)}
@@ -59,21 +98,27 @@ function QnaModal({ open, handleClose, qnaId }) {
                         {qna.qnaStatus === '답변 대기' ? (
                             <>
                                 <TextField
-                                    fullWidth
-                                    multiline
-                                    rows={4}
-                                    placeholder="답변을 입력하세요."
-                                    margin="normal"
-                                    sx={{ mt: 2 }}
-                                />
-                                <Button variant="outlined" sx={{ mt: 2, float: "right" }}>등록</Button>
+                                fullWidth
+                                multiline
+                                rows={4}
+                                placeholder="답변을 입력하세요."
+                                margin="normal"
+                                sx={{ mt: 2 }}
+                                value={replyContent}
+                                onChange={(e) => setReplyContent(e.target.value)}
+                            />
+                            <Button variant="outlined" sx={{ mt: 2, float: "right" }} onClick={handleReplySubmit}>
+                                등록
+                            </Button>
                             </>
                         ) : (
                             <>
                                 <Typography sx={{ mt: 2 }}>관리자 {formatDate(qna.qnaReplyDate)}</Typography>
                                 <Typography sx={{ mt: 2 }}>{qna.qnaReplyContents}</Typography>
                                 <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
-                                    <Button variant="outlined" color="error" sx={{ mr: 2 }}>답변 삭제</Button>
+                                    <Button variant="outlined" color="error" sx={{ mr: 2 }} onClick={handleReplyDelete}>
+                                        답변 삭제
+                                    </Button>
                                     <Button variant="outlined" onClick={handleClose}>확인</Button>
                                 </Box>
                             </>
