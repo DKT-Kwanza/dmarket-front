@@ -31,6 +31,7 @@ function SearchPage() {
                 });
                 setProducts(response.data.data.productList);
                 setTotalPages(response.data.data.totalPage);
+                console.log(response.data)
             } catch (e) {
                 console.error(e);
             }
@@ -38,10 +39,19 @@ function SearchPage() {
         fetchData();
     }, [query, sorter, minPrice, maxPrice, star, currentPage]);
 
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const page = queryParams.get('page');
+        const currentPage = page ? parseInt(page, 10) : 1;
+        setCurrentPage(currentPage);
+    
+    }, [location.search]);
+    
+
     const handlePageChange = (event, value) => {
-        setCurrentPage(value);
-        navigate(`?page=${value}`);
+        navigate(`?q=${query}&page=${value}`);
     };
+    
 
     return (
         <div className="searchList-body">
