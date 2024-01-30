@@ -79,7 +79,7 @@ function FaqWriteModal({ open, handleClose }) {
                         <SelectBox
                             text={'유형을 선택해 주세요'}
                             options={['회원', '주문/결제', '반품/환불', '마일리지']}
-                            onSelectOption={handleFaqTypeChange}
+                            onChange={handleFaqTypeChange}
                         />
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>

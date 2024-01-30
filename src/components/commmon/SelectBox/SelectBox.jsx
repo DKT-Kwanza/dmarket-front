@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ReactComponent as ChevronDown } from "../../../assets/icons/chevron-down.svg";
 
 
-export default function SelectBox({ text, options, onSelectOption }) {
+export default function SelectBox({ text, options, onChange }) {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
 
@@ -13,7 +13,6 @@ export default function SelectBox({ text, options, onSelectOption }) {
 
     const handleOptionSelect = (option) => {
         setSelectedOption(option);
-        onSelectOption(option);
         setDropdownOpen(false);
         onChange(option);
     };

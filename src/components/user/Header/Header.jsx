@@ -39,9 +39,6 @@ function Header() {
             fetchCategories();
     }, []);
 
-    /* 세션 스토리지에서 토큰 가져오기 */
-    const token = sessionStorage.getItem('token');
-
     useEffect(() => {
         const fetchData = async () => {
             try {
