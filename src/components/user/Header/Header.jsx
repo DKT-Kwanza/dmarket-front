@@ -39,6 +39,9 @@ function Header() {
             fetchCategories();
     }, []);
 
+    /* 세션 스토리지에서 토큰 가져오기 */
+    const token = sessionStorage.getItem('token');
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -64,8 +67,8 @@ function Header() {
     };
     
 
-    // 아이콘 클릭 이후 페이지 변경
-    const navigateToPage= (menu) => {
+    /* 아이콘 클릭 이후 페이지 변경 */
+    const navigateToPage = (menu) => {
         navigate(`./mydkt/${menu}`);
     }
 
@@ -93,6 +96,9 @@ function Header() {
         const encodedCategoryName2 = encodeURIComponent(categoryName2);
         navigate(`/category/${categoryId}?category1depthName=${encodedCategoryName1}&category2depthName=${encodedCategoryName2}`);
     };
+    const navigateToAdmin = () => {
+        navigate('./memberMng/manager');
+    }
 
     return (
         <div className="header-div">
@@ -183,7 +189,10 @@ function Header() {
                             </div>
                         </div>
                     </div>
-                    <div onClick={navigateToCustomer} className="user-center">고객센터</div>
+                    <div className="user-center">
+                        <div onClick={navigateToAdmin} className="cate-admin">관리자</div>
+                        <div onClick={navigateToCustomer} className="cate-customer">고객센터</div>
+                    </div>
                 </div>
             </div>
         </div>

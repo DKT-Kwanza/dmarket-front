@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 import {formatDate} from "../../../utils/Format";
 
 export default function CustomerInquiryTable({headers, rows, onDeleteClick, onRowClick}) {
+
+
     return (
         <TableContainer component={Paper} sx={{mb: 2}}>
             <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -22,7 +24,7 @@ export default function CustomerInquiryTable({headers, rows, onDeleteClick, onRo
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row, index) => (
+                    {rows && rows.map((row, index) => (
                         <TableRow
                             key={index} sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             onClick={(event) => onRowClick(event, row.inquiryId)}>
@@ -40,7 +42,8 @@ export default function CustomerInquiryTable({headers, rows, onDeleteClick, onRo
                             <TableCell>
                                 <Button
                                     onClick={(event) => {
-                                        onDeleteClick(event, row.inquiryId)
+                                        event.stopPropagation();
+                                        onDeleteClick(row.inquiryId);
                                     }}
                                     variant="outlined"
                                     color="error"

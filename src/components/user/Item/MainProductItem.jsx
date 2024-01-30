@@ -1,9 +1,9 @@
 import React from 'react';
 import './MainProductItem.css'
 
-const ProductItem = ({ brand, productName, productImg, sales }) => {
+const ProductItem = ({ brand, productName, productImg, sales, onClick }) => {
   return (
-    <div className='main-div-product-wrapper'>
+    <div className='main-div-product-wrapper' onClick={onClick}>
       <div className='main-div-product-img-wrapper'>
         <img src={productImg} className='main-img-product' alt='상품이미지'/>
       </div>

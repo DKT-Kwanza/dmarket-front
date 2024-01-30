@@ -7,7 +7,7 @@ function RecommendProductList({recommendProducts}) {
 
     const navigate = useNavigate();
     const navigateToProductDetail = (productId) => {
-        navigate(`../product/detail/${productId}`);
+        navigate(`/product/detail/${productId}`);
     }
 
     return (

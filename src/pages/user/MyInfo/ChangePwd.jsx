@@ -3,8 +3,11 @@ import "./ChangePwd.css";
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function ChangePwd() {
+    const navigate = useNavigate();
     /* 현재 비밀번호 변수 */
     const [currentPassword, setCurrentPassword] = useState("");
     /* 새 비밀번호 변수 */
@@ -21,24 +24,57 @@ function ChangePwd() {
         setPasswordsMatch(newPassword === confirmPassword);
     }, [newPassword, confirmPassword]);
 
+    /* 현재 비밀번호 값 */
+    const handleCurrentPasswordChange = (e) => {
+        setCurrentPassword(e.target.value);
+    };
+
+    /* 새 비밀번호 값 */
     const handlePasswordChange = (e) => {
         setNewPassword(e.target.value);
     };
 
+    /* 새 비밀번호 확인 값 */
     const handleConfirmPasswordChange = (e) => {
         setConfirmPassword(e.target.value);
     };
 
+    /* 확인 모달 handler */
     const openModalHandler = () => {
         setIsOpen(true);
-    };
-
+    }
     const closeModalHandler = () => {
         setIsOpen(false);
     };
 
-    const handleConfirm = () => {
-        // modal 의 확인 을 누르면 button 이 disabled
+    /* 세션 스토리지에서 토큰 가져오기 */
+    const token = sessionStorage.getItem('token');
+    const userId = sessionStorage.getItem('userId');
+
+    const changePasswordConfirm = async () => {
+        const requestData = {
+            currentPassword: currentPassword,
+            newPassword: newPassword,
+        };
+
+        try {
+            const response = await axios.put(`http://172.16.210.136:8080/api/users/${userId}/mypage/change-pwd`, requestData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json; charset=UTF-8',
+                }
+            });
+            console.log('요청 성공:', response.data);
+
+            /* 성공 시 sessionStorage 비우기 */
+            sessionStorage.removeItem('token');
+            sessionStorage.removeItem('userId');
+
+            /* 로그인 페이지로 이동 */
+            navigate("/member/login");
+        } catch (e) {
+            console.error('요청 실패:', e);
+        }
         setIsConfirming(true);
     };
 
@@ -64,7 +100,7 @@ function ChangePwd() {
                                     <tbody>
                                     <tr>
                                         <td>현재 비밀번호</td>
-                                        <td><input type="password" value={currentPassword}></input></td>
+                                        <td><input type="password" value={currentPassword} onChange={handleCurrentPasswordChange}/></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -121,7 +157,7 @@ function ChangePwd() {
                 </div>
             </div>
             {isOpen && (
-                <ConfirmModal isOpen={isOpen} onClose={closeModalHandler} onConfirm={handleConfirm}>
+                <ConfirmModal isOpen={isOpen} onClose={closeModalHandler} onConfirm={changePasswordConfirm}>
                     <div style={{display: 'flex', flexDirection: 'column'}}>
                         <div>비밀번호 변경이 완료되었습니다.</div>
                         <div>자동으로 로그아웃됩니다.</div>

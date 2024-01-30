@@ -15,6 +15,7 @@ export default function SelectBox({ text, options, onSelectOption }) {
         setSelectedOption(option);
         onSelectOption(option);
         setDropdownOpen(false);
+        onChange(option);
     };
 
     return (
