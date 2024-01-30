@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { ReactComponent as ChevronDown } from "../../../assets/icons/chevron-down.svg";
 
 
-export default function SelectBox({text, options}) {
+export default function SelectBox({ text, options, onSelectOption }) {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(''); // 선택된 옵션을 추적하기 위한 상태 추가
+    const [selectedOption, setSelectedOption] = useState('');
 
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
@@ -13,6 +13,7 @@ export default function SelectBox({text, options}) {
 
     const handleOptionSelect = (option) => {
         setSelectedOption(option);
+        onSelectOption(option);
         setDropdownOpen(false);
     };
 

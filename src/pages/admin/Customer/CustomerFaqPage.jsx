@@ -16,7 +16,7 @@ const drawerWidth = 260;
 
 function CustomerFAQ() {
     const [faqList, setFaqList] = useState([]);
-    const [selectedTab, setSelectedTab] = useState('회원문의');
+    const [selectedTab, setSelectedTab] = useState('회원 문의');
     const tableHeader = ['구분', '제목', '작성자', ''];
 
     /* 모달 상태 관리 변수 */
@@ -28,7 +28,7 @@ function CustomerFAQ() {
     const [selectedFaqId, setSelectedFaqId] = useState(null);
 
     const menuList = [
-        {title: '회원문의'},
+        {title: '회원 문의'},
         {title: '주문/결제 문의'},
         {title: '반품/환불 문의'},
         {title: '마일리지 문의'}
@@ -39,31 +39,42 @@ function CustomerFAQ() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/admin/board/faq?type=USER`, {
+                const initialTabValue = '회원'; 
+                const response = await axios.get(`http://172.16.210.136:8080/api/admin/board/faq?type=${initialTabValue}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
                 console.log(response.data);
                 setFaqList(response.data.data.content);
-                console.log(faqList);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
+    
         fetchData();
     }, []);
+    
+    
 
     const handleTabChange = async (tabTitle) => {
-        setSelectedTab(tabTitle);
-        // try {
-        //     const response = await axios.get(`/api/AdminCustomerFaqTestData.json`);
-        //     /* 데이터를 테이블 형식에 맞게 가공하고 inquiryList 업데이트 */
-        //     setFaqList(response.data);
-        // } catch (error) {
-        //     console.error("Error fetching data: ", error);
-        // }
+        const tabValue = tabTitle.replace(' 문의', '');
+        setSelectedTab(tabValue);
+    
+        try {
+            const response = await axios.get(`http://172.16.210.136:8080/api/admin/board/faq?type=${tabValue}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            console.log(response.data);
+            setFaqList(response.data.data.content);
+        } catch (e) {
+            console.error("Error fetching data: ", e);
+        }
     };
+    
+    
 
     const openConfirmModalHandler = (event, row) => {
         event.stopPropagation();
@@ -143,8 +154,7 @@ function CustomerFAQ() {
             )} */}
             {
                 selectedFaqId !== null && (
-                    <FaqModal open={isDetailModalOpen} handleClose={handleCloseDetailModal} faqId={selectedFaqId}
-                              faqList={faqList}/>
+                    <FaqModal open={isDetailModalOpen} handleClose={handleCloseDetailModal} faqId={selectedFaqId} faqList={faqList}/>
                 )
             }
             {
