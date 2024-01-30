@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from "react";
-import {useLocation} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import './SearchPage.css';
 import ProductItem from '../../../components/user/Item/ProductItem';
 import Filter from '../../../components/user/Common/Filter/Filter';
 import Dropdown from '../../../components/user/Common/Select/Dropdown';
 import ScrollToTopBtn from "../../../components/user/Common/Button/ScrollToTopBtn";
+import { Pagination } from "@mui/material";
 
-function SearchList() {
+function SearchPage() {
+    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const location = useLocation();
     const [sorter, setSorter] = useState('');
@@ -16,21 +18,30 @@ function SearchList() {
     const [star, setStar] = useState('');
     const query = new URLSearchParams(location.search).get('q');
     const token = sessionStorage.getItem('token');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+
 
     useEffect(() => {
         const fetchData = async () => {
-            const url = `http://172.16.210.136:8080/api/products/search?q=${query}&sorter=${sorter}&min-price=${minPrice}&max-price=${maxPrice}&star=${star}`;
+            const url = `http://172.16.210.136:8080/api/products/search?q=${query}&sorter=${sorter}&min-price=${minPrice}&max-price=${maxPrice}&star=${star}&page=${currentPage}`;
             try {
                 const response = await axios.get(url, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 setProducts(response.data.data.productList);
+                setTotalPages(response.data.data.totalPage);
             } catch (e) {
-                console.error("Error fetching filtered products: ", e);
+                console.error(e);
             }
         };
         fetchData();
-    }, [query, sorter, minPrice, maxPrice, star]);
+    }, [query, sorter, minPrice, maxPrice, star, currentPage]);
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+        navigate(`?page=${value}`);
+    };
 
     return (
         <div className="searchList-body">
@@ -53,9 +64,10 @@ function SearchList() {
                     />
                 ))}
             </div>
+            <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             <ScrollToTopBtn />
         </div>
     )
 }
 
-export default SearchList;
+export default SearchPage;

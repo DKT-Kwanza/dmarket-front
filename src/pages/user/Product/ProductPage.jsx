@@ -5,11 +5,14 @@ import ProductItem from '../../../components/user/Item/ProductItem';
 import Filter from '../../../components/user/Common/Filter/Filter';
 import Dropdown from '../../../components/user/Common/Select/Dropdown';
 import ScrollToTopBtn from "../../../components/user/Common/Button/ScrollToTopBtn";
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import { Pagination } from "@mui/material";
+import { FaAngleRight } from "react-icons/fa6";
 
 function ProductPage(){
-    const [products, setProducts] = useState([]);
     const location = useLocation();
+    const navigate = useNavigate();
+    const [products, setProducts] = useState([]);
     const { categoryId } = useParams();
     const [category1depthName, setCategory1depthName] = useState("");
     const [category2depthName, setCategory2depthName] = useState("");
@@ -17,42 +20,51 @@ function ProductPage(){
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
     const [star, setStar] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
     const token = sessionStorage.getItem('token');
 
     useEffect(() => {
         const fetchData = async () => {
-            const url = `http://172.16.210.136:8080/api/products/categories/${categoryId}?sorter=${sorter}&min-price=${minPrice}&max-price=${maxPrice}&star=${star}`;
+            const url = `http://172.16.210.136:8080/api/products/categories/${categoryId}?sorter=${sorter}&min-price=${minPrice}&max-price=${maxPrice}&star=${star}&page=${currentPage}`;
             try {
                 const response = await axios.get(url, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 setProducts(response.data.data.productList);
+                setTotalPages(response.data.data.totalPage);
             } catch (e) {
-                console.error("Error fetching data: ", e);
+                console.error(e);
             }
         };
         fetchData();
-    
+    }, [categoryId, sorter, minPrice, maxPrice, star, currentPage]);
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+        navigate(`?page=${value}`);
+    };
+
+    useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
-        const category1depthName = queryParams.get('category1depthName');
-        const category2depthName = queryParams.get('category2depthName');
+        const category1Name = queryParams.get('category1depthName');
+        const category2Name = queryParams.get('category2depthName');
     
-        if (category1depthName) {
-            setCategory1depthName(decodeURIComponent(category1depthName));
+        if (category1Name) {
+            setCategory1depthName(decodeURIComponent(category1Name));
         }
-        if (category2depthName) {
-            setCategory2depthName(decodeURIComponent(category2depthName));
-        }
-    }, [categoryId, sorter, minPrice, maxPrice, star]);
     
+        if (category2Name) {
+            setCategory2depthName(decodeURIComponent(category2Name));
+        }
+    }, [location]);
 
     return (
         <div className="productList-body">
-            <div className='productList-category'>{category1depthName} &#47; {category2depthName}</div>
+            <div className='productList-category'>{category1depthName} <FaAngleRight /> {category2depthName}</div>
             <div className='productList-title'>{category2depthName}</div>
             <div className='productList-title-bar'></div>
-            {/* //NOTE filter 컴포넌트로 분리했는데 별로면 주석 해제하세요 */}
             <Filter setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} setStar={setStar} />
             <div className='productList-bar'></div>
             <Dropdown setSorter={setSorter} />
@@ -70,6 +82,7 @@ function ProductPage(){
                     />
                 ))}
             </div>
+            <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             <ScrollToTopBtn />
         </div>
     )

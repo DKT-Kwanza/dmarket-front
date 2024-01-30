@@ -13,6 +13,7 @@
     font-weight: 500;
     margin: 18px auto;
     text-align: center;
+    padding-top: 30px;
 }
 
 .searchList-title-bar {
@@ -148,5 +149,6 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     place-items: center;
+    align-items: start;
     margin-top: 17px;
 }

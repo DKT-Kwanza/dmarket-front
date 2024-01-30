@@ -13,7 +13,7 @@ import FaqWriteModal from "../../../components/admin/Modal/FaqWriteModal";
 const primary = indigo[50];
 const drawerWidth = 260;
 
-function CustomerFAQ() {
+function AdiminCustomerFaqPage() {
     const [faqList, setFaqList] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
@@ -137,4 +137,4 @@ function CustomerFAQ() {
     );
 }
 
-export default CustomerFAQ;
+export default AdiminCustomerFaqPage;

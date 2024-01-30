@@ -6,6 +6,9 @@
 
 .productList-category {
     font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding-top: 30px;
 }
 
 .productList-title {
@@ -129,5 +132,6 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     place-items: center;
+    align-items: start;
     margin-top: 17px;
 }

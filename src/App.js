@@ -14,7 +14,7 @@ import Detail from "./pages/user/Product/DetailPage";
 import Mywish from "./pages/user/WishList/Mywish";
 import Cart from "./pages/user/Cart/CartPage";
 import ProductPage from "./pages/user/Product/ProductPage";
-import SearchList from "./pages/user/Product/SearchPage";
+import SearchPage from "./pages/user/Product/SearchPage";
 import PaymentPage from "./pages/user/Payment/PaymentPage";
 import OrderComplete from './pages/user/Payment/OrderComplete';
 import ChangePwd from './pages/user/MyInfo/ChangePwd';
@@ -44,7 +44,7 @@ import Refund from "./pages/admin/Order/OrderRefundPage";
 import CustomerNotice from "./pages/admin/Customer/CustomerNoticePage";
 import ReturnStatus from "./pages/admin/Order/OrderReturnPage";
 import CustomerInquiry from "./pages/admin/Customer/CustomerInquiryPage";
-import CustomerFAQ from "./pages/admin/Customer/CustomerFaqPage";
+import AdminCustomerFaqPage from "./pages/admin/Customer/AdminCustomerFaqPage";
 
 function App() {
     const location = useLocation();
@@ -67,7 +67,7 @@ function App() {
               <Route path='/'>
                 <Route path='' element={<Main/>} />
                 <Route path='category/:categoryId' element={<ProductPage/>}/>
-                <Route path='search' element={<SearchList/>}/>
+                <Route path='search' element={<SearchPage/>}/>
               </Route>
 
               <Route path='/product'>
@@ -128,7 +128,7 @@ function App() {
                 <Route path='/customerMng'>
                     <Route path='notice' element={<CustomerNotice/>}/>
                     <Route path='inquiry' element={<CustomerInquiry/>}/>
-                    <Route path='faq' element={<CustomerFAQ/>}/>
+                    <Route path='faq' element={<AdminCustomerFaqPage/>}/>
                 </Route>
 
             </Routes>

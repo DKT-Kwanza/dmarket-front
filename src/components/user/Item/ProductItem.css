@@ -10,6 +10,11 @@
     background: #D9D9D9;
 }
 
+.productListItem-img > img {
+    width: 230px;
+    height: 230px;
+}
+
 .productListItem-info {
     margin-top: 12px;
     display: flex;
@@ -45,6 +50,7 @@
 
 .productListItem-review {
     display: flex;
+    align-items: center;
 }
 
 .productListItem-reviews {
