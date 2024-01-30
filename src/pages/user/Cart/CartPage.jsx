@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import './CartPage.css';
 import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
 import CartList from "../../../components/user/List/CartList";
 import CartOrderInfo from "../../../components/user/Info/CartOrderInfo";
 
-function Cart(){
+function Cart() {
     const navigate = useNavigate();
-    const [carts, setCarts] = useState({ cartList: [], cartCount: 0 });
+    const [carts, setCarts] = useState({cartList: [], cartCount: 0});
     const [selectAll, setSelectAll] = useState(false);
     const [checkedItems, setCheckedItems] = useState({});
 
@@ -51,20 +51,40 @@ function Cart(){
 
     /* 개별 상품 선택 체크박스 상태 */
     const handleItemCheck = index => {
-        const newCheckedItems = { ...checkedItems, [index]: !checkedItems[index] };
+        const newCheckedItems = {...checkedItems, [index]: !checkedItems[index]};
         setCheckedItems(newCheckedItems);
     };
 
-    /* 체크한 상품 삭제 */
-    const handleDeleteSelected = () => {
+    /* 장바구니 삭제 */
+    const handleDeleteSelected = async () => {
+        /* 선택된 상품들의 cartId를 추출 */
+        const selectedCartIds = carts.cartList
+            .filter((_, index) => checkedItems[index])
+            .map(item => item.cartId);
+
+        /* 새로운 카트 리스트 생성 */
         const newCartList = carts.cartList.filter((_, index) => !checkedItems[index]);
-        setCarts({ ...carts, cartList: newCartList });
+        setCarts({...carts, cartList: newCartList});
 
         const newCheckedItems = {};
         newCartList.forEach((_, index) => {
             newCheckedItems[index] = false;
         });
         setCheckedItems(newCheckedItems);
+
+        /* 선택된 상품들을 삭제하는 API 호출 */
+        try {
+            await Promise.all(selectedCartIds.map(async cartId => {
+                const url = `http://172.16.210.136:8080/api/users/${userId}/cart/${cartId}`;
+                await axios.delete(url, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                });
+            }));
+        } catch (e) {
+            console.error("Error deleting Cart data: ", e);
+        }
     };
 
     /* 선택된 상품의 가격 배열 생성 */
@@ -82,23 +102,23 @@ function Cart(){
         return total;
     }, 0);
 
-    return(
+    return (
         <div className='cart-body'>
             <div className='cart-title'>
                 <div className='cart-title-content'>장바구니</div>
             </div>
             <div className='cart-container'>
                 <div className='cart-checkbox'>
-                    <CheckBox checked={selectAll} onChange={handleSelectAll} />
+                    <CheckBox checked={selectAll} onChange={handleSelectAll}/>
                 </div>
                 <div className='cart-count'>전체 상품 : <span>{carts.cartCount}</span>개</div>
                 <button onClick={handleDeleteSelected} className='cart-delete-button'>삭제</button>
             </div>
             <div className='cart-bar'></div>
             <div className='cart-item-list'>
-                <CartList items={carts.cartList} checkedItems={checkedItems} onItemCheck={handleItemCheck} />
+                <CartList items={carts.cartList} checkedItems={checkedItems} onItemCheck={handleItemCheck}/>
             </div>
-            <CartOrderInfo 
+            <CartOrderInfo
                 navigateToOrder={navigateToOrder}
                 itemCount={selectedItemCount}
                 totalPrice={selectedItemTotalPrice}
