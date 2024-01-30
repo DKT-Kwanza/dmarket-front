@@ -9,7 +9,7 @@ root.render(
     <React.StrictMode>
         <BrowserRouter>
             <ScrollToTop/>
-            <App basename="/member/login"/>
+            <App />
         </BrowserRouter>
     </React.StrictMode>
 );

@@ -32,6 +32,7 @@ function Detail() {
 
     /* 상품 상세 정보 조회 */
     useEffect(() => {
+        console.log("productId: ", productId);
         const fetchData = async () => {
             try {
                 const response = await axios.get(`http://172.16.210.136:8080/api/products/${productId}`, {
@@ -124,6 +125,7 @@ function Detail() {
         fetchData();
     }, [productId]);
 
+    console.log("product: ", product);
     console.log(recommendProducts); // 확인용 로그
 
     const navigateToMypage = (menu) => {
@@ -134,11 +136,45 @@ function Detail() {
         navigate("../../order");
     }
 
+    /* 선택한 옵션을 탭에 전달하기 위한 변수(optionId, optionQuantity) */
     const [selected, setSelected] = useState([]);
-
     const handleSelect = (e) => {
-        setSelected([...selected, e.target.value]);
+        const selectedOption = {
+            "optionValue": e.target.value,
+            "optionId": e.target.options[e.target.selectedIndex].getAttribute("optionId"),
+            "optionQuantity": e.target.options[e.target.selectedIndex].getAttribute("optionQuantity")
+        };
+        setSelected([...selected, selectedOption]);
     };
+
+    /* 탭에서 전달 받은 옵션, 옵션 수량, 전체 옵션 수량에 관한 코드 */
+    const [totalCount, setTotalCount] = useState(0);
+    const [order, setOrder] = useState([]);
+    const handleCountChange = ({ count, optionId }) => {
+        /* setOrder 함수를 콜백 형태로 사용하여 주문 상태를 업데이트 */
+        setOrder(prevOrder => {
+            const existingItem = prevOrder.find(item => item.selectedOption.optionId === optionId);
+
+            if (existingItem) {
+                /* 이미 존재하는 아이템인 경우 count만 업데이트 */
+                return prevOrder.map(item =>
+                    item.selectedOption.optionId === optionId
+                        ? { selectedOption: { ...item.selectedOption, productCount: count } }
+                        : item
+                );
+            } else {
+                /* 존재하지 않는 아이템인 경우 새로운 아이템 추가 */
+                return [...prevOrder, { selectedOption: { productId, optionId, productCount: count } }];
+            }
+        });
+    };
+    /* 주문 목록이 변경될 때마다 총 수량 업데이트 */
+    useEffect(() => {
+        console.log("주문 목록: ", order);
+        const newTotalCount = order.reduce((total, item) => total + item.selectedOption.productCount, 0);
+        setTotalCount(newTotalCount);
+    }, [order]);
+
 
     const [isExpanded, setIsExpanded] = useState(false);
     // const [checkboxState, setCheckboxState] = useState('none');
@@ -162,6 +198,8 @@ function Detail() {
     //     }
     // };
 
+
+
     return (
         <>
             <div id="container1">
@@ -169,14 +207,23 @@ function Detail() {
                     <text>{product.productCategory}</text>
                 </div>
                 <div className='productArea'>
-                    <div className='repImg'/>
-                    <div className='subImgArea'>
-                        <div className='subImg'/>
-                        <div className='subImg'/>
-                        <div className='subImg'/>
-                        <div className='subImg'/>
-                        <div className='subImg'/>
+                    <div className='repImg'>
+                        {
+                            product.imgList && <img alt={product.productName}
+                                                    src={product.imgList[0]}/>
+                        }
                     </div>
+
+                    <div className='subImgArea'>
+                        {product.imgList && product.imgList.length > 1 && (
+                            product.imgList.slice(1).map((imgSrc, index) => (
+                                <div key={index} className='subImg'>
+                                    <img alt={`SubImage ${index + 1}`} src={imgSrc}/>
+                                </div>
+                            ))
+                        )}
+                    </div>
+
                     <div className='detailArea'>
                         <div className='title'>
                             <text>{product.productBrand} &gt;</text>
@@ -192,7 +239,7 @@ function Detail() {
                             <text>{formatPrice(product.productSalePrice)} 원</text>
                         </div>
                         <div className='releasePrice'>
-                            <text>최초출시가 {formatPrice(product.productPrice)}</text>
+                            <text>최초출시가 {formatPrice(product.productPrice)} 원</text>
                         </div>
                         <hr style={{marginTop: '13px'}}/>
                         <div className='deliveryInfo'>
@@ -205,19 +252,25 @@ function Detail() {
                             <text>배송비</text>
                             <text style={{marginLeft: '77px'}}>무료</text>
                         </div>
-                        <div className='colorSelect'>
-                            <text style={{marginTop: '2px'}}>색상</text>
-                            <select id="colors" name="colors" onChange={handleSelect}>
-                                <option value="" disabled selected hidden>선택하세요.</option>
-                                <option value="red">Red</option>
-                                <option value="blue">Blue</option>
-                                <option value="green">Green</option>
+                        <div className='detail-option-select'>
+                            {
+                                product.optionList &&
+                                <text style={{marginTop: '2px'}}>{product.optionList[0].optionName}</text>
+                            }
+                            <select className='detail-options' name="options" onChange={handleSelect}>
+                                <option value="" disabled selected hidden>옵션을 선택하세요.</option>
+                                {
+                                    product.optionList && product.optionList.map((option, index) => (
+                                        <option key={index} value={option.optionValue}
+                                                optionId={option.optionId} optionQuantity={option.optionQuantity}>{option.optionValue}</option>
+                                    ))
+                                }
                             </select>
                         </div>
                         {
                             selected.map((value, index) => (
                                 <div key={index}>
-                                    <ProductOptionTab option={value} name={product.productName}/>
+                                    <ProductOptionTab option={value} name={product.productName} onCountChange={handleCountChange} />
                                 </div>
                             ))
                         }
@@ -226,7 +279,7 @@ function Detail() {
                                 <text>합계</text>
                             </div>
                             <div className='cost'>
-                                <text>59,900원</text>
+                                <text>{formatPrice(totalCount*product.productSalePrice)} 원</text>
                             </div>
                         </div>
                         <hr style={{marginTop: '19px'}}/>
