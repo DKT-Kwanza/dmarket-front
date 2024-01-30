@@ -4,13 +4,13 @@ import WishItem from '../Item/WishItem'
 const WishItemList = ({ items, checkedItems, onItemCheck }) => {
     return (
         <div>
-          {items.map((item, index) => (
+          {items && items.map((item, index) => (
             <WishItem
               key={index}
               productImg={item.productImg}
-              brand={item.brand}
+              brand={item.productBrand}
               productName={item.productName}
-              sales={item.sales}
+              sales={item.productSalePrice}
               checked={checkedItems[index]}
               onCheck={() => onItemCheck(index)}
             />

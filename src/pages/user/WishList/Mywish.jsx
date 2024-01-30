@@ -9,13 +9,22 @@ function WishList() {
     const [selectAll, setSelectAll] = useState(false);
     const [checkedItems, setCheckedItems] = useState({});
 
+    /* 세션 스토리지에서 토큰 가져오기 */
+    const token = sessionStorage.getItem('token');
+    const userId = sessionStorage.getItem('userId');
+
+    /* 위시리스트 데이터 조회 */
     useEffect(() => {
         const fetchData = async () => {
+            const url = `http://172.16.210.136:8080/api/users/${userId}/wish`;
             try {
-                const response = await axios.get("/api/WishListData.json");
-                
-                setWishLists(response.data);
-
+                const response = await axios.get(url, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                });
+                setWishLists(response.data.data);
+                console.log(response.data.data)
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -57,12 +66,12 @@ function WishList() {
                 <div className='wishList-checkbox'>
                     <CheckBox checked={selectAll} onChange={handleSelectAll} />
                 </div>
-                <div className='wishList-count'>전체 상품 : <span>{wishLists.length}</span>개</div>
+                <div className='wishList-count'>전체 상품 : <span>{wishLists.wishCount}</span>개</div>
                 <button onClick={handleDeleteSelected} className='wishList-delete-button'>삭제</button>
             </div>
             <div className='wishList-bar'></div>
             <div className='wishList-item-list'>
-                <WishItemList items={wishLists} checkedItems={checkedItems} onItemCheck={handleItemCheck} />
+                <WishItemList items={wishLists.wishListItem} checkedItems={checkedItems} onItemCheck={handleItemCheck} />
             </div>
         </div>
     )

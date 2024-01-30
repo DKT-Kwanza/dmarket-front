@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import './WishItem.css';
 import CheckBox from '../Common/CheckBox/CheckBox';
+import {formatPrice} from "../../../utils/Format";
 
 function WishItem({ productImg, brand, productName, sales, checked, onCheck }) {
     return(
@@ -16,7 +16,7 @@ function WishItem({ productImg, brand, productName, sales, checked, onCheck }) {
                 </div>
             </div>
             <div className='wishItem-bar'></div>
-            <div className='wishItem-price'>{sales}원</div>
+            <div className='wishItem-price'>{formatPrice(sales)} 원</div>
         </div>
     );
 }
