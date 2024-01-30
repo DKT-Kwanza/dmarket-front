@@ -1,8 +1,10 @@
-// 확인, 취소 버튼이 있는 popup modal 입니다.
+/* 상품 상세에서 장바구니에 상품을 추가했을 때 나타나는 popup modal 입니다. */
 import styled from 'styled-components';
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
-function ConfirmCancelModal({isOpen, onClose, onConfirm, children}) {
+function AddToCartModal({isOpen, onClose}) {
+    const navigate = useNavigate();
     const [isConfirmed, setIsConfirmed] = useState(false);
 
     if (!isOpen) {
@@ -11,16 +13,19 @@ function ConfirmCancelModal({isOpen, onClose, onConfirm, children}) {
 
     const handleConfirm = () => {
         setIsConfirmed(true);
-        onConfirm();
         onClose(); // Close the modal after confirmation
     };
+
+    const navigateToCart = () => {
+        navigate('/mydkt/mycart');
+    }
 
     return (
         <ModalBackdrop onClick={onClose}>
             <ModalView onClick={(e) => e.stopPropagation()}>
-                <TextArea>{children}</TextArea>
+                <TextArea>장바구니에 상품을 담았습니다.</TextArea>
                 <BtnArea>
-                    <CancelBtn onClick={onClose}>취소</CancelBtn>
+                    <CancelBtn onClick={navigateToCart}>장바구니로 이동</CancelBtn>
                     <ConfirmBtn onClick={handleConfirm}>확인</ConfirmBtn>
                 </BtnArea>
             </ModalView>
@@ -44,8 +49,8 @@ const ModalBackdrop = styled.div`
 `;
 
 const ModalView = styled.div.attrs((props) => ({
-  // attrs 메소드를 이용해서 아래와 같이 div 엘리먼트에 속성을 추가할 수 있다.
-  role: 'dialog',
+    // attrs 메소드를 이용해서 아래와 같이 div 엘리먼트에 속성을 추가할 수 있다.
+    role: 'dialog',
 }))`
   // Modal CSS
   display: flex;
@@ -95,6 +100,7 @@ const ConfirmBtn = styled.button`
   border: none;
   border-radius: 0 0 5px 0;
   background: #FFD465;
+  color: white;
   &:active,
   &:hover,
   &:focus {
@@ -102,4 +108,4 @@ const ConfirmBtn = styled.button`
   }
 `
 
-export default ConfirmCancelModal;
+export default AddToCartModal;

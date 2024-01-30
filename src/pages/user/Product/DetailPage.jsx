@@ -15,6 +15,7 @@ import arrowRight from '../../../assets/icons/chevron-right.svg';
 import parcelIcon from '../../../assets/icons/truck-02.png';
 import {FaHeart} from "react-icons/fa";
 import {formatPrice} from "../../../utils/Format";
+import AddToCartModal from "../../../components/user/Common/Modal/AddToCartModal";
 
 function Detail() {
     const navigate = useNavigate();
@@ -50,29 +51,6 @@ function Detail() {
         };
         fetchData();
     }, [productId]);
-
-    /* 위시 리스트 추가 */
-    const handleWishClick = async () => {
-        console.log("productIsWish: ", productIsWish);
-        const requestData = {
-            productId: productId
-        };
-
-        try {
-            const response = await axios.post(`http://172.16.210.136:8080/api/users/${userId}/wish`, requestData, {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json; charset=UTF-8',
-                }
-            });
-            console.log("wishClick", response.data.data);
-
-            /* productIsWish 값을 true 로 변경 */
-            setProductIsWish(true);
-        } catch (e) {
-            console.error("Error fetching Inquiry data: ", e);
-        }
-    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -136,6 +114,29 @@ function Detail() {
         navigate("../../order");
     }
 
+    /* 위시 리스트 추가 */
+    const handleWishClick = async () => {
+        console.log("productIsWish: ", productIsWish);
+        const requestData = {
+            productId: productId
+        };
+
+        try {
+            const response = await axios.post(`http://172.16.210.136:8080/api/users/${userId}/wish`, requestData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json; charset=UTF-8',
+                }
+            });
+            console.log("wishClick", response.data.data);
+
+            /* productIsWish 값을 true 로 변경 */
+            setProductIsWish(true);
+        } catch (e) {
+            console.error("Error fetching Inquiry data: ", e);
+        }
+    };
+
     /* 선택한 옵션을 탭에 전달하기 위한 변수(optionId, optionQuantity) */
     const [selected, setSelected] = useState([]);
     const handleSelect = (e) => {
@@ -174,6 +175,44 @@ function Detail() {
         const newTotalCount = order.reduce((total, item) => total + item.selectedOption.productCount, 0);
         setTotalCount(newTotalCount);
     }, [order]);
+
+    /* 장바구니 클릭 시 모달 */
+    const [isOpen, setIsOpen] = useState(false);
+    const modalHandler = () => {
+        setIsOpen(!isOpen);
+    };
+
+    /* 장바구니에 추가 */
+    const handleCartClick = async () => {
+        /* order 리스트에서 productCount가 0인 값을 필터링하여 새로운 리스트 생성 */
+        const filteredOrder = order.filter(item => item.selectedOption.productCount !== 0);
+
+        if (filteredOrder.length > 0) {
+            try {
+                /* 각 아이템에 대해 try-catch 블록 실행 */
+                await Promise.all(filteredOrder.map(async (item) => {
+                    const requestData = {
+                        productId: item.selectedOption.productId,
+                        optionId: item.selectedOption.optionId,
+                        productCount: item.selectedOption.productCount,
+                    };
+
+                    const response = await axios.post(`http://172.16.210.136:8080/api/users/${userId}/cart`, requestData, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json; charset=UTF-8',
+                        }
+                    });
+                    console.log(response.data);
+                }));
+                modalHandler();
+            } catch (e) {
+                console.error("Error fetching Inquiry data: ", e);
+            }
+        } else {
+            alert("장바구니에 추가할 상품이 없습니다.");
+        }
+    };
 
 
     const [isExpanded, setIsExpanded] = useState(false);
@@ -289,7 +328,7 @@ function Detail() {
                     <button onClick={() => !productIsWish && handleWishClick()} className='wishlistButton'>
                         {productIsWish ? <FaHeart color='red'/> : <img src={heart} alt="heart"/>}
                     </button>
-                    <button onClick={() => navigateToMypage('mycart')} className='cartButton'>장바구니</button>
+                    <button onClick={handleCartClick} className='cartButton'>장바구니</button>
                     <button onClick={navigateToOrder} className='purchaseButton'>바로구매</button>
                 </div>
             </div>
@@ -415,6 +454,9 @@ function Detail() {
             </div>
             <div style={{marginBottom: '200px'}}/>
             <ScrollToTopBtn/>
+            {isOpen && (
+                <AddToCartModal isOpen={isOpen} onClose={modalHandler} />
+            )}
         </>
     );
 }

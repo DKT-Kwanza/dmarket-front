@@ -1,4 +1,4 @@
-// 확인, 취소 버튼이 있는 popup modal 입니다.
+/* 확인, 취소 버튼이 있는 popup modal 입니다. */
 import styled from 'styled-components';
 import {useState} from "react";
 
