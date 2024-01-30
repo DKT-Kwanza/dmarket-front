@@ -24,7 +24,7 @@ export default function OrderCancelTable({headers, rows}) {
                     {rows.map((row, index) => (
                         <TableRow
                             key={index}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
                         >
                             <TableCell>{row.orderId}</TableCell>
                             <TableCell>{row.productId}</TableCell>
@@ -44,7 +44,7 @@ export default function OrderCancelTable({headers, rows}) {
                             <TableCell>{row.optionValue}</TableCell>
                             <TableCell>{row.productCount}</TableCell>
                             <TableCell>{formatDate(row.orderDate)}</TableCell>
-                            <TableCell>{row.orderStatus}</TableCell>
+                            <TableCell sx={{color: '#FF5D5D'}}>{row.orderState}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

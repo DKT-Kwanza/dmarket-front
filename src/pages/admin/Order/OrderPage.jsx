@@ -21,7 +21,6 @@ function OrderStatus() {
 
     /* selectedTab 에 맞는 데이터 가져오기 */
     useEffect(() => {
-        console.log(selectedTab);
         const fetchData = async () => {
             try {
                 const encodedTab = encodeURIComponent(selectedTab);
