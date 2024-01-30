@@ -14,6 +14,7 @@ import productDetail from '../../../assets/images/productDetail.png';
 import arrowRight from '../../../assets/icons/chevron-right.svg';
 import parcelIcon from '../../../assets/icons/truck-02.png';
 import {FaHeart} from "react-icons/fa";
+import {formatPrice} from "../../../utils/Format";
 
 function Detail() {
     const navigate = useNavigate();
@@ -47,13 +48,13 @@ function Detail() {
             }
         };
         fetchData();
-    }, []);
+    }, [productId]);
 
     /* 위시 리스트 추가 */
     const handleWishClick = async () => {
         console.log("productIsWish: ", productIsWish);
         const requestData = {
-            "productId": productId
+            productId: productId
         };
 
         try {
@@ -65,7 +66,7 @@ function Detail() {
             });
             console.log("wishClick", response.data.data);
 
-            /* productIsWish 값을 반전시켜줍니다. */
+            /* productIsWish 값을 true 로 변경 */
             setProductIsWish(true);
         } catch (e) {
             console.error("Error fetching Inquiry data: ", e);
@@ -82,31 +83,46 @@ function Detail() {
             }
         };
         fetchData();
-    }, []);
+    }, [productId]);
 
+    /* Qna 데이터 목록 조회 */
     useEffect(() => {
+        // console.log("qna productId: ", productId);
         const fetchData = async () => {
             try {
-                const response = await axios.get("/api/ProductQnaData.json");
+                const response = await axios.get(`http://172.16.210.136:8080/api/products/${productId}/qnaList`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    }
+                });
                 setQnas(response.data);
+                console.log("qna: ", qnas);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
         fetchData();
-    }, []);
+    }, [productId]);
 
+    /* 같은 카테고리의 최신 상품 4개 조회 (추천 상품 조회) */
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("/api/RecommendProductData.json");
-                setRecommendProducts(response.data);
+                const response = await axios.get(`http://172.16.210.136:8080/api/products/${productId}/recommend`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    }
+                });
+                setRecommendProducts(response.data.data);
+                console.log(response.data);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
         fetchData();
-    }, []);
+    }, [productId]);
 
     console.log(recommendProducts); // 확인용 로그
 
@@ -173,10 +189,10 @@ function Detail() {
                             <text style={{marginLeft: '10px'}}>({product.productReviewCount}건)</text>
                         </div>
                         <div className='price'>
-                            <text>{product.productSalePrice} 원</text>
+                            <text>{formatPrice(product.productSalePrice)} 원</text>
                         </div>
                         <div className='releasePrice'>
-                            <text>최초출시가 {product.productPrice}</text>
+                            <text>최초출시가 {formatPrice(product.productPrice)}</text>
                         </div>
                         <hr style={{marginTop: '13px'}}/>
                         <div className='deliveryInfo'>
@@ -217,7 +233,7 @@ function Detail() {
                     </div>
                 </div>
                 <div className='purchaseArea'>
-                    <button onClick={handleWishClick} className='wishlistButton'>
+                    <button onClick={() => !productIsWish && handleWishClick()} className='wishlistButton'>
                         {productIsWish ? <FaHeart color='red'/> : <img src={heart} alt="heart"/>}
                     </button>
                     <button onClick={() => navigateToMypage('mycart')} className='cartButton'>장바구니</button>
