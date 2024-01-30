@@ -3,16 +3,16 @@ import styled from 'styled-components';
 import CheckBox from '../Common/CheckBox/CheckBox';
 import {formatPrice} from "../../../utils/Format";
 
-function CartItem ({ productImg, brand, productName, price, option, quantity, checked, onCheck, onClick }){
+function CartItem({productImg, brand, productName, price, option, quantity, checked, onCheck, onClick}) {
 
-    return(
-        <div className='cartItem-container' onClick={onClick}>
+    return (
+        <div className='cartItem-container'>
             <div className='cartItem-checkbox'>
-                <CheckBox checked={checked} onChange={onCheck} />
-                </div>
-            <div className='cartItem-item'>
+                <CheckBox checked={checked} onChange={onCheck}/>
+            </div>
+            <div className='cartItem-item' onClick={onClick}>
                 <div className='cartItem-img'>
-                    <img src={productImg} style={{ width: "100px", height: "100px" }}/>
+                    <img src={productImg} style={{width: "100px", height: "100px"}}/>
                 </div>
                 <div className='cartItem-description'>
                     <div className='cartItem-brand'>{brand}</div>
@@ -21,7 +21,7 @@ function CartItem ({ productImg, brand, productName, price, option, quantity, ch
                     <div className='cartItem-option'>
                         <div>옵션</div>
                         <Value>{option}</Value>
-                        <Line />
+                        <Line/>
                         <div>수량</div>
                         <Value>{quantity}</Value>
                     </div>

@@ -4,11 +4,11 @@ import {formatPrice} from "../../../utils/Format";
 
 function WishItem({ productImg, brand, productName, sales, checked, onCheck, onClick }) {
     return(
-        <div className='wishItem-container' onClick={onClick}>
+        <div className='wishItem-container'>
             <div className='wishList-checkbox'>
                 <CheckBox checked={checked} onChange={onCheck} />
             </div>
-            <div className='wishItem-item'>
+            <div className='wishItem-item' onClick={onClick}>
                     <img src={productImg} style={{ width: "100px", height: "100px" }}/>
                 <div>
                     <div className='wishItem-brand'>{brand}</div>

@@ -6,7 +6,6 @@ import {Paper, Box} from "@mui/material";
 import {indigo} from '@mui/material/colors';
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import InquiryModal from "../../../components/admin/Modal/InquiryModal";
 
 const primary = indigo[50];

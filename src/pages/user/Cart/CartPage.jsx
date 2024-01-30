@@ -5,10 +5,13 @@ import './CartPage.css';
 import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
 import CartList from "../../../components/user/List/CartList";
 import CartOrderInfo from "../../../components/user/Info/CartOrderInfo";
+import ConfirmCancelModal from "../../../components/commmon/Modal/ConfirmCancelModal";
+import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 
 function Cart() {
     const navigate = useNavigate();
     const [carts, setCarts] = useState({cartList: [], cartCount: 0});
+    const [cartCount, setCartCount] = useState(0);
     const [selectAll, setSelectAll] = useState(false);
     const [checkedItems, setCheckedItems] = useState({});
 
@@ -27,6 +30,7 @@ function Cart() {
                     }
                 });
                 setCarts(response.data.data);
+                setCartCount(response.data.data.cartCount);
                 console.log(response.data.data)
             } catch (e) {
                 console.error("Error fetching data: ", e);
@@ -55,8 +59,35 @@ function Cart() {
         setCheckedItems(newCheckedItems);
     };
 
-    /* 장바구니 삭제 */
-    const handleDeleteSelected = async () => {
+    /* 장바구니에서 삭제할 것인지 묻는 모달 */
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const handleCloseDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+    };
+
+    /* 빈 장바구니 일때 삭제 버튼 클릭 시 뜨는 모달 */
+    const [emptyCartModalOpen, setEmptyCartModalOpen] = useState(false);
+    const [isConfirming, setIsConfirming] = useState(false);
+    const handleCloseEmptyCartModal = () => {
+        setEmptyCartModalOpen(false);
+    };
+    const handleConfirm = () => {
+        setIsConfirming(true);
+    };
+
+    /* 삭제 버튼 클릭 */
+    const handleDeleteBtnClick = (checkedItems) => {
+        const checkedCount = Object.values(checkedItems).filter(Boolean).length;
+
+        if (checkedCount > 0) {
+            setIsDeleteModalOpen(true);
+        } else {
+            setEmptyCartModalOpen(true);
+        }
+    };
+
+    /* 모달 확인 버튼 클릭 시 장바구니 삭제 */
+    const handleDeleteSelectedItems = async () => {
         /* 선택된 상품들의 cartId를 추출 */
         const selectedCartIds = carts.cartList
             .filter((_, index) => checkedItems[index])
@@ -72,18 +103,24 @@ function Cart() {
         });
         setCheckedItems(newCheckedItems);
 
-        /* 선택된 상품들을 삭제하는 API 호출 */
-        try {
-            await Promise.all(selectedCartIds.map(async cartId => {
-                const url = `http://172.16.210.136:8080/api/users/${userId}/cart/${cartId}`;
-                await axios.delete(url, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    }
-                });
-            }));
-        } catch (e) {
-            console.error("Error deleting Cart data: ", e);
+        if (checkedItems) {
+            /* 선택된 상품들을 삭제하는 API 호출 */
+            try {
+                await Promise.all(selectedCartIds.map(async cartId => {
+                    const url = `http://172.16.210.136:8080/api/users/${userId}/cart/${cartId}`;
+                    await axios.delete(url, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                        }
+                    });
+                }));
+                /* 선택된 상품의 개수 계산 */
+                // const selectedItemCount = Object.values(checkedItems).filter(Boolean).length;
+                setCartCount(cartCount - selectedItemCount);
+                setIsDeleteModalOpen(false);
+            } catch (e) {
+                console.error("Error deleting Cart data: ", e);
+            }
         }
     };
 
@@ -94,7 +131,6 @@ function Cart() {
 
     /* 선택된 상품의 개수와 총 가격 계산 */
     const selectedItemCount = Object.values(checkedItems).filter(Boolean).length;
-
     const selectedItemTotalPrice = carts.cartList.reduce((total, item, index) => {
         if (checkedItems[index]) {
             return total + item.productTotalSalePrice;
@@ -111,8 +147,8 @@ function Cart() {
                 <div className='cart-checkbox'>
                     <CheckBox checked={selectAll} onChange={handleSelectAll}/>
                 </div>
-                <div className='cart-count'>전체 상품 : <span>{carts.cartCount}</span>개</div>
-                <button onClick={handleDeleteSelected} className='cart-delete-button'>삭제</button>
+                <div className='cart-count'>전체 상품 : <span>{cartCount}</span>개</div>
+                <button onClick={() => {handleDeleteBtnClick(checkedItems)}} className='cart-delete-button'>삭제</button>
             </div>
             <div className='cart-bar'></div>
             <div className='cart-item-list'>
@@ -124,6 +160,16 @@ function Cart() {
                 totalPrice={selectedItemTotalPrice}
                 prices={selectedItemsPrices}
             />
+            {isDeleteModalOpen && (
+                <ConfirmCancelModal isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal} onConfirm={handleDeleteSelectedItems} color='#ff5d5d'>
+                    <div>장바구니에서 삭제하시겠습니까?</div>
+                </ConfirmCancelModal>
+            )}
+            {emptyCartModalOpen && (
+                <ConfirmModal color='#FF5D5D' isOpen={emptyCartModalOpen} onClose={handleCloseEmptyCartModal} onConfirm={handleConfirm}>
+                    <div>선택한 상품이 없습니다.</div>
+                </ConfirmModal>
+            )}
         </div>
     )
 }
