@@ -61,7 +61,6 @@
 .main-btn-cate-button {
     height: 46px;
     border-radius: 50px;
-    background-color: transparent;
     font-size: 15px;
     padding: 12px 20px;
     font-weight: 400;
@@ -70,12 +69,7 @@
     margin: 0 4.5px;
     cursor: pointer;
 }
-.main-btn-cate-button:hover {
-    border: 1px solid #000;
-    cursor: pointer;
-}
-
-.main-btn-cate-button:active {
+.main-btn-cate-button:hover, .main-btn-cate-button:focus {
     border: 1px solid #000;
     cursor: pointer;
 }
