@@ -1,3 +1,4 @@
+import {useState} from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,9 +7,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import SelectBox from "../../commmon/SelectBox/SelectBox";
+import Button from "@mui/material/Button";
 import {formatDate} from "../../../utils/Format";
 
-export default function OrderStatusTable({headers, rows}) {
+export default function OrderStatusTable({headers, rows, onChangeOrderStatusClick}) {
+    /* 선택된 select box 옵션 */
+    const [selectedStatus, setSelectedStatus] = useState('결제 완료');
+    const handleStatusChange = (selectedValue) => {
+        setSelectedStatus(selectedValue);
+    };
+
     return (
         <TableContainer component={Paper} sx={{mb: 2}}>
             <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -46,7 +54,16 @@ export default function OrderStatusTable({headers, rows}) {
                             <TableCell>{row.productCount}</TableCell>
                             <TableCell>{formatDate(row.orderDate)}</TableCell>
                             <TableCell>
-                                <SelectBox text={row.orderStatus} options={['결제완료', '배송준비', '배송중', '배송 완료']}/>
+                                <SelectBox text={row.orderStatus} options={['결제 완료', '배송 준비', '배송중']} onChange={handleStatusChange}/>
+                            </TableCell>
+                            <TableCell>
+                                <Button
+                                    onClick={(event) => {
+                                        event.stopPropagation();
+                                        onChangeOrderStatusClick(row.detailId, selectedStatus);
+                                    }}
+                                    variant="outlined"
+                                    href="#text-buttons">등록</Button>
                             </TableCell>
                         </TableRow>
                     ))}

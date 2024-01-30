@@ -13,12 +13,16 @@ const Main = () => {
     const [popularProducts, setPopularProducts] = useState([]);
     const [categories, setCategories] = useState([]);
 
+    /* 세션 스토리지에서 토큰 가져오기 */
+    const token = sessionStorage.getItem('token');
+
     /* 신상품 데이터 */
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get("http://172.16.210.136:8080/api/products/new-products", {
                     headers: {
+                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
@@ -56,6 +60,7 @@ const Main = () => {
         try {
             const response = await axios.get(`http://172.16.210.136:8080/api/products/popular/${categoryId || ''}`, {
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json; charset=UTF-8',
                 }
             });

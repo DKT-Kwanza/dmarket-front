@@ -39,24 +39,19 @@ function ChangePwd() {
         setConfirmPassword(e.target.value);
     };
 
+    /* 확인 모달 handler */
     const openModalHandler = () => {
         setIsOpen(true);
     }
-
     const closeModalHandler = () => {
         setIsOpen(false);
     };
-
-    // const handleConfirm = () => {
-    //     setIsConfirming(true);
-    // };
 
     /* 세션 스토리지에서 토큰 가져오기 */
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');
 
     const changePasswordConfirm = async () => {
-
         const requestData = {
             currentPassword: currentPassword,
             newPassword: newPassword,
