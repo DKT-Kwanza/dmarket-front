@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import CheckBox from '../Common/CheckBox/CheckBox';
 import {formatPrice} from "../../../utils/Format";
 
-function CartItem ({ productImg, brand, productName, price, option, quantity, checked, onCheck }){
+function CartItem ({ productImg, brand, productName, price, option, quantity, checked, onCheck, onClick }){
 
     return(
-        <div className='cartItem-container'>
+        <div className='cartItem-container' onClick={onClick}>
             <div className='cartItem-checkbox'>
                 <CheckBox checked={checked} onChange={onCheck} />
                 </div>

@@ -1,7 +1,13 @@
 import React from 'react';
+import {useNavigate} from "react-router-dom";
 import CartItem from '../Item/CartItem'
 
 const CartList = ({ items, checkedItems, onItemCheck }) => {
+    const navigate = useNavigate();
+    const navigateToDetailPage = (productId) => {
+        navigate(`/product/detail/${productId}`);
+    }
+
     return (
         <div>
           {items.map((item, index) => (
@@ -15,6 +21,7 @@ const CartList = ({ items, checkedItems, onItemCheck }) => {
               price={item.productTotalSalePrice}
               checked={checkedItems[index]}
               onCheck={() => onItemCheck(index)}
+              onClick={() => navigateToDetailPage(item.productId)}
             />
           ))}
         </div>

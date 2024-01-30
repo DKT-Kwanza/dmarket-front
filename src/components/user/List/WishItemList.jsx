@@ -1,7 +1,12 @@
-import React from 'react';
+import {useNavigate} from "react-router-dom";
 import WishItem from '../Item/WishItem'
 
 const WishItemList = ({ items, checkedItems, onItemCheck }) => {
+    const navigate = useNavigate();
+    const navigateToDetailPage = (productId) => {
+        navigate(`/product/detail/${productId}`);
+    }
+
     return (
         <div>
           {items && items.map((item, index) => (
@@ -13,6 +18,7 @@ const WishItemList = ({ items, checkedItems, onItemCheck }) => {
               sales={item.productSalePrice}
               checked={checkedItems[index]}
               onCheck={() => onItemCheck(index)}
+              onClick={() => navigateToDetailPage(item.productId)}
             />
           ))}
         </div>

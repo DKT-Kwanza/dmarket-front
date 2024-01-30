@@ -26,7 +26,6 @@ function WishList() {
                 });
                 setWishLists(response.data.data);
                 setWishCount(response.data.data.wishCount);
-                console.log(response.data.data)
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -94,7 +93,7 @@ function WishList() {
                 <div className='wishList-checkbox'>
                     <CheckBox checked={selectAll} onChange={handleSelectAll} />
                 </div>
-                <div className='wishList-count'>전체 상품 : <span>{wishCount}</span>개</div>
+                <div className='wishList-count'>전체 상품 : <span>{wishCount}</span> 개</div>
                 <button onClick={handleDeleteSelected} className='wishList-delete-button'>삭제</button>
             </div>
             <div className='wishList-bar'></div>
