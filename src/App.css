@@ -9,3 +9,8 @@ html {
 .body {
   margin-top: 166px;
 }
+
+html {
+  width: 100%;
+  overflow-x: hidden;
+}

@@ -13,7 +13,7 @@ import ReviewList from "./pages/user/MyReview/ReviewList";
 import Detail from "./pages/user/Product/DetailPage";
 import Mywish from "./pages/user/WishList/Mywish";
 import Cart from "./pages/user/Cart/CartPage";
-import ProductList from "./pages/user/Product/ProductPage";
+import ProductPage from "./pages/user/Product/ProductPage";
 import SearchList from "./pages/user/Product/SearchPage";
 import PaymentPage from "./pages/user/Payment/PaymentPage";
 import OrderComplete from './pages/user/Payment/OrderComplete';
@@ -66,7 +66,7 @@ function App() {
 
               <Route path='/'>
                 <Route path='' element={<Main/>} />
-                <Route path='category' element={<ProductList/>}/>
+                <Route path='category/:categoryId' element={<ProductPage/>}/>
                 <Route path='search' element={<SearchList/>}/>
               </Route>
 

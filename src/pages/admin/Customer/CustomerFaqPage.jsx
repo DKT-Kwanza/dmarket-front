@@ -2,11 +2,10 @@ import LeftNav from "../../../components/admin/Sidebar/LeftNav";
 import Header from "../../../components/admin/Header/Header";
 import TabMenu from "../../../components/admin/Common/TabMenu/TabMenu";
 import CustomerFaqTable from "../../../components/admin/Table/CustomerFaqTable";
-import {Paper, Box, Button} from "@mui/material";
+import {Paper, Box, Button, Pagination} from "@mui/material";
 import {indigo} from '@mui/material/colors';
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import FaqModal from "../../../components/admin/Modal/FaqModal";
 import FaqWriteModal from "../../../components/admin/Modal/FaqWriteModal";
@@ -16,15 +15,14 @@ const drawerWidth = 260;
 
 function CustomerFAQ() {
     const [faqList, setFaqList] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
     const [selectedTab, setSelectedTab] = useState('회원 문의');
     const tableHeader = ['구분', '제목', '작성자', ''];
 
     /* 모달 상태 관리 변수 */
-    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
     const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
-
-    const [isConfirming, setIsConfirming] = useState(false);
     const [selectedFaqId, setSelectedFaqId] = useState(null);
 
     const menuList = [
@@ -37,57 +35,31 @@ function CustomerFAQ() {
     const token = sessionStorage.getItem('token');
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const initialTabValue = '회원'; 
-                const response = await axios.get(`http://172.16.210.136:8080/api/admin/board/faq?type=${initialTabValue}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                console.log(response.data);
-                setFaqList(response.data.data.content);
-            } catch (e) {
-                console.error("Error fetching data: ", e);
-            }
-        };
-    
-        fetchData();
-    }, []);
-    
-    
+        fetchFAQs(selectedTab.replace(' 문의', ''), currentPage);
+    }, [selectedTab, currentPage]);
 
-    const handleTabChange = async (tabTitle) => {
-        const tabValue = tabTitle.replace(' 문의', '');
-        setSelectedTab(tabValue);
-    
+    const fetchFAQs = async (faqType, page) => {
         try {
-            const response = await axios.get(`http://172.16.210.136:8080/api/admin/board/faq?type=${tabValue}`, {
+            const response = await axios.get(`http://172.16.210.136:8080/api/admin/board/faq?type=${faqType}&page=${page}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            console.log(response.data);
             setFaqList(response.data.data.content);
+            setTotalPages(response.data.data.totalPages);
         } catch (e) {
             console.error("Error fetching data: ", e);
         }
     };
     
-    
-
-    const openConfirmModalHandler = (event, row) => {
-        event.stopPropagation();
-        setIsConfirmModalOpen(true);
+    const handleTabChange = (tabTitle) => {
+        setSelectedTab(tabTitle);
+        setCurrentPage(0); // 탭을 변경할 때 페이지 번호를 초기화합니다.
     };
 
-    const closeConfirmModalHandler = () => {
-        setIsConfirmModalOpen(false);
-    };
-
-    const handleConfirm = () => {
-        /* modal 의 확인 을 누르면 button 이 disabled */
-        setIsConfirming(true);
+    // 페이지네이션 핸들러
+    const handlePageChange = (event, newPage) => {
+        setCurrentPage(newPage);
     };
 
     const handleCloseDetailModal = () => {
@@ -146,6 +118,7 @@ function CustomerFAQ() {
                         작성하기
                     </Button>
                 </Paper>
+                <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             </Box>
             {/* {isConfirmModalOpen && (
                 <ConfirmModal color={'#FF5D5D'} isOpen={isConfirmModalOpen} onClose={closeConfirmModalHandler} onConfirm={handleConfirm}>
