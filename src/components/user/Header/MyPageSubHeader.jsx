@@ -11,11 +11,18 @@ const MyPageSubHeader = () => {
 
     const [info, setInfo] = useState([]);
 
+    const token = sessionStorage.getItem('token');
+    const userId = sessionStorage.getItem('userId');
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("/api/subHeaderData.json");
-                setInfo(response.data);
+                const response = await axios.get(`http://172.16.210.136:8080/api/users/${userId}/mypage/mileage`,{
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                setInfo(response.data.data);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }

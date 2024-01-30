@@ -22,18 +22,20 @@ export default function CustomerFaqTable({headers, rows, onDeleteClick, onRowCli
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row, index) => (
+                    {rows.map((row) => (
                         <TableRow
-                            key={index}
+                            key={row.faqId}
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             onClick={(event) => onRowClick(event, row.faqId)}>
                             <TableCell>{row.faqType}</TableCell>
-                            <TableCell>{row.faqTitle}</TableCell>
+                            <TableCell>{row.faqQuestion}</TableCell>
                             <TableCell>관리자</TableCell>
-                            <TableCell>{formatDate(row.faqCreatedDate)}</TableCell>
                             <TableCell>
                                 <Button
-                                    onClick={(event)=>{onDeleteClick(event, row.faqId)}}
+                                    onClick={(event) => {
+                                        event.stopPropagation();
+                                        onDeleteClick(row.faqId);
+                                    }}
                                     variant="outlined"
                                     color="error"
                                     href="#text-buttons">삭제</Button>

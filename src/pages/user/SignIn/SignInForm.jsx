@@ -39,10 +39,10 @@ function SignInForm() {
     };
     
 
-    const handleSignUpSubmit = () => {
-        console.log("click signup");
+    const handleSignUpSubmit = (e) => {
+        e.preventDefault(); // 폼의 기본 제출 이벤트를 방지
         axios
-            .post(`${process.env.REACT_APP_MEMBER_API_KEY}/signup`,{
+            .post('http://172.16.210.136:8080/api/users/join',{
                 userEmail: state.inputId,
                 userPassword: state.inputPw,
                 userDktNum: state.dktNum,
@@ -54,13 +54,8 @@ function SignInForm() {
                 userDetailedAddress: state.detailedAddress
             })
             .then((res)=> {
-                if(res.data.success){
-                    alert("회원가입에 성공했습니다!");
-                    sessionStorage.setItem('previousPage', 'signup');
-                    navigate("../main",{replace : true});    // login으로 navigate 이후 뒤로가기 불가
-                } else {
-                    alert("회원가입에 실패했습니다!")
-                }
+                alert("회원가입에 성공했습니다!");
+                navigate("../../",{replace : true});
             })
             .catch(function(error){
                 console.log(error);
@@ -78,7 +73,7 @@ function SignInForm() {
             </div>
             <div className='signInForm-box'>
                 <div className='signInForm-contents'>
-                    <form>
+                    <form onSubmit={handleSignUpSubmit}>
                         <div className='signInForm-form'>
                             <label htmlFor='email'>이메일</label>
                             <input
@@ -89,6 +84,7 @@ function SignInForm() {
                                 onChange={handleInputChange}
                                 required
                                 className='signInForm-input'
+                                autoComplete="on"
                             />
                         </div>
                         <div className='signInForm-form'>
@@ -98,6 +94,7 @@ function SignInForm() {
                                 id='password'
                                 name='inputPw'
                                 value={state.inputPw}
+                                autoComplete="new-password"
                                 onChange={handleInputChange}
                                 required
                                 className='signInForm-input'
@@ -113,6 +110,7 @@ function SignInForm() {
                                 type='password'
                                 id='confirmPassword'
                                 name='confirmPassword'
+                                autoComplete="current-password"
                                 required
                                 className='signInForm-input'
                                 placeholder='비밀번호를 다시 입력하세요.'
@@ -129,6 +127,7 @@ function SignInForm() {
                                 required
                                 className='signInForm-input'
                                 placeholder='이름을 입력하세요.'
+                                autoComplete="on"
                             />
                         </div>
                         <div className='signInForm-form'>
@@ -155,6 +154,7 @@ function SignInForm() {
                                 placeholder='사원번호를 입력하세요.'
                                 value={state.dktNum}
                                 onChange={handleInputChange}
+                                autoComplete="on"
                             />
                         </div>
                         <div className='signInForm-form'>
@@ -168,6 +168,7 @@ function SignInForm() {
                                 placeholder='입사일을 입력하세요.'
                                 value={state.joinDate}
                                 onChange={handleInputChange}
+                                autoComplete="on"
                             />
                         </div>
                         <div className='signInForm-form'>
@@ -181,6 +182,7 @@ function SignInForm() {
                                 placeholder='우편번호'
                                 value={state.postalCode}
                                 onChange={handleInputChange}
+                                autoComplete="on"
                             />
                         </div>
                         <div className='signInForm-form'>
@@ -194,6 +196,7 @@ function SignInForm() {
                                 placeholder='기본주소'
                                 value={state.address}
                                 onChange={handleInputChange}
+                                autoComplete="on"
                             />
                         </div>
                         <div className='signInForm-form'>
@@ -207,6 +210,7 @@ function SignInForm() {
                                 placeholder='상세주소를 입력하세요'
                                 value={state.detailedAddress}
                                 onChange={handleInputChange}
+                                autoComplete="on"
                             />
                         </div>
                         <div className='signInForm-agreement'>
@@ -230,7 +234,7 @@ function SignInForm() {
                             </div>
                         </div>
                         <div className='signInForm-btn-container'>
-                            <button type='submit' onClick={handleSignUpSubmit} className='signInForm-btn'>회원가입</button>
+                            <button type='submit' className='signInForm-btn'>회원가입</button>
                         </div>
                     </form>
                 </div>

@@ -38,14 +38,11 @@ function FaqModal({open, handleClose, faqId, faqList}) {
                         </Typography>
                         <hr/>
                         <Typography id="faq-modal-title" variant="h6" component="h2" sx={{mt: 2}}>
-                            [{faq.faqType}] {faq.faqTitle}
-                        </Typography>
-                        <Typography sx={{mt: 2}}>
-                            관리자 {formatDate(faq.faqCreatedDate)}
+                            [{faq.faqType}] {faq.faqQuestion}
                         </Typography>
                         <hr/>
                         <Typography sx={{mt: 2, minHeight: 200}}>
-                            {faq.faqContents}
+                            {faq.faqAnswer}
                         </Typography>
                         <Button variant="contained" sx={{float: 'right'}}
                                 onClick={handleClose}>확인</Button>

@@ -1,111 +1,73 @@
 import React, {useState, useEffect} from "react";
+import {useLocation, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import './SearchPage.css';
 import ProductItem from '../../../components/user/Item/ProductItem';
 import Filter from '../../../components/user/Common/Filter/Filter';
 import Dropdown from '../../../components/user/Common/Select/Dropdown';
 import ScrollToTopBtn from "../../../components/user/Common/Button/ScrollToTopBtn";
+import { Pagination } from "@mui/material";
 
-function SearchList(){
+function SearchPage() {
+    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
+    const location = useLocation();
+    const [sorter, setSorter] = useState('');
+    const [minPrice, setMinPrice] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
+    const [star, setStar] = useState('');
+    const query = new URLSearchParams(location.search).get('q');
+    const token = sessionStorage.getItem('token');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+
 
     useEffect(() => {
         const fetchData = async () => {
+            const url = `http://172.16.210.136:8080/api/products/search?q=${query}&sorter=${sorter}&min-price=${minPrice}&max-price=${maxPrice}&star=${star}&page=${currentPage}`;
             try {
-                const response = await axios.get("/api/ProductListData.json");
-                setProducts(response.data);
+                const response = await axios.get(url, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                setProducts(response.data.data.productList);
+                setTotalPages(response.data.data.totalPage);
             } catch (e) {
-                console.error("Error fetching data: ", e);
+                console.error(e);
             }
         };
         fetchData();
-    }, []);
+    }, [query, sorter, minPrice, maxPrice, star, currentPage]);
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+        navigate(`?page=${value}`);
+    };
 
     return (
         <div className="searchList-body">
-            <div className='searchList-title'>'<span>후드티</span>'에 대한 검색 결과입니다.</div>
+            <div className='searchList-title'>{`'${query}'에 대한 검색 결과입니다.`}</div>
             <div className='searchList-title-bar'></div>
-            <Filter/>
-            {/* <div className='searchList-filter-container'>
-                <div className='searchList-price-container'>
-                    <div className='searchList-label'>가격</div>
-                    <input className='searchList-filter-price' placeholder='0₩'/>
-                    <div className='searchList-font'>~</div>
-                    <input className='searchList-filter-price' placeholder='0₩'/>
-                </div>
-                <div className='searchList-rating-container'>
-                    <div className='searchList-label'>별점</div>
-                    <div>
-                        <input type="radio" name="rating" id="star4" className="searchList-radio-btn" value="4"/>
-                        <label for="star4" className="searchList-radio-label">
-                            <div className='searchList-star'>
-                                <PiStarFill/>
-                                <PiStarFill/>
-                                <PiStarFill/>
-                                <PiStarFill/>
-                                <PiStarLight/>
-                            </div>
-                            <span> 4점 이상</span>
-                        </label>
-                        <input type="radio" name="rating" id="star3" className="searchList-radio-btn" value="3"/>
-                        <label for="star3" className="searchList-radio-label">
-                            <div className='searchList-star'>
-                                <PiStarFill/>
-                                <PiStarFill/>
-                                <PiStarFill/>
-                                <PiStarLight/>
-                                <PiStarLight/>
-                            </div>
-                            <span> 3점 이상</span>
-                        </label>
-                        <input type="radio" name="rating" id="star2" className="searchList-radio-btn" value="2"/>
-                        <label for="star2" className="searchList-radio-label">
-                            <div className='searchList-star'>
-                                <PiStarFill/>
-                                <PiStarFill/>
-                                <PiStarLight/>
-                                <PiStarLight/>
-                                <PiStarLight/>
-                            </div>
-                            <span> 2점 이상</span>
-                        </label>
-                        <input type="radio" name="rating" id="star1" className="searchList-radio-btn" value="1"/>
-                        <label for="star1" className="searchList-radio-label">
-                            <div className='searchList-star'>
-                                <PiStarFill/>
-                                <PiStarLight/>
-                                <PiStarLight/>
-                                <PiStarLight/>
-                                <PiStarLight/>
-                            </div>
-                            <span> 1점 이상</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div className='searchList-btn-container'>
-                <button className='searchList-search-btn'>검색</button>
-                <button className='searchList-clear-btn'>전체해제</button>
-            </div> */}
+            <Filter setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} setStar={setStar} />
             <div className='searchList-bar'></div>
-            <Dropdown />
+            <Dropdown setSorter={setSorter} />
             <div className='searchList-bar'></div>
             <div className='searchList-container'>
-                {products.map((item, index) => (
+                {products.map((item) => (
                     <ProductItem 
-                        key={index}
-                        imgSrc={item.imgSrc}
-                        brand={item.brand}
-                        productName={item.name}
-                        sales={item.price}
-                        ratingAvg={item.rating}
-                        reviewCnt={item.reviews}
+                        key={item.productId}
+                        imgSrc={item.productImg}
+                        brand={item.productBrand}
+                        productName={item.productName}
+                        sales={item.productSalePrice}
+                        ratingAvg={item.productRating}
+                        reviewCnt={item.productReviewCount}
                     />
                 ))}
             </div>
+            <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             <ScrollToTopBtn />
         </div>
     )
 }
 
-export default SearchList;
+export default SearchPage;
