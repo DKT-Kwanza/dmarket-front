@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import './DetailPage.css';
 import DetailQnaList from "../../../components/user/List/DetailQnaList";
@@ -8,18 +8,69 @@ import ProductOptionTab from "../../../components/user/Common/Select/ProductOpti
 import StarRating from "../../../components/user/Common/Rating/StarRating";
 import RecommendProductList from "../../../components/user/List/RecommendProductList";
 import DetailWriteQna from "../../../components/user/Common/Input/DetailWriteQna";
+import ScrollToTopBtn from '../../../components/user/Common/Button/ScrollToTopBtn';
 import heart from '../../../assets/icons/heart.svg';
 import productDetail from '../../../assets/images/productDetail.png';
 import arrowRight from '../../../assets/icons/chevron-right.svg';
 import parcelIcon from '../../../assets/icons/truck-02.png';
-import ScrollToTopBtn from '../../../components/user/Common/Button/ScrollToTopBtn';
+import {FaHeart} from "react-icons/fa";
 
 function Detail() {
-
     const navigate = useNavigate();
+    const {productId} = useParams();
+
+    const [product, setProduct] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [qnas, setQnas] = useState([]);
     const [recommendProducts, setRecommendProducts] = useState([]);
+    const [productIsWish, setProductIsWish] = useState();
+
+    /* 세션 스토리지에서 토큰 가져오기 */
+    const token = sessionStorage.getItem('token');
+    const userId = sessionStorage.getItem('userId');
+
+    /* 상품 상세 정보 조회 */
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://172.16.210.136:8080/api/products/${productId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    }
+                });
+                console.log(response.data.data);
+                setProduct(response.data.data);
+                setProductIsWish(response.data.data.productIsWish);
+            } catch (e) {
+                console.error("Error fetching Inquiry data: ", e);
+            }
+        };
+        fetchData();
+    }, []);
+
+    /* 위시 리스트 추가 */
+    const handleWishClick = async () => {
+        console.log("productIsWish: ", productIsWish);
+        const requestData = {
+            "productId": productId
+        };
+
+        try {
+            const response = await axios.post(`http://172.16.210.136:8080/api/users/${userId}/wish`, requestData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json; charset=UTF-8',
+                }
+            });
+            console.log("wishClick", response.data.data);
+
+            /* productIsWish 값을 반전시켜줍니다. */
+            setProductIsWish(true);
+        } catch (e) {
+            console.error("Error fetching Inquiry data: ", e);
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -83,7 +134,7 @@ function Detail() {
     // "답변 완료"인 객체의 개수를 세기
     const qnaCompletedAnswersCount = qnas.qnaList ? qnas.qnaList.filter(item => item.qnaStatus === "답변 완료").length : 0;
     // "답변 대기"인 객체의 개수
-    const qnaPendingAnswersCount = qnas.qnaCount-qnaCompletedAnswersCount;
+    const qnaPendingAnswersCount = qnas.qnaCount - qnaCompletedAnswersCount;
 
     // const handleCheckboxChange = (newState) => { // qna 작성 공개 여부 체크박스
     //     console.log(newState);
@@ -99,7 +150,7 @@ function Detail() {
         <>
             <div id="container1">
                 <div className='category'>
-                    <text>카테고리/카테고리/카테고리</text>
+                    <text>{product.productCategory}</text>
                 </div>
                 <div className='productArea'>
                     <div className='repImg'/>
@@ -112,20 +163,20 @@ function Detail() {
                     </div>
                     <div className='detailArea'>
                         <div className='title'>
-                            <text>JAJU &gt;</text>
+                            <text>{product.productBrand} &gt;</text>
                         </div>
                         <div className='subTitle'>
-                            <text>여 다운필 루즈핏 퀼팅 점퍼 J103401008099</text>
+                            <text>{product.productName}</text>
                         </div>
                         <div className="rating">
-                            <StarRating rating={reviews.productRating}/>
-                            <text style={{marginLeft: '10px'}}>({reviews.reviewCnt}건)</text>
+                            <StarRating rating={product.productRating}/>
+                            <text style={{marginLeft: '10px'}}>({product.productReviewCount}건)</text>
                         </div>
                         <div className='price'>
-                            <text>59,900원</text>
+                            <text>{product.productSalePrice} 원</text>
                         </div>
                         <div className='releasePrice'>
-                            <text>최초출시가 89,900원</text>
+                            <text>최초출시가 {product.productPrice}</text>
                         </div>
                         <hr style={{marginTop: '13px'}}/>
                         <div className='deliveryInfo'>
@@ -150,7 +201,7 @@ function Detail() {
                         {
                             selected.map((value, index) => (
                                 <div key={index}>
-                                    <ProductOptionTab option={value} name={"여 다운필 루즈핏 퀼팅 점퍼 J103401008099"}/>
+                                    <ProductOptionTab option={value} name={product.productName}/>
                                 </div>
                             ))
                         }
@@ -166,7 +217,8 @@ function Detail() {
                     </div>
                 </div>
                 <div className='purchaseArea'>
-                    <button onClick={() => navigateToMypage('mywish')} className='wishlistButton'><img src={heart}/>
+                    <button onClick={handleWishClick} className='wishlistButton'>
+                        {productIsWish ? <FaHeart color='red'/> : <img src={heart} alt="heart"/>}
                     </button>
                     <button onClick={() => navigateToMypage('mycart')} className='cartButton'>장바구니</button>
                     <button onClick={navigateToOrder} className='purchaseButton'>바로구매</button>
@@ -176,7 +228,8 @@ function Detail() {
             <div id='container2'>
                 <ul className='buttonArea'>
                     <li className='productDetailButton'><a href="#productDetailButtonScroll">상품상세정보</a></li>
-                    <li className='reviewButton'><a href="#reviewButtonScroll">고객리뷰({reviews.reviewCnt})</a></li>
+                    <li className='reviewButton'><a href="#reviewButtonScroll">고객리뷰({product.productReviewCount})</a>
+                    </li>
                     <li className='qnaButton'><a href="#qnaButtonScroll">상품 Q&A({qnas.qnaCount})</a></li>
                     <li className='recommandButton'><a href="#recommandButtonScroll">추천 상품</a></li>
                     <li className='returnInfoButton'><a href="#scroll5">배송/반품/교환 안내</a></li>
@@ -292,7 +345,7 @@ function Detail() {
                 </div>
             </div>
             <div style={{marginBottom: '200px'}}/>
-            <ScrollToTopBtn />
+            <ScrollToTopBtn/>
         </>
     );
 }

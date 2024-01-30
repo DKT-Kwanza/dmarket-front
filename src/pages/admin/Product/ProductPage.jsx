@@ -23,15 +23,24 @@ function ProductPage() {
         return activeFilter === filter ? 'contained' : 'outlined';
     };
 
+    /* 세션 스토리지에서 토큰 가져오기 */
+    const token = sessionStorage.getItem('token');
+
+    /* 카테고리 별 상품 조회 */
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await axios.get("/api/AdminProductList.json");
-                setProducts(response.data);
-                setDisplayedProducts(response.data);
-            } catch (e) {
-                console.error("Error fetching data: ", e);
-            }
+            // try {
+            //     const response = await axios.get(`http://172.16.210.136:8080/api/admin/products/categories/${cateId}`, {
+            //         headers: {
+            //             'Authorization': `Bearer ${token}`,
+            //             'Content-Type': 'application/json; charset=UTF-8',
+            //         }
+            //     });
+            //     console.log(response.data);
+            //     setProducts(response.data);
+            // } catch (e) {
+            //     console.error("Error fetching Inquiry data: ", e);
+            // }
         };
         fetchData();
     }, []);
