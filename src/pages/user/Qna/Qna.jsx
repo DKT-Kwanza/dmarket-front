@@ -1,28 +1,49 @@
 import React, { useState, useEffect } from 'react';
+import {useNavigate, useLocation} from 'react-router-dom';
 import axios from 'axios';
 import { formatDate } from '../../../utils/Format';
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import './Qna.css';
 import QnaItem from '../../../components/user/Item/QnaItem';
+import { Pagination } from "@mui/material";
 
 const Qna = () => { 
+    const navigate = useNavigate();
+    const location = useLocation();
     const [qnas, setQnas] = useState([])
     const [expandedQnaId, setExpandedQnaId] = useState(null);
+    const token = sessionStorage.getItem('token');
+    const userId = sessionStorage.getItem('userId');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const page = parseInt(queryParams.get('page') || '1', 10);
+        setCurrentPage(page);
+
         const fetchData = async () => {
             try {
-                const response = await axios.get("/api/QnaData.json");
-                
-                setQnas(response.data);
-
+                const response = await axios.get(`http://172.16.210.136:8080/api/users/${userId}/mypage/qna?page=${page}`, 
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                setQnas(response.data.data.content);
+                setTotalPages(response.data.data.totalPages);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
         fetchData();
-    }, []);
+    }, [userId, currentPage, location.search]);
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value); 
+        navigate(`?page=${value}`);
+    };
 
     // 질문을 토글하는 함수
     const toggleQna = (qnaId) => {
@@ -69,6 +90,7 @@ const Qna = () => {
                                 />
                             ))}
                         </div>
+                        <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
                     </div>
                 </div>
             </div>
