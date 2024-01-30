@@ -12,14 +12,22 @@ function Cart(){
     const [selectAll, setSelectAll] = useState(false);
     const [checkedItems, setCheckedItems] = useState({});
 
+    /* 세션 스토리지에서 토큰 가져오기 */
+    const token = sessionStorage.getItem('token');
+    const userId = sessionStorage.getItem('userId');
+
+    /* 장바구니 데이터 조회 */
     useEffect(() => {
         const fetchData = async () => {
+            const url = `http://172.16.210.136:8080/api/users/${userId}/cart`;
             try {
-                const response = await axios.get("api/CartData.json");
-                
-                setCarts(response.data);
-                console.log(carts)
-
+                const response = await axios.get(url, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                });
+                setCarts(response.data.data);
+                console.log(response.data.data)
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -31,7 +39,8 @@ function Cart(){
         navigate("../../order");
     }
 
-    const handleSelectAll = () => { // 전체 선택 체크박스 상태
+    /* 전체 선택 체크박스 상태*/
+    const handleSelectAll = () => {
         const newCheckedItems = {};
         carts.cartList.forEach((_, index) => {
             newCheckedItems[index] = !selectAll;
@@ -39,17 +48,18 @@ function Cart(){
         setCheckedItems(newCheckedItems);
         setSelectAll(!selectAll);
     };
-    
 
-    const handleItemCheck = index => { // 개별 상품 선택 체크박스 상태
+    /* 개별 상품 선택 체크박스 상태 */
+    const handleItemCheck = index => {
         const newCheckedItems = { ...checkedItems, [index]: !checkedItems[index] };
         setCheckedItems(newCheckedItems);
     };
 
-    const handleDeleteSelected = () => { // 체크한 상품 삭제
+    /* 체크한 상품 삭제 */
+    const handleDeleteSelected = () => {
         const newCartList = carts.cartList.filter((_, index) => !checkedItems[index]);
         setCarts({ ...carts, cartList: newCartList });
-    
+
         const newCheckedItems = {};
         newCartList.forEach((_, index) => {
             newCheckedItems[index] = false;
@@ -57,17 +67,17 @@ function Cart(){
         setCheckedItems(newCheckedItems);
     };
 
-    // 선택된 상품의 가격 배열 생성
+    /* 선택된 상품의 가격 배열 생성 */
     const selectedItemsPrices = carts.cartList
         .filter((_, index) => checkedItems[index])
-        .map(item => item.price);
+        .map(item => item.productTotalSalePrice);
 
-    // 선택된 상품의 개수와 총 가격 계산
+    /* 선택된 상품의 개수와 총 가격 계산 */
     const selectedItemCount = Object.values(checkedItems).filter(Boolean).length;
-    
+
     const selectedItemTotalPrice = carts.cartList.reduce((total, item, index) => {
         if (checkedItems[index]) {
-            return total + parseFloat(item.price.replace(/,/g, '')); // 가격 문자열에서 쉼표 제거 후 숫자로 변환
+            return total + item.productTotalSalePrice;
         }
         return total;
     }, 0);

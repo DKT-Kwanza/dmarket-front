@@ -1,5 +1,7 @@
 import './CartItem.css';
+import styled from 'styled-components';
 import CheckBox from '../Common/CheckBox/CheckBox';
+import {formatPrice} from "../../../utils/Format";
 
 function CartItem ({ productImg, brand, productName, price, option, quantity, checked, onCheck }){
 
@@ -17,15 +19,30 @@ function CartItem ({ productImg, brand, productName, price, option, quantity, ch
                     <div className='cartItem-name'>{productName}</div>
                     <div className='cartItem-description-bar'></div>
                     <div className='cartItem-option'>
-                        <div>{option}</div>
-                        <div className='cartItem-option-value'>{quantity}</div>
+                        <div>옵션</div>
+                        <Value>{option}</Value>
+                        <Line />
+                        <div>수량</div>
+                        <Value>{quantity}</Value>
                     </div>
                 </div>
             </div>
             <div className='cartItem-bar'></div>
-            <div className='cartItem-price'>{price}원</div>
+            <div className='cartItem-price'>{formatPrice(price)}원</div>
         </div>
     )
 }
+
+const Line = styled.div`
+  width: 1px;
+  height: 12px;
+  background: #DBDBDB;
+  margin: 0 10px;
+`
+
+const Value = styled.div`
+  color: #505050;
+  font-weight: 500;
+`
 
 export default CartItem;

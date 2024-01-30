@@ -1,5 +1,6 @@
-import StarRating from "../../../components/user/Common/Rating/StarRating";
 import './ProductListItem.css'
+import StarRating from "../../../components/user/Common/Rating/StarRating";
+import {formatPrice} from "../../../utils/Format";
 
 function ProductListItem({onClick, brand, productName, productImg, sales, ratingAvg, reviewCnt}) {
 
@@ -11,7 +12,7 @@ function ProductListItem({onClick, brand, productName, productImg, sales, rating
             <div className='productListItem-info'>
                 <div className='productListItem-brand'>{brand}</div>
                 <div className='productListItem-name'>{productName}</div>
-                <div className='productListItem-price'>{sales} 원</div>
+                <div className='productListItem-price'>{formatPrice(sales)} 원</div>
 
                 {ratingAvg ?
                     <div className='productListItem-review'>

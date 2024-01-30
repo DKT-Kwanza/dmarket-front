@@ -8,11 +8,11 @@ const CartList = ({ items, checkedItems, onItemCheck }) => {
             <CartItem
               key={index}
               productImg={item.productImg}
-              brand={item.brand}
+              brand={item.productBrand}
               productName={item.productName}
-              option={item.option}
-              quantity={item.quantity}
-              price={item.price}
+              option={item.productOption}
+              quantity={item.productCount}
+              price={item.productTotalSalePrice}
               checked={checkedItems[index]}
               onCheck={() => onItemCheck(index)}
             />

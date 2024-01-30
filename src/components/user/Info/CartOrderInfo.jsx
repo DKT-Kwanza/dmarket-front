@@ -1,8 +1,8 @@
-import React from 'react';
 import './CartOrderInfo.css'
+import {formatPrice} from "../../../utils/Format";
 
 export default function CartOrderInfo({ navigateToOrder, itemCount, totalPrice, prices }) {
-    // 총 결제 금액 포맷팅
+    /* 총 결제 금액 포맷팅 */
     const formattedTotalPrice = totalPrice.toLocaleString('ko-KR');
 
     return (
@@ -22,14 +22,14 @@ export default function CartOrderInfo({ navigateToOrder, itemCount, totalPrice, 
                         <div>주문 금액</div>
                         <div className='cart-item-price'>
                             {prices.map((price, index) => (
-                                <div key={index}>{index > 0 ? " + " : ""}{price}원</div>
+                                <div key={index}>{index > 0 ? " + " : ""}{formatPrice(price)} 원</div>
                             ))}
                         </div>
                     </div>
                     <div className='cart-order-bar'></div>
                     <div className='cart-total-price'>
                         <div>총 결제 금액</div>
-                        <div>{formattedTotalPrice}원</div>
+                        <div>{formattedTotalPrice} 원</div>
                     </div>
                 </div>
                 <div className='cart-order-container'>

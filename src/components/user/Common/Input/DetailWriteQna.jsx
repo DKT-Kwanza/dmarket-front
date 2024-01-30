@@ -3,32 +3,41 @@ import React, {useState} from "react";
 import styled from "styled-components";
 
 function DetailWriteQna({onClick}) {
+    const [checkboxState, setCheckboxState] = useState(false);
+    const [title, setTitle] = useState('');
+    const [contents, setContents] = useState('');
 
-    const [checkboxState, setCheckboxState] = useState('none');
-
-    const handleCheckboxChange = (newState) => { // qna 작성 공개 여부 체크박스
+    /* qna 작성 공개 여부 체크박스 */
+    const handleCheckboxChange = (newState) => {
         console.log(newState);
         if (checkboxState === newState) {
-            setCheckboxState('none');
+            setCheckboxState(true);
         } else {
             setCheckboxState(newState);
             console.log(newState);
         }
     };
 
+    const handleEnrollClick = () => {
+        /* onClick 콜백 함수 호출하여 데이터 전달 */
+        onClick(title, contents, checkboxState);
+    };
+
     return (
         <Area>
             <Title>
                 <text>제목</text>
-                <TitleInput type="text" name="title" placeholder="제목을 입력해주세요."
+                <TitleInput type="text" name="title" placeholder="제목을 입력해주세요." value={title}
+                            onChange={(e) => setTitle(e.target.value)}
                             required></TitleInput>
             </Title>
             <Content>
                 <ContentTitle>
                     <text>내용</text>
                 </ContentTitle>
-                <ContentInput type="text" name="contents"
-                              placeholder="내용을 입력해주세요." required></ContentInput>
+                <ContentInput type="text" name="contents" value={contents} placeholder="내용을 입력해주세요."
+                              onChange={(e) => setContents(e.target.value)}
+                              required></ContentInput>
             </Content>
             <SecretState>
                 <Secret>비밀글</Secret>
@@ -47,7 +56,7 @@ function DetailWriteQna({onClick}) {
                     onChange={() => handleCheckboxChange('private')}
                 />
             </SecretState>
-            <EnrollBtn onClick={onClick}>등록</EnrollBtn>
+            <EnrollBtn onClick={handleEnrollClick}>등록</EnrollBtn>
         </Area>
     );
 }
