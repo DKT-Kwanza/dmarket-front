@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import GreyBtn from '../Common/Button/GreyBtn';
 import styled from 'styled-components';
-import ConfirmCancelModal from '../../user/Common/Modal/ConfirmCancelModal'
+import ConfirmCancelModal from "../../commmon/Modal/ConfirmCancelModal";
 import SelectBox from "../../commmon/SelectBox/SelectBox";
 
 function OrderDetailItem({img, brand, name, option, count, price, status}) {

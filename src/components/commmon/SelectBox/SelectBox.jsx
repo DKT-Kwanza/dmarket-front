@@ -36,7 +36,6 @@ export default function SelectBox({ text, options, onChange }) {
                     </Options>
                 )}
             </DropDown>
-
         </Content>
     );
 }

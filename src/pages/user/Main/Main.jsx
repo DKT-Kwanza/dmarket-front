@@ -1,10 +1,10 @@
 import './Main.css';
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
-import {FaAngleLeft, FaAngleRight, FaPause} from "react-icons/fa6";
 import axios from 'axios';
 import MainProductItem from "../../../components/user/Item/MainProductItem";
 import ScrollToTopBtn from '../../../components/user/Common/Button/ScrollToTopBtn';
+import {FaAngleLeft, FaAngleRight, FaPause} from "react-icons/fa6";
 
 const Main = () => {
     const navigate = useNavigate();
