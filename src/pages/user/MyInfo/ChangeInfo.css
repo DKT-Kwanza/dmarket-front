@@ -136,6 +136,12 @@
     padding-top: 12px;
 }
 
+.InfoChange-address-postalcode{
+    height: 28px;
+    border-radius: 5px;
+    border: 1px solid #EAEEEF;
+}
+
 .InfoChange-address-detail{
     width: 290px;
     height: 28px;
