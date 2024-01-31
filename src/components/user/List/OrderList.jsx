@@ -9,12 +9,12 @@ const OrderList = ({ orders }) => {
 
   /* 상품 정보 리뷰 작성 페이지로 전달 */
   const navigateToWrite = (orderDetailList) => {
-    navigate('../writeReview', { state: { orderDetailList } });
+    navigate('../writeReview', { state: { orderDetailList: orderDetailList } });
   };
 
   return (
     <div>
-      {orders.map((order, index) => (
+      {orders && orders.map((order, index) => (
         <div key={index} className='OrderList-box'>
           {/* 주문 정보 컴포넌트 */}
           <OrderInfo
