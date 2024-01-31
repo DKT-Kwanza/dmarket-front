@@ -2,54 +2,74 @@ import LeftNav from "../../../components/admin/Sidebar/LeftNav";
 import Header from "../../../components/admin/Header/Header";
 import TabMenu from "../../../components/admin/Common/TabMenu/TabMenu";
 import ReturnStatusTable from "../../../components/admin/Table/ReturnStatusTable";
-import {Paper, Box} from "@mui/material";
+import {Paper, Box, Pagination} from "@mui/material";
 import {indigo} from '@mui/material/colors';
 import {useEffect, useState} from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 const primary = indigo[50];
 const drawerWidth = 260;
 
 function ReturnStatus() {
+    const navigate = useNavigate();
     const [returnStatus, setReturnStatus] = useState([]);
     const [selectedTab, setSelectedTab] = useState('반품 요청');
     const [menuList, setMenuList] = useState([]);
-    const tableHeader = ['주분번호', '상품번호', '브랜드', '상품', '옵션', '주문수량', '요청사유', '주문날짜', '요청날짜', '반품상태 변경'];
+    const tableHeader = ['주문번호', '상품번호', '브랜드', '상품', '옵션', '주문수량', '요청사유', '주문날짜', '요청날짜', '반품상태 변경'];
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+
+    const token = sessionStorage.getItem('token');
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get("/api/AdminOrderReturnStatusData.json");
-                setReturnStatus(response.data);
-                console.log(returnStatus);
-            } catch (e) {
-                console.error("Error fetching data: ", e);
-            }
-        };
         fetchData();
-    }, []);
+    }, [selectedTab, currentPage, token]);
 
-    useEffect(() => {
-        /* returnStatus가 업데이트되었을 때만 setMenuList 호출 */
-        if (returnStatus && returnStatus.returnList) {
-            setMenuList([
-                {title: '반품 요청', count: returnStatus.returnReqCount},
-                {title: '수거 중', count: returnStatus.returnColCount},
-                {title: '수거 완료', count: returnStatus.colConfCount},
-                {title: '반품 완료', count: returnStatus.returnConfcount}
-            ]);
-        }
-    }, [returnStatus]);
-
-    const handleTabChange = async (tabTitle) => {
-        setSelectedTab(tabTitle);
+    const fetchData = async () => {
         try {
-            const response = await axios.get(`/api/AdminOrderReturnStatusTestData.json`);
-            /* 데이터를 테이블 형식에 맞게 가공하고 returnStatus 업데이트 */
-            setReturnStatus(response.data);
-        } catch (error) {
-            console.error("Error fetching data: ", error);
+            const response = await axios.get(`http://172.16.210.136:8080/api/admin/orders/returns?status=${selectedTab}&page=${currentPage}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            setReturnStatus(response.data.data.returnList.content);
+            setTotalPages(response.data.data.returnList.totalPages);
+            setMenuList([
+                { title: '반품 요청', count: response.data.data.returnReqCount },
+                { title: '수거중', count: response.data.data.returnColCount },
+                { title: '수거 완료', count: response.data.data.colConfCount }
+            ]);
+        } catch (e) {
+            console.error(e);
         }
+    };
+
+    const handleTabChange = (tabTitle) => {
+        setSelectedTab(tabTitle);
+        setCurrentPage(1);
+    };
+
+    const onChangeReturnStatusClick = async (returnId, selectedStatus) => {
+        try {
+            await axios.put(`http://172.16.210.136:8080/api/admin/orders/returns/${returnId}`, {
+                returnStatus: selectedStatus,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+    
+            alert("반품 상태가 변경되었습니다.");
+            setReturnStatus(prevStatus => prevStatus.filter(item => item.returnId !== returnId));
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+        navigate(`?page=${value}`);
     };
 
     return (
@@ -72,8 +92,9 @@ function ReturnStatus() {
                 <Paper square elevation={2}
                        sx={{p: '20px 30px'}}>
                     <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange} />
-                    <ReturnStatusTable headers={tableHeader} rows={returnStatus.returnList} />
+                    <ReturnStatusTable headers={tableHeader} rows={returnStatus} onChangeReturnStatusClick={onChangeReturnStatusClick} />
                 </Paper>
+                <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             </Box>
         </Box>
 
