@@ -57,7 +57,7 @@ function OrderHistory() {
                         <div className="orderHistory-process">
                             <div className="orderHistory-process-list">
                                 <div className="orderHistory-process-item-wrap">
-                                    <div className="orderHistory-process-title">결제확인</div>
+                                    <div className="orderHistory-process-title">결제완료</div>
                                     <div className="orderHistory-process-count">{orderHistory.confPayCount}</div>
                                 </div>
                                 <div className="orderHistory-process-bar"/>

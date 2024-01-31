@@ -84,9 +84,10 @@ function Detail() {
 
     /* Qna 데이터 목록 조회 */
     useEffect(() => {
-        console.log(productId);
+        console.log("productId: ",productId);
         const fetchData = async () => {
             const url = `${productsApi}/${productId}/qnaList`;
+            console.log("url: ",url);
             try {
                 const response = await axios.get(url, {
                     headers: {
@@ -95,9 +96,9 @@ function Detail() {
                     }
                 });
                 setQnas(response.data);
-                console.log("qna: ", qnas);
+                console.log("qna: ", response.data);
             } catch (e) {
-                console.error("Error fetching data: ", e);
+                console.error("Error fetching QNA data: ", e);
             }
         };
         fetchData();

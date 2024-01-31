@@ -97,6 +97,7 @@ function OrderHistoryDetail() {
                         {orderDetailProducts?.productDetailList?.map((product, index) => (
                             <OrderDetailItem
                                 key={index}
+                                detailId={product.detailId}
                                 brand={product.productBrand}
                                 name={product.productName}
                                 img={product.productImg}
