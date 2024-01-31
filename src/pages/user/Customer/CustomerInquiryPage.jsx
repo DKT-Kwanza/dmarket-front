@@ -56,6 +56,7 @@ function CustomerInquiryPage() {
                 'Content-Type': 'application/json'
             }
             });
+        navigate('/mydkt/inquiry');
         }
     catch (error) {
         console.log('Error submitting inquiry:', error);
