@@ -14,7 +14,7 @@ const OrderList = ({ orders }) => {
 
   return (
     <div>
-      {orders.map((order, index) => (
+      {orders && orders.map((order, index) => (
         <div key={index} className='OrderList-box'>
           {/* 주문 정보 컴포넌트 */}
           <OrderInfo

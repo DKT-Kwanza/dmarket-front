@@ -5,7 +5,7 @@ import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import OrderList from "../../../components/user/List/OrderList";
 import OrderReviewList from "../../../components/user/List/OrderReviewList";
-
+import {userApi} from "../../../Api";
 const ReviewList = () => {
     
     const [availableReviews, setAvailableReviews] = useState([]);
@@ -13,12 +13,24 @@ const ReviewList = () => {
     const [review, setReview] = useState(true);
     const [reviewed, setReviewed] = useState(false);
 
+    // 작성 가능한 리뷰
     useEffect(() => {
         const fetchData = async () => {
+            const userId = sessionStorage.getItem("userId");
+            const token = sessionStorage.getItem("token");
+
+            if (!token || !userId) {
+                console.error("No token or userId")
+                return;
+            }
             try {
-                const response = await axios.get("/api/AvailableReviewsData.json");
-                
-                setAvailableReviews(response.data);
+                const response = await axios.get(`${userApi}/${userId}/mypage/available-reviews`,{
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'}
+                });
+                console.log("availablereviews: ", response.data.data.content);
+                setAvailableReviews(response.data.data.content);
 
             } catch (e) {
                 console.error("Error fetching data: ", e);
@@ -27,11 +39,25 @@ const ReviewList = () => {
         fetchData();
     }, []);
 
+    // 작성한 리뷰
     useEffect(() => {
         const fetchData = async () => {
+            const userId = sessionStorage.getItem("userId");
+            const token = sessionStorage.getItem("token");
+
+            if (!token || !userId) {
+                console.error("No token or userId")
+                return;
+            }
+
             try {
-                const response = await axios.get("/api/WrittenReviewsData.json");
-                
+                const response = await axios.get("/api/WrittenReviewsData.json",{
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'}
+                });
+
+                console.log(response.data);
                 setWrittenReviews(response.data);
 
             } catch (e) {
@@ -41,6 +67,7 @@ const ReviewList = () => {
         fetchData();
     }, []);
 
+    // 작성 가능한 리뷰, 작성한 리뷰 toggle 버튼
     const onClickReview = () => {
         setReview(true);
         setReviewed(false);
