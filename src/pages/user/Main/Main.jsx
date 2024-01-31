@@ -5,6 +5,7 @@ import axios from 'axios';
 import MainProductItem from "../../../components/user/Item/MainProductItem";
 import ScrollToTopBtn from '../../../components/user/Common/Button/ScrollToTopBtn';
 import {FaAngleLeft, FaAngleRight, FaPause} from "react-icons/fa6";
+import {productsApi} from "../../../Api";
 
 const Main = () => {
     const navigate = useNavigate();
@@ -19,8 +20,9 @@ const Main = () => {
     /* 신상품 데이터 */
     useEffect(() => {
         const fetchData = async () => {
+            const url = `${productsApi}/new-products`
             try {
-                const response = await axios.get("http://172.16.210.136:8080/api/products/new-products", {
+                const response = await axios.get(url, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json; charset=UTF-8',
