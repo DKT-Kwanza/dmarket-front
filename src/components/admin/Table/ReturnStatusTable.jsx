@@ -48,7 +48,8 @@ export default function ReturnStatusTable({ headers, rows, onChangeReturnStatusC
                             <TableCell>{formatDate(row.orderDate)}</TableCell>
                             <TableCell>{formatDate(row.returnReqDate)}</TableCell>
                             <TableCell>
-                            <SelectBox
+                                <SelectBox
+                                    key={`${row.returnId}-${row.returnStatus}`}
                                     text={row.returnStatus}
                                     options={['반품 준비중', '수거중', '수거 완료']}
                                     onChange={(selectedStatus) => onChangeReturnStatusClick(row.returnId, selectedStatus)}

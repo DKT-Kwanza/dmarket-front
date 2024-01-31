@@ -37,8 +37,7 @@ function ReturnStatus() {
             setTotalPages(response.data.data.returnList.totalPages);
             setMenuList([
                 { title: '반품 요청', count: response.data.data.returnReqCount },
-                { title: '수거중', count: response.data.data.returnColCount },
-                { title: '수거 완료', count: response.data.data.colConfCount }
+                { title: '수거중', count: response.data.data.returnColCount }
             ]);
         } catch (e) {
             console.error(e);
