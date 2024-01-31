@@ -28,7 +28,7 @@ function UserMileagePage() {
             const response = await axios.get(`http://172.16.210.136:8080/api/admin/users/mileage-history?status=PROCESSING&page=${currentPage}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            setMileageReqData(response.data.data.mileageReqList);
+            setMileageReqData(response.data.data.content);
             setTotalPages(response.data.data.totalPage);
         } catch (error) {
             console.error(error);
@@ -40,7 +40,7 @@ function UserMileagePage() {
             const response = await axios.get(`http://172.16.210.136:8080/api/admin/users/mileage-history?status=PROCESSED&page=${currentPage}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            setMileageData(response.data.data.mileageReqList);
+            setMileageData(response.data.data.content);
             setTotalPages(response.data.data.totalPage);
         } catch (error) {
             console.error(error);

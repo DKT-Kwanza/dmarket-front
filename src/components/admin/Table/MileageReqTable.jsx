@@ -33,30 +33,27 @@ export default function MileageReqTable({ headers, rows, fetchData }) {
     const token = sessionStorage.getItem('token');
 
     const openApproveModal = (request) => {
-        console.log("Selected request for approval:", request);
         setSelectedRequest(request);
         setIsApproveModalOpen(true);
     };
     
     const openRefuseModal = (request) => {
-        console.log("Selected request for refusal:", request); 
         setSelectedRequest(request);
         setIsRefuseModalOpen(true);
     };
 
     const handleApprove = async () => {
-        const mileageReqId = selectedRequest.mileageReqId;
-
+        const mileageReqId = selectedRequest.mileageReqId; 
+    
         try {
-            const response = await axios.put (`http://172.16.232.230:8080/api/admin/users/mileage/approval/${mileageReqId}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+            await axios.put(`http://172.16.210.136:8080/api/admin/users/mileage/approval/${mileageReqId}`, {}, {
+                headers: { 'Authorization': `Bearer ${token}` }
             });
             alert("승인되었습니다!");
             closeApproveModal();
+            fetchData();
         } catch (error) {
-            console.error('Error approving request:', error);
+            console.error(error)
         }
     };
 
@@ -71,16 +68,17 @@ export default function MileageReqTable({ headers, rows, fetchData }) {
     };
 
     const handleRefuse = async () => {
-        const mileageReqId = selectedRequest.mileageReqId;
-
+        const mileageReqId = selectedRequest.mileageReqId; 
+    
         try {
-            const response = await axios.put(`http://172.16.210.136:8080/api/admin/users/mileage/refusal/${mileageReqId}`, {
+            await axios.put(`http://172.16.210.136:8080/api/admin/users/mileage/refusal/${mileageReqId}`, {}, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             alert("거부되었습니다!");
             closeRefuseModal();
+            fetchData(); 
         } catch (error) {
-            console.error('Error refusing request:', error);
+            console.error(error);
         }
     };
 
