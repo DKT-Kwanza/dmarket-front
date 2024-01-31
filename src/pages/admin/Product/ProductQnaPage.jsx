@@ -2,9 +2,9 @@ import * as React from "react";
 import LeftNav from "../../../components/admin/Sidebar/LeftNav";
 import Header from "../../../components/admin/Header/Header";
 import QnaTable from "../../../components/admin/Table/QnaTable";
-import {Paper, Box, Button} from "@mui/material";
+import {Paper, Box, Pagination} from "@mui/material";
 import {indigo} from '@mui/material/colors';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -12,25 +12,39 @@ const primary = indigo[50];
 const drawerWidth = 260;
 
 function ProductQnaPage() {
+    const location = useLocation();
     const navigate = useNavigate();
     const [rows, setRows] = useState([]);
     const [open, setOpen] = useState(false);
     const [selectedQnaId, setSelectedQnaId] = useState(null);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
 
     const tableHeader = ['상품번호', '제목', '작성자', '작성일', '답변상태', ''];
 
+    const token = sessionStorage.getItem('token');
+
+    const fetchQnaList = async () => {
+        try {
+            const response = await axios.get(`http://172.16.210.136:8080/api/admin/products/qna?page=${currentPage}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            setRows(response.data.data.qnaList);
+            setTotalPages(response.data.data.totalPage);
+        } catch (error) {
+            console.error("Error fetching QnA list: ", error);
+        }
+    };
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get("/api/AdminProductQnaData.json");
-                setRows(response.data);
-                
-            } catch (e) {
-                console.error("Error fetching data: ", e);
-            }
-        };
-        fetchData();
-    }, []);
+        fetchQnaList();
+    }, [currentPage]);
+
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+        navigate(`?page=${value}`);
+    };
 
     const handleRowClick = (qnaId) => {
         setSelectedQnaId(qnaId);
@@ -48,8 +62,9 @@ function ProductQnaPage() {
                 sx={{height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px`}}>
                 <Paper square elevation={2}
                     sx={{p: '20px 30px'}}>
-                    <QnaTable headers={tableHeader} rows={rows} onRowClick={handleRowClick} />
+                    <QnaTable headers={tableHeader} rows={rows} onRowClick={handleRowClick} fetchQnaList={fetchQnaList}/>
                 </Paper>
+                <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             </Box>
         </Box>
 

@@ -38,7 +38,7 @@ function NoticeModal({open, handleClose, noticeId, noticeList}) {
                         </Typography>
                         <hr/>
                         <Typography id="notice-modal-title" variant="h6" component="h2" sx={{mt: 2}}>
-                            [{notice.noticeType}] {notice.noticeTitle}
+                            {notice.noticeTitle}
                         </Typography>
                         <Typography sx={{mt: 2}}>
                             관리자 {formatDate(notice.noticeCreatedDate)}
