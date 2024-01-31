@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {useNavigate} from 'react-router-dom';
-import {formatDate} from '../../../utils/Format';
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { formatDate } from '../../../utils/Format';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -24,7 +24,7 @@ const style = {
     p: 4,
 };
 
-export default function UserTable({headers, rows, children}) {
+export default function UserTable({ headers, rows, children, onRoleChange }) {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState(null);
@@ -32,6 +32,7 @@ export default function UserTable({headers, rows, children}) {
     const handleOpenModal = (userId) => {
         setSelectedUserId(userId);
         setIsOpen(true);
+
     };
 
     const handleCloseModal = () => {
@@ -44,8 +45,8 @@ export default function UserTable({headers, rows, children}) {
     };
 
     return (
-        <TableContainer component={Paper} sx={{mb: 2}}>
-            <Table sx={{minWidth: 650}} aria-label="simple table">
+        <TableContainer component={Paper} sx={{ mb: 2 }}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
                         {
@@ -57,7 +58,7 @@ export default function UserTable({headers, rows, children}) {
                 </TableHead>
                 <TableBody>
 
-                    <TableRow key={rows.userId} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                    <TableRow key={rows.userId} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell>{rows.userName}</TableCell>
                         <TableCell>{rows.userDktNum}</TableCell>
                         <TableCell>{rows.userEmail}</TableCell>
@@ -75,7 +76,11 @@ export default function UserTable({headers, rows, children}) {
                                         삭제
                                     </Button>
                                     :
-                                    <SelectBox text={'유형을 선택하세요'} options={['사용자', '총괄관리자', '시스템관리자', '상품관리자']}/>
+                                    <SelectBox
+                                        text={'유형을 선택하세요'}
+                                        options={['사용자', '총괄관리자', '시스템관리자', '상품관리자']}
+                                        onChange={onRoleChange}
+                                    />
                             }
                         </TableCell>
                     </TableRow>
