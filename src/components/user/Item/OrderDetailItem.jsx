@@ -3,6 +3,7 @@ import GreyBtn from '../Common/Button/GreyBtn';
 import styled from 'styled-components';
 import ConfirmCancelModal from "../../commmon/Modal/ConfirmCancelModal";
 import SelectBox from "../../commmon/SelectBox/SelectBox";
+import {formatPrice} from "../../../utils/Format";
 
 function OrderDetailItem({img, brand, name, option, count, price, status}) {
     const [statusText, setStatusText] = useState("");
@@ -10,7 +11,7 @@ function OrderDetailItem({img, brand, name, option, count, price, status}) {
     const [isConfirming, setIsConfirming] = useState(false);
 
     useEffect(() => {
-        if (status === "결제 확인") {
+        if (status === "결제확인") {
             setStatusText("주문취소");
         } else if (status === "배송 완료") {
             setStatusText("반품신청");
@@ -57,11 +58,14 @@ function OrderDetailItem({img, brand, name, option, count, price, status}) {
                         </tr>
                         <tr>
                             <InfoTitle>결제금액</InfoTitle>
-                            <InfoContent>{price} 원</InfoContent> {/* 상품 금액 */}
+                            <InfoContent>{formatPrice(price)} 원</InfoContent> {/* 상품 금액 */}
                         </tr>
                     </Info>
                     {status === "결제 확인" || status === "배송 완료" ? (
-                        <GreyBtn onClick={openModalHandler}>{statusText}</GreyBtn>
+                        <InfoProcess>
+                            <div style={{paddingRight: '40px'}}>{status}</div>
+                            <GreyBtn onClick={openModalHandler}>{statusText}</GreyBtn>
+                        </InfoProcess>
                     ) : (
                         <InfoProcess>{status}</InfoProcess>
                     )}
@@ -134,6 +138,8 @@ const InfoProcess = styled.div`
   font-weight: 700;
   line-height: normal;
   margin-left: auto;
+  display: flex;
+  align-items: center;
 `
 
 const Line = styled.div`

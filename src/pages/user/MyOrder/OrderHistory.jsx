@@ -4,16 +4,32 @@ import "./OrderHistory.css";
 import OrderHistoryItem from '../../../components/user/Item/OrderHistoryItem';
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
+import {userApi} from "../../../Api";
 
 function OrderHistory() {
 
+    const [orderHistory, setOrderHistory] = useState([]);
     const [orderHistoryProducts, setOrderHistoryProducts] = useState([]);
 
+    /* 세션 스토리지에서 토큰 가져오기 */
+    const token = sessionStorage.getItem('token');
+    const userId = sessionStorage.getItem('userId');
+
+    /* 주문, 배송 내역 조회 */
     useEffect(() => {
         const fetchData = async () => {
+            const url = `${userApi}/${userId}/mypage/orders`;
             try {
-                const response = await axios.get("/api/OrderHistoryData.json");
-                setOrderHistoryProducts(response.data);
+                const response = await axios.get(url, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    }
+                });
+                console.log(response.data.data);
+                console.log(response.data.data.orderList);
+                setOrderHistory(response.data.data)
+                setOrderHistoryProducts(response.data.data.orderList);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -42,24 +58,24 @@ function OrderHistory() {
                             <div className="orderHistory-process-list">
                                 <div className="orderHistory-process-item-wrap">
                                     <div className="orderHistory-process-title">결제확인</div>
-                                    <div className="orderHistory-process-count">{orderHistoryProducts.confPayCount}</div>
+                                    <div className="orderHistory-process-count">{orderHistory.confPayCount}</div>
                                 </div>
                                 <div className="orderHistory-process-bar"/>
                                 <div className="orderHistory-process-item-wrap">
                                     <div className="orderHistory-process-title">배송준비 중</div>
-                                    <div className="orderHistory-process-count">{orderHistoryProducts.preShipCount}</div>
+                                    <div className="orderHistory-process-count">{orderHistory.preShipCount}</div>
                                 </div>
                                 <div className="orderHistory-process-bar"/>
                                 <div className="orderHistory-process-item-wrap">
                                     <div className="orderHistory-process-title">배송중</div>
                                     <div
-                                        className="orderHistory-process-count">{orderHistoryProducts.inTransitCount}</div>
+                                        className="orderHistory-process-count">{orderHistory.inTransitCount}</div>
                                 </div>
                                 <div className="orderHistory-process-bar"/>
                                 <div className="orderHistory-process-item-wrap">
                                     <div className="orderHistory-process-title">배송완료</div>
                                     <div
-                                        className="orderHistory-process-count">{orderHistoryProducts.cmpltDilCount}</div>
+                                        className="orderHistory-process-count">{orderHistory.cmpltDilCount}</div>
                                 </div>
                             </div>
                         </div>
@@ -69,23 +85,23 @@ function OrderHistory() {
                                 <div className="orderHistory-process-item-wrap">
                                     <div className="orderHistory-process-cancel-title">주문취소</div>
                                     <div
-                                        className="orderHistory-process-count">{orderHistoryProducts.orderCancelCount}</div>
+                                        className="orderHistory-process-count">{orderHistory.orderCancelCount}</div>
                                 </div>
                                 <div className="orderHistory-process-bar"/>
                                 <div className="orderHistory-process-item-wrap">
                                     <div className="orderHistory-process-cancel-title">반품/환불</div>
-                                    <div className="orderHistory-process-count">{orderHistoryProducts.returnCount}</div>
+                                    <div className="orderHistory-process-count">{orderHistory.returnCount}</div>
                                 </div>
                             </div>
                         </div>
 
                         {/*주문 내역이 나오는 영역 입니다.*/}
-                        {orderHistoryProducts && orderHistoryProducts.orderList && orderHistoryProducts.orderList.map((order, index) => (
+                        {orderHistoryProducts && orderHistoryProducts.content && orderHistoryProducts.content.map((order, index) => (
                             <OrderHistoryItem
                                 key={order.orderId || index}
                                 orderDate={order.orderDate}
                                 orderId={order.orderId}
-                                orderItems={order.orderDetailList}
+                                orderItems={order.productDetailList}
                             />
                         ))}
                     </div>

@@ -74,6 +74,7 @@ function ChangePwd() {
             navigate("/member/login");
         } catch (e) {
             console.error('요청 실패:', e);
+            alert(e.response.data.msg);
         }
         setIsConfirming(true);
     };

@@ -9,7 +9,7 @@ const DetailReviewsList = ({reviews}) => {
                         <DetailReviewItem
                             rating={review.reviewRating}
                             writer={review.reviewWriter}
-                            reviewDate={review.reviewCreatedDate.split(' ')[0]}
+                            reviewDate={review.reviewCreatedDate}
                             option={review.productOption}
                             imageSrc={review.reviewImg}
                             content={review.reviewContents}/>
