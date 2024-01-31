@@ -41,6 +41,7 @@
     align-items: center;
     border-radius: 5px;
     display: flow;
+    cursor: pointer;
 }
 
 .notification-item.read {
@@ -61,7 +62,6 @@
 
 .notification-item.unread {
     background-color: #FFD465;
-    color: #000;
 }
 
 .notification-item.unread:hover {
