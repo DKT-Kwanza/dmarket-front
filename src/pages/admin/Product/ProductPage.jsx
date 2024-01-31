@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, Paper } from '@mui/material';
+import { Box, Button, Paper, Pagination } from '@mui/material';
 import { indigo } from '@mui/material/colors';
 import LeftNav from '../../../components/admin/Sidebar/LeftNav';
 import Header from '../../../components/admin/Header/Header';
@@ -16,8 +16,12 @@ const drawerWidth = 260;
 function ProductPage() {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
-    const [displayedProducts, setDisplayedProducts] = useState([]);
     const [activeFilter, setActiveFilter] = useState('all');
+    const [categoryId, setCategoryId] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+    const [search, setSearch] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
 
     const getButtonVariant = (filter) => {
         return activeFilter === filter ? 'contained' : 'outlined';
@@ -27,40 +31,58 @@ function ProductPage() {
     const token = sessionStorage.getItem('token');
 
     /* 카테고리 별 상품 조회 */
-    useEffect(() => {
-        const fetchData = async () => {
-            // try {
-            //     const response = await axios.get(`http://172.16.210.136:8080/api/admin/products/categories/${cateId}`, {
-            //         headers: {
-            //             'Authorization': `Bearer ${token}`,
-            //             'Content-Type': 'application/json; charset=UTF-8',
-            //         }
-            //     });
-            //     console.log(response.data);
-            //     setProducts(response.data);
-            // } catch (e) {
-            //     console.error("Error fetching Inquiry data: ", e);
-            // }
-        };
-        fetchData();
-    }, []);
-
-    const tableHeader = ['상품번호', '브랜드', '상품', '옵션', '판매가', '카테고리', '상태', '재고', '등록일', ''];
-
-    const filterProducts = (status) => {
-        setActiveFilter(status);
-        if (status === 'all') {
-            setDisplayedProducts(products);
-        } else {
-            const filtered = products.map(product => ({
-                ...product,
-                optionList: product.optionList.filter(option => option.optionStatus === status)
-            })).filter(product => product.optionList.length > 0);
-            setDisplayedProducts(filtered);
+    const fetchData = async () => {
+        if (categoryId !== null) {
+            const url = `http://172.16.210.136:8080/api/admin/products/categories/${categoryId}?page=${currentPage}`;
+            try {
+                const response = await axios.get(url, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    }
+                });
+                setProducts(response.data.data.content);
+                setTotalPages(response.data.data.totalPage);
+                console.log(response.data)
+            } catch (e) {
+                console.error(e);
+            }
         }
-    };    
+    };
 
-    console.log(displayedProducts)
+    const handleCategoryClick = (categoryId) => {
+        setCategoryId(categoryId);
+        fetchData(categoryId);
+    };
+    
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+        navigate(`?page=${value}`);
+    };
+
+    const tableHeader = ['상품번호', '브랜드', '상품', '옵션', '판매가', '카테고리', '재고', '등록일', ''];
+
+    const handleSearch = async () => {
+        console.log(search)
+        const url = `http://172.16.210.136:8080/api/admin/products/search?q=${search}&page=${currentPage}`;
+        try {
+            const response = await axios.get(url, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            setProducts(response.data.data.content);
+            setTotalPages(response.data.data.totalPage);
+            console.log(response.data)
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    const handleSearchInputChange = (event) => {
+        const searchText = event.target.value;
+        setSearch(searchText);
+    };
+
     const navigateToAdd = () => {
         navigate("./add");
     };
@@ -73,21 +95,10 @@ function ProductPage() {
                 bgcolor={primary}
                 component="main"
                 sx={{ height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px` }}>
-                <Category />
-                <SearchBar />
+                <Category onCategoryClick={handleCategoryClick} /> 
+                <SearchBar text={search} onChange={handleSearchInputChange} onSearch={handleSearch} />
                 <Paper square elevation={2} sx={{ p: '20px 30px' }}>
-                    <Box sx={{ mb: 2 }}>
-                        <Button variant={getButtonVariant('all')} onClick={() => filterProducts('all')} sx={{ mr: 1 }}>
-                            전체
-                        </Button>
-                        <Button variant={getButtonVariant('판매중')} onClick={() => filterProducts('판매중')} sx={{ mr: 1 }}>
-                            판매중
-                        </Button>
-                        <Button variant={getButtonVariant('품절')} onClick={() => filterProducts('품절')}>
-                            품절
-                        </Button>
-                    </Box>
-                    <EditProductTable headers={tableHeader} rows={{ product: displayedProducts }} />
+                    <EditProductTable headers={tableHeader} rows={{ product: products }} />
                     <Button
                         variant="outlined"
                         sx={{ float: 'right' }}
@@ -96,6 +107,7 @@ function ProductPage() {
                         상품추가
                     </Button>
                 </Paper>
+                <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             </Box>
         </Box>
     );

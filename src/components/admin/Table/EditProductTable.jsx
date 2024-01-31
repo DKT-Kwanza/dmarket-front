@@ -64,7 +64,7 @@ export default function EditProductTable({headers, rows}) {
                                             width='50px'
                                             height='60px'
                                             style={{marginRight: '6px'}}
-                                            src={row.productImg[0]} />
+                                            src={row.productImg} />
                                         <div>
                                             {row.productName}
                                         </div>
@@ -73,11 +73,6 @@ export default function EditProductTable({headers, rows}) {
                                 <TableCell>{item.optionValue}</TableCell>
                                 <TableCell>{formatPrice(row.productSalePrice)}</TableCell>
                                 <TableCell>{row.productCategory}</TableCell>
-                                <TableCell
-                                    sx={{ color: item.optionStatus === '판매중' ? '#3377FF' : '#FF5D5D' }}
-                                >
-                                    {item.optionStatus}
-                                </TableCell>
                                 <TableCell>{item.optionQuantity}</TableCell>
                                 <TableCell>{formatDate(row.productRegistDate)}</TableCell>
                                 <TableCell>
