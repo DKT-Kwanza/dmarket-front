@@ -14,7 +14,8 @@ const OrderReviewsList = ({ orders }) => {
 
   return (
       <div>
-          {orders.map((order, index) => (
+        {console.log(orders)}
+          {orders && orders.map((order, index) => (
               <div key={index} className='orderReviewList-box'>
                 {/* 주문 정보 */}
                   <OrderInfo 

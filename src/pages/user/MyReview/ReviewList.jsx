@@ -51,14 +51,14 @@ const ReviewList = () => {
             }
 
             try {
-                const response = await axios.get("/api/WrittenReviewsData.json",{
+                const response = await axios.get(`${userApi}/${userId}/mypage/written-reviews`,{
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'}
                 });
 
                 console.log(response.data);
-                setWrittenReviews(response.data);
+                setWrittenReviews(response.data.data.content);
 
             } catch (e) {
                 console.error("Error fetching data: ", e);
