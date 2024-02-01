@@ -5,11 +5,18 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 
-export default function SearchBar({text}) {
+export default function SearchBar({ text, onChange, onSearch, search }) {
+    
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        onSearch(search);
+    };
+
     return (
         <Paper
             elevation={3}
             component="form"
+            onSubmit={handleSubmit}
             sx={{ p: '2px 4px', mb: 4, display: 'flex', alignItems: 'center', width: '100%' }}
         >
             <IconButton sx={{ p: '10px' }} aria-label="menu">
@@ -19,6 +26,7 @@ export default function SearchBar({text}) {
                 sx={{ ml: 1, flex: 1 }}
                 placeholder={text ? text : "상품명 검색"}
                 inputProps={{ 'aria-label': '상품명 검색' }}
+                onChange={onChange}
             />
             <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
                 <SearchIcon />

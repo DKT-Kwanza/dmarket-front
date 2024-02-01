@@ -31,7 +31,6 @@ function Cart() {
                 });
                 setCarts(response.data.data);
                 setCartCount(response.data.data.cartCount);
-                console.log(response.data.data)
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -138,6 +137,20 @@ function Cart() {
         return total;
     }, 0);
 
+    const getSelectedItemsDetails = () => {
+        return carts.cartList
+            .filter((_, index) => checkedItems[index])
+            .map(item => ({
+                productId: item.productId,
+                productCount: item.productCount,
+                optionId: item.optionId,
+                price: item.productTotalSalePrice,
+            }));
+    };
+    
+    
+    const prices = getSelectedItemsDetails().map(item => item.price);
+
     return (
         <div className='cart-body'>
             <div className='cart-title'>
@@ -158,7 +171,7 @@ function Cart() {
                 navigateToOrder={navigateToOrder}
                 itemCount={selectedItemCount}
                 totalPrice={selectedItemTotalPrice}
-                prices={selectedItemsPrices}
+                selectedItemsDetails={getSelectedItemsDetails()}
             />
             {isDeleteModalOpen && (
                 <ConfirmCancelModal isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal} onConfirm={handleDeleteSelectedItems} color='#ff5d5d'>

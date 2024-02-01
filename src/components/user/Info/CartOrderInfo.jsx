@@ -1,7 +1,54 @@
 import './CartOrderInfo.css'
 import {formatPrice} from "../../../utils/Format";
+import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
-export default function CartOrderInfo({ navigateToOrder, itemCount, totalPrice, prices }) {
+export default function CartOrderInfo({ itemCount, selectedItemsDetails, totalPrice }) {
+    const navigate = useNavigate();
+
+    const token = sessionStorage.getItem('token');
+    const userId = sessionStorage.getItem('userId');
+
+    console.log(selectedItemsDetails)
+
+     /* 주문 */
+    const handleCheckout = async () => {
+        console.log(selectedItemsDetails)
+        if (!selectedItemsDetails || selectedItemsDetails.length === 0) {
+            alert("주문할 상품을 선택해주세요!");
+            return;
+        }
+
+        const productList = selectedItemsDetails.map(item => ({
+            productId: item.productId,
+            optionId: item.optionId,
+            productCount: item.productCount,
+        }));
+
+        const purchaseData = {
+            userId: userId,
+            productList: productList,
+        };
+
+        try {
+            console.log(purchaseData)
+            const response = await axios.post('http://172.16.210.136:8080/api/order/products', purchaseData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            console.log(response.data)
+
+            navigate('/order', { state: { orderData: response.data } });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    
+    
+
     /* 총 결제 금액 포맷팅 */
     const formattedTotalPrice = totalPrice.toLocaleString('ko-KR');
 
@@ -21,8 +68,8 @@ export default function CartOrderInfo({ navigateToOrder, itemCount, totalPrice, 
                     <div className='cart-order-price'>
                         <div>주문 금액</div>
                         <div className='cart-item-price'>
-                            {prices.map((price, index) => (
-                                <div key={index}>{index > 0 ? " + " : ""}{formatPrice(price)} 원</div>
+                            {selectedItemsDetails.map((item, index) => (
+                                <div key={index}>{index > 0 ? " + " : ""}{formatPrice(item.price)} 원</div>
                             ))}
                         </div>
                     </div>
@@ -34,7 +81,7 @@ export default function CartOrderInfo({ navigateToOrder, itemCount, totalPrice, 
                 </div>
                 <div className='cart-order-container'>
                     <div className='cart-order-tos'>주문정보 및 서비스 이용약관에 동의합니다.</div>
-                    <button onClick={navigateToOrder} className='cart-order-btn'>주문하기</button>
+                    <button onClick={handleCheckout} className='cart-order-btn'>주문하기</button>
                 </div>
             </div>
         </div>
