@@ -22,9 +22,11 @@ function CustomerInquiryPage() {
     if (file) {
       const previewUrl = URL.createObjectURL(file);
       setPreviewImg(previewUrl);
+      const inquiryImgURL = `${bucketURL}${v4()}.${file.type.split('/')[1]}` 
+      console.log(inquiryImgURL); 
       try {
         const response = await axios.put(
-          `${bucketURL}${v4()}.${file.type.split('/')[1]}`,
+          inquiryImgURL,
           file,
           {
             headers: {
@@ -33,8 +35,7 @@ function CustomerInquiryPage() {
             }
           }
         );
-        console.log('Image created:', response.data);
-        setInquiryImg(`${bucketURL}${v4()}.${file.type.split('/')[1]}`);
+        setInquiryImg(inquiryImgURL);
       } catch (error) {
         console.log('Error uploading inquiry image:', error);
       }
