@@ -21,7 +21,9 @@ function ProductPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [search, setSearch] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
+    const [searchCategoryId, setSearchCategoryId] = useState('');
+    
+    const tableHeader = ['상품번호', '브랜드', '상품', '옵션', '판매가', '카테고리', '재고', '등록일', ''];
 
     const getButtonVariant = (filter) => {
         return activeFilter === filter ? 'contained' : 'outlined';
@@ -43,38 +45,39 @@ function ProductPage() {
                 });
                 setProducts(response.data.data.content);
                 setTotalPages(response.data.data.totalPage);
-                console.log(response.data)
+                setSearchCategoryId(categoryId);
             } catch (e) {
                 console.error(e);
             }
         }
     };
 
-    const handleCategoryClick = (categoryId) => {
-        setCategoryId(categoryId);
-        fetchData(categoryId);
+    const handleCategoryClick = (newCategoryId) => {
+        setCategoryId(newCategoryId);
+        setCurrentPage(1);
+        fetchData(newCategoryId); 
     };
-    
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
         navigate(`?page=${value}`);
     };
 
-    const tableHeader = ['상품번호', '브랜드', '상품', '옵션', '판매가', '카테고리', '재고', '등록일', ''];
-
+    /* 카테고리 별 상품 검색 */
     const handleSearch = async () => {
-        console.log(search)
-        const url = `http://172.16.210.136:8080/api/admin/products/search?q=${search}&page=${currentPage}`;
-        try {
-            const response = await axios.get(url, {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            setProducts(response.data.data.content);
-            setTotalPages(response.data.data.totalPage);
-            console.log(response.data)
-        } catch (e) {
-            console.error(e);
+        if (search.trim() === '') {
+            fetchData(categoryId);
+        } else {
+            const url = `http://172.16.210.136:8080/api/admin/products/categories/${searchCategoryId}/search?q=${search}&page=${currentPage}`;
+            try {
+                const response = await axios.get(url, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                setProducts(response.data.data.content);
+                setTotalPages(response.data.data.totalPage);
+            } catch (e) {
+                console.error(e);
+            }
         }
     };
 
