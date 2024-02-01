@@ -80,6 +80,8 @@ function OrderStatus() {
                     return [];
                 }
             });
+
+            setSelectedTab(selectedStatus);
         } catch (error) {
             console.error('PUT API 호출 실패:', error);
         }
@@ -91,7 +93,8 @@ function OrderStatus() {
             setMenuList([
                 { title: '결제 완료', count: order.confPayCount },
                 { title: '배송 준비', count: order.preShipCount },
-                { title: '배송중', count: order.InTransitCount }
+                { title: '배송중', count: order.InTransitCount },
+                { title: "배송 완료", count: order.delivCompCount }
             ]);
         }
     }, [order]);
