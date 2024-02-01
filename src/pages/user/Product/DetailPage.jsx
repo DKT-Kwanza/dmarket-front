@@ -11,7 +11,7 @@ import DetailWriteQna from "../../../components/user/Common/Input/DetailWriteQna
 import ScrollToTopBtn from '../../../components/user/Common/Button/ScrollToTopBtn';
 import AddToCartModal from "../../../components/user/Common/Modal/AddToCartModal";
 import {formatPrice} from "../../../utils/Format";
-import {productsApi, userApi} from "../../../Api";
+import {productsApi, userApi, orderApi} from "../../../Api";
 import {Pagination} from "@mui/material";
 import {FaHeart} from "react-icons/fa";
 import heart from '../../../assets/icons/heart.svg';
@@ -64,7 +64,6 @@ function Detail() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                console.log("위시 인지?", response.data);
                 setProductIsWish(response.data.data.isWish);
             } catch (e) {
                 console.error("Error fetching Wishlist data: ", e);
@@ -92,7 +91,6 @@ function Detail() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                console.log("상품 리뷰 조회: ",response.data);
                 setReviews(response.data.data);
                 setReviewTotalPages(response.data.data.totalPage);
             } catch (e) {
@@ -104,10 +102,8 @@ function Detail() {
 
     /* Qna 데이터 목록 조회 */
     useEffect(() => {
-        console.log("productId: ",productId);
         const fetchData = async () => {
             const url = `${productsApi}/${productId}/qnaList`;
-            console.log("url: ",url);
             try {
                 const response = await axios.get(url, {
                     headers: {
@@ -115,8 +111,7 @@ function Detail() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                setQnas(response.data);
-                console.log("qna: ", response.data);
+                setQnas(response.data.data);
             } catch (e) {
                 console.error("Error fetching QNA data: ", e);
             }
@@ -136,7 +131,6 @@ function Detail() {
                     }
                 });
                 setRecommendProducts(response.data.data);
-                console.log("추천: ", response.data);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -237,7 +231,6 @@ function Detail() {
                             'Content-Type': 'application/json; charset=UTF-8',
                         }
                     });
-                    console.log(response.data);
                 }));
                 modalHandler();
             } catch (e) {
@@ -256,9 +249,7 @@ function Detail() {
 
     /* qna 작성 */
     const handleWriteQna = async (title, contents, qnaIsSecret) => {
-        console.log('Received data:', { title, contents, qnaIsSecret });
-        console.log(userId);
-        const url = `http://172.16.210.136:8080/api/products/${productId}/qna`
+        const url = `${productsApi}/${productId}/qna`
         const requestData = {
             userId: userId,
             qnaTitle: title,
@@ -271,28 +262,22 @@ function Detail() {
                     'Authorization': `Bearer ${token}`
                 }
             })
-            console.log(response.data)
             handleToggle();
+            console.log(response.data.data);
+            /* 현재의 qnas 상태를 복사하여 수정 */
+            const newQnas = { ...qnas };
+            newQnas.qnaList = newQnas.qnaList || [];
+            newQnas.qnaList.push(response.data.data);
+            setQnas(newQnas);
         } catch (e) {
             console.error(e);
         }
     }
 
-    // "답변 완료"인 객체의 개수를 세기
+    /* "답변 완료"인 객체의 개수를 세기 */
     const qnaCompletedAnswersCount = qnas.qnaList ? qnas.qnaList.filter(item => item.qnaStatus === "답변 완료").length : 0;
-    // "답변 대기"인 객체의 개수
+    /* "답변 대기"인 객체의 개수 */
     const qnaPendingAnswersCount = qnas.qnaCount - qnaCompletedAnswersCount;
-
-    // const [checkboxState, setCheckboxState] = useState('none');
-    // const handleCheckboxChange = (newState) => { // qna 작성 공개 여부 체크박스
-    //     console.log(newState);
-    //     if (checkboxState === newState) {
-    //         setCheckboxState('none');
-    //     } else {
-    //         setCheckboxState(newState);
-    //         console.log(newState);
-    //     }
-    // };
     
     /* 바로 구매 결제 */
     const handleDirectPurchase = async () => {
@@ -319,7 +304,6 @@ function Detail() {
                     'Content-Type': 'application/json',
                 },
             });
-
             navigate('/order', { state: { orderData: response.data } });
         } catch (error) {
             console.error(error);

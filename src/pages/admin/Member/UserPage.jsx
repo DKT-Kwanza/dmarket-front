@@ -52,8 +52,7 @@ function MemberList() {
                     <Button
                         variant="outlined"
                         sx={{ float: 'right'}}
-                        onClick={navigateToRegister}
-                    >
+                        onClick={navigateToRegister}>
                         등록
                     </Button>
                 </Paper>
