@@ -22,6 +22,8 @@ function ProductQuantityPage() {
     const [categoryId, setCategoryId] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+    const [search, setSearch] = useState('');
+    const [searchCategoryId, setSearchCategoryId] = useState('');
 
     const token = sessionStorage.getItem('token');
 
@@ -39,7 +41,7 @@ function ProductQuantityPage() {
                 });
                 setRows(response.data.data.content);
                 setTotalPages(response.data.data.totalPage);
-                console.log(response.data)
+                setSearchCategoryId(categoryId);
             } catch (e) {
                 console.error(e);
             }
@@ -57,14 +59,28 @@ function ProductQuantityPage() {
         navigate(`?page=${value}`);
     };
 
-    const handleTabChange = (newValue) => {
-        setSelectedTab(newValue);
+    /* 카테고리 별 상품 검색 */
+    const handleSearch = async () => {
+        if (search.trim() === '') {
+            fetchData(categoryId);
+        } else {
+            const url = `http://172.16.210.136:8080/api/admin/products/categories/${searchCategoryId}/search?q=${search}&page=${currentPage}`;
+            try {
+                const response = await axios.get(url, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                setRows(response.data.data.content);
+                setTotalPages(response.data.data.totalPage);
+            } catch (e) {
+                console.error(e);
+            }
+        }
     };
-    
-    const navigateToAdd = () => {
-        navigate("../add")
-    }
 
+    const handleSearchInputChange = (event) => {
+        const searchText = event.target.value;
+        setSearch(searchText);
+    };
 
     return (
         <Box>
@@ -76,7 +92,7 @@ function ProductQuantityPage() {
                 component="main"
                 sx={{height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px`}}>
                 <Category onCategoryClick={handleCategoryClick} /> 
-                <SearchBar/>
+                <SearchBar text={search} onChange={handleSearchInputChange} onSearch={handleSearch} />
                 <Paper square elevation={2}
                     sx={{p: '20px 30px'}}>
                     <OptionQuantityTable headers={tableHeader} rows={rows} fetchData={fetchData} setRows={setRows} />

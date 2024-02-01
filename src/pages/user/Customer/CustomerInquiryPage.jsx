@@ -4,14 +4,16 @@ import './CustomerInquiryPage.css';
 import { ReactComponent as ChevronDown } from "../../../assets/icons/chevron-down.svg";
 import { LuImagePlus } from "react-icons/lu";
 import axios from "axios";
-import {userApi} from "../../../Api";
+import {userApi,bucketToken,bucketURL} from "../../../Api";
+
 
 function CustomerInquiryPage() {
-
+  const {v4} = require('uuid');
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(''); // 선택된 옵션을 추적하기 위한 상태 추가
   const [inquiryImg, setInquiryImg] = useState(null); // 첨부 이미지 상태 변수
+  const [previewImg, setPreviewImg] = useState(null); // 이미지 미리보기 상태 변수
   const [inquiryTitle, setInquiryTitle] = useState('');
   const [inquiryContents, setInquiryContents] = useState('');
 
@@ -19,7 +21,24 @@ function CustomerInquiryPage() {
     const file = e.target.files[0];
     if (file) {
       const previewUrl = URL.createObjectURL(file);
-      setInquiryImg(previewUrl);
+      setPreviewImg(previewUrl);
+      const inquiryImgURL = `${bucketURL}${v4()}.${file.type.split('/')[1]}` 
+      console.log(inquiryImgURL); 
+      try {
+        const response = await axios.put(
+          inquiryImgURL,
+          file,
+          {
+            headers: {
+              'X-Auth-Token': `${bucketToken}`,
+              'Content-Type': file.type
+            }
+          }
+        );
+        setInquiryImg(inquiryImgURL);
+      } catch (error) {
+        console.log('Error uploading inquiry image:', error);
+      }
     }
   }, []);
 
@@ -49,7 +68,7 @@ function CustomerInquiryPage() {
           inquiryType:  selectedOption,
           inquiryTitle: inquiryTitle,
           inquiryContents: inquiryContents,
-          inquiryImg : null
+          inquiryImg : inquiryImg
         },{
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -131,9 +150,9 @@ function CustomerInquiryPage() {
               사진
             </div>
             <div>
-              {inquiryImg ? (
+              {previewImg ? (
                 <div>
-                  <img src={inquiryImg} alt="Inquiry Preview" className="inquiry-image" />
+                  <img src={previewImg} alt="Inquiry Preview" className="inquiry-image" />
                   <div className='inquiry-menu-stars-button'>
                     <label htmlFor="image-upload" className="inquiry-menu-stars-button-plus">
                       사진 변경

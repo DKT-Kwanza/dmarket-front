@@ -2,9 +2,9 @@ import LeftNav from "../../../components/admin/Sidebar/LeftNav";
 import Header from "../../../components/admin/Header/Header";
 import TabMenu from "../../../components/admin/Common/TabMenu/TabMenu";
 import CustomerFaqTable from "../../../components/admin/Table/CustomerFaqTable";
-import {Paper, Box, Button, Pagination} from "@mui/material";
-import {indigo} from '@mui/material/colors';
-import React, {useEffect, useState} from "react";
+import { Paper, Box, Button, Pagination } from "@mui/material";
+import { indigo } from '@mui/material/colors';
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import FaqModal from "../../../components/admin/Modal/FaqModal";
@@ -26,10 +26,10 @@ function AdiminCustomerFaqPage() {
     const [selectedFaqId, setSelectedFaqId] = useState(null);
 
     const menuList = [
-        {title: '회원 문의'},
-        {title: '주문/결제 문의'},
-        {title: '반품/환불 문의'},
-        {title: '마일리지 문의'}
+        { title: '회원 문의' },
+        { title: '주문/결제 문의' },
+        { title: '반품/환불 문의' },
+        { title: '마일리지 문의' }
     ];
 
     const token = sessionStorage.getItem('token');
@@ -51,7 +51,7 @@ function AdiminCustomerFaqPage() {
             console.error("Error fetching data: ", e);
         }
     };
-    
+
     const handleTabChange = (tabTitle) => {
         setSelectedTab(tabTitle);
         setCurrentPage(0); // 탭을 변경할 때 페이지 번호를 초기화합니다.
@@ -94,24 +94,24 @@ function AdiminCustomerFaqPage() {
         } catch (error) {
             console.log(error);
         }
-    };    
+    };
 
     return (
         <Box>
-            <LeftNav/>
-            <Header title={'FAQ'}/>
+            <LeftNav />
+            <Header title={'FAQ'} />
             {/*컨텐츠 영역입니다.*/}
             <Box
                 bgcolor={primary}
                 component="main"
-                sx={{height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px`}}>
+                sx={{ height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px` }}>
                 <Paper square elevation={2}
-                       sx={{p: '20px 30px'}}>
-                    <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange}/>
+                    sx={{ p: '20px 30px' }}>
+                    <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange} />
                     <CustomerFaqTable headers={tableHeader} rows={faqList} onDeleteClick={onDeleteClick}
-                                      onRowClick={handleRowClick}/>
+                        onRowClick={handleRowClick} />
                     <Button
-                        sx={{float: 'right'}}
+                        sx={{ float: 'right' }}
                         variant="contained"
                         endIcon={<BorderColorIcon />}
                         onClick={handleWriteButtonClick}>
@@ -127,7 +127,7 @@ function AdiminCustomerFaqPage() {
             )} */}
             {
                 selectedFaqId !== null && (
-                    <FaqModal open={isDetailModalOpen} handleClose={handleCloseDetailModal} faqId={selectedFaqId} faqList={faqList}/>
+                    <FaqModal open={isDetailModalOpen} handleClose={handleCloseDetailModal} faqId={selectedFaqId} faqList={faqList} />
                 )
             }
             {

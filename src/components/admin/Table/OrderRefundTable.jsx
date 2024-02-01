@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,7 +9,8 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import SelectBox from "../../commmon/SelectBox/SelectBox";
 
-export default function OrderRefundTable({headers, rows, onApplyClick}) {
+export default function OrderRefundTable({ headers, rows, refundPercents, onApplyClick }) {
+
     return (
         <TableContainer component={Paper} sx={{mb: 2}}>
             <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -46,15 +48,14 @@ export default function OrderRefundTable({headers, rows, onApplyClick}) {
                             <TableCell>{row.productCount}</TableCell>
                             <TableCell>{row.returnContents}</TableCell>
                             <TableCell>
-                                <div style={{display: 'flex', alignItems: 'center'}}>
-                                <SelectBox
-                                    text={'100% 환불'}
-                                    options={['100% 환불', '90% 환불']} />
-                                <Button
-                                    onClick={()=>{onApplyClick(row.orderId)}}
-                                    sx={{ml: 2}}
-                                    variant="outlined"
-                                    href="#text-buttons">신청</Button>
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <SelectBox
+                                        key={`${row.returnId}-${row.returnStatus}`}
+                                        text={'환불 선택'}
+                                        options={['100% 환불', '90% 환불']}
+                                        value={refundPercents[row.returnId]}
+                                        onChange={() => onApplyClick(row.returnId, refundPercents[row.returnId] === '100% 환불' ? 100 : 90)}
+                                    />
                                 </div>
                             </TableCell>
                         </TableRow>
