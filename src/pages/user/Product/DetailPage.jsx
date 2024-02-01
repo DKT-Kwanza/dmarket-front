@@ -45,13 +45,32 @@ function Detail() {
                     }
                 });
                 setProduct(response.data.data);
-                setProductIsWish(response.data.data.productIsWish);
             } catch (e) {
-                console.error("Error fetching Inquiry data: ", e);
+                console.error("Error fetching Product data: ", e);
             }
         };
         fetchData();
     }, [productId]);
+
+    /* 상품 위시리스트 확인 */
+    useEffect(() => {
+        const fetchData = async () => {
+            const url = `${userApi}/${userId}/wish/${productId}`;
+            try {
+                const response = await axios.get(url, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    }
+                });
+                console.log("위시 인지?", response.data);
+                setProductIsWish(response.data.data.isWish);
+            } catch (e) {
+                console.error("Error fetching Wishlist data: ", e);
+            }
+        }
+        fetchData();
+    }, []);
 
     /* 리뷰 페이지네이션 */
     const [reviewCurrentPage, setReviewCurrentPage] = useState(1);
