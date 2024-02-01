@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import StarRating from "../Common/Rating/StarRating";
+import {formatDate} from "../../../utils/Format";
 
 function DetailReviewItem({rating, writer, reviewDate, option, imageSrc, content}) {
     return (
@@ -10,7 +11,7 @@ function DetailReviewItem({rating, writer, reviewDate, option, imageSrc, content
                 <InfoLine />
                 <div>{writer}</div>
                 <InfoLine />
-                <div>{reviewDate}</div>
+                <div>{formatDate(reviewDate)}</div>
                 <InfoLine />
                 <div>option : {option}</div>
             </ReviewInfo>
