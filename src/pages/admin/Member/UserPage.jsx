@@ -20,6 +20,7 @@ function MemberList() {
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [isData, setIsData] = useState(false);
+    const [rowLength, setRowLength] = useState(0);
     const [searchInput, setSearchInput] = useState("");
 
     const query = new URLSearchParams(location.search).get('q');
@@ -45,6 +46,7 @@ function MemberList() {
                 setRows(response.data.data[0]);
                 setTotalPages(response.data.data.totalPages);
                 console.log(response.data)
+                setRowLength(response.data.data.length);
                 setIsData(true);
             } catch (e) {
                 console.error(e);
@@ -81,23 +83,20 @@ function MemberList() {
                 component="main"
                 sx={{height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px`}}>
                 <SearchBar text={'사용자 검색'} handleSearchInput={handleSearch}/>
-            
-                
+                    <Paper square elevation={2} sx={{p: '20px 30px'}}>
                         {
                             isData && 
                             (
-                                <Paper square elevation={2} sx={{p: '20px 30px'}}>
-                                <UserTable headers={tableHeader} rows={rows} />
-                                    <Button
-                                        variant="outlined"
-                                        sx={{ float: 'right'}}
-                                        onClick={navigateToRegister}>
-                                        등록
-                                    </Button>
-                            </Paper>
+                            <UserTable headers={tableHeader} rows={rows} length={rowLength}/>
                             )
                         }
-                
+                        <Button
+                            variant="outlined"
+                            sx={{ float: 'right'}}
+                            onClick={navigateToRegister}>
+                            등록
+                        </Button>
+                    </Paper>
             </Box>
             <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
         </Box>
