@@ -62,8 +62,7 @@ export default function OrderStatusTable({headers, rows, onChangeOrderStatusClic
                                         event.stopPropagation();
                                         onChangeOrderStatusClick(row.detailId, selectedStatus);
                                     }}
-                                    variant="outlined"
-                                    href="#text-buttons">등록</Button>
+                                    variant="outlined">등록</Button>
                             </TableCell>
                         </TableRow>
                     ))}

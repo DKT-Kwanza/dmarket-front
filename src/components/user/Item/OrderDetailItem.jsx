@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import GreyBtn from '../Common/Button/GreyBtn';
 import styled from 'styled-components';
 import ConfirmCancelModal from "../../commmon/Modal/ConfirmCancelModal";
-import SelectBox from "../../commmon/SelectBox/SelectBox";
 import {formatPrice} from "../../../utils/Format";
 import {userApi} from "../../../Api";
 import axios from "axios";
@@ -46,7 +45,6 @@ function OrderDetailItem({orderId, detailId, img, brand, name, option, count, pr
 
     const handleConfirm = async (statusButton) => {
         if (statusButton === "주문취소") {
-            console.log("주문취소 일때");
             /* 주문 취소 API 호출 */
             try {
                 const url = `${userApi}/${userId}/mypage/order/cancel`;
@@ -80,9 +78,6 @@ function OrderDetailItem({orderId, detailId, img, brand, name, option, count, pr
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                // 반품 신청 성공 시의 동작
-                console.log("반품이 신청되었습니다.");
-                console.log(response.data)
                 setStatus("환불/반품 신청");
                 setIsConfirming(true);
             } catch (e) {
@@ -126,35 +121,40 @@ function OrderDetailItem({orderId, detailId, img, brand, name, option, count, pr
                         <InfoProcess>
                             <div style={{paddingRight: '40px'}}>{status}</div>
                             <GreyBtn onClick={() => {
-                                openModalHandler()}}>{statusButton}</GreyBtn>
-                                </InfoProcess>
-                                ) : (
-                                <InfoProcess>{status}</InfoProcess>
-                        )}
+                                openModalHandler()
+                            }}>{statusButton}</GreyBtn>
+                        </InfoProcess>
+                    ) : (
+                        <InfoProcess>{status}</InfoProcess>
+                    )}
                 </Item>
             </div>
             {isOpen && (
-            <ConfirmCancelModal isOpen={isOpen} onClose={closeModalHandler}
-                                onConfirm={() => handleConfirm(statusButton)} color='#ffd465'>
-                {
-                    statusButton === "주문취소"
-                        ? <div>해당 상품에 대한 주문이 취소됩니다.</div>
-                        :
-                        <div style={{display: 'flex', flexDirection: 'column'}}>
-                            <div>해당 상품을 반품신청 합니다.</div>
-                            <select className='detail-options' name="options" onChange={handleReasonChange}>
-                                <option disabled selected hidden>반품신청 사유를 선택하세요.</option>
-                                {['단순변심', '제품하자', '오배송'].map((option, index) => (
-                                    <option key={index} value={option}>{option}</option>
-                                ))}
-                            </select>
-                        </div>
-                }
-            </ConfirmCancelModal>
+                <ConfirmCancelModal isOpen={isOpen} onClose={closeModalHandler}
+                                    onConfirm={() => handleConfirm(statusButton)} color='#ffd465'>
+                    {
+                        statusButton === "주문취소"
+                            ? <div>해당 상품에 대한 주문이 취소됩니다.</div>
+                            :
+                            <div style={{display: 'flex', flexDirection: 'column'}}>
+                                <div>해당 상품을 반품신청 합니다.</div>
+                                <Select name="options" onChange={handleReasonChange}>
+                                    <option disabled selected hidden>반품신청 사유를 선택하세요.</option>
+                                    {['단순변심', '제품하자', '오배송'].map((option, index) => (
+                                        <option key={index} value={option}>{option}</option>
+                                    ))}
+                                </Select>
+                            </div>
+                    }
+                </ConfirmCancelModal>
             )}
         </div>
     );
 }
+
+const Select = styled.select`
+  margin-top: 10px;
+`
 
 const Item = styled.div`
   display: flex;
