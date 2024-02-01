@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Typography, Modal, TextField, Button } from '@mui/material';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Box, Modal, Button, Typography } from '@mui/material';
 import axios from "axios";
 import UserTable from "../Table/UserTable";
 import SearchBar from "../Common/SearchBar/SearchBar";
@@ -16,29 +17,35 @@ const AdminModalStyle = {
 };
 
 function AdminModal({ open, handleClose }) {
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [newRole, setNewRole] = useState(null);
+    const [search, setSearch] = useState('');
     const tableHeader = ['이름', '사번', '이메일', '관리자 그룹', '입사일', ''];
 
 
     const token = sessionStorage.getItem('token');
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/admin/admin-user?q=${1971110559}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                setUser(response.data.data[0]);
-                console.log(response.data.data);
-            } catch (e) {
-                console.error("Error fetching data: ", e);
-            }
-        };
-        fetchData();
-    }, []);
+    const handleSearchInputChange = (event) => {
+        const searchText = event.target.value;
+        setSearch(searchText);
+    };
+
+    /* 사원번호 검색 */
+    const handleSearch = async () => {
+        const url = `http://172.16.210.136:8080/api/admin/admin-users?q=${search}`;
+        try {
+            const response = await axios.get(url, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setUser(response.data.data);
+            console.log(response.data)
+        } catch (e) {
+            console.error(e);
+        }
+    };    
 
     const handleRoleChange = (option) => {
         const roleMap = {
@@ -49,7 +56,8 @@ function AdminModal({ open, handleClose }) {
         };
         setNewRole(roleMap[option]);
     };
-
+    
+    /* 사원 역할 변경 */
     const handleConfirm = async () => {
         try {
             console.log(newRole);
@@ -71,19 +79,32 @@ function AdminModal({ open, handleClose }) {
         }
     };
 
+    /* 모달 닫힐 때 검색 결과 비우기 */
+    const onModalClose = () => {
+        handleClose(); 
+        setUser(null);
+        setNewRole(null);
+        setSearch('');
+    };
+
     return (
-        
         <Modal
             open={open}
-            onClose={handleClose}
+            onClose={onModalClose}
             aria-labelledby="admin-modal-title"
             aria-describedby="admin-modal-description">
             <Box sx={AdminModalStyle}>
-                <SearchBar text={'사원번호를 입력하세요.'} />
+                <SearchBar text={'사원번호를 입력하세요.'} onChange={handleSearchInputChange} onSearch={handleSearch} />
                 <hr />
-                <UserTable headers={tableHeader} rows={user} children={'selectBox'} onRoleChange={handleRoleChange}/>
-                <Button variant="contained" sx={{ float: 'right' }}
-                    onClick={handleConfirm}>확인</Button>
+                {user ? ( 
+                        <UserTable headers={tableHeader} rows={user} children={'selectBox'} onRoleChange={handleRoleChange}/>
+                    ) : (
+                        <Typography>검색 결과가 없습니다.</Typography>
+                )}
+                <Button variant="outlined" sx={{ float: 'right' }}
+                    onClick={onModalClose}>확인</Button>
+                <Button variant="contained" sx={{ float: 'right', marginRight: '10px'}}
+                    onClick={handleConfirm}>변경</Button>
             </Box>
         </Modal>
     );
