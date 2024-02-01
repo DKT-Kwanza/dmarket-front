@@ -36,7 +36,7 @@ function OrderStatus() {
         const fetchData = async () => {
             try {
                 const encodedTab = encodeURIComponent(selectedTab);
-                const url = `${adminApi}/orders?status=${encodedTab}?page=${orderCurrentPage}`;
+                const url = `${adminApi}/orders?status=${encodedTab}&pageNo=${orderCurrentPage}`;
                 const response = await axios.get(url,{
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -96,8 +96,10 @@ function OrderStatus() {
         }
     }, [order]);
 
+    /* 메뉴 탭이 변했을 때 */
     const handleTabChange = async (tabTitle) => {
         setSelectedTab(tabTitle);
+        setOrderCurrentPage(0);
     };
 
     return (
