@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import SelectBox from "../../commmon/SelectBox/SelectBox";
 import ConfirmCancelModal from "../../../components/commmon/Modal/ConfirmCancelModal";
+import axios from 'axios';
 
 const style = {
     position: 'absolute',
@@ -28,6 +29,8 @@ export default function UserTable({headers, rows, children}) {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState(null);
+    const [row, setRow] = useState(rows);
+    const token = sessionStorage.getItem('token');
 
     const handleOpenModal = (userId) => {
         setSelectedUserId(userId);
@@ -38,10 +41,23 @@ export default function UserTable({headers, rows, children}) {
         setIsOpen(false);
     };
 
-    const handleConfirmDelete = () => {
+    const handleConfirmDelete = async () => {
         setIsOpen(false);
-        // 삭제 api 추가
-    };
+        try {
+            /* 삭제 API 호출 */
+            const response = await axios.delete(`http://172.16.210.136:8080/api/admin/users/${selectedUserId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+            });
+            alert("해당 사용자를 삭제했습니다.");
+            setRow(row.filter(row => row.userId !== selectedUserId));
+        } catch (error) {
+            console.log(selectedUserId);
+            console.error('Delete API 호출 실패:', error);
+        }
+    }
 
     return (
         <TableContainer component={Paper} sx={{mb: 2}}>
@@ -62,7 +78,7 @@ export default function UserTable({headers, rows, children}) {
                         <TableCell>{rows.userDktNum}</TableCell>
                         <TableCell>{rows.userEmail}</TableCell>
                         <TableCell>{rows.userRole}</TableCell>
-                        <TableCell>{formatDate(rows.userJoinDate)}</TableCell>
+                        <TableCell>{rows.userJoinDate}</TableCell>
                         <TableCell>
                             {
                                 !children
