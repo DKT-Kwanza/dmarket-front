@@ -12,7 +12,6 @@ const Main = () => {
     const [showMore, setShowMore] = useState(false);
     const [newProducts, setNewProducts] = useState([]);
     const [popularProducts, setPopularProducts] = useState([]);
-    const [categories, setCategories] = useState([]);
 
     /* 세션 스토리지에서 토큰 가져오기 */
     const token = sessionStorage.getItem('token');
@@ -44,16 +43,26 @@ const Main = () => {
     }
 
     /* 카테고리 데이터 */
+    const [categories, setCategories] = useState([]);
+    const [levelTwoCategories, setLevelTwoCategories] = useState([]);
+
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchCategories = async () => {
+            const url = `${productsApi}/categories`;
             try {
-                const response = await axios.get("/api/Categories.json");
-                setCategories(response.data);
-            } catch (e) {
-                console.error("Error fetching data: ", e);
+                const response = await axios.get(url, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                setCategories(response.data.data);
+                const levelTwos = response.data.data.reduce((acc, curr) => [...acc, ...curr.child], []);
+                setLevelTwoCategories(levelTwos);
+            } catch (error) {
+                console.error('Error fetching categories:', error);
             }
         };
-        fetchData();
+        fetchCategories();
     }, []);
 
     /* 카테고리별 주문 많은 순 조회 데이터 */
@@ -137,17 +146,17 @@ const Main = () => {
                         autoFocus
                         onClick={() => {
                             handleCategoryButtonClick(null)
-                        }}>전체보기</button>
-                    {
-                        categories.map((category, index) => (
-                            <button
-                                className='main-btn-cate-button'
-                                onClick={() => {
-                                    console.log(category.categoryId);
-                                    handleCategoryButtonClick(category.categoryId)
-                                }}>{category.categoryName}</button>
-                        ))
-                    }
+                        }}>전체보기
+                    </button>
+                    {categories.filter(cat => cat.categoryDepth === 1).map((category) => (
+                        <button
+                            key={category.categoryId}
+                            className='main-btn-cate-button'
+                            onClick={() => {
+                                handleCategoryButtonClick(category.categoryId)
+                            }}>{category.categoryName}
+                        </button>
+                    ))}
                 </div>
 
                 <div className='main-div-products-wrapper'>
