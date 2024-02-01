@@ -1,8 +1,41 @@
+import React, { useState } from 'react';
+import axios from 'axios';
 import './ChargeMileage.css'
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 
 function ChargeMileage(){
+
+    const [chargeAmount, setChargeAmount] = useState('');
+
+    const token = sessionStorage.getItem('token');
+    const userId = sessionStorage.getItem('userId');
+
+    const handleChargeRequest = async () => {
+        if (!chargeAmount) {
+            alert('충전 금액을 입력해주세요.');
+            return;
+        }
+
+        console.log(chargeAmount);
+
+        try {
+            const response = await axios.post(`http://172.16.210.136:8080/api/users/${userId}/mypage/mileage-charge`, {
+                mileageCharge: chargeAmount
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            alert('충전 요청이 성공적으로 처리되었습니다.');
+            setChargeAmount('');
+        } catch (error) {
+            console.error('Error submitting charge request:', error);
+            alert('충전 요청 처리 중 오류가 발생했습니다.');
+        }
+    };
+
     return(
         <div className='chargemileage'>
             <MyPageSubHeader />
@@ -48,11 +81,15 @@ function ChargeMileage(){
                                         <div className='contents-right-charge-price-enalbe-A'>*충전 가능 금액</div>
                                         <div className='contents-right-charge-price-enalbe-B'>1,000,000원</div>
                                     </div>
-                                    <input placeholder='   충전 금액을 입력하세요.' className='contents-right-charge-price-inputbox'/>
+                                    <input placeholder='   충전 금액을 입력하세요.' 
+                                        className='contents-right-charge-price-inputbox' 
+                                        value={chargeAmount}
+                                        onChange={(e) => setChargeAmount(e.target.value)}
+                                    />
                                 </div>
                                 <div className='contents-right-charge-request'>
                                     <div className='contents-right-charge-request-button-div'>
-                                        <button className='contents-right-charge-request-button'>충전요청</button>
+                                        <button onClick={handleChargeRequest} className='contents-right-charge-request-button'>충전요청</button>
                                     </div>
                                 </div>
                             </div>

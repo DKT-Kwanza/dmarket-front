@@ -9,16 +9,22 @@ import MileageHistoryItem from "../../../components/user/Item/MileageHistoryItem
 function HistoryMileage(){
 
     const [historyMileages, setHistoryMileages] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+
+    const token = sessionStorage.getItem('token');
+    const userId = sessionStorage.getItem('userId');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("/api/HistoryMileageData.json");
-
-                setHistoryMileages(response.data);
-
-            } catch (e) {
-                console.error("Error fetching data: ", e);
+                const response = await axios.get(`http://172.16.210.136:8080/api/users/${userId}/mypage/mileage-usage?page=${currentPage}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                setHistoryMileages(response.data.data.mileageList);
+                setTotalPages(response.data.data.totalPage);
+            } catch (error) {
+                console.error(error);
             }
         };
         fetchData();
@@ -58,10 +64,10 @@ function HistoryMileage(){
                             {historyMileages.map((mileage, index) => (
                                 <MileageHistoryItem
                                     key={index}
-                                    date={formatDate(mileage.date)}
-                                    contents={mileage.contents}
-                                    addMileage={mileage.addMileage}
-                                    curMileage={mileage.curMileage}
+                                    date={formatDate(mileage.mileageChangeDate)}
+                                    contents={mileage.mileageContents}
+                                    addMileage={mileage.changeMileage}
+                                    curMileage={mileage.remainMileage}
                                 />
                             ))}
                             </div>

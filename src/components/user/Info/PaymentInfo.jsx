@@ -1,22 +1,54 @@
 import React from "react";
+import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { formatPrice } from "../../../utils/Format";
 import {ReactComponent as ShoppingBag} from "../../../assets/icons/shopping-bag-03.svg";
 import './PaymentInfo.css'
 
-export default function PaymentInfo({ userName, totalPrice, discount, totalPay }){
+export default function PaymentInfo({ userName, totalPrice, discount, totalPay, productList }) {
     const navigate = useNavigate();
+    const userId = sessionStorage.getItem('userId');
+    const token = sessionStorage.getItem('token');
 
-    const navigateToOrderComplete = () => {
-        navigate("./complete", {
-            state: {
-                userName: userName,
-                totalPrice: totalPrice,
-                discount: discount,
-                totalPay: totalPay
+    const handleOrderSubmit = async () => {
+        const orderDetailList = productList.map(product => ({
+            productId: product.productId,
+            optionId: product.optionId,
+            orderDetailCount: product.productCount,
+            orderDetailPrice: product.productTotalPrice, 
+            orderDetailSalePrice: product.productTotalSalePrice
+        }));
+
+        const orderPayload = {
+            userId: userId,
+            orderTotalPrice: totalPrice,
+            orderTotalPay: totalPay,
+            orderDetailList: orderDetailList
+        };
+
+        const orderCompleteData = {
+            userName,
+            totalPrice,
+            discount,
+            totalPay
+        };
+
+        try {
+            const response = await axios.post('http://172.16.210.136:8080/api/order/payment', orderPayload, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.data.code === 200) {
+                alert("주문이 완료되었습니다!");
+                console.log(response.data)
+                navigate('../order/complete', { state: { orderData: response.data.data, orderCompleteData } });
+            } else {
             }
-        });
-    }
+        } catch (error) {
+        }
+    };
 
     return(
         <div className="payment-info">
@@ -45,7 +77,7 @@ export default function PaymentInfo({ userName, totalPrice, discount, totalPay }
                     <div>
                         <span>주문정보 및 서비스 이용약관에 동의합니다.</span>
                     </div>
-                    <button onClick={navigateToOrderComplete}>주문하기</button> {/*버튼 클릭시 주문요청 api*/}
+                    <button onClick={handleOrderSubmit}>주문하기</button> {/*버튼 클릭시 주문요청 api*/}
                 </div>
             </div>
         </div>

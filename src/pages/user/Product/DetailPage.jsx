@@ -27,6 +27,7 @@ function Detail() {
     const [qnas, setQnas] = useState([]);
     const [recommendProducts, setRecommendProducts] = useState([]);
     const [productIsWish, setProductIsWish] = useState();
+    const [selectedOptions, setSelectedOptions] = useState([]);
 
     /* 세션 스토리지에서 토큰 가져오기 */
     const token = sessionStorage.getItem('token');
@@ -269,7 +270,39 @@ function Detail() {
     //         console.log(newState);
     //     }
     // };
+    
+    /* 바로 구매 결제 */
+    const handleDirectPurchase = async () => {
+        if (order.length === 0) {
+            alert("옵션과 수량을 선택해주세요!");
+            return;
+        }
+    
+        const productList = order.map(item => ({
+            productId: productId,
+            optionId: item.selectedOption.optionId,
+            productCount: item.selectedOption.productCount,
+        }));
+    
+        const purchaseData = {
+            userId: userId,
+            productList: productList,
+        };
+    
+        try {
+            const response = await axios.post('http://172.16.210.136:8080/api/order/products', purchaseData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
 
+            navigate('/order', { state: { orderData: response.data } });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    
 
     return (
         <>
@@ -330,13 +363,11 @@ function Detail() {
                             }
                             <select className='detail-options' name="options" onChange={handleSelect}>
                                 <option value="" disabled selected hidden>옵션을 선택하세요.</option>
-                                {
-                                    product.optionList && product.optionList.map((option, index) => (
-                                        <option key={index} value={option.optionValue}
-                                                optionId={option.optionId}
-                                                optionQuantity={option.optionQuantity}>{option.optionValue}</option>
-                                    ))
-                                }
+                                {product.optionList && product.optionList.map((option, index) => (
+                                    <option key={index} value={option.optionValue}
+                                            optionId={option.optionId}
+                                            optionQuantity={option.optionQuantity}>{option.optionValue}</option>
+                                ))}
                             </select>
                         </div>
                         {
@@ -363,7 +394,7 @@ function Detail() {
                         {productIsWish ? <FaHeart color='red'/> : <img src={heart} alt="heart"/>}
                     </button>
                     <button onClick={handleCartClick} className='cartButton'>장바구니</button>
-                    <button onClick={navigateToOrder} className='purchaseButton'>바로구매</button>
+                    <button onClick={handleDirectPurchase} className='purchaseButton'>바로 구매</button>
                 </div>
             </div>
 

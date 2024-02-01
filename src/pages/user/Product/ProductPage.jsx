@@ -32,8 +32,9 @@ function ProductPage(){
                 const response = await axios.get(url, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                setProducts(response.data.data.productList);
+                setProducts(response.data.data.content);
                 setTotalPages(response.data.data.totalPage);
+                console.log(response.data)
             } catch (e) {
                 console.error(e);
             }
