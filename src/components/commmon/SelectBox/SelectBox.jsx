@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as ChevronDown } from "../../../assets/icons/chevron-down.svg";
 
@@ -10,7 +10,6 @@ export default function SelectBox({ text, options, onChange }) {
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
     };
-
     const handleOptionSelect = (option) => {
         setSelectedOption(option);
         setDropdownOpen(false);
@@ -20,16 +19,16 @@ export default function SelectBox({ text, options, onChange }) {
     return (
         <Content>
             <DropDown onClick={toggleDropdown}>
-                <div style={{display: 'flex', justifyContent:'center'}}>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
                     {selectedOption || text}
                     <Button>
-                        <ChevronDown/>
+                        <ChevronDown />
                     </Button>
                 </div>
                 {isDropdownOpen && (
                     <Options>
                         {
-                            options.map((option, index)=>(
+                            options.map((option, index) => (
                                 <Option onClick={() => handleOptionSelect(option)}>{option}</Option>
                             ))
                         }
