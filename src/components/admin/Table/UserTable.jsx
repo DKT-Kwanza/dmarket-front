@@ -25,7 +25,9 @@ const style = {
     p: 4,
 };
 
-export default function UserTable({headers, rows, children}) {
+export default function UserTable({ headers, rows, children, onRoleChange }) {
+    const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState(null);
     const [row, setRow] = useState(rows);
     const token = sessionStorage.getItem('token');
@@ -85,8 +87,11 @@ export default function UserTable({headers, rows, children}) {
                                                 삭제
                                             </Button>
                                             :
-                                            <SelectBox text={'유형을 선택하세요'}
-                                                       options={['사용자', '총괄관리자', '시스템관리자', '상품관리자']}/>
+                                            <SelectBox
+                                                text={'유형을 선택하세요'}
+                                                options={['사용자', '총괄관리자', '시스템관리자', '상품관리자']}
+                                                onChange={onRoleChange}
+                                            />
                                     }
                                 </TableCell>
                             </TableRow>

@@ -45,15 +45,15 @@ function DetailWriteQna({onClick}) {
                     공개
                 </Public>
                 <CheckBox
-                    checked={checkboxState === 'public'}
-                    onChange={() => handleCheckboxChange('public')}
+                    checked={checkboxState === false}
+                    onChange={() => handleCheckboxChange(false)}
                 />
                 <Private>
                     비공개
                 </Private>
                 <CheckBox
-                    checked={checkboxState === 'private'}
-                    onChange={() => handleCheckboxChange('private')}
+                    checked={checkboxState === true}
+                    onChange={() => handleCheckboxChange(true)}
                 />
             </SecretState>
             <EnrollBtn onClick={handleEnrollClick}>등록</EnrollBtn>

@@ -11,6 +11,7 @@ import DetailWriteQna from "../../../components/user/Common/Input/DetailWriteQna
 import ScrollToTopBtn from '../../../components/user/Common/Button/ScrollToTopBtn';
 import AddToCartModal from "../../../components/user/Common/Modal/AddToCartModal";
 import {formatPrice} from "../../../utils/Format";
+import {productsApi, userApi} from "../../../Api";
 import {Pagination} from "@mui/material";
 import {FaHeart} from "react-icons/fa";
 import heart from '../../../assets/icons/heart.svg';
@@ -27,6 +28,7 @@ function Detail() {
     const [qnas, setQnas] = useState([]);
     const [recommendProducts, setRecommendProducts] = useState([]);
     const [productIsWish, setProductIsWish] = useState();
+    const [selectedOptions, setSelectedOptions] = useState([]);
 
     /* 세션 스토리지에서 토큰 가져오기 */
     const token = sessionStorage.getItem('token');
@@ -35,7 +37,7 @@ function Detail() {
     /* 상품 상세 정보 조회 */
     useEffect(() => {
         const fetchData = async () => {
-            const url = `http://172.16.210.136:8080/api/products/${productId}`;
+            const url = `${productsApi}/${productId}`;
             try {
                 const response = await axios.get(url, {
                     headers: {
@@ -44,18 +46,17 @@ function Detail() {
                     }
                 });
                 setProduct(response.data.data);
-                setProductIsWish(response.data.data.productIsWish);
             } catch (e) {
-                console.error("Error fetching Inquiry data: ", e);
+                console.error("Error fetching Product data: ", e);
             }
         };
         fetchData();
     }, [productId]);
 
-    /* 상품 리뷰 조회 */
+    /* 상품 위시리스트 확인 */
     useEffect(() => {
         const fetchData = async () => {
-            const url = `http://172.16.210.136:8080/api/products/${productId}/reviews?page=${reviewCurrentPage}`;
+            const url = `${userApi}/${userId}/wish/${productId}`;
             try {
                 const response = await axios.get(url, {
                     headers: {
@@ -63,19 +64,50 @@ function Detail() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                console.log(response.data);
+                console.log("위시 인지?", response.data);
+                setProductIsWish(response.data.data.isWish);
+            } catch (e) {
+                console.error("Error fetching Wishlist data: ", e);
+            }
+        }
+        fetchData();
+    }, []);
+
+    /* 리뷰 페이지네이션 */
+    const [reviewCurrentPage, setReviewCurrentPage] = useState(1);
+    const [reviewTotalPages, setReviewTotalPages] = useState(0);
+    const handleReviewPageChange = (event, value) => {
+        setReviewCurrentPage(value);
+        navigate(`?page=${value}`);
+    };
+
+    /* 상품 리뷰 조회 */
+    useEffect(() => {
+        const fetchData = async () => {
+            const url = `${productsApi}/${productId}/reviews?page=${reviewCurrentPage}`;
+            try {
+                const response = await axios.get(url, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    }
+                });
+                console.log("상품 리뷰 조회: ",response.data);
                 setReviews(response.data.data);
+                setReviewTotalPages(response.data.data.totalPage);
             } catch (e) {
                 console.error("Error fetching Inquiry data: ", e);
             }
         };
         fetchData();
-    }, [productId]);
+    }, [productId, reviewCurrentPage]);
 
     /* Qna 데이터 목록 조회 */
     useEffect(() => {
+        console.log("productId: ",productId);
         const fetchData = async () => {
-            const url = `http://172.16.210.136:8080/api/products/${productId}/qnaList`;
+            const url = `${productsApi}/${productId}/qnaList`;
+            console.log("url: ",url);
             try {
                 const response = await axios.get(url, {
                     headers: {
@@ -84,9 +116,9 @@ function Detail() {
                     }
                 });
                 setQnas(response.data);
-                console.log("qna: ", qnas);
+                console.log("qna: ", response.data);
             } catch (e) {
-                console.error("Error fetching data: ", e);
+                console.error("Error fetching QNA data: ", e);
             }
         };
         fetchData();
@@ -95,7 +127,7 @@ function Detail() {
     /* 같은 카테고리의 최신 상품 4개 조회 (추천 상품 조회) */
     useEffect(() => {
         const fetchData = async () => {
-            const url = `http://172.16.210.136:8080/api/products/${productId}/recommend`;
+            const url = `${productsApi}/${productId}/recommend`;
             try {
                 const response = await axios.get(url, {
                     headers: {
@@ -119,7 +151,7 @@ function Detail() {
     /* 위시 리스트 추가 */
     const handleWishClick = async () => {
         console.log("productIsWish: ", productIsWish);
-        const url = `http://172.16.210.136:8080/api/users/${userId}/wish`;
+        const url = `${userApi}/${userId}/wish`;
         const requestData = {
             productId: productId
         };
@@ -198,8 +230,8 @@ function Detail() {
                         optionId: item.selectedOption.optionId,
                         productCount: item.selectedOption.productCount,
                     };
-
-                    const response = await axios.post(`http://172.16.210.136:8080/api/users/${userId}/cart`, requestData, {
+                    const url = `${userApi}/${userId}/cart`;
+                    const response = await axios.post(url, requestData, {
                         headers: {
                             'Authorization': `Bearer ${token}`,
                             'Content-Type': 'application/json; charset=UTF-8',
@@ -214,14 +246,6 @@ function Detail() {
         } else {
             alert("장바구니에 추가할 상품이 없습니다.");
         }
-    };
-
-    /* 리뷰 페이지네이션 */
-    const [reviewCurrentPage, setReviewCurrentPage] = useState(1);
-    const [reviewTotalPages, setReviewTotalPages] = useState(0);
-    const handleReviewPageChange = (event, value) => {
-        setReviewCurrentPage(value);
-        navigate(`?page=${value}`);
     };
 
     /* qna 작성창 열기 */
@@ -248,7 +272,7 @@ function Detail() {
                 }
             })
             console.log(response.data)
-            // handleToggle();
+            handleToggle();
         } catch (e) {
             console.error(e);
         }
@@ -269,7 +293,39 @@ function Detail() {
     //         console.log(newState);
     //     }
     // };
+    
+    /* 바로 구매 결제 */
+    const handleDirectPurchase = async () => {
+        if (order.length === 0) {
+            alert("옵션과 수량을 선택해주세요!");
+            return;
+        }
+    
+        const productList = order.map(item => ({
+            productId: productId,
+            optionId: item.selectedOption.optionId,
+            productCount: item.selectedOption.productCount,
+        }));
+    
+        const purchaseData = {
+            userId: userId,
+            productList: productList,
+        };
+    
+        try {
+            const response = await axios.post('http://172.16.210.136:8080/api/order/products', purchaseData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
 
+            navigate('/order', { state: { orderData: response.data } });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    
 
     return (
         <>
@@ -330,13 +386,11 @@ function Detail() {
                             }
                             <select className='detail-options' name="options" onChange={handleSelect}>
                                 <option value="" disabled selected hidden>옵션을 선택하세요.</option>
-                                {
-                                    product.optionList && product.optionList.map((option, index) => (
-                                        <option key={index} value={option.optionValue}
-                                                optionId={option.optionId}
-                                                optionQuantity={option.optionQuantity}>{option.optionValue}</option>
-                                    ))
-                                }
+                                {product.optionList && product.optionList.map((option, index) => (
+                                    <option key={index} value={option.optionValue}
+                                            optionId={option.optionId}
+                                            optionQuantity={option.optionQuantity}>{option.optionValue}</option>
+                                ))}
                             </select>
                         </div>
                         {
@@ -363,7 +417,7 @@ function Detail() {
                         {productIsWish ? <FaHeart color='red'/> : <img src={heart} alt="heart"/>}
                     </button>
                     <button onClick={handleCartClick} className='cartButton'>장바구니</button>
-                    <button onClick={navigateToOrder} className='purchaseButton'>바로구매</button>
+                    <button onClick={handleDirectPurchase} className='purchaseButton'>바로 구매</button>
                 </div>
             </div>
 

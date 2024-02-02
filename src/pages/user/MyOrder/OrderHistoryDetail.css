@@ -99,6 +99,7 @@
 .orderHistoryDetail-info {
     text-align: left;
     border-spacing: 0 10px;
+    width: fit-content;
 }
 
 .orderHistoryDetail-info-tit {
@@ -107,6 +108,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    min-width: 150px;
 }
 
 .orderHistoryDetail-info-cont {

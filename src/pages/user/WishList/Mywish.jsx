@@ -3,9 +3,13 @@ import axios from 'axios';
 import WishItemList from '../../../components/user/List/WishItemList';
 import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
 import './Mywish.css';
+import {Pagination} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 function WishList() {
+    const navigate = useNavigate();
     const [wishLists, setWishLists] = useState([]);
+    const [wishListItem, setWishListItem] = useState([]);
     const [wishCount, setWishCount] = useState(0);
     const [selectAll, setSelectAll] = useState(false);
     const [checkedItems, setCheckedItems] = useState({});
@@ -14,24 +18,36 @@ function WishList() {
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');
 
+    /* 위시 페이지 네이션 */
+    const [wishTotalPage, setWishTotalPage] = useState(0);
+    const [wishCurrentPage, setWishCurrentPage] = useState(0);
+
+    const handleWishPageChange = (event, value) => {
+        setWishCurrentPage(value);
+        navigate(`?page=${value}`);
+    };
+
     /* 위시리스트 데이터 조회 */
     useEffect(() => {
         const fetchData = async () => {
-            const url = `http://172.16.210.136:8080/api/users/${userId}/wish`;
+            const url = `http://172.16.210.136:8080/api/users/${userId}/wish?page=${wishCurrentPage}`;
             try {
                 const response = await axios.get(url, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     }
                 });
+                console.log(response.data.data);
                 setWishLists(response.data.data);
+                setWishListItem(response.data.data.wishListItem.content);
                 setWishCount(response.data.data.wishCount);
+                setWishTotalPage(response.data.data.totalPage);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
         fetchData();
-    }, []);
+    }, [wishCurrentPage]);
 
     /* 전체 선택 체크박스 상태 */
     const handleSelectAll = () => {
@@ -98,7 +114,11 @@ function WishList() {
             </div>
             <div className='wishList-bar'></div>
             <div className='wishList-item-list'>
-                <WishItemList items={wishLists.wishListItem} checkedItems={checkedItems} onItemCheck={handleItemCheck} />
+                {
+                    wishListItem &&
+                    <WishItemList items={wishListItem} checkedItems={checkedItems} onItemCheck={handleItemCheck} />
+                }
+                <Pagination count={wishTotalPage} page={wishCurrentPage} onChange={handleWishPageChange} />
             </div>
         </div>
     )

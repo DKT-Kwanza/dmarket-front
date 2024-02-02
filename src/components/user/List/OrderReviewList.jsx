@@ -4,17 +4,35 @@ import OrderItem from '../Item/OrderItem';
 import ReviewItem from '../Item/ReviewItem';
 import { formatDate } from '../../../utils/Format';
 import './OrderReviewList.css'
+import {productsApi} from "../../../Api";
+import axios from "axios";
 
 const OrderReviewsList = ({ orders }) => {
 
   /* 리뷰 삭제 구현 필요 */
-  const deleteReview = (reviewId) => {
-    alert(`${reviewId} 삭제하시겠습니까?`)
+  const deleteReview = async (reviewId,productId) => {
+    const token = sessionStorage.getItem("token");
+    const userId = sessionStorage.getItem("userId");
+    if (!token || !userId) {
+      console.error("No token or userId")
+      return;
+    }
+    try {
+      await axios.delete(`${productsApi}/reviews/${reviewId}`,{
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'}
+      })
+    }
+    catch (e) {
+      console.error("Error fetching data: ", e);
+    }
   };
 
   return (
       <div>
-          {orders.map((order, index) => (
+        {console.log(orders)}
+          {orders && orders.map((order, index) => (
               <div key={index} className='orderReviewList-box'>
                 {/* 주문 정보 */}
                   <OrderInfo 

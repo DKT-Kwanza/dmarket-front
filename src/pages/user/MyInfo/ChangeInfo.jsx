@@ -7,24 +7,58 @@ import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 
 function ChangeInfo() {
     const [userInfo, setUserInfo] = useState({});
-
+    const [userPostalCode, setUserPostalCode] = useState('');
+    const [userAddress, setUserAddress] = useState('');
+    const [userAddressDetail, setUserAddressDetail] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const [isConfirming, setIsConfirming] = useState(false);
+
+    const token = sessionStorage.getItem('token');
+    const userId = sessionStorage.getItem('userId');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("/api/UserInfoData.json");
-                setUserInfo(response.data);
+                const response = await axios.get(`http://172.16.210.136:8080/api/users/${userId}/mypage/myinfo`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                setUserInfo(response.data.data);
+                setUserPostalCode(response.data.data.userPostalCode);
+                setUserAddress(response.data.data.userAddress);
+                setUserAddressDetail(response.data.data.userAddressDetail);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
         fetchData();
-    }, []);
+    }, [userId, token]);
 
-    const openModalHandler = () => {
-        setIsOpen(true);
+    const handlePostalCodeChange = (e) => {
+        setUserPostalCode(e.target.value);
+    };
+
+    const handleAddressChange = (e) => {
+        setUserAddress(e.target.value);
+    };
+
+    const handleDetailedAddressChange = (e) => {
+        setUserAddressDetail(e.target.value);
+    };
+
+    const openModalHandler = async () => {
+        try {
+            const response = await axios.put(`http://172.16.210.136:8080/api/users/${userId}/mypage/myinfo`, {
+                userPostalCode: userPostalCode,
+                userAddress: userAddress,
+                userDetailedAddress: userAddressDetail
+            }, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            alert("배송지가 수정되었습니다!");
+            setIsOpen(true);
+        } catch (error) {
+            console.error("Error updating address: ", error);
+        }
     };
 
     const closeModalHandler = () => {
@@ -32,7 +66,6 @@ function ChangeInfo() {
     };
 
     const handleConfirm = () => {
-        /* modal 의 확인 을 누르면 button 이 disabled */
         setIsConfirming(true);
     };
 
@@ -83,8 +116,10 @@ function ChangeInfo() {
                                 <div className='InfoChange-info-title'>배송지</div>
                                 <input
                                     type="text"
-                                    className="InfoChange-address-name"
-                                    placeholder={userInfo.userPostalCode}
+                                    className="InfoChange-address-postalcode"
+                                    placeholder="우편번호"
+                                    value={userPostalCode}
+                                    onChange={handlePostalCodeChange}
                                 />
                                 <div className="InfoChange-address-essential">우편번호</div>
                             </div>
@@ -93,7 +128,9 @@ function ChangeInfo() {
                                 <input
                                     type="text"
                                     className="InfoChange-address-detail"
-                                    placeholder={userInfo.userAddress}
+                                    placeholder="기본주소"
+                                    value={userAddress}
+                                    onChange={handleAddressChange}
                                 />
                                 <div className="InfoChange-address-essential">기본주소</div>
                             </div>
@@ -102,7 +139,9 @@ function ChangeInfo() {
                                 <input
                                     type="text"
                                     className="InfoChange-address-detail"
-                                    placeholder={userInfo.userDetailedAddress}
+                                    placeholder="나머지주소"
+                                    value={userAddressDetail}
+                                    onChange={handleDetailedAddressChange}
                                 />
                                 <div className="InfoChange-address-essential">나머지주소</div>
                             </div>

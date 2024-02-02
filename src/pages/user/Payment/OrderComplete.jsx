@@ -6,23 +6,10 @@ import "./OrderComplete.css";
 
 
 function OrderComplete() {
-
     const location = useLocation();
-    const { userName, totalPrice, discount, totalPay } = location.state || {};
+    const { orderData, orderCompleteData } = location.state;
 
-    const [paymentProducts, setPaymentProducts] = useState([])
-    
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get("/api/OrderCompleteData.json");
-                setPaymentProducts(response.data);
-            } catch (e) {
-                console.error("Error fetching data: ", e);
-            }
-        };
-        fetchData();
-    }, []);
+    const { userName, totalPrice, discount, totalPay } = orderCompleteData;
 
     return(
         <div>
@@ -36,8 +23,8 @@ function OrderComplete() {
                             <p>{userName} 고객님, 주문이 완료되었습니다.</p>
                         </div> {/*사용자의 이름 받아오기*/}
                         <div className="orderComplete-ordernum">
-                            <span>{formatDate(paymentProducts.orderDate)} {formatTime(paymentProducts.orderDate)}에 주문하신 주문의  
-                                <strong style={{color:"#F00"}}> 주문번호는 {paymentProducts.orderId}번</strong> 입니다. 
+                            <span>{formatDate(orderData.orderDate)} {formatTime(orderData.orderDate)}에 주문하신 주문의  
+                                <strong style={{color:"#F00"}}> 주문번호는 {orderData.orderId}번</strong> 입니다. 
                             </span> {/*사용자의 주문일자, 주문번호 받아오기*/}
                         </div>
                         <div className="orderComplete-price">

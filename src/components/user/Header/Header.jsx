@@ -6,6 +6,24 @@ import user from '../../../assets/icons/user.svg'
 import heart from '../../../assets/icons/heart.svg'
 import shoppingBag from '../../../assets/icons/shoppingBag.svg'
 import alert from '../../../assets/icons/alert.svg'
+import NotificationModal from '../Common/Modal/NotificationModal';
+
+const NotificationData = [
+    {
+        notiId: 1,
+        content: '[폴로랄프로렌 치노 베이스볼캡 ..] 주문하신 상품의 배송이 시작되었습니다.',
+        url: '/mydkt/orderInfo',
+        isRead: false,
+        notificationCreatedDate: '2024-02-22T09:48:00.123456',
+    },
+    {
+        notiId: 2,
+        content: '[반품했는데 환불이 ...] 작성하신 문의에 답변이 등록되었습니다.',
+        url: '/mydkt/inquiry',
+        isRead: true,
+        notificationCreatedDate: '2024-01-08T09:48:00.123456',
+    },
+];
 
 function Header() {
     const navigate = useNavigate();
@@ -14,6 +32,8 @@ function Header() {
     const [categories, setCategories] = useState([]);
     const [levelTwoCategories, setLevelTwoCategories] = useState([]);
     const [searchInput, setSearchInput] = useState("");
+    const [notifications, setNotifications] = useState([]);
+    const [showNotifications, setShowNotifications] = useState(false);
 
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');
@@ -97,6 +117,10 @@ function Header() {
         navigate('./memberMng/manager');
     }
 
+    const toggleNotifications = () => {
+        setShowNotifications(!showNotifications);
+    };
+
     return (
         <div className="header-div">
             <div className="nav-div">
@@ -137,11 +161,15 @@ function Header() {
                             alt={"heart-icon"}
                             src={heart}/>
                     </div>
-                    <div className='alams'>
-                        <img
-                            alt={"alert-icon"}
-                            src={alert}/>
+                    <div className='alams' onClick={toggleNotifications}>
+                            <img alt={"alert-icon"} src={alert}/>
                     </div>
+                    {showNotifications && (
+                        <NotificationModal
+                            notifications={NotificationData}
+                            onClose={() => setShowNotifications(false)}
+                        />
+                    )}
                 </div>
             </div>
             <div className="category-div">
