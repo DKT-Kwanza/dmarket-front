@@ -10,6 +10,7 @@ import RecommendProductList from "../../../components/user/List/RecommendProduct
 import DetailWriteQna from "../../../components/user/Common/Input/DetailWriteQna";
 import ScrollToTopBtn from '../../../components/user/Common/Button/ScrollToTopBtn';
 import AddToCartModal from "../../../components/user/Common/Modal/AddToCartModal";
+import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import {formatPrice} from "../../../utils/Format";
 import {productsApi, userApi, orderApi} from "../../../Api";
 import {Pagination} from "@mui/material";
@@ -28,7 +29,6 @@ function Detail() {
     const [qna, setQna] = useState([]);
     const [recommendProducts, setRecommendProducts] = useState([]);
     const [productIsWish, setProductIsWish] = useState();
-    const [selectedOptions, setSelectedOptions] = useState([]);
 
     /* 세션 스토리지에서 토큰 가져오기 */
     const token = sessionStorage.getItem('token');
@@ -212,6 +212,13 @@ function Detail() {
         setIsOpen(!isOpen);
     };
 
+    /* 옵션, 수량 미선택 시 alert 모달 */
+    const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+    const [modalText, setModalText] = useState('');
+    const alertModalHandler = () => {
+        setIsAlertModalOpen(!isAlertModalOpen);
+    }
+
     /* 장바구니에 추가 */
     const handleCartClick = async () => {
         /* order 리스트에서 productCount가 0인 값을 필터링하여 새로운 리스트 생성 */
@@ -239,7 +246,8 @@ function Detail() {
                 console.error("Error fetching Inquiry data: ", e);
             }
         } else {
-            alert("장바구니에 추가할 상품이 없습니다.");
+            setModalText("장바구니에 추가할 상품이 없습니다.");
+            alertModalHandler();
         }
     };
 
@@ -278,12 +286,13 @@ function Detail() {
     /* "답변 완료"인 객체의 개수를 세기 */
     const qnaCompletedAnswersCount = qna.content ? qna.content.filter(item => item.qnaStatus === "답변 완료").length : 0;
     /* "답변 대기"인 객체의 개수 */
-    const qnaPendingAnswersCount = qna.numberOfElements - qnaCompletedAnswersCount;
+    const qnaPendingAnswersCount = qna.content ? qna.content.filter(item => item.qnaStatus === "답변 대기").length : 0;
     
     /* 바로 구매 결제 */
     const handleDirectPurchase = async () => {
         if (order.length === 0) {
-            alert("옵션과 수량을 선택해주세요!");
+            setModalText("옵션과 수량을 선택해주세요.");
+            alertModalHandler();
             return;
         }
     
@@ -534,6 +543,11 @@ function Detail() {
             <ScrollToTopBtn/>
             {isOpen && (
                 <AddToCartModal isOpen={isOpen} onClose={modalHandler}/>
+            )}
+            {isAlertModalOpen && (
+                <ConfirmModal isOpen={isAlertModalOpen} onClose={alertModalHandler} onConfirm={alertModalHandler}>
+                    {modalText}
+                </ConfirmModal>
             )}
         </>
     );
