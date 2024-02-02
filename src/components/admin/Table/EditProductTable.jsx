@@ -12,7 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
-export default function EditProductTable({headers, rows}) {
+export default function EditProductTable({headers, rows, products, setProducts}) {
     const token = sessionStorage.getItem('token');
     const navigate = useNavigate();
     const navigateToEdit = () => {
@@ -34,21 +34,28 @@ export default function EditProductTable({headers, rows}) {
     //     setIsOpen(false);
     // };
 
-    const handleConfirmDelete = async(targetProductId, targetOptionId) => {
+    const handleConfirmDelete = async (targetProductId, targetOptionId) => {
         const url = adminApi + `/products/${targetProductId}/${targetOptionId}`;
         try {
-            const response = await axios.delete(url, {
+            await axios.delete(url, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json; charset=UTF-8'
                 }
             });
-            alert("해당 상품에 대한 옵션이 삭제되었습니다!")
-            console.log(response.data);
+            alert("해당 상품에 대한 옵션이 삭제되었습니다!");
+
+            const updatedProducts = products.map(product => ({
+                ...product,
+                optionList: product.optionList.filter(option => option.optionId !== targetOptionId)
+            })).filter(product => product.optionList.length > 0);
+
+            setProducts(updatedProducts);
         } catch (e) {
             console.error(e);
         }
     };
+    
 
 
     return (
