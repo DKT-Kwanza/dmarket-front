@@ -308,7 +308,8 @@ function Detail() {
         };
     
         try {
-            const response = await axios.post('http://172.16.210.136:8080/api/order/products', purchaseData, {
+            const url = `${orderApi}/products`;
+            const response = await axios.post(url, purchaseData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
