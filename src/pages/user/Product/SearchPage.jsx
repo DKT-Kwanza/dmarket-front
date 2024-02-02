@@ -29,8 +29,8 @@ function SearchPage() {
                 const response = await axios.get(url, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                setProducts(response.data.data.productList);
-                setTotalPages(response.data.data.totalPage);
+                setProducts(response.data.data.content);
+                setTotalPages(response.data.data.totalPages);
                 console.log(response.data)
             } catch (e) {
                 console.error(e);
