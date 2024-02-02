@@ -175,6 +175,15 @@ function Detail() {
             "optionId": e.target.options[e.target.selectedIndex].getAttribute("optionId"),
             "optionQuantity": e.target.options[e.target.selectedIndex].getAttribute("optionQuantity")
         };
+
+        // 이미 선택된 optionId가 order에 있으면 alert 표시
+        const isOptionIdExistInOrder = order.some((item) => item.selectedOption.optionId === selectedOption.optionId);
+
+        if (isOptionIdExistInOrder) {
+            alert(`주문 목록에 이미 선택한 옵션이 존재합니다.`);
+            return;
+        }
+
         setSelected([...selected, selectedOption]);
     };
 
@@ -184,6 +193,12 @@ function Detail() {
     const handleCountChange = ({count, optionId}) => {
         /* setOrder 함수를 콜백 형태로 사용하여 주문 상태를 업데이트 */
         setOrder(prevOrder => {
+
+            if (count === 0) {
+                /* count가 0이면 해당 optionId를 가진 아이템을 제거 */
+                return prevOrder.filter((item) => item.selectedOption.optionId !== optionId);
+            }
+
             const existingItem = prevOrder.find(item => item.selectedOption.optionId === optionId);
 
             if (existingItem) {
@@ -201,7 +216,6 @@ function Detail() {
     };
     /* 주문 목록이 변경될 때마다 총 수량 업데이트 */
     useEffect(() => {
-        console.log("주문 목록: ", order);
         const newTotalCount = order.reduce((total, item) => total + item.selectedOption.productCount, 0);
         setTotalCount(newTotalCount);
     }, [order]);
@@ -222,12 +236,12 @@ function Detail() {
     /* 장바구니에 추가 */
     const handleCartClick = async () => {
         /* order 리스트에서 productCount가 0인 값을 필터링하여 새로운 리스트 생성 */
-        const filteredOrder = order.filter(item => item.selectedOption.productCount !== 0);
+        // const filteredOrder = order.filter(item => item.selectedOption.productCount !== 0);
 
-        if (filteredOrder.length > 0) {
+        if (order.length > 0) {
             try {
                 /* 각 아이템에 대해 try-catch 블록 실행 */
-                await Promise.all(filteredOrder.map(async (item) => {
+                await Promise.all(order.map(async (item) => {
                     const requestData = {
                         productId: item.selectedOption.productId,
                         optionId: item.selectedOption.optionId,
