@@ -6,14 +6,13 @@ import {indigo} from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
+import axios from "axios";
 
 const primary = indigo[50];
 const drawerWidth = 260;
 
 function UserRegisterPage() {
     const navigate = useNavigate();
-    const [isOpen, setIsOpen] = useState(false);
-    const [formSubmitted, setFormSubmitted] = useState(false);
 
     const [state, setState] = useState({
         inputId: '',
@@ -22,26 +21,73 @@ function UserRegisterPage() {
         phoneNumber: '',
         dktNum: '',
         joinDate: '',
+        passwordValid: ''
     });
 
-    const handleInputChange = (e) => {
 
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        if (name === 'phoneNumber') {
+            const input = value.replace(/\D/g, '');
+            const formattedPhoneNumber = input.replace(/(\d{3})(\d{0,4})(\d{0,4})/, (match, p1, p2, p3) => {
+                if (p3) {
+                    return `${p1}-${p2}-${p3}`;
+                } else if (p2) {
+                    return `${p1}-${p2}`;
+                } else {
+                    return p1;
+                }
+            });
+            setState({ ...state, [name]: formattedPhoneNumber });
+        } else {
+            setState({ ...state, [name]: value });
+        }
     };
+
 
     const handleFormSubmit = (e) => {
         e.preventDefault(); 
-        // 회원가입 api 연동
+        const token = sessionStorage.getItem('token');
+        const regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^])(?=.*[0-9]).{8,25}$/;
+        if (!token) {
+            console.error('Token is missing');
+            return;
+        }
+        if (state.inputPw.length < 8 || !regExp.test(state.inputPw)) {
+            alert("비밀번호는 8자리 이상이며 영문자, 숫자, 특수문자(!@#$%^)가 포함되어야 합니다.");
+            return;
+        }
+        if (state.passwordValid !== state.inputPw){
+            alert("비밀번호가 일치하지 않습니다.");
+            console.error("Password mismatch");
+            return;
+        }
 
-        setFormSubmitted(true);
-        setIsOpen(true);
+        axios.post('http://172.16.210.136:8080/api/users/join', {
+                userEmail: state.inputId,
+                userPassword: state.inputPw,
+                userDktNum: state.dktNum,
+                userName: state.inputName,
+                userPhoneNum: state.phoneNumber,
+                userJoinDate: state.joinDate,
+                userPostalCode: state.postalCode,
+                userAddress: state.address,
+                userDetailedAddress: state.detailedAddress
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((res)=> {
+                alert('사용자가 등록되었습니다.');
+                navigate(`/memberMng/user`);
+            })
+            .catch(function(error){
+                alert(error.response.data.msg);
+                console.error('Error submitting user:', error);
+            });
     };
-
-    const handleCloseModal = () => {
-        setIsOpen(false);
-        navigate('/memberMng/user');
-    };
-
-
 
     return (
         <Box>
@@ -81,6 +127,7 @@ function UserRegisterPage() {
                         label="비밀번호 확인"
                         type="password"
                         margin="normal"
+                        name="passwordValid"
                         value={state.passwordValid}
                         onChange={handleInputChange}
                     />
@@ -138,11 +185,6 @@ function UserRegisterPage() {
                     </Button>
                 </Paper>
             </Box>
-            {formSubmitted && isOpen && (
-                <ConfirmModal color={'#3377FF'} isOpen={isOpen} onClose={handleCloseModal} onConfirm={handleCloseModal}>
-                    <div>사용자 등록이 완료되었습니다.</div>
-                </ConfirmModal>
-            )}
         </Box>
     );
 }
