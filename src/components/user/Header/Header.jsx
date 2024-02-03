@@ -175,6 +175,26 @@ function Header() {
         
         setEventSource(source);
     }
+    // sse 연결
+
+    // 알림 조회
+    useEffect(() => {
+        if (token && userId) {
+            axios.get(`http://localhost:8080/api/notify/${userId}/notifications`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                setNotifications(response.data);
+            })
+            .catch((error) => {
+                console.error('Could not fetch notifications', error);
+            });
+        }
+    }, [token, userId]);
+    //알림 조회
+
 
     const handleSearch = (e) => {
         if (e.key === 'Enter') {
