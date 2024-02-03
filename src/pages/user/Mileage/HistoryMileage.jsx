@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {formatDate} from "../../../utils/Format";
 import './HistoryMileage.css'
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import MileageHistoryItem from "../../../components/user/Item/MileageHistoryItem";
+import {formatDate} from "../../../utils/Format";
+import {userApi} from "../../../Api";
 
 function HistoryMileage(){
 
@@ -18,10 +19,11 @@ function HistoryMileage(){
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/users/${userId}/mypage/mileage-usage?page=${currentPage}`, {
+                const url = `${userApi}/${userId}/mypage/mileage-usage?page=${currentPage}`;
+                const response = await axios.get(url, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                setHistoryMileages(response.data.data.mileageList);
+                setHistoryMileages(response.data.data.content);
                 setTotalPages(response.data.data.totalPage);
             } catch (error) {
                 console.error(error);
