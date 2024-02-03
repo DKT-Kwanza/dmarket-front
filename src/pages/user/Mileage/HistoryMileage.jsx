@@ -1,12 +1,12 @@
 import './HistoryMileage.css'
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
-import axios from 'axios';
-import {Pagination} from "@mui/material";
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import MileageHistoryItem from "../../../components/user/Item/MileageHistoryItem";
+import {Pagination} from "@mui/material";
 import {formatDate} from "../../../utils/Format";
+import axios from 'axios';
 import {userApi} from "../../../Api";
 
 function HistoryMileage() {
@@ -32,7 +32,6 @@ function HistoryMileage() {
                     headers: {'Authorization': `Bearer ${token}`}
                 });
                 setHistoryMileages(response.data.data.content);
-                console.log(response.data.data);
                 setMileageTotalPages(response.data.data.totalPages);
             } catch (error) {
                 console.error(error);
