@@ -1,29 +1,32 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import axios from "axios";
+import { EventSourcePolyfill } from 'event-source-polyfill';
 import './Header.css'
 import user from '../../../assets/icons/user.svg'
 import heart from '../../../assets/icons/heart.svg'
 import shoppingBag from '../../../assets/icons/shoppingBag.svg'
 import alert from '../../../assets/icons/alert.svg'
 import NotificationModal from '../Common/Modal/NotificationModal';
+import { isLoginState } from '../../commmon/AuthState';
 
-const NotificationData = [
-    {
-        notiId: 1,
-        content: '[폴로랄프로렌 치노 베이스볼캡 ..] 주문하신 상품의 배송이 시작되었습니다.',
-        url: '/mydkt/orderInfo',
-        isRead: false,
-        notificationCreatedDate: '2024-02-22T09:48:00.123456',
-    },
-    {
-        notiId: 2,
-        content: '[반품했는데 환불이 ...] 작성하신 문의에 답변이 등록되었습니다.',
-        url: '/mydkt/inquiry',
-        isRead: true,
-        notificationCreatedDate: '2024-01-08T09:48:00.123456',
-    },
-];
+// const NotificationData = [
+//     {
+//         notiId: 1,
+//         content: '[폴로랄프로렌 치노 베이스볼캡 ..] 주문하신 상품의 배송이 시작되었습니다.',
+//         url: '/mydkt/orderInfo',
+//         isRead: false,
+//         notificationCreatedDate: '2024-02-22T09:48:00.123456',
+//     },
+//     {
+//         notiId: 2,
+//         content: '[반품했는데 환불이 ...] 작성하신 문의에 답변이 등록되었습니다.',
+//         url: '/mydkt/inquiry',
+//         isRead: true,
+//         notificationCreatedDate: '2024-01-08T09:48:00.123456',
+//     },
+// ];
 
 function Header() {
     const navigate = useNavigate();
@@ -34,46 +37,137 @@ function Header() {
     const [searchInput, setSearchInput] = useState("");
     const [notifications, setNotifications] = useState([]);
     const [showNotifications, setShowNotifications] = useState(false);
+    const [lastEventId, setLastEventId] = useState("");
+    const [ eventSource, setEventSource ] = useState(null);
+    const isLogin = useRecoilValue(isLoginState);
 
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');
     
     useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const response = await axios.get('http://172.16.210.136:8080/api/products/categories', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                if (response.data.code === 200) {
-                setCategories(response.data.data);
-                const levelTwos = response.data.data.reduce((acc, curr) => [...acc, ...curr.child], []);
-                setLevelTwoCategories(levelTwos);
-                }
-            } catch (error) {
-                console.error('Error fetching categories:', error);
-            }
-            };
-        
-            fetchCategories();
-    }, []);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/users/${userId}/cart-count`,{
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                setCartCount(response.data.data.cartCount);
-            } catch (e) {
-                console.error("Error fetching data: ", e);
-            }
-        };
+        fetchCategories();
         fetchData();
-    }, [cartCount]);
+        console.log(isLogin);
+        // 마운트 시 로그인 상태 + sse 연결이 안 된 상태면 연결
+        if (isLogin && !eventSource) {
+            subscribe();
+        }
+
+        // 언마운트 시 sse 연결 종료
+        return () => {
+            if (eventSource) {
+                eventSource.close();
+                console.log("연결 종료");
+                setEventSource(null);
+            }
+        }
+    }, [cartCount, eventSource, isLogin, notifications]);
+
+    // useEffect(() => {
+        
+    //     fetchData();
+
+    //     console.log(isLogin);
+    //     // 마운트 시 로그인 상태 + sse 연결이 안 된 상태면 연결
+    //     if (isLogin && !eventSource) {
+    //         subscribe();
+    //     }
+
+    //     // 언마운트 시 sse 연결 종료
+    //     return () => {
+    //         if (eventSource) {
+    //             eventSource.close();
+    //             console.log("연결 종료");
+    //             setEventSource(null);
+    //         }
+    //     }
+
+    // }, [cartCount, eventSource, isLogin]);
+
+    // useEffect(() => {
+    //     console.log(isLogin);
+    //     // 마운트 시 로그인 상태 + sse 연결이 안 된 상태면 연결
+    //     if (isLogin && !eventSource) {
+    //         subscribe();
+    //     }
+
+    //     // 언마운트 시 sse 연결 종료
+    //     return () => {
+    //         if (eventSource) {
+    //             eventSource.close();
+    //             console.log("연결 종료");
+    //             setEventSource(null);
+    //         }
+    //     }
+
+    // }, [eventSource, isLogin])
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`http://172.16.210.136:8080/api/users/${userId}/cart-count`,{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setCartCount(response.data.data.cartCount);
+        } catch (e) {
+            console.error("Error fetching data: ", e);
+        }
+    };
+
+    const fetchCategories = async () => {
+        try {
+            const response = await axios.get('http://172.16.210.136:8080/api/products/categories', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (response.data.code === 200) {
+            setCategories(response.data.data);
+            const levelTwos = response.data.data.reduce((acc, curr) => [...acc, ...curr.child], []);
+            setLevelTwoCategories(levelTwos);
+            }
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+    };
+
+    // sse 연결 시작
+    const subscribe = () => {
+        console.log("연결 시작");
+        const source = new EventSourcePolyfill(
+            `http://localhost:8080/api/notify/subscribe/` + userId,
+            {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                lastEventId: lastEventId,
+            },
+            heartbeatTimeout: 60000,
+            }
+        );
+
+        source.addEventListener("error", (e) => {
+            console.log(e);
+        });
+
+        // 연결 시작 시 더미 데이터 받아옴
+        source.addEventListener("test", (e) => {
+            console.log(lastEventId);
+            const data = JSON.parse(e.data);
+            console.log(data.content);
+        });
+
+        // mileage 관련 알림 받아옴
+        source.addEventListener("mileage", (e) => {
+            setLastEventId(e.lastEventId);
+            console.log(lastEventId);
+            const data = JSON.parse(e.data);
+            console.log(data);
+            setNotifications((prevNotifications) => [...prevNotifications, data]);
+            console.log(notifications);
+        });
+        
+        setEventSource(source);
+    }
 
     const handleSearch = (e) => {
         if (e.key === 'Enter') {
@@ -166,7 +260,7 @@ function Header() {
                     </div>
                     {showNotifications && (
                         <NotificationModal
-                            notifications={NotificationData}
+                            notifications={notifications}
                             onClose={() => setShowNotifications(false)}
                         />
                     )}

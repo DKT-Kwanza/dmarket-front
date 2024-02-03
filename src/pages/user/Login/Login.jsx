@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -6,6 +7,7 @@ import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
 import './Login.css';
 import logo from '../../../assets/images/logo.png'
 import chevronRight from '../../../assets/icons/chevron-right.svg'
+import { isLoginState } from '../../../components/commmon/AuthState'
 
 function Login() {
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ function Login() {
   const [passwordValid, setPasswordValid] = useState(true);
   const [inputId,setInputId] = useState("");
   const [inputPw,setInputPw] = useState("");
+  const [isLogin,setIsLogin] = useRecoilState(isLoginState);
 
   const formData = new FormData();
 
@@ -37,6 +40,7 @@ function Login() {
             sessionStorage.setItem('token', token);
             sessionStorage.setItem('userId', userId);
             alert("로그인 되었습니다!");
+            setIsLogin(true);
             navigate("../../");
         })
         .catch(error => {

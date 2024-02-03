@@ -1,4 +1,5 @@
 import {Router, Route, Routes, useLocation} from "react-router-dom";
+import { RecoilRoot } from "recoil";
 
 import './App.css';
 import Header from "./components/user/Header/Header";
@@ -57,6 +58,7 @@ function App() {
 
   return (
     <div className="App">
+      <RecoilRoot>
         {!hideHeaderFooter && <Header />}
         <div className={applyBodyStyle ? "body" : ""}>
             <Routes>
@@ -137,6 +139,7 @@ function App() {
             </Routes>
           </div>
         {!hideHeaderFooter && <Footer />}
+      </RecoilRoot>
     </div>
   );
 }
