@@ -137,6 +137,7 @@ function Header() {
             console.log(lastEventId);
             const data = JSON.parse(e.data);
             console.log(data.content);
+            toast(data.content);
             setNotifications((prevNotifications) => [data, ...prevNotifications]);
             console.log(notifications);
         });
@@ -146,6 +147,7 @@ function Header() {
             setLastEventId(e.lastEventId);
             console.log(lastEventId);
             const data = JSON.parse(e.data);
+            toast(data.content);
             setNotifications((prevNotifications) => [data, ...prevNotifications]);
         });
 
@@ -155,6 +157,7 @@ function Header() {
             console.log(lastEventId);
             const data = JSON.parse(e.data);
             console.log(data);
+            toast(data.content);
             setNotifications((prevNotifications) => [data, ...prevNotifications]);
             console.log(notifications);
         });
@@ -165,6 +168,7 @@ function Header() {
             console.log(lastEventId);
             const data = JSON.parse(e.data);
             console.log(data);
+            toast(data.content);
             setNotifications((prevNotifications) => [data, ...prevNotifications]);
             console.log(notifications);
         });
