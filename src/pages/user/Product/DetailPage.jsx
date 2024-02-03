@@ -115,8 +115,8 @@ function Detail() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                setQnas(response.data);
-                console.log("qna: ", response.data);
+                setQnas(response.data.data);
+                console.log("qna: ", response.data.data);
             } catch (e) {
                 console.error("Error fetching QNA data: ", e);
             }

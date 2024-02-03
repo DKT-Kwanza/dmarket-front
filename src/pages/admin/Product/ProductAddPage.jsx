@@ -11,6 +11,8 @@ import ImageIcon from '@mui/icons-material/Image';
 import Typography from '@mui/material/Typography';
 import Write from "../../../components/admin/Common/Input/Write";
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
+import axios from "axios";
+import { adminApi, bucketToken, bucketURL } from "../../../Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -22,8 +24,12 @@ const categories = ['여성 의류', '남성 의류', '유아 의류', '신발',
                     
 function ProductAddPage () {
     const navigate = useNavigate();
+    const {v4} = require('uuid');
+    //const token = sessionStorage.getItem('token');
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwiZW1haWwiOiJhYmNAZ2FjaG9uLmFjLmtyIiwidHlwZSI6IkFUSyIsImlhdCI6MTcwNjA3MTQ2MywiZXhwIjoxNzA4MjMxNDYzfQ.ObpC_S0ib78Aob2jwYa1esnYvk4HNaMWUy_TAsxvAZc'
     const [productDes, setProductDes] = useState("");
     const [images, setImages] = useState(Array(5).fill(null));
+    const [objecImages, setObjectImages] = useState(Array(5).fill(null));
     const [category, setCategory] = useState('');
     const [brand, setBrand] = useState(''); 
     const [productName, setProductName] = useState('');
@@ -41,8 +47,11 @@ function ProductAddPage () {
             const reader = new FileReader();
             reader.onloadend = () => {
                 const newImages = [...images];
+                const objectNewImages = [...objecImages];
                 newImages[index] = reader.result;
+                objectNewImages[index] = file;
                 setImages(newImages);
+                setObjectImages(objectNewImages);
             };
             reader.readAsDataURL(file);
         }
@@ -61,9 +70,10 @@ function ProductAddPage () {
     };
 
     function onEditorChange(value) {
-        const content = value;
+        const content = value.replace(/<p>/gi, "").replace(/<\/p>/gi, "");
         setProductDes(content);
-    }
+      }
+      
 
     const handleOptionChange = (e) => {
         setOptionInput(e.target.value);
@@ -104,10 +114,63 @@ function ProductAddPage () {
             handleAddOptionTag();
         }
     };
+    const uuid = require('uuid');
 
-    const handleAddSubmit = (e) => {
+    const handleAddSubmit = async(e) => {
         e.preventDefault(); 
+    
         // 상품 등록 api 연동
+        // 서버로 전송할 이미지 src 리스트
+        const newImgList = [];
+        console.log(images);
+        console.log(objecImages);
+
+        // Object Storage 저장
+        for (let index = 0; index < objecImages.length; index++) {
+            const file = objecImages[index];
+            
+            if (file) {
+                const newProductImgSrc = `${bucketURL}${uuid.v4()}.${file.type.split('/')[1]}`;
+                newImgList.push(newProductImgSrc);
+                try {
+                    const response = await axios.put(newProductImgSrc, 
+                        file, {
+                        headers: {
+                            'X-Auth-Token': `${bucketToken}`,
+                            'Content-Type': file.type
+                        }
+                    });
+                } catch (error) {
+                console.error('Error during request:', error);
+                }
+            }
+        }
+
+        // 서버로 이미지 새 상품 데이터 전송
+        if(!token){
+            console.log('Toekn is missing');
+            return;
+        }
+
+        try{
+            const response = await axios.post(`${adminApi}/product`, {
+                brand: brand,
+                productName: productName,
+                categoryName: category,
+                productPrice: price.cost,
+                productDes: productDes,
+                productSalePrice: price.sale,
+                imgList: newImgList,
+                optionList: options
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            
+        }catch(error){
+            console.log("Error :" , error);
+        }
 
         setAddSubmitted(true);
         setIsOpen(true);
