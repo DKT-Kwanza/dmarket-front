@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
 import axios from 'axios';
-import { formatDate } from '../../../utils/Format';
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import './Qna.css';
 import QnaItem from '../../../components/user/Item/QnaItem';
 import { Pagination } from "@mui/material";
+import { formatDate } from '../../../utils/Format';
+import {userApi} from "../../../Api";
 
 const Qna = () => { 
     const navigate = useNavigate();
@@ -25,7 +26,8 @@ const Qna = () => {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/users/${userId}/mypage/qna?page=${page}`, 
+                const url = `${userApi}/${userId}/mypage/qna?page=${page}`;
+                const response = await axios.get(url,
                 {
                     headers: {
                         'Authorization': `Bearer ${token}`
