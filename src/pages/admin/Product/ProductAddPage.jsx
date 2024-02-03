@@ -112,23 +112,7 @@ function ProductAddPage () {
     const handlePriceChange = (prop) => (event) => {
         setPrice({ ...price, [prop]: event.target.value });
     };
-
-    /* 옵션 추가하기 */
-    const handleAddOption = () => {
-        if (optionInput && optionTags.length > 0) {
-            const newOptions = optionTags.map(tag => ({
-                optionName: optionInput,
-                optionValue: tag,
-                optionQuantity: parseInt(optionQuantities[tag], 10) || 0,
-            }));
-            setOptions([...options, ...newOptions]);
-            setOptionInput('');
-            setOptionTags([]);
-            setOptionQuantities({});
-        }
-    };
     
-
     /* 옵션값 스페이스바, 엔터로 분리 */
     const handleKeyUp = (event) => {
         if (event.key === ' ' || event.key === 'Enter') {
@@ -301,17 +285,6 @@ function ProductAddPage () {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {options.map((option) => (
-                                        <TableRow key={option.name}>
-                                            <TableCell>{option.name}</TableCell>
-                                            <TableCell>
-                                                <TextField
-                                                    type="number"
-                                                    size="small"
-                                                />
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
                                     {optionTags.map((tag, index) => (
                                         <TableRow key={index}>
                                             <TableCell>{tag.optionValue}</TableCell>
@@ -358,7 +331,6 @@ function ProductAddPage () {
                     sx={{ float: 'right'}}
                     variant="outlined"
                     onClick={() => {
-                        handleAddOption(); 
                         handleAddSubmit();
                     }}
                 >
