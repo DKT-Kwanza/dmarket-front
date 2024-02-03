@@ -101,7 +101,12 @@ function ProductPage() {
                 <Category onCategoryClick={handleCategoryClick} /> 
                 <SearchBar text={search} onChange={handleSearchInputChange} onSearch={handleSearch} />
                 <Paper square elevation={2} sx={{ p: '20px 30px' }}>
-                    <EditProductTable headers={tableHeader} rows={{ product: products }} />
+                    <EditProductTable
+                        headers={tableHeader}
+                        rows={{ product: products }}
+                        products={products}
+                        setProducts={setProducts}
+                    />
                     <Button
                         variant="outlined"
                         sx={{ float: 'right' }}

@@ -7,6 +7,7 @@ import Filter from '../../../components/user/Common/Filter/Filter';
 import Dropdown from '../../../components/user/Common/Select/Dropdown';
 import ScrollToTopBtn from "../../../components/user/Common/Button/ScrollToTopBtn";
 import { Pagination } from "@mui/material";
+import { removeCommas } from "../../../utils/Format";
 
 function SearchPage() {
     const navigate = useNavigate();
@@ -24,7 +25,10 @@ function SearchPage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const url = `http://172.16.210.136:8080/api/products/search?q=${query}&sorter=${sorter}&min-price=${minPrice}&max-price=${maxPrice}&star=${star}&page=${currentPage}`;
+            const formattedMinPrice = removeCommas(minPrice);
+            const formattedMaxPrice = removeCommas(maxPrice);
+
+            const url = `http://172.16.210.136:8080/api/products/search?q=${query}&sorter=${sorter}&min-price=${formattedMinPrice}&max-price=${formattedMaxPrice}&star=${star}&page=${currentPage}`;
             try {
                 const response = await axios.get(url, {
                     headers: { 'Authorization': `Bearer ${token}` }

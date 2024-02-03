@@ -8,6 +8,7 @@ import ScrollToTopBtn from "../../../components/user/Common/Button/ScrollToTopBt
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { Pagination } from "@mui/material";
 import { FaAngleRight } from "react-icons/fa6";
+import { removeCommas } from "../../../utils/Format";
 
 function ProductPage(){
     const location = useLocation();
@@ -27,7 +28,10 @@ function ProductPage(){
 
     useEffect(() => {
         const fetchData = async () => {
-            const url = `http://172.16.210.136:8080/api/products/categories/${categoryId}?sorter=${sorter}&min-price=${minPrice}&max-price=${maxPrice}&star=${star}&page=${currentPage}`;
+            const formattedMinPrice = removeCommas(minPrice);
+            const formattedMaxPrice = removeCommas(maxPrice);
+
+            const url = `http://172.16.210.136:8080/api/products/categories/${categoryId}?sorter=${sorter}&min-price=${formattedMinPrice}&max-price=${formattedMaxPrice}&star=${star}&page=${currentPage}`;
             try {
                 const response = await axios.get(url, {
                     headers: { 'Authorization': `Bearer ${token}` }
