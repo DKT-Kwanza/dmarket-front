@@ -21,7 +21,7 @@ function HistoryMileage(){
                 const response = await axios.get(`http://172.16.210.136:8080/api/users/${userId}/mypage/mileage-usage?page=${currentPage}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                setHistoryMileages(response.data.data.mileageList);
+                setHistoryMileages(response.data.data.content);
                 setTotalPages(response.data.data.totalPage);
             } catch (error) {
                 console.error(error);

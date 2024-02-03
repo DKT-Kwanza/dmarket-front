@@ -8,18 +8,14 @@ const NotificationModal = ({ notifications, onClose }) => {
     const navigate = useNavigate();
     const userId = sessionStorage.getItem('userId');
 
-    const handleMoveToPage = () =>{
-        navigate(`/mydkt/${userId}/mileageInfo`);
-    }
-
     return (
         <div className="notification-modal cute-modal">
             <div className="notification-header">
                 <IoClose onClick={onClose} className="close-icon"/>
             </div>
             <ul className="notification-list">
-                {notifications.map((notification) => (
-                    <NotificationModalItem key={notification.notiId} notification={notification} onClick={handleMoveToPage} />
+                {notifications && notifications.map((notification) => (
+                    <NotificationModalItem key={notification.notiId} notification={notification} />
                 ))}
             </ul>
         </div>

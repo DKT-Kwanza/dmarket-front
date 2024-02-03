@@ -15,7 +15,6 @@ function Login() {
   const [passwordValid, setPasswordValid] = useState(true);
   const [inputId,setInputId] = useState("");
   const [inputPw,setInputPw] = useState("");
-  const [isLogin,setIsLogin] = useRecoilState(isLoginState);
 
   const formData = new FormData();
 
@@ -40,7 +39,6 @@ function Login() {
             sessionStorage.setItem('token', token);
             sessionStorage.setItem('userId', userId);
             alert("로그인 되었습니다!");
-            setIsLogin(true);
             navigate("../../");
         })
         .catch(error => {

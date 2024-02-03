@@ -1,5 +1,4 @@
 import {Router, Route, Routes, useLocation} from "react-router-dom";
-import { RecoilRoot } from "recoil";
 
 import './App.css';
 import Header from "./components/user/Header/Header";
@@ -58,88 +57,86 @@ function App() {
 
   return (
     <div className="App">
-      <RecoilRoot>
-        {!hideHeaderFooter && <Header />}
-        <div className={applyBodyStyle ? "body" : ""}>
-            <Routes>
+      {!hideHeaderFooter && <Header />}
+      <div className={applyBodyStyle ? "body" : ""}>
+          <Routes>
 
-              <Route path='/member'>
-                <Route path='login' element={<Login />} />
-                <Route path='signin' element={<SignIn/>}/>
-                <Route path='signinForm' element={<SignInForm/>} />
+            <Route path='/member'>
+              <Route path='login' element={<Login />} />
+              <Route path='signin' element={<SignIn/>}/>
+              <Route path='signinForm' element={<SignInForm/>} />
+            </Route>
+
+            <Route path='/'>
+              <Route path='' element={<Main/>} />
+              <Route path='category/:categoryId' element={<ProductPage/>}/>
+              <Route path='search' element={<SearchPage/>}/>
+            </Route>
+
+            <Route path='/product'>
+              <Route path='detail/:productId' element={<Detail/>}/>
+              <Route path='detail' element={<Detail/>}/>
+            </Route>
+
+            <Route path='/order'>
+              <Route path='' element={<PaymentPage/>}/>
+              <Route path='complete' element={<OrderComplete/>} />
+            </Route>
+
+            <Route path='/mydkt'>
+              <Route path='orderInfo' element={<OrderHistory/>}/>
+              <Route path='orderInfoDetail' element={<OrderHistoryDetail/>} />
+              <Route path='mycart' element={<Cart />} />
+              <Route path='mywish' element={<Mywish/>} />
+              <Route path='review' element={<ReviewList/>} />
+              <Route path='writeReview' element={<WriteReviewPage/>} />
+              <Route path='qna' element={<Qna />} />
+              <Route path='inquiry' element={<Inquiry />} />
+              <Route path='changeInfo' element={<ChangeInfo/>} />
+              <Route path='changePwd' element={<ChangePwd/>} />
+              <Route path='charge' element={<ChargeMileage/>} />
+              <Route path='mileageInfo' element={<HistoryMileage/>} />
+            </Route>
+            
+            <Route path='/customer'>
+              <Route path='' element={<CustomerCenterNotice/>} />
+              <Route path='faq/:tab' element={<CustomerCenterFAQ/>}/>
+              <Route path='writeInquiry' element={<CustomerInquiryPage/>}/>
+            </Route>
+
+            {/* 관리자 라우팅 */}
+            <Route path='/memberMng'>
+                  <Route path='manager' element={<AdminList />}/>
+                  <Route path='user' element={<MemberList/>}/>
+                  <Route path='addUser' element={<UserRegisterPage/>}/>
+                  <Route path='mileage' element={<UserMileagePage/>}/>
               </Route>
 
-              <Route path='/'>
-                <Route path='' element={<Main/>} />
-                <Route path='category/:categoryId' element={<ProductPage/>}/>
-                <Route path='search' element={<SearchPage/>}/>
+              <Route path='/productMng'>
+                  <Route path='' element={<Product/>}/>
+                  <Route path='add' element={<ProductAddPage/>}/>
+                  <Route path='edit' element={<ProductEditPage/>}/>
+                  <Route path='qna' element={<ProductQnaPage/>}/>
+                  <Route path='quantity' element={<ProductQuantityPage/>}/>
+                  <Route path='review' element={<ProductReviewPage/>}/>
               </Route>
 
-              <Route path='/product'>
-                <Route path='detail/:productId' element={<Detail/>}/>
-                <Route path='detail' element={<Detail/>}/>
+              <Route path='/orderMng'>
+                  <Route path='' element={<OrderStatus/>}/>
+                  <Route path='cancel' element={<OrderCancel/>}/>
+                  <Route path='return' element={<ReturnStatus/>}/>
+                  <Route path='refund' element={<Refund/>}/>
               </Route>
 
-              <Route path='/order'>
-                <Route path='' element={<PaymentPage/>}/>
-                <Route path='complete' element={<OrderComplete/>} />
+              <Route path='/customerMng'>
+                  <Route path='notice' element={<CustomerNotice/>}/>
+                  <Route path='inquiry' element={<CustomerInquiry/>}/>
+                  <Route path='faq' element={<AdminCustomerFaqPage/>}/>
               </Route>
 
-              <Route path='/mydkt'>
-                <Route path='orderInfo' element={<OrderHistory/>}/>
-                <Route path='orderInfoDetail' element={<OrderHistoryDetail/>} />
-                <Route path='mycart' element={<Cart />} />
-                <Route path='mywish' element={<Mywish/>} />
-                <Route path='review' element={<ReviewList/>} />
-                <Route path='writeReview' element={<WriteReviewPage/>} />
-                <Route path='qna' element={<Qna />} />
-                <Route path='inquiry' element={<Inquiry />} />
-                <Route path='changeInfo' element={<ChangeInfo/>} />
-                <Route path='changePwd' element={<ChangePwd/>} />
-                <Route path='charge' element={<ChargeMileage/>} />
-                <Route path='mileageInfo' element={<HistoryMileage/>} />
-              </Route>
-              
-              <Route path='/customer'>
-                <Route path='' element={<CustomerCenterNotice/>} />
-                <Route path='faq/:tab' element={<CustomerCenterFAQ/>}/>
-                <Route path='writeInquiry' element={<CustomerInquiryPage/>}/>
-              </Route>
-
-              {/* 관리자 라우팅 */}
-              <Route path='/memberMng'>
-                    <Route path='manager' element={<AdminList />}/>
-                    <Route path='user' element={<MemberList/>}/>
-                    <Route path='addUser' element={<UserRegisterPage/>}/>
-                    <Route path='mileage' element={<UserMileagePage/>}/>
-                </Route>
-
-                <Route path='/productMng'>
-                    <Route path='' element={<Product/>}/>
-                    <Route path='add' element={<ProductAddPage/>}/>
-                    <Route path='edit' element={<ProductEditPage/>}/>
-                    <Route path='qna' element={<ProductQnaPage/>}/>
-                    <Route path='quantity' element={<ProductQuantityPage/>}/>
-                    <Route path='review' element={<ProductReviewPage/>}/>
-                </Route>
-
-                <Route path='/orderMng'>
-                    <Route path='' element={<OrderStatus/>}/>
-                    <Route path='cancel' element={<OrderCancel/>}/>
-                    <Route path='return' element={<ReturnStatus/>}/>
-                    <Route path='refund' element={<Refund/>}/>
-                </Route>
-
-                <Route path='/customerMng'>
-                    <Route path='notice' element={<CustomerNotice/>}/>
-                    <Route path='inquiry' element={<CustomerInquiry/>}/>
-                    <Route path='faq' element={<AdminCustomerFaqPage/>}/>
-                </Route>
-
-            </Routes>
-          </div>
-        {!hideHeaderFooter && <Footer />}
-      </RecoilRoot>
+          </Routes>
+        </div>
+      {!hideHeaderFooter && <Footer />}
     </div>
   );
 }
