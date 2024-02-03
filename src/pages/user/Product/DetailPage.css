@@ -263,8 +263,7 @@ a {color: #333; text-decoration: none;}
 }
 
 .productDetailBox {
-    height: 1153px;
-    background-color: #D9D9D9;
+    text-align: center;
 }
 
 .reviewTitle {

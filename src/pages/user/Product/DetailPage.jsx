@@ -10,8 +10,9 @@ import RecommendProductList from "../../../components/user/List/RecommendProduct
 import DetailWriteQna from "../../../components/user/Common/Input/DetailWriteQna";
 import ScrollToTopBtn from '../../../components/user/Common/Button/ScrollToTopBtn';
 import AddToCartModal from "../../../components/user/Common/Modal/AddToCartModal";
+import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import {formatPrice} from "../../../utils/Format";
-import {productsApi, userApi} from "../../../Api";
+import {productsApi, userApi, orderApi} from "../../../Api";
 import {Pagination} from "@mui/material";
 import {FaHeart} from "react-icons/fa";
 import heart from '../../../assets/icons/heart.svg';
@@ -25,10 +26,9 @@ function Detail() {
 
     const [product, setProduct] = useState([]);
     const [reviews, setReviews] = useState([]);
-    const [qnas, setQnas] = useState([]);
+    const [qna, setQna] = useState([]);
     const [recommendProducts, setRecommendProducts] = useState([]);
     const [productIsWish, setProductIsWish] = useState();
-    const [selectedOptions, setSelectedOptions] = useState([]);
 
     /* 세션 스토리지에서 토큰 가져오기 */
     const token = sessionStorage.getItem('token');
@@ -64,7 +64,6 @@ function Detail() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                console.log("위시 인지?", response.data);
                 setProductIsWish(response.data.data.isWish);
             } catch (e) {
                 console.error("Error fetching Wishlist data: ", e);
@@ -92,7 +91,6 @@ function Detail() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                console.log("상품 리뷰 조회: ",response.data);
                 setReviews(response.data.data);
                 setReviewTotalPages(response.data.data.totalPage);
             } catch (e) {
@@ -102,12 +100,18 @@ function Detail() {
         fetchData();
     }, [productId, reviewCurrentPage]);
 
+    /* Qna 페이지네이션 */
+    const [qnaCurrentPage, setQnaCurrentPage] = useState(1);
+    const [qnaTotalPages, setQnaTotalPages] = useState(0);
+    const handleQnaPageChange = (event, value) => {
+        setQnaCurrentPage(value);
+        navigate(`?page=${value}`);
+    };
+
     /* Qna 데이터 목록 조회 */
     useEffect(() => {
-        console.log("productId: ",productId);
         const fetchData = async () => {
-            const url = `${productsApi}/${productId}/qnaList`;
-            console.log("url: ",url);
+            const url = `${productsApi}/${productId}/qnaList?page=${qnaCurrentPage}`;
             try {
                 const response = await axios.get(url, {
                     headers: {
@@ -115,14 +119,14 @@ function Detail() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                setQnas(response.data);
-                console.log("qna: ", response.data);
+                setQna(response.data.data);
+                setQnaTotalPages(response.data.data.totalPages);
             } catch (e) {
                 console.error("Error fetching QNA data: ", e);
             }
         };
         fetchData();
-    }, [productId]);
+    }, [productId, qnaCurrentPage]);
 
     /* 같은 카테고리의 최신 상품 4개 조회 (추천 상품 조회) */
     useEffect(() => {
@@ -136,7 +140,6 @@ function Detail() {
                     }
                 });
                 setRecommendProducts(response.data.data);
-                console.log("추천: ", response.data);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -144,13 +147,8 @@ function Detail() {
         fetchData();
     }, [productId]);
 
-    const navigateToOrder = () => {
-        navigate("../../order");
-    }
-
     /* 위시 리스트 추가 */
     const handleWishClick = async () => {
-        console.log("productIsWish: ", productIsWish);
         const url = `${userApi}/${userId}/wish`;
         const requestData = {
             productId: productId
@@ -162,12 +160,10 @@ function Detail() {
                     'Content-Type': 'application/json; charset=UTF-8',
                 }
             });
-            console.log("wishClick", response.data.data);
-
             /* productIsWish 값을 true 로 변경 */
             setProductIsWish(true);
         } catch (e) {
-            console.error("Error fetching Inquiry data: ", e);
+            console.error("Error fetching Wish data: ", e);
         }
     };
 
@@ -179,6 +175,15 @@ function Detail() {
             "optionId": e.target.options[e.target.selectedIndex].getAttribute("optionId"),
             "optionQuantity": e.target.options[e.target.selectedIndex].getAttribute("optionQuantity")
         };
+
+        // 이미 선택된 optionId가 order에 있으면 alert 표시
+        const isOptionIdExistInOrder = order.some((item) => item.selectedOption.optionId === selectedOption.optionId);
+
+        if (isOptionIdExistInOrder) {
+            alert(`주문 목록에 이미 선택한 옵션이 존재합니다.`);
+            return;
+        }
+
         setSelected([...selected, selectedOption]);
     };
 
@@ -188,6 +193,12 @@ function Detail() {
     const handleCountChange = ({count, optionId}) => {
         /* setOrder 함수를 콜백 형태로 사용하여 주문 상태를 업데이트 */
         setOrder(prevOrder => {
+
+            if (count === 0) {
+                /* count가 0이면 해당 optionId를 가진 아이템을 제거 */
+                return prevOrder.filter((item) => item.selectedOption.optionId !== optionId);
+            }
+
             const existingItem = prevOrder.find(item => item.selectedOption.optionId === optionId);
 
             if (existingItem) {
@@ -205,7 +216,6 @@ function Detail() {
     };
     /* 주문 목록이 변경될 때마다 총 수량 업데이트 */
     useEffect(() => {
-        console.log("주문 목록: ", order);
         const newTotalCount = order.reduce((total, item) => total + item.selectedOption.productCount, 0);
         setTotalCount(newTotalCount);
     }, [order]);
@@ -216,15 +226,22 @@ function Detail() {
         setIsOpen(!isOpen);
     };
 
+    /* 옵션, 수량 미선택 시 alert 모달 */
+    const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+    const [modalText, setModalText] = useState('');
+    const alertModalHandler = () => {
+        setIsAlertModalOpen(!isAlertModalOpen);
+    }
+
     /* 장바구니에 추가 */
     const handleCartClick = async () => {
         /* order 리스트에서 productCount가 0인 값을 필터링하여 새로운 리스트 생성 */
-        const filteredOrder = order.filter(item => item.selectedOption.productCount !== 0);
+        // const filteredOrder = order.filter(item => item.selectedOption.productCount !== 0);
 
-        if (filteredOrder.length > 0) {
+        if (order.length > 0) {
             try {
                 /* 각 아이템에 대해 try-catch 블록 실행 */
-                await Promise.all(filteredOrder.map(async (item) => {
+                await Promise.all(order.map(async (item) => {
                     const requestData = {
                         productId: item.selectedOption.productId,
                         optionId: item.selectedOption.optionId,
@@ -237,14 +254,14 @@ function Detail() {
                             'Content-Type': 'application/json; charset=UTF-8',
                         }
                     });
-                    console.log(response.data);
                 }));
                 modalHandler();
             } catch (e) {
                 console.error("Error fetching Inquiry data: ", e);
             }
         } else {
-            alert("장바구니에 추가할 상품이 없습니다.");
+            setModalText("장바구니에 추가할 상품이 없습니다.");
+            alertModalHandler();
         }
     };
 
@@ -256,9 +273,7 @@ function Detail() {
 
     /* qna 작성 */
     const handleWriteQna = async (title, contents, qnaIsSecret) => {
-        console.log('Received data:', { title, contents, qnaIsSecret });
-        console.log(userId);
-        const url = `http://172.16.210.136:8080/api/products/${productId}/qna`
+        const url = `${productsApi}/${productId}/qna`
         const requestData = {
             userId: userId,
             qnaTitle: title,
@@ -271,33 +286,27 @@ function Detail() {
                     'Authorization': `Bearer ${token}`
                 }
             })
-            console.log(response.data)
             handleToggle();
+            /* 현재의 qna 상태를 복사하여 수정 */
+            const newQna = { ...qna };
+            newQna.qnaList = newQna.qnaList || [];
+            newQna.qnaList.push(response.data.data);
+            setQna(newQna);
         } catch (e) {
             console.error(e);
         }
     }
 
-    // "답변 완료"인 객체의 개수를 세기
-    const qnaCompletedAnswersCount = qnas.qnaList ? qnas.qnaList.filter(item => item.qnaStatus === "답변 완료").length : 0;
-    // "답변 대기"인 객체의 개수
-    const qnaPendingAnswersCount = qnas.qnaCount - qnaCompletedAnswersCount;
-
-    // const [checkboxState, setCheckboxState] = useState('none');
-    // const handleCheckboxChange = (newState) => { // qna 작성 공개 여부 체크박스
-    //     console.log(newState);
-    //     if (checkboxState === newState) {
-    //         setCheckboxState('none');
-    //     } else {
-    //         setCheckboxState(newState);
-    //         console.log(newState);
-    //     }
-    // };
+    /* "답변 완료"인 객체의 개수를 세기 */
+    const qnaCompletedAnswersCount = qna.content ? qna.content.filter(item => item.qnaStatus === "답변 완료").length : 0;
+    /* "답변 대기"인 객체의 개수 */
+    const qnaPendingAnswersCount = qna.content ? qna.content.filter(item => item.qnaStatus === "답변 대기").length : 0;
     
     /* 바로 구매 결제 */
     const handleDirectPurchase = async () => {
         if (order.length === 0) {
-            alert("옵션과 수량을 선택해주세요!");
+            setModalText("옵션과 수량을 선택해주세요.");
+            alertModalHandler();
             return;
         }
     
@@ -313,13 +322,13 @@ function Detail() {
         };
     
         try {
-            const response = await axios.post('http://172.16.210.136:8080/api/order/products', purchaseData, {
+            const url = `${orderApi}/products`;
+            const response = await axios.post(url, purchaseData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
             });
-
             navigate('/order', { state: { orderData: response.data } });
         } catch (error) {
             console.error(error);
@@ -426,7 +435,7 @@ function Detail() {
                     <li className='productDetailButton'><a href="#productDetailButtonScroll">상품상세정보</a></li>
                     <li className='reviewButton'><a href="#reviewButtonScroll">고객리뷰({reviews.productReviewCount})</a>
                     </li>
-                    <li className='qnaButton'><a href="#qnaButtonScroll">상품 Q&A({qnas.qnaCount})</a></li>
+                    <li className='qnaButton'><a href="#qnaButtonScroll">상품 Q&A({qna.totalElements})</a></li>
                     <li className='recommandButton'><a href="#recommandButtonScroll">추천 상품</a></li>
                     <li className='returnInfoButton'><a href="#scroll5">배송/반품/교환 안내</a></li>
                 </ul>
@@ -440,7 +449,9 @@ function Detail() {
                 <div className='productDetailImg'>
                     <img src={productDetail}/>
                 </div>
-                <div className='productDetailBox'></div>
+                <div className='productDetailBox'>
+                    {product.productDes}
+                </div>
 
 
                 <div className='reviewTitle'>
@@ -470,14 +481,14 @@ function Detail() {
                 <Pagination count={reviewTotalPages} page={reviewCurrentPage} onChange={handleReviewPageChange} />
 
                 <div className='qnaTitle'>
-                    <div className="qnaButtonScroll" id="qnaButtonScroll">Q&A({qnas.qnaCount})</div>
+                    <div className="qnaButtonScroll" id="qnaButtonScroll">Q&A({qna.totalElements})</div>
                 </div>
                 <div className='qnaAnnounce'>
                     <text>상품 외 배송, 교환/반품 등에 관한 문의사항은 고객센터에서 확인하실 수 있습니다.</text>
                 </div>
                 <div className='qnaCategory'>
                     <div className='qna-category-btn-area'>
-                        <button className='qnaAll'>전체 ({qnas.qnaCount})</button>
+                        <button className='qnaAll'>전체 ({qna.totalElements})</button>
                         <div className='qna-category-line'/>
                         <button className='qnaReplyDone'>답변완료 ({qnaCompletedAnswersCount})</button>
                         <div className='qna-category-line'/>
@@ -485,10 +496,11 @@ function Detail() {
                     </div>
                     <button onClick={handleToggle} className='qnaEnroll'>Q&A 작성하기 <img src={arrowRight}/></button>
                 </div>
-                <DetailQnaList qnas={qnas.qnaList || []}/>
+                <DetailQnaList qnas={qna.content || []}/>
                 {
                     isExpanded && <DetailWriteQna onClick={handleWriteQna}/>
                 }
+                <Pagination count={qnaTotalPages} page={qnaCurrentPage} onChange={handleQnaPageChange} />
 
                 <div className='recommandTitle'>
                     <div className="recommandButtonScroll" id="recommandButtonScroll">함께 보면 좋은 상품</div>
@@ -546,6 +558,11 @@ function Detail() {
             <ScrollToTopBtn/>
             {isOpen && (
                 <AddToCartModal isOpen={isOpen} onClose={modalHandler}/>
+            )}
+            {isAlertModalOpen && (
+                <ConfirmModal isOpen={isAlertModalOpen} onClose={alertModalHandler} onConfirm={alertModalHandler}>
+                    {modalText}
+                </ConfirmModal>
             )}
         </>
     );

@@ -37,11 +37,10 @@ function WishList() {
                         'Authorization': `Bearer ${token}`,
                     }
                 });
-                console.log(response.data.data);
                 setWishLists(response.data.data);
                 setWishListItem(response.data.data.wishListItem.content);
                 setWishCount(response.data.data.wishCount);
-                setWishTotalPage(response.data.data.totalPage);
+                setWishTotalPage(response.data.data.wishListItem.totalPages);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
