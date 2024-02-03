@@ -25,8 +25,7 @@ const categories = ['여성 의류', '남성 의류', '유아 의류', '신발',
 function ProductAddPage () {
     const navigate = useNavigate();
     const {v4} = require('uuid');
-    //const token = sessionStorage.getItem('token');
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwiZW1haWwiOiJhYmNAZ2FjaG9uLmFjLmtyIiwidHlwZSI6IkFUSyIsImlhdCI6MTcwNjA3MTQ2MywiZXhwIjoxNzA4MjMxNDYzfQ.ObpC_S0ib78Aob2jwYa1esnYvk4HNaMWUy_TAsxvAZc'
+    const token = sessionStorage.getItem('token');
     const [productDes, setProductDes] = useState("");
     const [images, setImages] = useState(Array(5).fill(null));
     const [objecImages, setObjectImages] = useState(Array(5).fill(null));
