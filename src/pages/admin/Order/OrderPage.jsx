@@ -2,15 +2,19 @@ import LeftNav from "../../../components/admin/Sidebar/LeftNav";
 import Header from "../../../components/admin/Header/Header";
 import TabMenu from "../../../components/admin/Common/TabMenu/TabMenu";
 import OrderStatusTable from "../../../components/admin/Table/OrderStatusTable";
-import {Paper, Box} from "@mui/material";
+import {Paper, Box, Pagination} from "@mui/material";
 import {indigo} from '@mui/material/colors';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {adminApi} from "../../../Api";
+import {useNavigate} from "react-router-dom";
 
 const primary = indigo[50];
 const drawerWidth = 260;
 
 function OrderStatus() {
+    const navigate = useNavigate();
+
     const [order, setOrder] = useState([]);
     const [selectedTab, setSelectedTab] = useState('결제 완료');
     const [menuList, setMenuList] = useState([]);
@@ -19,25 +23,35 @@ function OrderStatus() {
     /* 세션 스토리지에서 토큰 가져오기 */
     const token = sessionStorage.getItem('token');
 
+    /* 주문,배송 상태 페이지네이션 */
+    const [orderCurrentPage, setOrderCurrentPage] = useState(1);
+    const [orderTotalPages, setOrderTotalPages] = useState(0);
+    const handleOrderPageChange = (event, value) => {
+        setOrderCurrentPage(value);
+        navigate(`?page=${value}`);
+    };
+
     /* selectedTab 에 맞는 데이터 가져오기 */
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const encodedTab = encodeURIComponent(selectedTab);
-                const response = await axios.get(`http://172.16.210.136:8080/api/admin/orders?status=${encodedTab}`,{
+                const url = `${adminApi}/orders?status=${encodedTab}&pageNo=${orderCurrentPage}`;
+                const response = await axios.get(url,{
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json; charset=UTF-8',
                     },
                 });
-                // console.log("response: ", response.data.data);
+                console.log("response: ", response.data.data);
                 setOrder(response.data.data);
+                setOrderTotalPages(response.data.data.orderList.totalPages);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
         fetchData();
-    }, [selectedTab]);
+    }, [selectedTab, orderCurrentPage]);
 
     /* 주문 상태 변경 클릭 */
     const onChangeOrderStatusClick = async (detailId, selectedStatus) => {
@@ -47,7 +61,8 @@ function OrderStatus() {
 
         try {
             /* 주문상태 변경 API 호출 */
-            const response = await axios.put(`http://172.16.210.136:8080/api/admin/orders/${detailId}`, requestData, {
+            const url = `http://172.16.210.136:8080/api/admin/orders/${detailId}`
+            const response = await axios.put(url, requestData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json; charset=UTF-8',
@@ -65,6 +80,8 @@ function OrderStatus() {
                     return [];
                 }
             });
+
+            setSelectedTab(selectedStatus);
         } catch (error) {
             console.error('PUT API 호출 실패:', error);
         }
@@ -76,13 +93,16 @@ function OrderStatus() {
             setMenuList([
                 { title: '결제 완료', count: order.confPayCount },
                 { title: '배송 준비', count: order.preShipCount },
-                { title: '배송중', count: order.InTransitCount }
+                { title: '배송중', count: order.InTransitCount },
+                { title: "배송 완료", count: order.delivCompCount }
             ]);
         }
     }, [order]);
 
+    /* 메뉴 탭이 변했을 때 */
     const handleTabChange = async (tabTitle) => {
         setSelectedTab(tabTitle);
+        setOrderCurrentPage(0);
     };
 
     return (
@@ -109,6 +129,7 @@ function OrderStatus() {
                         <OrderStatusTable headers={tableHeader} rows={order.orderList.content}
                                           onChangeOrderStatusClick={onChangeOrderStatusClick}/>
                     )}
+                    <Pagination count={orderTotalPages} page={orderCurrentPage} onChange={handleOrderPageChange} />
                 </Paper>
             </Box>
         </Box>
