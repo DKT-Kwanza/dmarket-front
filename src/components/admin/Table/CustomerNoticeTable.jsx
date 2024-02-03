@@ -6,7 +6,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import SelectBox from "../../commmon/SelectBox/SelectBox";
+import {formatDate} from "../../../utils/Format";
 
 export default function CustomerNoticeTable({headers, rows, onDeleteClick, onRowClick}) {
     return (
@@ -28,7 +28,7 @@ export default function CustomerNoticeTable({headers, rows, onDeleteClick, onRow
                                   onClick={(event) => onRowClick(event, row.noticeId)}>
                             <TableCell>{row.noticeTitle}</TableCell>
                             <TableCell>관리자</TableCell>
-                            <TableCell>{row.noticeCreatedDate}</TableCell>
+                            <TableCell>{formatDate(row.noticeCreatedDate)}</TableCell>
                             <TableCell>
                                 <Button
                                     onClick={(event) => {

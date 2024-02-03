@@ -30,7 +30,7 @@ function Detail() {
     const [recommendProducts, setRecommendProducts] = useState([]);
     const [productIsWish, setProductIsWish] = useState();
 
-    /* 세션 스토리지에서 토큰 가져오기 */
+    /* 세션 스토리지에서 토큰, userId 가져오기 */
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');
 

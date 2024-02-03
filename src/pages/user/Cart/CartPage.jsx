@@ -1,12 +1,13 @@
+import './CartPage.css';
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
-import axios from 'axios';
-import './CartPage.css';
 import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
 import CartList from "../../../components/user/List/CartList";
 import CartOrderInfo from "../../../components/user/Info/CartOrderInfo";
 import ConfirmCancelModal from "../../../components/commmon/Modal/ConfirmCancelModal";
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
+import axios from 'axios';
+import {userApi} from "../../../Api";
 
 function Cart() {
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ function Cart() {
     /* 장바구니 데이터 조회 */
     useEffect(() => {
         const fetchData = async () => {
-            const url = `http://172.16.210.136:8080/api/users/${userId}/cart`;
+            const url = `${userApi}/${userId}/cart`;
             try {
                 const response = await axios.get(url, {
                     headers: {
@@ -106,7 +107,7 @@ function Cart() {
             /* 선택된 상품들을 삭제하는 API 호출 */
             try {
                 await Promise.all(selectedCartIds.map(async cartId => {
-                    const url = `http://172.16.210.136:8080/api/users/${userId}/cart/${cartId}`;
+                    const url = `${userApi}/${userId}/cart/${cartId}`;
                     await axios.delete(url, {
                         headers: {
                             'Authorization': `Bearer ${token}`,
