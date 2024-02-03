@@ -39,6 +39,7 @@ function Header() {
     const [showNotifications, setShowNotifications] = useState(false);
     const [lastEventId, setLastEventId] = useState("");
     const [ eventSource, setEventSource ] = useState(null);
+    const [unreadCount, setUnreadCount] = useState(0);
 
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');
@@ -105,7 +106,7 @@ function Header() {
                 Authorization: `Bearer ${token}`,
                 lastEventId: lastEventId,
             },
-            heartbeatTimeout: 60000,
+            heartbeatTimeout: 600000,
             }
         );
 
@@ -129,6 +130,7 @@ function Header() {
             toast(data.content);
             setNotifications((prevNotifications) => [data, ...prevNotifications]);
             console.log(notifications);
+            setUnreadCount((prevCount) => prevCount + 1);
         });
         
         // 문의 답변 알림
@@ -140,6 +142,7 @@ function Header() {
             toast(data.content);
             setNotifications((prevNotifications) => [data, ...prevNotifications]);
             console.log(notifications);
+            setUnreadCount((prevCount) => prevCount + 1);
         });
         
         // 상품 QnA 답변 알림
@@ -149,6 +152,7 @@ function Header() {
             const data = JSON.parse(e.data);
             toast(data.content);
             setNotifications((prevNotifications) => [data, ...prevNotifications]);
+            setUnreadCount((prevCount) => prevCount + 1);
         });
 
         // 배송 상태 변경 알림
@@ -160,6 +164,7 @@ function Header() {
             toast(data.content);
             setNotifications((prevNotifications) => [data, ...prevNotifications]);
             console.log(notifications);
+            setUnreadCount((prevCount) => prevCount + 1);
         });
     
         // 반품 상태 변경 알림
@@ -171,6 +176,7 @@ function Header() {
             toast(data.content);
             setNotifications((prevNotifications) => [data, ...prevNotifications]);
             console.log(notifications);
+            setUnreadCount((prevCount) => prevCount + 1);
         });
         
         setEventSource(source);
@@ -192,8 +198,27 @@ function Header() {
                 console.error('Could not fetch notifications', error);
             });
         }
-    }, [token, userId]);
+    }, []);
     //알림 조회
+
+
+    // 알림 개수
+    useEffect(() => {
+        const fetchUnreadCount = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080/api/notify/${userId}/unreadCount`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setUnreadCount(response.data);
+            } catch (error) {
+                console.error('Could not fetch unread notification count', error);
+            }
+        };
+        fetchUnreadCount();
+    }, []);
+    // 알림 개수
 
 
     const handleSearch = (e) => {
@@ -283,6 +308,11 @@ function Header() {
                             alt={"heart-icon"}
                             src={heart}/>
                     </div>
+
+                    {/* 알림 카운트 */}
+                        {unreadCount > 0 && <span>{unreadCount}</span>}
+                    {/* 알림 카운트 */}
+                    
                     <div className='alams' onClick={toggleNotifications}>
                             <img alt={"alert-icon"} src={alert}/>
                     </div>
@@ -290,6 +320,7 @@ function Header() {
                         <NotificationModal
                             notifications={notifications}
                             onClose={() => setShowNotifications(false)}
+                            setUnreadCount={setUnreadCount}
                         />
                     )}
                 </div>

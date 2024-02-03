@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import './NotificationModal.css'
 import { formatDate } from '../../../../utils/Format';
 
-const NotificationItem = ({ notification }) => {
+const NotificationItem = ({ notification, setUnreadCount }) => {
     const navigate = useNavigate();
     const { content, url, isRead, notificationCreatedDate } = notification;
     const token = sessionStorage.getItem('token');
@@ -29,6 +29,7 @@ const NotificationItem = ({ notification }) => {
                 }
             })
             notification.isRead = true;
+            setUnreadCount((prevCount) => prevCount - 1);
             navigate(url);
             }
             catch (e) {
