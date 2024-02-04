@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
 import axios from 'axios';
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import './Qna.css';
 import QnaItem from '../../../components/user/Item/QnaItem';
-import { Pagination } from "@mui/material";
-import { formatDate } from '../../../utils/Format';
+import {Pagination} from "@mui/material";
+import {formatDate} from '../../../utils/Format';
 import {userApi} from "../../../Api";
 
-const Qna = () => { 
+const Qna = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [qnas, setQnas] = useState([])
@@ -27,8 +27,7 @@ const Qna = () => {
         const fetchData = async () => {
             try {
                 const url = `${userApi}/${userId}/mypage/qna?page=${page}`;
-                const response = await axios.get(url,
-                {
+                const response = await axios.get(url, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -43,7 +42,7 @@ const Qna = () => {
     }, [userId, currentPage, location.search]);
 
     const handlePageChange = (event, value) => {
-        setCurrentPage(value); 
+        setCurrentPage(value);
         navigate(`?page=${value}`);
     };
 
@@ -54,22 +53,22 @@ const Qna = () => {
 
     return (
         <div className='Qna'>
-            <div><MyPageSubHeader /></div>
+            <div><MyPageSubHeader/></div>
             <div className='Qna-contents-body'>
-                <MyPageSidebar />
+                <MyPageSidebar/>
                 <div className='Qna-container'>
                     <div className='Qna-title'>
                         <div className='Qna-title-bar'></div>
                         <div className='Qna-title-info'>상품 Q&A</div>
                     </div>
                     <div className='Inquiry-contents-content'>
-                        <div className='Inquiry-contents-content-hr' />
+                        <div className='Inquiry-contents-content-hr'/>
                         <div className='Qna-contents-content-info'>
                             <p>* 상품과 관련 없는 내용, 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</p>
                             <p>* 고객님께서 상품 상세에 작성하신 내용입니다.</p>
                         </div>
                         <div className='Qna-contents-content-data'>
-                            <hr className='Qna-contents-content-data-hr' />
+                            <hr className='Qna-contents-content-data-hr'/>
                             <div className='Qna-contents-content-data-title'>
                                 <div className='Qna-contents-content-data-1'>상품명</div>
                                 <div className='Qna-contents-content-data-2'>제목</div>
@@ -92,7 +91,7 @@ const Qna = () => {
                                 />
                             ))}
                         </div>
-                        <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
+                        <Pagination count={totalPages} page={currentPage} onChange={handlePageChange}/>
                     </div>
                 </div>
             </div>

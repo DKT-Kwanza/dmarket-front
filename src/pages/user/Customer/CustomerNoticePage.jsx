@@ -100,9 +100,9 @@ function CustomerCenterNotice() {
                                 <div dangerouslySetInnerHTML={{__html: notice.noticeContents}}/>
                             </CustomerCenterNoticeItem>
                         ))}
-                        <Pagination count={totalPages} page={currentPage}
-                                    onChange={handlePageChange}/>
                     </div>
+                    <Pagination count={totalPages} page={currentPage}
+                                onChange={handlePageChange}/>
                 </div>
             </div>
         </div>

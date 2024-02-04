@@ -16,7 +16,6 @@ function CustomerCenterFAQ() {
 
     /* 세션 스토리지에서 토큰, userId 가져오기 */
     const token = sessionStorage.getItem('token');
-    const userId = sessionStorage.getItem('userId');
 
     /* faq 페이지네이션 */
     const [currentPage, setCurrentPage] = useState(1);
@@ -35,7 +34,6 @@ function CustomerCenterFAQ() {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                console.log(response.data.data);
                 setCustomerCenterFaqs(response.data.data.content);
                 setTotalPages(response.data.data.totalPages);
             } catch (e) {
@@ -107,11 +105,11 @@ function CustomerCenterFAQ() {
                             FAQ [{selectedMenu}]
                         </div>
                         <div className='faq-main-body-line'/>
-                        <div>
+                        <div style={{marginBottom: '20px'}}>
                             <CustomerCenterFAQList items={filteredFaqs}/>
-                            <Pagination count={totalPages} page={currentPage}
-                                        onChange={handlePageChange}/>
                         </div>
+                        <Pagination count={totalPages} page={currentPage}
+                                    onChange={handlePageChange}/>
                         <div className='faq-main-menu-cantfind'>
                             원하는 정보를 찾지 못하셨나요?
                         </div>

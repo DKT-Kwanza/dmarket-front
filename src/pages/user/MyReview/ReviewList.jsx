@@ -53,7 +53,7 @@ const ReviewList = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${userApi}/${userId}/mypage/written-reviews`, {
+                const response = await axios.get(`${userApi}/${userId}/mypage/written-reviews?page=${reviewCurrentPage}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
@@ -108,14 +108,17 @@ const ReviewList = () => {
                             ? <>
                                 {/* 작성 가능한 리뷰 */}
                                 <OrderList orders={availableReviews}/>
+                                <Pagination count={reviewTotalPages} page={reviewCurrentPage}
+                                            onChange={handleReviewPageChange}/>
                             </>
                             : <>
                                 {/* 작성한 리뷰 */}
                                 <OrderReviewList orders={writtenReviews}/>
+                                <Pagination count={reviewTotalPages} page={reviewCurrentPage}
+                                            onChange={handleReviewPageChange}/>
                             </>
                     }
-                    <Pagination count={reviewTotalPages} page={reviewCurrentPage}
-                                onChange={handleReviewPageChange}/>
+
                 </div>
             </div>
         </div>
