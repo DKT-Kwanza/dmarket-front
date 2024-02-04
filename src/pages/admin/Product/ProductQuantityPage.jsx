@@ -29,6 +29,10 @@ function ProductQuantityPage() {
 
     const tableHeader = ['상품번호', '브랜드', '상품', '옵션', '판매가', '카테고리', '상태', '재고', '입고', '등록일', '등록', ''];
 
+    useEffect(() => {
+        fetchData(categoryId, currentPage);
+    }, [categoryId, currentPage]); 
+    
     const fetchData = async () => {
         if (categoryId !== null) {
             const url = `http://172.16.210.136:8080/api/admin/products/categories/${categoryId}?page=${currentPage}`;
@@ -39,8 +43,8 @@ function ProductQuantityPage() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                setRows(response.data.data.content);
-                setTotalPages(response.data.data.totalPage);
+                setRows(response.data.data.productList);
+                setTotalPages(response.data.data.totalPages);
                 setSearchCategoryId(categoryId);
             } catch (e) {
                 console.error(e);
@@ -49,15 +53,20 @@ function ProductQuantityPage() {
     };
 
     const handleCategoryClick = (categoryId) => {
-        setCategoryId(categoryId);
-        fetchData(categoryId);
-    };
-    
+        if (categoryId) {
+            setCategoryId(categoryId);
+            setCurrentPage(1);
+            navigate(`?category=${categoryId}&page=1`);
+            fetchData(categoryId, 1);
+        }
+    };    
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
-        navigate(`?page=${value}`);
-    };
+        const categoryParam = categoryId ? `category=${categoryId}` : '';
+        navigate(`?${categoryParam}&page=${value}`);
+        fetchData(categoryId, value);
+    }; 
 
     /* 카테고리 별 상품 검색 */
     const handleSearch = async () => {
@@ -69,8 +78,8 @@ function ProductQuantityPage() {
                 const response = await axios.get(url, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                setRows(response.data.data.content);
-                setTotalPages(response.data.data.totalPage);
+                setRows(response.data.data.productList);
+                setTotalPages(response.data.data.totalPages);
             } catch (e) {
                 console.error(e);
             }

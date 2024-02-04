@@ -38,7 +38,8 @@ function ProductPage(){
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 setProducts(response.data.data.content);
-                setTotalPages(response.data.data.totalPage);
+                setTotalPages(response.data.data.totalPages);
+                console.log(response.data)
             } catch (e) {
                 console.error(e);
             }

@@ -32,6 +32,10 @@ function ProductPage() {
     /* 세션 스토리지에서 토큰 가져오기 */
     const token = sessionStorage.getItem('token');
 
+    useEffect(() => {
+        fetchData(categoryId, currentPage);
+    }, [categoryId, currentPage]); 
+
     /* 카테고리 별 상품 조회 */
     const fetchData = async () => {
         if (categoryId !== null) {
@@ -43,25 +47,31 @@ function ProductPage() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                setProducts(response.data.data.content);
-                setTotalPages(response.data.data.totalPage);
+                setProducts(response.data.data.productList);
+                setTotalPages(response.data.data.totalPages);
                 setSearchCategoryId(categoryId);
+                console.log(response.data)
             } catch (e) {
                 console.error(e);
             }
         }
     };
 
-    const handleCategoryClick = (newCategoryId) => {
-        setCategoryId(newCategoryId);
-        setCurrentPage(1);
-        fetchData(newCategoryId); 
-    };
+    const handleCategoryClick = (categoryId) => {
+        if (categoryId) {
+            setCategoryId(categoryId);
+            setCurrentPage(1);
+            navigate(`?category=${categoryId}&page=1`);
+            fetchData(categoryId, 1);
+        }
+    };    
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
-        navigate(`?page=${value}`);
-    };
+        const categoryParam = categoryId ? `category=${categoryId}` : '';
+        navigate(`?${categoryParam}&page=${value}`);
+        fetchData(categoryId, value);
+    };   
 
     /* 카테고리 별 상품 검색 */
     const handleSearch = async () => {
@@ -73,8 +83,8 @@ function ProductPage() {
                 const response = await axios.get(url, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                setProducts(response.data.data.content);
-                setTotalPages(response.data.data.totalPage);
+                setProducts(response.data.data.productList);
+                setTotalPages(response.data.data.totalPages);
             } catch (e) {
                 console.error(e);
             }

@@ -115,7 +115,7 @@ function App() {
                 <Route path='/productMng'>
                     <Route path='' element={<Product/>}/>
                     <Route path='add' element={<ProductAddPage/>}/>
-                    <Route path='edit' element={<ProductEditPage/>}/>
+                    <Route path="edit/:productId" element={<ProductEditPage />} />
                     <Route path='qna' element={<ProductQnaPage/>}/>
                     <Route path='quantity' element={<ProductQuantityPage/>}/>
                     <Route path='review' element={<ProductReviewPage/>}/>
