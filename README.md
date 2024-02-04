@@ -72,32 +72,18 @@ Presentation and Container 컴포넌트 패턴을 사용했습니다.
 
 ### 멤버 👩🏻‍💻🧑🏻‍💻
 
-|  | 이름   | 역할              | 이메일                  | GitHub                                   |
-|:------:|--------|-------------------|-------------------------|------------------------------------------|
-| <img src="https://avatars.githubusercontent.com/u/106718306?v=4" width=30 height=30> | Jupiter| 프로젝트 리더     | johs710@gachon.ac.kr    | [gustjdw](https://github.com/gustjdw)    |
-| <img src="https://avatars.githubusercontent.com/u/106463658?v=4" width=30 height=30> | Noah   | 프로젝트 매니저   | gwonsang247@gmail.com   | [gwon477](https://github.com/gwon477)   |
-| <img src="https://avatars.githubusercontent.com/u/143896003?v=4" width=30 height=30> | Marie  | 프론트엔드 리더   | yejin331@gachon.ac.kr   | [kang-ye-jin](https://github.com/kang-ye-jin) |
-| <img src="https://avatars.githubusercontent.com/u/79887939?v=4" width=30 height=30> | Heiley | 프론트엔드 개발자 | ahy1612@gmail.com       | [An-hyeonyoung](https://github.com/An-hyeonyoung) |
-| <img src="https://avatars.githubusercontent.com/u/48776634?v=4" width=30 height=30> | Reina  | 백엔드 리더       | yhj990520@gmail.com     | [yoon520](https://github.com/yoon520)    |
-| <img src="https://avatars.githubusercontent.com/u/114065532?v=4" width=30 height=30> | Scott  | 백엔드 개발자     | woongaa1@naver.com      | [xxng1](https://github.com/mike-xxng1)   |
-| <img src="https://avatars.githubusercontent.com/u/90545561?v=4" width=30 height=30> | Evelyn | 백엔드 개발자     | tnwls5792@gachon.ac.kr  | [ohdeng02](https://github.com/ohdeng02) |
-| <img src="https://avatars.githubusercontent.com/u/112960401?v=4" width=30 height=30> | Kai    | 백엔드 개발자     | nmh9097@gmail.com       | [naminhyeok](https://github.com/naminhyeok) |
-| <img src="https://avatars.githubusercontent.com/u/72259206?v=4" width=30 height=30> | Yun    | 백엔드 개발자     | yungi981026@gmail.com    | [dbsrl1026](https://github.com/dbsrl1026) |
+|                     [Jupiter](https://github.com/gustjdw)                     |                      [Noah](https://github.com/gwon477)                       |                    [Marie](https://github.com/kang-ye-jin)                    |                 [Heiley](https://github.com/An-hyeonyoung)                 |                    [Reina](https://github.com/yoon520)                     |                   [Scott](https://github.com/mike-xxng1)                    |                   [Evelyn](https://github.com/ohdeng02)                    |                    [Kai](https://github.com/naminhyeok)                     |                    [Yun](https://github.com/dbsrl1026)                     |
+|:-----------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|
+| <img src="https://avatars.githubusercontent.com/u/106718306?v=4" width=400px> | <img src="https://avatars.githubusercontent.com/u/106463658?v=4" width=400px> | <img src="https://avatars.githubusercontent.com/u/143896003?v=4" width=400px> | <img src="https://avatars.githubusercontent.com/u/79887939?v=4" width=400> | <img src="https://avatars.githubusercontent.com/u/48776634?v=4" width=400> | <img src="https://avatars.githubusercontent.com/u/114065532?v=4" width=400> | <img src="https://avatars.githubusercontent.com/u/90545561?v=4" width=400> | <img src="https://avatars.githubusercontent.com/u/112960401?v=4" width=400> | <img src="https://avatars.githubusercontent.com/u/72259206?v=4" width=400> |
+|                                 프로젝트 리더 (PL)✨                                 |                                프로젝트 매니저 (PM)✨                                 |                           프론트엔드 리더 (Frontend-PL)✨                            |                                프론트엔드 개발자🎢                                 |                           백엔드 리더 (Backend-PL)✨                            |                                  백엔드 개발자🎢                                  |                                 백엔드 개발자🎢                                  |                                  백엔드 개발자🎢                                  |                                 백엔드 개발자🎢                                  |
 
 
-
-### 담당자
+### 직무 별 담당
 - 기획
   - Kwanza 구성원 
   - Noah, Jupiter, Scott, Reina, Evelyn, Kai, Marie, Heiley, Yun
 - 디자인
   - Marie, Heiley
-- FE
-  - Marie, Heiley
-- BE
-  - Noah, Jupiter, Scott, Reina, Evelyn, Kai, Yun
-
----
 
 
 ## 주요 의존성 패키지 버전
