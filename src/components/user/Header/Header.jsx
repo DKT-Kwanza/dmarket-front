@@ -94,7 +94,7 @@ function Header() {
                 setEventSource(null);
             }
         }
-    },[eventSource, token, notifications])
+    },[eventSource, token])
 
     // sse 연결 시작
     const subscribe = async () => {
@@ -110,17 +110,7 @@ function Header() {
             }
         );
 
-        source.addEventListener("error", (e) => {
-            console.log(e);
-        });
-
-        // 연결 시작 시 더미 데이터 받아옴
-        source.addEventListener("test", (e) => {
-            console.log(lastEventId);
-            const data = JSON.parse(e.data);
-            console.log(data.content);
-        });
-
+        
         // mileage 관련 알림 받아옴
         source.addEventListener("mileage", (e) => {
             setLastEventId(e.lastEventId);
