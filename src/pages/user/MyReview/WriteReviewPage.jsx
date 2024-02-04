@@ -1,18 +1,23 @@
-import React, { useState, useCallback } from 'react';
-import {useLocation, useNavigate} from 'react-router-dom';
-import { formatPrice } from '../../../utils/Format';
 import "./WriteReviewPage.css";
+import React, {useState, useCallback} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
-import {productsApi} from "../../../Api";
+import {formatPrice} from '../../../utils/Format';
 import axios from "axios";
+import {productsApi} from "../../../Api";
 
 function WriteReview() {
     const navigate = useNavigate();
-    const { orderDetailList } = useLocation().state;
+    const {orderDetailList} = useLocation().state;
+    const orderDetailId = orderDetailList.orderDetailId;
+    const productId = orderDetailList.productId;
+    const optionId = orderDetailList.optionId;
     const [rating, setRating] = useState(0);
     const [reviewImg, setReviewImg] = useState(null); // 첨부 이미지 상태 변수
     const [reviewContents, setReviewContents] = useState(''); // 리뷰 내용 상태 변수
+    const [lengthCheck, setLengthCheck] = useState(false);
+
     const uploadReviewImg = useCallback(async (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -20,48 +25,53 @@ function WriteReview() {
             setReviewImg(previewUrl);
         }
     }, []);
-    const orderDetailId = orderDetailList.orderDetailId;
-    const productId = orderDetailList.productId;
-    const optionId = orderDetailList.optionId;
 
-    const handleStarClick = (clickedRating) => {
-        setRating(clickedRating);
-    };
+    const token = sessionStorage.getItem("token");
+    const userId = sessionStorage.getItem("userId");
 
+    /* 리뷰 작성 api 호출 */
     const handleReviewSubmit = async () => {
-        const token = sessionStorage.getItem("token");
-        const userId = sessionStorage.getItem("userId");
-        if (!token || !userId) {
-            console.error("No token or userId")
-            return;
-        }
         try {
-            await axios.post(`${productsApi}/${productId}/review`,{
-                userId : userId,
-                orderDetailId : orderDetailId,
-                optionId : optionId,
-                reviewRating : rating,
-                reviewContents : reviewContents,
+            const url = `${productsApi}/${productId}/review`;
+            await axios.post(url, {
+                userId: userId,
+                orderDetailId: orderDetailId,
+                optionId: optionId,
+                reviewRating: rating,
+                reviewContents: reviewContents,
                 reviewImg: reviewImg
-            },{
+            }, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 }
             })
-            navigate('/mypage/review', { replace: true })
-        }
-        catch (e) {
+            navigate('/mydkt/review', {replace: true})
+        } catch (e) {
             console.error("Error fetching data: ", e);
         }
-
     }
+
+    const handleStarClick = (clickedRating) => {
+        setRating(clickedRating);
+    };
+
+    /* 작성한 리뷰 컨텐츠 */
+    const handleReviewContentsChange = (e) => {
+        setReviewContents(e.target.value)
+        if (reviewContents.length >= 20) {
+            setLengthCheck(true);
+        } else {
+            setLengthCheck(false);
+        }
+    };
+
     return (
         <div>
-            <MyPageSubHeader />
+            <MyPageSubHeader/>
             <div className="mypageProductReview-body">
                 <div className="mypageProductReview-container">
-                    <MyPageSidebar />
+                    <MyPageSidebar/>
                     <div className="productreview-div-review-wrapper">
                         <div className="mypageProductReview-content">
                             <div className="mypageProductReview-title">
@@ -71,7 +81,9 @@ function WriteReview() {
                             <div className="mypageProductReview-title-line"></div>
                             <div className="mypageProductReview-order-list">
                                 <div className="mypageProductReview-order-item">
-                                    <div className="mypageProductReview-item-img"/>
+                                    <img className="mypageProductReview-item-img"
+                                         alt={orderDetailList.productName}
+                                         src={orderDetailList.productImg}/>
                                     <table className="mypageProductReview-item-info">
                                         <tr>
                                             <td className="mypageProductReview-item-info-tit">브랜드</td>
@@ -86,6 +98,7 @@ function WriteReview() {
                                             <td className="mypageProductReview-item-info-cont">
                                                 <div>{orderDetailList.productOption}</div>
                                                 <div className="mypageProductReview-item-info-bar"/>
+                                                <div className="mypageProductReview-item-info-option">수량</div>
                                                 <div>{orderDetailList.productCount}</div>
                                             </td>
                                         </tr>
@@ -106,8 +119,7 @@ function WriteReview() {
                                         <span
                                             key={index}
                                             className={index <= rating ? 'filledStar' : 'emptyStar'}
-                                            onClick={() => handleStarClick(index)}
-                                        >
+                                            onClick={() => handleStarClick(index)}>
                                         ★
                                         </span>
                                     ))}
@@ -117,13 +129,17 @@ function WriteReview() {
                                 <div className="mypageProductReview-stars-title">
                                     내용
                                 </div>
-                                <input
-                                    type="text"
+                                <textarea
                                     className="mypageProductReview-contents-contents"
                                     placeholder="내용을 입력하세요 (20자 이상 작성)"
                                     value={reviewContents}
-                                    onChange={(e) => setReviewContents(e.target.value)}
+                                    onChange={handleReviewContentsChange}
                                 />
+                                {lengthCheck
+                                    ? null
+                                    : (
+                                        <span style={{color: 'red', fontSize: '14px'}}>20자 이상 작성해 주세요.</span>
+                                    )}
                             </div>
 
                             <div className="mypageProductReview-pictures">
@@ -133,20 +149,24 @@ function WriteReview() {
                                 <div>
                                     {reviewImg ? (
                                         <div>
-                                            <img src={reviewImg} alt="Inquiry Preview" className="review-image" />
+                                            <img src={reviewImg} alt="Inquiry Preview" className="review-image"/>
                                             <div className='mypageProductReview-stars-button'>
-                                                <label htmlFor="image-upload" className="mypageProductReview-stars-button-plus">
-                                                사진 변경
+                                                <label htmlFor="image-upload"
+                                                       className="mypageProductReview-stars-button-plus">
+                                                    사진 변경
                                                 </label>
-                                                <input id="image-upload" type="file" accept='image/*' onChange={uploadReviewImg} style={{ display: 'none' }} />
+                                                <input id="image-upload" type="file" accept='image/*'
+                                                       onChange={uploadReviewImg} style={{display: 'none'}}/>
                                             </div>
                                         </div>
                                     ) : (
                                         <div className="mypageProductReview-stars-button">
-                                            <label htmlFor="image-upload" className="mypageProductReview-stars-button-plus2">
+                                            <label htmlFor="image-upload"
+                                                   className="mypageProductReview-stars-button-plus2">
                                                 사진 업로드
                                             </label>
-                                            <input id="image-upload" type="file" accept='image/*' onChange={uploadReviewImg} style={{ display: 'none' }} />
+                                            <input id="image-upload" type="file" accept='image/*'
+                                                   onChange={uploadReviewImg} style={{display: 'none'}}/>
                                         </div>
                                     )}
                                 </div>
@@ -155,7 +175,9 @@ function WriteReview() {
                                 사진첨부는 최대 1장 가능합니다.
                             </div>
                             <div className="mypageProductReview-registration">
-                                <button onClick={handleReviewSubmit} className="mypageProductReview-registration-button">
+                                <button className="mypageProductReview-registration-button"
+                                        disabled={!lengthCheck}
+                                        onClick={handleReviewSubmit}>
                                     등록
                                 </button>
                             </div>

@@ -118,8 +118,8 @@ function CustomerInquiry() {
                     <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange} />
                     <CustomerInquiryTable headers={tableHeader} rows={inquiryList}
                         onDeleteClick={onDeleteClick} onRowClick={handleRowClick} />
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
                 </Paper>
-                <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             </Box>
             {selectedInquiryId !== null && (
                 <InquiryModal
