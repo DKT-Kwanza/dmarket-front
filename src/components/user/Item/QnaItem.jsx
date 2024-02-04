@@ -1,16 +1,17 @@
+import './QnaItem.css'
 import React from 'react';
 import { CiLock } from "react-icons/ci";
-import './QnaItem.css'
+import {truncate} from "../../../utils/Format";
 
 const QnaItem = ({ productName, title, contents, createdAt, isSecret, status, replyContents, qnaReplyDate, isExpanded, onToggle  }) => {
-      
+
     return (
         <ul className='Qna-contents-content-data-list'>
             <li onClick={onToggle} className='Qna-contents-content-data-list-temp'>
-                <div className='Qna-contents-content-data-1'>{productName}</div>
+                <div className='Qna-contents-content-data-1'>{truncate(productName, 20)}</div>
                 <div className='Qna-contents-content-data-2'>
                     {title}
-                    {isSecret==false && <CiLock style={{ marginLeft: "5px" }} size={20} />}
+                    {!isSecret && <CiLock style={{ marginLeft: "5px" }} size={20} />}
                 </div>
                 <div className='Qna-contents-content-data-3'>{createdAt}</div>
                 <div className={`Qna-contents-content-data-${status === '답변 완료' ? '6' : '5'}`}>{status}</div>

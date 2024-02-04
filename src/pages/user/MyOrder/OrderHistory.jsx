@@ -1,24 +1,34 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
 import "./OrderHistory.css";
+import React, {useState, useEffect} from 'react';
+import {useNavigate} from "react-router-dom";
 import OrderHistoryItem from '../../../components/user/Item/OrderHistoryItem';
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
+import {Pagination} from "@mui/material";
+import axios from 'axios';
 import {userApi} from "../../../Api";
 
 function OrderHistory() {
-
+    const navigate = useNavigate();
     const [orderHistory, setOrderHistory] = useState([]);
     const [orderHistoryProducts, setOrderHistoryProducts] = useState([]);
 
-    /* 세션 스토리지에서 토큰 가져오기 */
+    /* 세션 스토리지에서 토큰과 userId 가져오기 */
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');
+
+    /* 주문 내역 페이지네이션 */
+    const [orderCurrentPage, setOrderCurrentPage] = useState(1);
+    const [orderTotalPages, setOrderTotalPages] = useState(0);
+    const handleOrderPageChange = (event, value) => {
+        setOrderCurrentPage(value);
+        navigate(`?page=${value}`);
+    };
 
     /* 주문, 배송 내역 조회 */
     useEffect(() => {
         const fetchData = async () => {
-            const url = `${userApi}/${userId}/mypage/orders`;
+            const url = `${userApi}/${userId}/mypage/orders?page=${orderCurrentPage}`;
             try {
                 const response = await axios.get(url, {
                     headers: {
@@ -26,16 +36,15 @@ function OrderHistory() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                console.log(response.data.data);
-                console.log(response.data.data.orderList);
-                setOrderHistory(response.data.data)
+                setOrderHistory(response.data.data);
                 setOrderHistoryProducts(response.data.data.orderList);
+                setOrderTotalPages(response.data.data.orderList.totalPages);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
         fetchData();
-    }, []);
+    }, [orderCurrentPage]);
 
     return (
         <div className="orderHistory">
@@ -104,6 +113,8 @@ function OrderHistory() {
                                 orderItems={order.productDetailList}
                             />
                         ))}
+                        <Pagination count={orderTotalPages} page={orderCurrentPage}
+                                    onChange={handleOrderPageChange}/>
                     </div>
                 </div>
             </div>

@@ -34,7 +34,6 @@ function OrderHistoryDetail() {
                     }
                 });
                 setOrderDetailProducts(response.data.data);
-                console.log(response.data.data);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -46,8 +45,6 @@ function OrderHistoryDetail() {
         <div className="orderHistoryDetail">
             <MyPageSubHeader/>
             <div className="orderHistoryDetail-body">
-
-
                 <div className="orderHistoryDetail-container">
                     {/*왼쪽 메뉴 바 영역 입니다.*/}
                     <MyPageSidebar/>
