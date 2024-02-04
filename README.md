@@ -72,6 +72,8 @@ Presentation and Container 컴포넌트 패턴을 사용했습니다.
 
 ## 📺 화면 구성
 
+<br/>
+
 ## 📦 주요 기능
 ### USER SIDE
 ⚡️ 제품 카테고리, 필터 순 정렬
@@ -95,11 +97,15 @@ Presentation and Container 컴포넌트 패턴을 사용했습니다.
 
 ⚡️ 공지사항 관리
 
+<br/>
+
 
 ## 💻 지원 브라우저
-| <img src="" alt="chrome"> |
+| <img src="https://github.com/DKT-Kwanza/dmarket-front/assets/79887939/0146835c-745d-433a-8c6a-060d6febe788" width=80px alt="chrome"> |
 |---------------------------|
 | Latest ✔️                 |
+
+<br/>
 
 ## 👀 시작 가이드
 ### Requirements
@@ -112,23 +118,26 @@ $ npm install
 $ npm start
 ```
 
+<br/>
+
 ## 👥 Kwanza 팀 소개
 ### 멤버 👩🏻‍💻🧑🏻‍💻
 
 |                     [Jupiter](https://github.com/gustjdw)                     |                      [Noah](https://github.com/gwon477)                       |
 |:-----------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|
-| <img src="https://avatars.githubusercontent.com/u/106718306?v=4" width=300px> | <img src="https://avatars.githubusercontent.com/u/106463658?v=4" width=300px> |
+| <img src="https://avatars.githubusercontent.com/u/106718306?v=4" width=150px> | <img src="https://avatars.githubusercontent.com/u/106463658?v=4" width=150px> |
 |                                 프로젝트 리더 (PL)✨                                 |                                프로젝트 매니저 (PM)✨                                 |
 
 |                    [Marie](https://github.com/kang-ye-jin)                    |                  [Heiley](https://github.com/An-hyeonyoung)                  |
 |:-----------------------------------------------------------------------------:|:----------------------------------------------------------------------------:|
-| <img src="https://avatars.githubusercontent.com/u/143896003?v=4" width=300px> | <img src="https://avatars.githubusercontent.com/u/79887939?v=4" width=300px> |
-|                           프론트엔드 리더 (Frontend-PL) 🌱                           |                                 프론트엔드 개발자 🌱                                 |
+| <img src="https://avatars.githubusercontent.com/u/143896003?v=4" width=150px> | <img src="https://avatars.githubusercontent.com/u/79887939?v=4" width=150px> |
+|                           프론트엔드 리더 🌱                           |                                 프론트엔드 개발자 🌱                                 |
 
 |                     [Reina](https://github.com/yoon520)                      |                    [Scott](https://github.com/mike-xxng1)                     |                    [Evelyn](https://github.com/ohdeng02)                     |                     [Kai](https://github.com/naminhyeok)                      |                     [Yun](https://github.com/dbsrl1026)                      |
 |:----------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|:----------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|:----------------------------------------------------------------------------:|
-| <img src="https://avatars.githubusercontent.com/u/48776634?v=4" width=400px> | <img src="https://avatars.githubusercontent.com/u/114065532?v=4" width=400px> | <img src="https://avatars.githubusercontent.com/u/90545561?v=4" width=400px> | <img src="https://avatars.githubusercontent.com/u/112960401?v=4" width=400px> | <img src="https://avatars.githubusercontent.com/u/72259206?v=4" width=400px> |
-|                             백엔드 리더 (Backend-PL) 🎢                              |                                   백엔드 개발자🎢                                   |                                  백엔드 개발자🎢                                   |                                   백엔드 개발자🎢                                   |                                  백엔드 개발자🎢                                   |
+| <img src="https://avatars.githubusercontent.com/u/48776634?v=4" width=150px> | <img src="https://avatars.githubusercontent.com/u/114065532?v=4" width=150px> | <img src="https://avatars.githubusercontent.com/u/90545561?v=4" width=150px> | <img src="https://avatars.githubusercontent.com/u/112960401?v=4" width=150px> | <img src="https://avatars.githubusercontent.com/u/72259206?v=4" width=150px> |
+|                             백엔드 리더 🎢                              |                                   백엔드 개발자🎢                                   |                                  백엔드 개발자🎢                                   |                                   백엔드 개발자🎢                                   |                                  백엔드 개발자🎢                                   |
+
 
 ### 직무 별 담당자
 - 기획
@@ -137,6 +146,7 @@ $ npm start
 - 디자인
   - Marie, Heiley
 
+<br/>
 
 ## 🛠️ 주요 의존성 패키지 버전
 
@@ -155,10 +165,12 @@ $ npm start
 - **react-router-dom**: ^6.21.2
 - **styled-components**: ^6.1.8
 
+<br/>
 
 
 ## 📄 라이선스
 이 프로젝트는 MIT 라이선스를 따릅니다. 자세한 내용은 [LICENSE](./LICENSE) 파일을 확인하세요.
 
----
+<br/>
+
 © 2024 DKT Shopping Mall. All Rights Reserved.
