@@ -53,7 +53,7 @@ function Detail() {
             }
         };
         fetchData();
-    }, [productId]);
+    }, [token, productId]);
 
     /* 상품 위시리스트 확인 */
     useEffect(() => {
@@ -72,7 +72,7 @@ function Detail() {
             }
         }
         fetchData();
-    }, []);
+    }, [productId, token, userId]);
 
     /* 리뷰 페이지네이션 */
     const [reviewCurrentPage, setReviewCurrentPage] = useState(1);
@@ -100,7 +100,7 @@ function Detail() {
             }
         };
         fetchData();
-    }, [productId, reviewCurrentPage]);
+    }, [token, productId, reviewCurrentPage]);
 
     /* Qna 페이지네이션 */
     const [qnaCurrentPage, setQnaCurrentPage] = useState(1);
@@ -128,7 +128,7 @@ function Detail() {
             }
         };
         fetchData();
-    }, [productId, qnaCurrentPage]);
+    }, [token, productId, qnaCurrentPage]);
 
     /* 같은 카테고리의 최신 상품 4개 조회 (추천 상품 조회) */
     useEffect(() => {
@@ -147,7 +147,7 @@ function Detail() {
             }
         };
         fetchData();
-    }, [productId]);
+    }, [token, productId]);
 
     /* 위시 리스트 추가 */
     const handleWishClick = async () => {
@@ -156,7 +156,7 @@ function Detail() {
             productId: productId
         };
         try {
-            const response = await axios.post(url, requestData, {
+            await axios.post(url, requestData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json; charset=UTF-8',
@@ -237,7 +237,6 @@ function Detail() {
 
     /* 장바구니에 추가 */
     const setCartCount = useSetRecoilState(cartCountAtom);
-
     const handleCartClick = async () => {
         if (order.length > 0) {
             try {
@@ -249,7 +248,7 @@ function Detail() {
                         productCount: item.selectedOption.productCount,
                     };
                     const url = `${userApi}/${userId}/cart`;
-                    const response = await axios.post(url, requestData, {
+                    await axios.post(url, requestData, {
                         headers: {
                             'Authorization': `Bearer ${token}`,
                             'Content-Type': 'application/json; charset=UTF-8',
@@ -456,7 +455,8 @@ function Detail() {
                     <div className="productDetailButtonScroll" id="productDetailButtonScroll">상품상세정보</div>
                 </div>
                 <div className='productDetailImg'>
-                    <img src={productDetail}/>
+                    <img alt={''}
+                         src={productDetail}/>
                 </div>
                 <div className='productDetailBox'>
                     {product.productDes}
@@ -503,7 +503,7 @@ function Detail() {
                         <div className='qna-category-line'/>
                         <button className='qnaReplyWaiting'>답변대기 ({qnaPendingAnswersCount})</button>
                     </div>
-                    <button onClick={handleToggle} className='qnaEnroll'>Q&A 작성하기 <img src={arrowRight}/></button>
+                    <button onClick={handleToggle} className='qnaEnroll'>Q&A 작성하기 <img alt={''} src={arrowRight}/></button>
                 </div>
                 <DetailQnaList qnas={qna.content || []}/>
                 {
@@ -521,7 +521,7 @@ function Detail() {
                 </div>
                 <hr style={{marginTop: '16px', borderWidth: '2px', marginBottom: '0px'}}/>
                 <div className='deliveryContents'>
-                    <div className='deliveryIcon'><img className='deliveryIconImg' src={parcelIcon}/></div>
+                    <div className='deliveryIcon'><img className='deliveryIconImg' alt={''} src={parcelIcon}/></div>
                     <div className='deliveryExplain'>
                         <text style={{color: '#000000', fontWeight: '700'}}>택배배송</text>
                         <text><br/>주문 후 평균 2~3일 이내 택배 배송됩니다.</text>

@@ -39,7 +39,7 @@ function Cart() {
             }
         };
         fetchData();
-    }, []);
+    }, [token, userId]);
 
     const navigateToOrder = () => {
         navigate("../../order");

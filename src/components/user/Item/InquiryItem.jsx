@@ -9,7 +9,7 @@ const InquiryItem = ({ category, title, contents, img, createdAt, status, replyC
                 <div className='Inquiry-contents-content-data-1'>{category}</div>
                 <div className='Inquiry-contents-content-data-2'>{title}</div>
                 <div className='Inquiry-contents-content-data-3'>{createdAt}</div>
-                <div className={`Inquiry-contents-content-data-${status === '답변 완료' ? '6' : '5'}`}>{status}</div>
+                <div className={`Inquiry-contents-content-data-${status ? '6' : '5'}`}>{status ? '답변 완료': '답변 대기'}</div>
             </li>
             <hr className='Inquiry-contents-content-data-list-hr' />
             {isExpanded && (
@@ -23,7 +23,7 @@ const InquiryItem = ({ category, title, contents, img, createdAt, status, replyC
                         {contents}
                     </div>
                     <hr className='Inquiry-contents-content-data-list-hr' />
-                    {status === '답변 완료' ? (
+                    {status ? (
                         <div className='Inquiry-contents-content-data-list-data2'>
                             <div className='Inquiry-contents-content-data-list-data-info'>
                                 <div className='Inquiry-contents-content-data-list-data-info-profile'>관리자</div>

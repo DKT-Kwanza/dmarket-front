@@ -35,7 +35,8 @@ const Inquiry = () => {
                     }
                 });
                 console.log(response.data);
-                setInquiries(response.data.data);
+                setInquiryTotalPages(response.data.data.totalPages);
+                setInquiries(response.data.data.content);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -73,17 +74,17 @@ const Inquiry = () => {
                             </div>
                             {inquiries.map((inquiry, index) => (
                                 <InquiryItem
-                                    key={inquiry.InquiryId}
-                                    category={inquiry.category}
-                                    title={inquiry.title}
-                                    contents={inquiry.contents}
-                                    img={inquiry.img}
-                                    createdAt={formatDate(inquiry.createdAt)}
-                                    status={inquiry.status}
-                                    replyContents={inquiry.replycontents}
+                                    key={inquiry.inquiryId}
+                                    category={inquiry.inquiryType}
+                                    title={inquiry.inquiryTitle}
+                                    contents={inquiry.inquiryContents}
+                                    img={inquiry.inquiryImg}
+                                    createdAt={formatDate(inquiry.inquiryCreatedDate)}
+                                    status={inquiry.inquiryStatus}
+                                    replyContents={inquiry.inquiryReplyContents}
                                     inquiryReplyDate={formatDate(inquiry.inquiryReplyDate)}
-                                    isExpanded={expandedInquiryId === inquiry.InquiryId}
-                                    onToggle={() => toggleInquiry(inquiry.InquiryId)}
+                                    isExpanded={expandedInquiryId === inquiry.inquiryId}
+                                    onToggle={() => toggleInquiry(inquiry.inquiryId)}
                                 />
                             ))}
                             <Pagination count={inquiryTotalPages} page={inquiryCurrentPage}

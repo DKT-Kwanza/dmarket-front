@@ -208,22 +208,24 @@ function Header() {
                     isMainDivHovered
                         ? (<div className='sub-category-box-whole' onMouseLeave={handleMouseLeaveMain}>
                             <div className='sub-category-box-container'>
-                                {categories.filter(cat => cat.categoryDepth === 1).map((category, index) => (
-                                    <div className='sub-sub-category-contents-details' key={index}>
-                                        {category.child.map((subCategory) => (
-                                            <div key={subCategory.categoryId}>
-                                                <div className='sub-sub-category-contents-details-style'>
-                                                    <button
-                                                        onClick={() => navigateToCategory(subCategory.categoryId, category.categoryName, subCategory.categoryName)}
-                                                        className='sub-category-contents-details-button'
-                                                    >
-                                                        {subCategory.categoryName}
-                                                    </button>
+                                <div className='sub-category-box'>
+                                    {categories.filter(cat => cat.categoryDepth === 1).map((category, index) => (
+                                        <div className='sub-sub-category-contents-details' key={index}>
+                                            {category.child.map((subCategory) => (
+                                                <div key={subCategory.categoryId}>
+                                                    <div className='sub-sub-category-contents-details-style'>
+                                                        <button
+                                                            onClick={() => navigateToCategory(subCategory.categoryId, category.categoryName, subCategory.categoryName)}
+                                                            className='sub-category-contents-details-button'
+                                                        >
+                                                            {subCategory.categoryName}
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                ))}
+                                            ))}
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>) : null
                 }
