@@ -1,6 +1,7 @@
 import './CartPage.css';
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {useSetRecoilState} from "recoil";
 import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
 import CartList from "../../../components/user/List/CartList";
 import CartOrderInfo from "../../../components/user/Info/CartOrderInfo";
@@ -8,6 +9,7 @@ import ConfirmCancelModal from "../../../components/commmon/Modal/ConfirmCancelM
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import axios from 'axios';
 import {userApi} from "../../../Api";
+import {cartCountAtom} from "../../../recoil/atom";
 
 function Cart() {
     const navigate = useNavigate();
@@ -87,6 +89,7 @@ function Cart() {
     };
 
     /* 모달 확인 버튼 클릭 시 장바구니 삭제 */
+    const setHeaderCartCount = useSetRecoilState(cartCountAtom);
     const handleDeleteSelectedItems = async () => {
         /* 선택된 상품들의 cartId를 추출 */
         const selectedCartIds = carts.cartList
@@ -115,19 +118,22 @@ function Cart() {
                     });
                 }));
                 /* 선택된 상품의 개수 계산 */
-                // const selectedItemCount = Object.values(checkedItems).filter(Boolean).length;
                 setCartCount(cartCount - selectedItemCount);
                 setIsDeleteModalOpen(false);
+
+                /* 상품 추가 후, 장바구니 개수를 다시 가져오는 axios get 요청 */
+                const cartCountResponse = await axios.get(`${userApi}/${userId}/cart-count`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                });
+                /* cartCountAtom을 업데이트 */
+                setHeaderCartCount(cartCountResponse.data.data.cartCount);
             } catch (e) {
                 console.error("Error deleting Cart data: ", e);
             }
         }
     };
-
-    /* 선택된 상품의 가격 배열 생성 */
-    const selectedItemsPrices = carts.cartList
-        .filter((_, index) => checkedItems[index])
-        .map(item => item.productTotalSalePrice);
 
     /* 선택된 상품의 개수와 총 가격 계산 */
     const selectedItemCount = Object.values(checkedItems).filter(Boolean).length;
@@ -148,9 +154,6 @@ function Cart() {
                 price: item.productTotalSalePrice,
             }));
     };
-    
-    
-    const prices = getSelectedItemsDetails().map(item => item.price);
 
     return (
         <div className='cart-body'>

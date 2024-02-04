@@ -1,7 +1,7 @@
+import './DetailPage.css';
 import React, {useState, useEffect} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import axios from 'axios';
-import './DetailPage.css';
+import {useSetRecoilState} from 'recoil';
 import DetailQnaList from "../../../components/user/List/DetailQnaList";
 import DetailReviewsList from "../../../components/user/List/DetailReviewsList";
 import ProductOptionTab from "../../../components/user/Common/Select/ProductOptionTab";
@@ -12,7 +12,9 @@ import ScrollToTopBtn from '../../../components/user/Common/Button/ScrollToTopBt
 import AddToCartModal from "../../../components/user/Common/Modal/AddToCartModal";
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import {formatPrice} from "../../../utils/Format";
+import axios from 'axios';
 import {productsApi, userApi, orderApi} from "../../../Api";
+import {cartCountAtom} from "../../../recoil/atom";
 import {Pagination} from "@mui/material";
 import {FaHeart} from "react-icons/fa";
 import heart from '../../../assets/icons/heart.svg';
@@ -234,10 +236,9 @@ function Detail() {
     }
 
     /* 장바구니에 추가 */
-    const handleCartClick = async () => {
-        /* order 리스트에서 productCount가 0인 값을 필터링하여 새로운 리스트 생성 */
-        // const filteredOrder = order.filter(item => item.selectedOption.productCount !== 0);
+    const setCartCount = useSetRecoilState(cartCountAtom);
 
+    const handleCartClick = async () => {
         if (order.length > 0) {
             try {
                 /* 각 아이템에 대해 try-catch 블록 실행 */
@@ -256,6 +257,14 @@ function Detail() {
                     });
                 }));
                 modalHandler();
+                /* 상품 추가 후, 장바구니 개수를 다시 가져오는 axios get 요청 */
+                const cartCountResponse = await axios.get(`${userApi}/${userId}/cart-count`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                });
+                /* cartCountAtom을 업데이트 */
+                setCartCount(cartCountResponse.data.data.cartCount);
             } catch (e) {
                 console.error("Error fetching Inquiry data: ", e);
             }
@@ -288,7 +297,7 @@ function Detail() {
             })
             handleToggle();
             /* 현재의 qna 상태를 복사하여 수정 */
-            const newQna = { ...qna };
+            const newQna = {...qna};
             newQna.qnaList = newQna.qnaList || [];
             newQna.qnaList.push(response.data.data);
             setQna(newQna);
@@ -301,7 +310,7 @@ function Detail() {
     const qnaCompletedAnswersCount = qna.content ? qna.content.filter(item => item.qnaStatus === "답변 완료").length : 0;
     /* "답변 대기"인 객체의 개수 */
     const qnaPendingAnswersCount = qna.content ? qna.content.filter(item => item.qnaStatus === "답변 대기").length : 0;
-    
+
     /* 바로 구매 결제 */
     const handleDirectPurchase = async () => {
         if (order.length === 0) {
@@ -309,18 +318,18 @@ function Detail() {
             alertModalHandler();
             return;
         }
-    
+
         const productList = order.map(item => ({
             productId: productId,
             optionId: item.selectedOption.optionId,
             productCount: item.selectedOption.productCount,
         }));
-    
+
         const purchaseData = {
             userId: userId,
             productList: productList,
         };
-    
+
         try {
             const url = `${orderApi}/products`;
             const response = await axios.post(url, purchaseData, {
@@ -329,12 +338,12 @@ function Detail() {
                     'Content-Type': 'application/json',
                 },
             });
-            navigate('/order', { state: { orderData: response.data } });
+            navigate('/order', {state: {orderData: response.data}});
         } catch (error) {
             console.error(error);
         }
     };
-    
+
 
     return (
         <>
@@ -478,7 +487,7 @@ function Detail() {
                         <DetailReviewsList reviews={reviews.reviewList || []}/>
                     }
                 </div>
-                <Pagination count={reviewTotalPages} page={reviewCurrentPage} onChange={handleReviewPageChange} />
+                <Pagination count={reviewTotalPages} page={reviewCurrentPage} onChange={handleReviewPageChange}/>
 
                 <div className='qnaTitle'>
                     <div className="qnaButtonScroll" id="qnaButtonScroll">Q&A({qna.totalElements})</div>
@@ -500,7 +509,7 @@ function Detail() {
                 {
                     isExpanded && <DetailWriteQna onClick={handleWriteQna}/>
                 }
-                <Pagination count={qnaTotalPages} page={qnaCurrentPage} onChange={handleQnaPageChange} />
+                <Pagination count={qnaTotalPages} page={qnaCurrentPage} onChange={handleQnaPageChange}/>
 
                 <div className='recommandTitle'>
                     <div className="recommandButtonScroll" id="recommandButtonScroll">함께 보면 좋은 상품</div>

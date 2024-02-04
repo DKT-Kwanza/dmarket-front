@@ -25,6 +25,7 @@ function CustomerCenterFAQ() {
         navigate(`?page=${value}`);
     };
 
+    /* 고객센터 faq 데이터 */
     useEffect(() => {
         const fetchData = async () => {
             try {

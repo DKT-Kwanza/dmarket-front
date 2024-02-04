@@ -1,12 +1,15 @@
+import './Header.css'
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import NotificationModal from '../Common/Modal/NotificationModal';
+import {useRecoilState} from "recoil";
+import {cartCountAtom} from "../../../recoil/atom";
 import axios from "axios";
-import './Header.css'
+import {userApi} from "../../../Api";
 import user from '../../../assets/icons/user.svg'
 import heart from '../../../assets/icons/heart.svg'
 import shoppingBag from '../../../assets/icons/shoppingBag.svg'
 import alert from '../../../assets/icons/alert.svg'
-import NotificationModal from '../Common/Modal/NotificationModal';
 
 const NotificationData = [
     {
@@ -27,12 +30,12 @@ const NotificationData = [
 
 function Header() {
     const navigate = useNavigate();
+    /* 장바구니 개수 전역상태 변수 관리 */
+    const [cartCount, setCartCount] = useRecoilState(cartCountAtom);
     const [isMainDivHovered, setMainDivHovered] = useState(false);
-    const [cartCount, setCartCount] = useState('');
     const [categories, setCategories] = useState([]);
     const [levelTwoCategories, setLevelTwoCategories] = useState([]);
     const [searchInput, setSearchInput] = useState("");
-    const [notifications, setNotifications] = useState([]);
     const [showNotifications, setShowNotifications] = useState(false);
 
     const token = sessionStorage.getItem('token');
@@ -55,25 +58,26 @@ function Header() {
                 console.error('Error fetching categories:', error);
             }
         };
-
         fetchCategories();
     }, []);
 
+    /* 장바구니 개수 데이터 */
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/users/${userId}/cart-count`, {
+                const cartCountResponse = await axios.get(`${userApi}/${userId}/cart-count`, {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${token}`,
                     }
                 });
-                setCartCount(response.data.data.cartCount);
+                /* cartCountAtom을 업데이트 */
+                setCartCount(cartCountResponse.data.data.cartCount);
             } catch (e) {
-                console.error("Error fetching data: ", e);
+                console.error('Error fetching data:', e);
             }
-        };
+        }
         fetchData();
-    }, [cartCount]);
+    }, []);
 
     const handleSearch = (e) => {
         if (e.key === 'Enter') {
@@ -151,7 +155,7 @@ function Header() {
                             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 21 20"
                                  fill="none">
                                 <circle cx="10.8359" cy="10" r="10" fill="black"/>
-                                <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="white" font-size="12">
+                                <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="white" fontSize="12">
                                     {cartCount}
                                 </text>
                             </svg>
