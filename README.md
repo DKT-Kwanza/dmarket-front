@@ -6,6 +6,8 @@
 <br/><br/>
 
 > DMarket 은 가천대학교 KEA Kwanza 팀이 개발한 폐쇄몰 서비스 입니다.
+> 
+> 개발 기간: 2024.01 - 2024.02
 
 <br/>
 
@@ -66,19 +68,69 @@ Presentation and Container 컴포넌트 패턴을 사용했습니다.
 └── 
 ```
 
-<br />
+<br/>
 
-## Kwanza 팀 소개
+## 📺 화면 구성
 
+## 📦 주요 기능
+### USER SIDE
+⚡️ 제품 카테고리, 필터 순 정렬
+
+⚡️ 제품 목록 및 상세 정보 표시
+
+⚡️ 장바구니 기능
+
+⚡️ 주문 및 결제 처리
+
+⚡️ 상품 리뷰 작성
+
+⚡️ 사용자 프로필 관리
+
+### ADMIN SIDE
+⚡️ 관리자 알림
+
+⚡️ 사용자 관리
+
+⚡️ 상품 및 주문/배송 관리
+
+⚡️ 공지사항 관리
+
+
+## 💻 지원 브라우저
+| <img src="" alt="chrome"> |
+|---------------------------|
+| Latest ✔️                 |
+
+## 👀 시작 가이드
+### Requirements
+- [Node.js 21.6.1](https://nodejs.org/ca/blog/release/v21.6.1/)
+### Installation
+``` bash
+$ git clone https://github.com/DKT-Kwanza/dmarket-front.git
+$ cd dmarket-front
+$ npm install
+$ npm start
+```
+
+## 👥 Kwanza 팀 소개
 ### 멤버 👩🏻‍💻🧑🏻‍💻
 
-|                     [Jupiter](https://github.com/gustjdw)                     |                      [Noah](https://github.com/gwon477)                       |                    [Marie](https://github.com/kang-ye-jin)                    |                 [Heiley](https://github.com/An-hyeonyoung)                 |                    [Reina](https://github.com/yoon520)                     |                   [Scott](https://github.com/mike-xxng1)                    |                   [Evelyn](https://github.com/ohdeng02)                    |                    [Kai](https://github.com/naminhyeok)                     |                    [Yun](https://github.com/dbsrl1026)                     |
-|:-----------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|
-| <img src="https://avatars.githubusercontent.com/u/106718306?v=4" width=400px> | <img src="https://avatars.githubusercontent.com/u/106463658?v=4" width=400px> | <img src="https://avatars.githubusercontent.com/u/143896003?v=4" width=400px> | <img src="https://avatars.githubusercontent.com/u/79887939?v=4" width=400> | <img src="https://avatars.githubusercontent.com/u/48776634?v=4" width=400> | <img src="https://avatars.githubusercontent.com/u/114065532?v=4" width=400> | <img src="https://avatars.githubusercontent.com/u/90545561?v=4" width=400> | <img src="https://avatars.githubusercontent.com/u/112960401?v=4" width=400> | <img src="https://avatars.githubusercontent.com/u/72259206?v=4" width=400> |
-|                                 프로젝트 리더 (PL)✨                                 |                                프로젝트 매니저 (PM)✨                                 |                           프론트엔드 리더 (Frontend-PL)✨                            |                                프론트엔드 개발자🎢                                 |                           백엔드 리더 (Backend-PL)✨                            |                                  백엔드 개발자🎢                                  |                                 백엔드 개발자🎢                                  |                                  백엔드 개발자🎢                                  |                                 백엔드 개발자🎢                                  |
+|                     [Jupiter](https://github.com/gustjdw)                     |                      [Noah](https://github.com/gwon477)                       |
+|:-----------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|
+| <img src="https://avatars.githubusercontent.com/u/106718306?v=4" width=300px> | <img src="https://avatars.githubusercontent.com/u/106463658?v=4" width=300px> |
+|                                 프로젝트 리더 (PL)✨                                 |                                프로젝트 매니저 (PM)✨                                 |
 
+|                    [Marie](https://github.com/kang-ye-jin)                    |                  [Heiley](https://github.com/An-hyeonyoung)                  |
+|:-----------------------------------------------------------------------------:|:----------------------------------------------------------------------------:|
+| <img src="https://avatars.githubusercontent.com/u/143896003?v=4" width=300px> | <img src="https://avatars.githubusercontent.com/u/79887939?v=4" width=300px> |
+|                           프론트엔드 리더 (Frontend-PL) 🌱                           |                                 프론트엔드 개발자 🌱                                 |
 
-### 직무 별 담당
+|                     [Reina](https://github.com/yoon520)                      |                    [Scott](https://github.com/mike-xxng1)                     |                    [Evelyn](https://github.com/ohdeng02)                     |                     [Kai](https://github.com/naminhyeok)                      |                     [Yun](https://github.com/dbsrl1026)                      |
+|:----------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|:----------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|:----------------------------------------------------------------------------:|
+| <img src="https://avatars.githubusercontent.com/u/48776634?v=4" width=400px> | <img src="https://avatars.githubusercontent.com/u/114065532?v=4" width=400px> | <img src="https://avatars.githubusercontent.com/u/90545561?v=4" width=400px> | <img src="https://avatars.githubusercontent.com/u/112960401?v=4" width=400px> | <img src="https://avatars.githubusercontent.com/u/72259206?v=4" width=400px> |
+|                             백엔드 리더 (Backend-PL) 🎢                              |                                   백엔드 개발자🎢                                   |                                  백엔드 개발자🎢                                   |                                   백엔드 개발자🎢                                   |                                  백엔드 개발자🎢                                   |
+
+### 직무 별 담당자
 - 기획
   - Kwanza 구성원 
   - Noah, Jupiter, Scott, Reina, Evelyn, Kai, Marie, Heiley, Yun
@@ -86,7 +138,7 @@ Presentation and Container 컴포넌트 패턴을 사용했습니다.
   - Marie, Heiley
 
 
-## 주요 의존성 패키지 버전
+## 🛠️ 주요 의존성 패키지 버전
 
 - **@emotion/react**: ^11.11.3
 - **@emotion/styled**: ^11.11.0
@@ -97,33 +149,15 @@ Presentation and Container 컴포넌트 패턴을 사용했습니다.
 - **axios**: ^1.6.5
 - **polished**: ^4.2.2
 - **react**: ^18.2.0
+- **recoil**: 
 - **react-dom**: ^18.2.0
 - **react-icons**: ^5.0.1
 - **react-router-dom**: ^6.21.2
 - **styled-components**: ^6.1.8
 
 
-## 지원브라우저
-크롬
 
-## 📌 주요 기능
-### 사용자
-- 제품 목록 및 상세 정보 표시
-- 장바구니 기능
-- 주문 및 결제 처리
-- 사용자 프로필 관리
-
-### 관리자
-- 관리자 알림
-
-## 사용 방법
-1. 저장소를 복제합니다: `https://github.com/DKT-Kwanza/dmarket-front.git`
-2. 프로젝트 디렉토리로 이동합니다: `cd dmarket-front`
-3. 필요한 의존성을 설치합니다: `npm install`
-4. 개발 서버를 시작합니다: `npm start`
-5. 브라우저에서 `http://localhost:3000`으로 접속하여 쇼핑몰을 확인합니다.
-
-## 라이선스
+## 📄 라이선스
 이 프로젝트는 MIT 라이선스를 따릅니다. 자세한 내용은 [LICENSE](./LICENSE) 파일을 확인하세요.
 
 ---
