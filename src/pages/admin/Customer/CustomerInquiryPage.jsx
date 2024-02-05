@@ -7,6 +7,8 @@ import { indigo } from '@mui/material/colors';
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import InquiryModal from "../../../components/admin/Modal/InquiryModal";
+import {adminApi} from "../../../Api";
+
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -35,8 +37,9 @@ function CustomerInquiry() {
     }, [selectedTab, currentPage]);
 
     const fetchInquirys = async (type, page) => {
+        const url = `${adminApi}/board/inquiry?type=${type}&page=${page}`;
         try {
-            const response = await axios.get(`http://172.16.210.136:8080/api/admin/board/inquiry?type=${type}&page=${page}`, {
+            const response = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -69,9 +72,10 @@ function CustomerInquiry() {
 
     /* 문의 삭제 handler */
     const onDeleteClick = async (selectedInquiryId) => {
+        const url = `${adminApi}/board/inquiry/${selectedInquiryId}`;
         try {
             /* 삭제 API 호출 */
-            const response = await axios.delete(`http://172.16.210.136:8080/api/admin/board/inquiry/${selectedInquiryId}`, {
+            const response = await axios.delete(url, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json; charset=UTF-8',
