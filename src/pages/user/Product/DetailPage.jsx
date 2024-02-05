@@ -28,6 +28,7 @@ function Detail() {
     const {productId} = useParams();
 
     const [product, setProduct] = useState([]);
+    const [productImg, setProductImg] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [qna, setQna] = useState([]);
     const [recommendProducts, setRecommendProducts] = useState([]);
@@ -49,6 +50,7 @@ function Detail() {
                     }
                 });
                 setProduct(response.data.data);
+                setProductImg(response.data.data.imgList);
             } catch (e) {
                 console.error("Error fetching Product data: ", e);
             }
@@ -149,6 +151,15 @@ function Detail() {
         };
         fetchData();
     }, [token, productId]);
+
+    /* 서브 이미지 클릭 */
+    const handleSubImgClick = (index) => {
+        if (index > 0 && index < productImg.length) {
+            const newProductImg = [...productImg];
+            [newProductImg[0], newProductImg[index]] = [newProductImg[index], newProductImg[0]];
+            setProductImg(newProductImg);
+        }
+    }
 
     /* 위시 리스트 추가 */
     const handleWishClick = async () => {
@@ -352,18 +363,21 @@ function Detail() {
                     <text>{product.productCategory}</text>
                 </div>
                 <div className='productArea'>
-                    <div className='repImg'>
+                    <div className='detail-repImg'>
                         {
-                            product.imgList && <img alt={product.productName}
-                                                    src={product.imgList[0]}/>
+                            productImg && <img alt={product.productName}
+                                               src={productImg[0]}/>
                         }
                     </div>
 
-                    <div className='subImgArea'>
-                        {product.imgList && product.imgList.length > 1 && (
-                            product.imgList.slice(1).map((imgSrc, index) => (
-                                <div key={index} className='subImg'>
-                                    <img alt={`SubImage ${index + 1}`} src={imgSrc}/>
+                    <div className='detail-subImgArea'>
+                        {productImg && productImg.length > 1 && (
+                            productImg.slice(1).map((img, index) => (
+                                <div key={index} className='detail-subImg'
+                                     onClick={() => {
+                                         handleSubImgClick(index + 1);
+                                     }}>
+                                    <img alt={`SubImage ${index + 1}`} src={img}/>
                                 </div>
                             ))
                         )}
@@ -461,9 +475,9 @@ function Detail() {
                 </div>
                 <div className='productDetailBox'>
                     <ReactQuill
-                    value={product.productDes}
-                    readOnly={true}
-                    theme={'bubble'}
+                        value={product.productDes}
+                        readOnly={true}
+                        theme={'bubble'}
                     />
                 </div>
 
@@ -508,7 +522,8 @@ function Detail() {
                         <div className='qna-category-line'/>
                         <button className='qnaReplyWaiting'>답변대기 ({qnaPendingAnswersCount})</button>
                     </div>
-                    <button onClick={handleToggle} className='qnaEnroll'>Q&A 작성하기 <img alt={''} src={arrowRight}/></button>
+                    <button onClick={handleToggle} className='qnaEnroll'>Q&A 작성하기 <img alt={''} src={arrowRight}/>
+                    </button>
                 </div>
                 <DetailQnaList qnas={qna.content || []}/>
                 {
