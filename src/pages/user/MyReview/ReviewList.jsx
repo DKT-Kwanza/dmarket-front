@@ -5,9 +5,9 @@ import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import OrderList from "../../../components/user/List/OrderList";
 import OrderReviewList from "../../../components/user/List/OrderReviewList";
+import {Pagination} from "@mui/material";
 import axios from 'axios';
 import {userApi} from "../../../Api";
-import {Pagination} from "@mui/material";
 
 const ReviewList = () => {
     const navigate = useNavigate();
@@ -22,6 +22,7 @@ const ReviewList = () => {
     /* 리뷰 페이지네이션 */
     const [reviewCurrentPage, setReviewCurrentPage] = useState(1);
     const [reviewTotalPages, setReviewTotalPages] = useState(0);
+    const [totalPageList, setTotalPageList] = useState([]);
     const handleReviewPageChange = (event, value) => {
         setReviewCurrentPage(value);
         navigate(`?page=${value}`);
@@ -38,8 +39,6 @@ const ReviewList = () => {
                         'Content-Type': 'application/json'
                     }
                 });
-                console.log("availablereviews: ", response.data.data.content);
-                console.log(response.data.data);
                 setAvailableReviews(response.data.data.content);
                 setReviewTotalPages(response.data.data.totalPages);
             } catch (e) {
@@ -59,8 +58,6 @@ const ReviewList = () => {
                         'Content-Type': 'application/json'
                     }
                 });
-
-                console.log("written: ", response.data.data);
                 setWrittenReviews(response.data.data.content);
                 setReviewTotalPages(response.data.data.totalPages);
             } catch (e) {
@@ -74,10 +71,12 @@ const ReviewList = () => {
     const onClickReview = () => {
         setReview(true);
         setReviewed(false);
+        setReviewCurrentPage(1);
     }
     const onClickReviewed = () => {
         setReview(false);
         setReviewed(true);
+        setReviewCurrentPage(1);
     }
 
     return (
@@ -108,17 +107,14 @@ const ReviewList = () => {
                             ? <>
                                 {/* 작성 가능한 리뷰 */}
                                 <OrderList orders={availableReviews}/>
-                                <Pagination count={reviewTotalPages} page={reviewCurrentPage}
-                                            onChange={handleReviewPageChange}/>
                             </>
                             : <>
                                 {/* 작성한 리뷰 */}
                                 <OrderReviewList orders={writtenReviews}/>
-                                <Pagination count={reviewTotalPages} page={reviewCurrentPage}
-                                            onChange={handleReviewPageChange}/>
                             </>
                     }
-
+                    <Pagination count={reviewTotalPages} page={reviewCurrentPage}
+                                onChange={handleReviewPageChange}/>
                 </div>
             </div>
         </div>

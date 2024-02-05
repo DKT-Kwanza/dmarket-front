@@ -95,7 +95,6 @@ function WishList() {
             /* 선택된 상품의 개수 계산 */
             const selectedItemCount = Object.values(checkedItems).filter(Boolean).length;
             setWishCount(wishCount-selectedItemCount);
-            // setWishListItem(newWishLists);
         } catch (e) {
             console.error("Error deleting Cart data: ", e);
         }
