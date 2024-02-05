@@ -17,7 +17,7 @@
 .main-div-buttonwrapper{
     display: flex;
     justify-content: flex-end;
-    margin: 10px 0;
+    margin: 20px 0;
 }
 
 .main-div-buttonwrapper > button{
@@ -41,6 +41,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    padding: 5px 10px;
 }
 
 .main-div-newitem-wrapper > div > h1{
@@ -97,5 +98,5 @@
 .main-div-products-wrapper{
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 40px;
 }

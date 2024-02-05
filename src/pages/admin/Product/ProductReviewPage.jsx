@@ -71,8 +71,8 @@ function ProductReviewPage() {
                 <Paper square elevation={2}
                     sx={{p: '20px 30px'}}>
                     <ReviewTable headers={tableHeader} rows={rows} onRowClick={handleRowClick} />
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
                 </Paper>
-                <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             </Box>
             {selectedReview && (
                 <ReviewModal open={openModal} handleClose={handleCloseModal} reviewData={selectedReview} />

@@ -2,19 +2,28 @@ import './Main.css';
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import axios from 'axios';
+import {useRecoilState} from "recoil";
 import MainProductItem from "../../../components/user/Item/MainProductItem";
 import ScrollToTopBtn from '../../../components/user/Common/Button/ScrollToTopBtn';
-import {FaAngleLeft, FaAngleRight, FaPause} from "react-icons/fa6";
 import {productsApi} from "../../../Api";
+import MainBanner from '../../../components/user/MainBanner';
+import { isLoggedInState } from '../../../recoil/atom';
 
 const Main = () => {
     const navigate = useNavigate();
     const [showMore, setShowMore] = useState(false);
     const [newProducts, setNewProducts] = useState([]);
     const [popularProducts, setPopularProducts] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
 
     /* 세션 스토리지에서 토큰 가져오기 */
     const token = sessionStorage.getItem('token');
+
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate("../member/login");
+        }
+    }, [isLoggedIn, navigate]);
 
     /* 신상품 데이터 */
     useEffect(() => {
@@ -99,19 +108,7 @@ const Main = () => {
     return (
         <div className='main-div-global-wrapper'> {/* 전체 wrapper */}
             <div className='main-div-mainimg-wrapper'> {/* 메인이미지 wrapper */}
-                <div className='main-div-mainimg'> {/* 메인이미지 */}
-                    <h1>1580 X 600 이었는데 너무 커서 1500 X 300으로 줄였어용</h1>
-                </div>
-                <div className='main-div-buttonwrapper'> {/* 메인이미지 버튼 wrapper */}
-                    <button className='main-btn-movebtn'><FaAngleLeft/></button>
-                    {/* 왼쪽가기 버튼 */}
-                    <button>1/10</button>
-                    {/* 페이지 번호 */}
-                    <button className='main-btn-movebtn'><FaAngleRight/></button>
-                    {/* 오른쪽가기 버튼 */}
-                    <button><FaPause/></button>
-                    {/* 일시정지 버튼 */}
-                </div>
+                <MainBanner />
             </div>
             <div className='main-div-newitem-wrapper'> {/* 신상품 wrapper */}
                 <div>

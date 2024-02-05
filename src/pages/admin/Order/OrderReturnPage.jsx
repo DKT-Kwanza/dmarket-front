@@ -92,8 +92,8 @@ function ReturnStatus() {
                        sx={{p: '20px 30px'}}>
                     <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange} />
                     <ReturnStatusTable headers={tableHeader} rows={returnStatus} onChangeReturnStatusClick={onChangeReturnStatusClick} />
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
                 </Paper>
-                <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             </Box>
         </Box>
 
