@@ -12,7 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
-export default function EditProductTable({headers, rows, products, setProducts}) {
+export default function EditProductTable({headers, products, setProducts}) {
     const token = sessionStorage.getItem('token');
     const navigate = useNavigate();
     
@@ -86,7 +86,7 @@ export default function EditProductTable({headers, rows, products, setProducts})
                                         width='50px'
                                         height='60px'
                                         style={{marginRight: '6px'}}
-                                        src={product.productImg} />
+                                        src={product.imgList[0]} />
                                     <div>
                                         {product.productName}
                                     </div>

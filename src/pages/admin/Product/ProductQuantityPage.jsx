@@ -27,12 +27,12 @@ function ProductQuantityPage() {
 
     const token = sessionStorage.getItem('token');
 
-    const tableHeader = ['상품번호', '브랜드', '상품', '옵션', '판매가', '카테고리', '상태', '재고', '입고', '등록일', '등록', ''];
+    const tableHeader = ['상품번호', '브랜드', '상품', '옵션', '판매가', '카테고리', '재고', '입고', '등록일', '등록', ''];
 
     useEffect(() => {
         fetchData(categoryId, currentPage);
     }, [categoryId, currentPage]); 
-    
+
     const fetchData = async () => {
         if (categoryId !== null) {
             const url = `http://172.16.210.136:8080/api/admin/products/categories/${categoryId}?page=${currentPage}`;
@@ -46,6 +46,7 @@ function ProductQuantityPage() {
                 setRows(response.data.data.productList);
                 setTotalPages(response.data.data.totalPages);
                 setSearchCategoryId(categoryId);
+                console.log(response.data)
             } catch (e) {
                 console.error(e);
             }
@@ -105,8 +106,8 @@ function ProductQuantityPage() {
                 <Paper square elevation={2}
                     sx={{p: '20px 30px'}}>
                     <OptionQuantityTable headers={tableHeader} rows={rows} fetchData={fetchData} setRows={setRows} />
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
                 </Paper>
-                <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             </Box>
         </Box>
 

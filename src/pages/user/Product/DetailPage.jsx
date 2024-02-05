@@ -21,6 +21,7 @@ import heart from '../../../assets/icons/heart.svg';
 import productDetail from '../../../assets/images/productDetail.png';
 import arrowRight from '../../../assets/icons/chevron-right.svg';
 import parcelIcon from '../../../assets/icons/truck-02.png';
+import ReactQuill from 'react-quill';
 
 function Detail() {
     const navigate = useNavigate();
@@ -459,7 +460,11 @@ function Detail() {
                          src={productDetail}/>
                 </div>
                 <div className='productDetailBox'>
-                    {product.productDes}
+                    <ReactQuill
+                    value={product.productDes}
+                    readOnly={true}
+                    theme={'bubble'}
+                    />
                 </div>
 
 

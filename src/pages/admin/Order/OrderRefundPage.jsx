@@ -79,8 +79,8 @@ function Refund() {
                     refundPercents={refundPercents}
                     onApplyClick={onChangeRefundStatusClick}
                 />
-                </Paper>
                 <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
+                </Paper>
             </Box>
         </Box>
     );

@@ -72,9 +72,8 @@ body, html {
     width: 24px;
     height: 24px;
     margin-left: auto;
-    margin-right: 14px; /* Adjust the margin-right for spacing between the icon and text */
+    margin-right: 14px;
 }
-
 
 .icons {
     width: 177px;
@@ -82,12 +81,12 @@ body, html {
     flex-shrink: 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .mypage{
     width: 30px;
     height: 30px;
-    margin-top: 10px;
     cursor: pointer;
     border:none;
     background-color: #FFF;
@@ -97,7 +96,6 @@ body, html {
     width: 30px;
     height: 30px;
     position: relative;
-    margin-top: 10px;
     border:none;
     background-color: #FFF;
     cursor: pointer;
@@ -114,8 +112,6 @@ body, html {
 .likes{
     width: 30px;
     height: 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
     border:none;
     background-color: #FFF;
     cursor: pointer;

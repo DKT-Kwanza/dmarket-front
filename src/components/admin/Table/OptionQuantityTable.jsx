@@ -105,7 +105,7 @@ export default function EditProductTable({headers, rows, fetchData, setRows}) {
                                         width='50px'
                                         height='60px'
                                         style={{marginRight: '6px'}}
-                                        src={row.productImg} />
+                                        src={row.imgList[0]} />
                                     <div>
                                         {row.productName}
                                     </div>
@@ -114,11 +114,6 @@ export default function EditProductTable({headers, rows, fetchData, setRows}) {
                             <TableCell>{row.optionValue}</TableCell>
                             <TableCell>{formatPrice(row.productSalePrice)}</TableCell>
                             <TableCell>{row.productCategory}</TableCell>
-                            <TableCell
-                                sx={{ color: row.optionStatus === '판매중' ? '#3377FF' : '#FF5D5D' }}
-                            >
-                                {row.optionStatus}
-                            </TableCell>
                             <TableCell>{row.optionQuantity}</TableCell>
                             <TableCell>
                                 <TextField

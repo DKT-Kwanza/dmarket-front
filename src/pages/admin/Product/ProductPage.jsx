@@ -113,7 +113,6 @@ function ProductPage() {
                 <Paper square elevation={2} sx={{ p: '20px 30px' }}>
                     <EditProductTable
                         headers={tableHeader}
-                        rows={{ product: products }}
                         products={products}
                         setProducts={setProducts}
                     />
@@ -124,8 +123,8 @@ function ProductPage() {
                         onClick={navigateToAdd}>
                         상품추가
                     </Button>
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
                 </Paper>
-                <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             </Box>
         </Box>
     );

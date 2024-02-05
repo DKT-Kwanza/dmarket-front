@@ -106,11 +106,7 @@ export default function MileageReqTable({ headers, rows, fetchData }) {
                                 </TableCell>
                                 <TableCell>{item.userName}</TableCell>
                                 <TableCell>{item.userEmail}</TableCell>
-                                <TableCell
-                                    sx={{
-                                        color: item.mileageReqReason === '충전' ? '#3377FF' : '#FF5D5D',
-                                    }}
-                                >
+                                <TableCell>
                                     {item.mileageReqReason}
                                 </TableCell>
                                 <TableCell>{formatPrice(item.mileageCharge)} P</TableCell>

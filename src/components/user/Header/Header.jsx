@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import NotificationModal from '../Common/Modal/NotificationModal';
 import {useRecoilState} from "recoil";
 import {cartCountAtom} from "../../../recoil/atom";
+import { isLoggedInState } from '../../../recoil/atom';
 import axios from "axios";
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { toast, ToastContainer } from "react-toastify";
@@ -17,6 +18,7 @@ import { notifyApi, productsApi, userApi } from '../../../Api';
 
 function Header() {
     const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
     /* 장바구니 개수 전역상태 변수 관리 */
     const [cartCount, setCartCount] = useRecoilState(cartCountAtom);
     const [isMainDivHovered, setMainDivHovered] = useState(false);
@@ -31,6 +33,7 @@ function Header() {
 
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');
+    const role = sessionStorage.getItem('role');
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -63,6 +66,7 @@ function Header() {
                 });
                 /* cartCountAtom을 업데이트 */
                 setCartCount(cartCountResponse.data.data.cartCount);
+                console.log(cartCountResponse.data)
             } catch (e) {
                 console.error('Error fetching data:', e);
             }
@@ -247,6 +251,16 @@ function Header() {
         setShowNotifications(!showNotifications);
     };
 
+    const onLogout = () => {
+        sessionStorage.clear();
+        setIsLoggedIn(false); 
+        if (eventSource) {
+            eventSource.close();
+            setEventSource(null);
+        }
+        navigate("/member/login"); 
+    };
+
     return (
         <div className="header-div">
             <ToastContainer stacked closeOnClick hideProgressBar theme="dark"/>
@@ -334,8 +348,13 @@ function Header() {
                         </div>
                     </div>
                     <div className="user-center">
-                        <div onClick={navigateToAdmin} className="cate-admin">관리자</div>
+                        {(role === 'ROLE_GM' || role === 'ROLE_SM' || role === 'ROLE_PM') && (
+                            <div onClick={navigateToAdmin} className="cate-admin">관리자</div>
+                        )}
                         <div onClick={navigateToCustomer} className="cate-customer">고객센터</div>
+                        {isLoggedIn && (
+                            <div onClick={onLogout} className="logout-button">로그아웃</div>
+                        )}
                     </div>
                 </div>
                 {

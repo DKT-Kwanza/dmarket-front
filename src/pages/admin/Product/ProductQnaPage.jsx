@@ -29,8 +29,8 @@ function ProductQnaPage() {
             const response = await axios.get(`http://172.16.210.136:8080/api/admin/products/qna?page=${currentPage}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            setRows(response.data.data.qnaList);
-            setTotalPages(response.data.data.totalPage);
+            setRows(response.data.data.content);
+            setTotalPages(response.data.data.totalPages);
         } catch (error) {
             console.error("Error fetching QnA list: ", error);
         }
@@ -63,8 +63,8 @@ function ProductQnaPage() {
                 <Paper square elevation={2}
                     sx={{p: '20px 30px'}}>
                     <QnaTable headers={tableHeader} rows={rows} onRowClick={handleRowClick} fetchQnaList={fetchQnaList}/>
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
                 </Paper>
-                <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             </Box>
         </Box>
 
