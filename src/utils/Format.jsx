@@ -24,7 +24,7 @@ export const formatPrice = (value) => {
     return stringValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-/* 사용 유무에 따라 레거시 예정 */
+/* 콤마 제거 */
 export const removeCommas = (value) => {
     return value.replace(/,/g, '');
 };
