@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Box, Typography, Modal, TextField, Button } from '@mui/material';
 import { formatDate } from '../../../utils/Format';
+import {adminApi} from "../../../Api";
 
 const InquiryModalStyle = {
     position: 'absolute',
@@ -29,8 +30,9 @@ function InquiryModal({ open, handleClose, inquiryId, fetchInquirys }) {
         fetchData();
     }, [inquiryId]);
     const fetchData = async () => {
+        const url = `${adminApi}/board/inquiry/${inquiryId}`;
         try {
-            const response = await axios.get(`http://172.16.210.136:8080/api/admin/board/inquiry/${inquiryId}`, {
+            const response = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json; charset=UTF-8',
@@ -45,9 +47,10 @@ function InquiryModal({ open, handleClose, inquiryId, fetchInquirys }) {
 
 
     const handleReplySubmit = async () => { // "등록" 버튼 클릭 시 실행할 함수
+        const url = `${adminApi}/board/inquiry/reply/${inquiryId}`;
         try {
 
-            const response = await axios.post(`http://172.16.210.136:8080/api/admin/board/inquiry/reply/${inquiryId}`, {
+            const response = await axios.post(url, {
                 inquiryReplyContents
             }, {
                 headers: {
@@ -65,7 +68,8 @@ function InquiryModal({ open, handleClose, inquiryId, fetchInquirys }) {
         try {
             /* 삭제 API 호출 */
             const inquiryReplyId = inquiry.inquiryReplyId;
-            const response = await axios.delete(`http://172.16.210.136:8080/api/admin/board/inquiry/reply/${inquiryReplyId}`, {
+            const url = `${adminApi}/board/inquiry/reply/${inquiryReplyId}`;
+            const response = await axios.delete(url, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json; charset=UTF-8',

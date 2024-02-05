@@ -6,6 +6,7 @@ import ManagerTable from "../../../components/admin/Table/MangerTable";
 import { Paper, Box } from "@mui/material";
 import { indigo } from '@mui/material/colors';
 import FilledButton from "../../../components/admin/Common/Button/FilledButton";
+import {adminApi} from "../../../Api";
 import axios from "axios";
 import AdminModal from "../../../components/admin/Modal/AdminModal";
 
@@ -35,8 +36,9 @@ function AdminPage() {
 
     useEffect(() => {
         const fetchData = async () => {
+            const url = `${adminApi}/admin-users`;
             try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/admin/admin-users`, {
+                const response = await axios.get(url , {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -90,8 +92,9 @@ function AdminPage() {
 
     useEffect(() => {
         const fetchData = async () => {
+            const url = `${adminApi}/admin-users`;
             try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/admin/admin-users`, {
+                const response = await axios.get(url, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
