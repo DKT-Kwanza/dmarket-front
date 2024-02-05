@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
 import './SignInForm.css';
+import { userApi } from '../../../Api';
 
 function SignInForm() {
     const navigate = useNavigate();
@@ -15,9 +16,18 @@ function SignInForm() {
         joinDate: '',
         postalCode: '',
         address: '',
-        detailedAddress: ''
+        detailedAddress: '',
+        Agreed: false
     });
     
+    const isPasswordValid = (password) => {
+        return password.length >= 8 && /[A-Z]/.test(password) && /\d/.test(password) && /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    };
+
+    const handleCheckboxChange = (e) => {
+        setState({ ...state, termsAgreed: e.target.checked });
+    };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
     
@@ -38,11 +48,27 @@ function SignInForm() {
         }
     };
     
-
+    
     const handleSignUpSubmit = (e) => {
         e.preventDefault(); // 폼의 기본 제출 이벤트를 방지
+        
+        if (state.inputPw !== state.confirmPassword) {
+            alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            return;
+        }
+
+        if (!isPasswordValid(state.inputPw)) {
+            alert("최소 8자리 이상 영대문자, 숫자, 특수문자를 포함해주세요.");
+            return;
+        }
+
+        if (!state.termsAgreed) {
+            alert("이용약관 및 개인정보수집 이용 동의는 필수입니다.");
+            return;
+        }
+
         axios
-            .post('http://172.16.210.136:8080/api/users/join',{
+            .post(`${userApi}/join`,{
                 userEmail: state.inputId,
                 userPassword: state.inputPw,
                 userDktNum: state.dktNum,
@@ -114,6 +140,8 @@ function SignInForm() {
                                 required
                                 className='signInForm-input'
                                 placeholder='비밀번호를 다시 입력하세요.'
+                                value={state.confirmPassword}
+                                onChange={handleInputChange}
                             />
                         </div>
                         <div className='signInForm-form'>
@@ -177,7 +205,6 @@ function SignInForm() {
                                 type='text'
                                 id='zipCode'
                                 name='postalCode'
-                                required
                                 className='signInForm-input'
                                 placeholder='우편번호'
                                 value={state.postalCode}
@@ -191,7 +218,6 @@ function SignInForm() {
                                 type='text'
                                 id='address'
                                 name='address'
-                                required
                                 className='signInForm-input'
                                 placeholder='기본주소'
                                 value={state.address}
@@ -205,7 +231,6 @@ function SignInForm() {
                                 type='text'
                                 id='addressDetail'
                                 name='detailedAddress'
-                                required
                                 className='signInForm-input'
                                 placeholder='상세주소를 입력하세요'
                                 value={state.detailedAddress}
@@ -220,16 +245,19 @@ function SignInForm() {
                             </div>
                             <div className='signInForm-agreement-form'>
                                 <div className="signInForm-checkbox">
-                                    <CheckBox/>
+                                    <CheckBox
+                                        checked={state.termsAgreed}
+                                        onChange={handleCheckboxChange}
+                                    />
                                 </div>
-                                <label htmlFor='agreement'>[필수] 개인정보 수집 및 이용 동의</label>
+                                <label htmlFor='agreement'>[필수] 이용약관 및 개인정보수집 및 이용</label>
                                 <button className='signInForm-agreement-btn'>약관 보기</button>
                             </div>
                             <div className='signInForm-agreement-form'>
                                 <div className="signInForm-checkbox">
                                     <CheckBox/>
                                 </div>
-                                <label htmlFor='agreement'>[필수] 개인정보 수집 및 이용 동의</label>
+                                <label htmlFor='agreement'>[선택] 쇼핑정보 수신</label>
                                 <button className='signInForm-agreement-btn'>약관 보기</button>
                             </div>
                         </div>
