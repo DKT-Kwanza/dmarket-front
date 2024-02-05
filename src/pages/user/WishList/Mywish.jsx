@@ -1,10 +1,11 @@
+import './Mywish.css';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import {useNavigate} from "react-router-dom";
 import WishItemList from '../../../components/user/List/WishItemList';
 import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
-import './Mywish.css';
 import {Pagination} from "@mui/material";
-import {useNavigate} from "react-router-dom";
+import axios from 'axios';
+import {userApi} from "../../../Api";
 
 function WishList() {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ function WishList() {
 
     /* 위시 페이지 네이션 */
     const [wishTotalPage, setWishTotalPage] = useState(0);
-    const [wishCurrentPage, setWishCurrentPage] = useState(0);
+    const [wishCurrentPage, setWishCurrentPage] = useState(1);
 
     const handleWishPageChange = (event, value) => {
         setWishCurrentPage(value);
@@ -30,7 +31,7 @@ function WishList() {
     /* 위시리스트 데이터 조회 */
     useEffect(() => {
         const fetchData = async () => {
-            const url = `http://172.16.210.136:8080/api/users/${userId}/wish?page=${wishCurrentPage}`;
+            const url = `${userApi}/${userId}/wish?page=${wishCurrentPage}`;
             try {
                 const response = await axios.get(url, {
                     headers: {
@@ -67,13 +68,13 @@ function WishList() {
     /* 위시 리스트 삭제 */
     const handleDeleteSelected = async () => {
         /* 선택된 상품들의 wishId를 추출 */
-        const selectedWishIds = wishLists.wishListItem
+        const selectedWishIds = wishListItem
             .filter((_, index) => checkedItems[index])
             .map(item => item.wishId);
 
         /* 새로운 위시 리스트 생성 */
-        const newWishLists = wishLists.wishListItem.filter((_, index) => !checkedItems[index]);
-        setWishLists({...wishLists, wishListItem: newWishLists});
+        const newWishLists = wishListItem.filter((_, index) => !checkedItems[index]);
+        setWishListItem(newWishLists);
 
         const newCheckedItems = {};
         newWishLists.forEach((_, index) => {
@@ -84,8 +85,8 @@ function WishList() {
         /* 선택된 상품들을 삭제하는 API 호출 */
         try {
             await Promise.all(selectedWishIds.map(async wishId => {
-                const url = `http://172.16.210.136:8080/api/users/${userId}/wish/${wishId}`;
-                await axios.delete(url, {
+                const url = `${userApi}/${userId}/wish/${wishId}`;
+                const response = await axios.delete(url, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     }
@@ -93,7 +94,7 @@ function WishList() {
             }));
             /* 선택된 상품의 개수 계산 */
             const selectedItemCount = Object.values(checkedItems).filter(Boolean).length;
-            setWishCount(wishCount-selectedItemCount)
+            setWishCount(wishCount-selectedItemCount);
         } catch (e) {
             console.error("Error deleting Cart data: ", e);
         }
