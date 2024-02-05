@@ -66,7 +66,6 @@ function Header() {
                 });
                 /* cartCountAtom을 업데이트 */
                 setCartCount(cartCountResponse.data.data.cartCount);
-                console.log(cartCountResponse.data)
             } catch (e) {
                 console.error('Error fetching data:', e);
             }

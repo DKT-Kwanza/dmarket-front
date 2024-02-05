@@ -24,6 +24,7 @@ function ProductPage() {
     const [star, setStar] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+    const [isEmpty, setIsEmpty] = useState(false);
 
     const token = sessionStorage.getItem('token');
 
@@ -37,9 +38,14 @@ function ProductPage() {
                 const response = await axios.get(url, {
                     headers: {'Authorization': `Bearer ${token}`}
                 });
-                setProducts(response.data.data.content);
-                setTotalPages(response.data.data.totalPages);
-                console.log(response.data)
+                /* 검색 결과가 없을 때 */
+                if (response.data.data.content.length <= 0) {
+                    setIsEmpty(true);
+                } else {
+                    setIsEmpty(false);
+                    setProducts(response.data.data.content);
+                    setTotalPages(response.data.data.totalPages);
+                }
             } catch (e) {
                 console.error(e);
             }
@@ -77,24 +83,31 @@ function ProductPage() {
             <div className='productList-title-bar'></div>
             <Filter setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} setStar={setStar}/>
             <div className='productList-bar'></div>
-            <Dropdown setSorter={setSorter}/>
-            <div className='productList-bar'></div>
-            <div className='productList-container'>
-                {products.map((item, index) => (
-                    <ProductItem
-                        key={index}
-                        imgSrc={item.productImg}
-                        brand={item.productBrand}
-                        productName={item.productName}
-                        sales={item.productSalePrice}
-                        ratingAvg={item.productRating}
-                        reviewCnt={item.productReviewCount}
-                        onClick={() => {
-                            navigateToProductDetail({productId: item.productId})
-                        }}/>
-                ))}
-            </div>
-            <Pagination count={totalPages} page={currentPage} onChange={handlePageChange}/>
+            {
+                isEmpty
+                    ? <div className='productList-empty'>해당하는 상품이 없습니다.</div>
+                    : <>
+                        <Dropdown setSorter={setSorter}/>
+                        <div className='productList-bar'></div>
+                        <div className='productList-container'>
+                            {products.map((item, index) => (
+                                <ProductItem
+                                    key={index}
+                                    imgSrc={item.productImg}
+                                    brand={item.productBrand}
+                                    productName={item.productName}
+                                    sales={item.productSalePrice}
+                                    ratingAvg={item.productRating}
+                                    reviewCnt={item.productReviewCount}
+                                    onClick={() => {
+                                        navigateToProductDetail({productId: item.productId})
+                                    }}/>
+                            ))}
+                        </div>
+                        <Pagination count={totalPages} page={currentPage} onChange={handlePageChange}/>
+                    </>
+
+            }
             <ScrollToTopBtn/>
         </div>
     )

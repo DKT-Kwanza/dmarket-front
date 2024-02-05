@@ -35,3 +35,9 @@
     align-items: start;
     margin-top: 17px;
 }
+
+.productList-empty {
+    font-size: 18px;
+    text-align: center;
+    padding-top: 30px;
+}
