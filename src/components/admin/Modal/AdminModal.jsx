@@ -4,6 +4,7 @@ import { Box, Modal, Button, Typography } from '@mui/material';
 import axios from "axios";
 import UserTable from "../Table/UserTable";
 import SearchBar from "../Common/SearchBar/SearchBar";
+import {adminApi} from "../../../Api";
 
 const AdminModalStyle = {
     position: 'absolute',
@@ -33,7 +34,7 @@ function AdminModal({ open, handleClose }) {
 
     /* 사원번호 검색 */
     const handleSearch = async () => {
-        const url = `http://172.16.210.136:8080/api/admin/admin-users?q=${search}`;
+        const url = `${adminApi}/admin-users?q=${search}`;
         try {
             const response = await axios.get(url, {
                 headers: {
@@ -62,7 +63,7 @@ function AdminModal({ open, handleClose }) {
         try {
             console.log(newRole);
             const response = await axios.put(
-                `http://172.16.210.136:8080/api/admin/admin-users/${user.userId}`,
+                `${adminApi}/admin-users/${user.userId}`,
                 { newRole: newRole },
                 {
                     headers: {
