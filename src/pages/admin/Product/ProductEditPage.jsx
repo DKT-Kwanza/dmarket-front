@@ -346,45 +346,45 @@ function ProductEditPage() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-            {options.map((option, index) => (
-                <TableRow key={`existing-option-${index}`}>
-                    <TableCell>{option.name}</TableCell>
-                    <TableCell>{option.values}</TableCell>
-                    <TableCell>
-                        <TextField
-                            type="number"
-                            size="small"
-                            value={option.quantity}
-                            onChange={(e) => {
-                                const updatedOptions = [...options];
-                                updatedOptions[index].quantity = e.target.value;
-                                setOptions(updatedOptions);
-                            }}
-                        />
-                    </TableCell>
-                </TableRow>
-            ))}
-        </TableBody>
-        <TableBody>
-            {optionTags.map((tag, index) => (
-                <TableRow key={`new-option-${index}`}>
-                    <TableCell>{optionName}</TableCell>
-                    <TableCell>{tag.optionValue}</TableCell>
-                    <TableCell>
-                        <TextField
-                            type="number"
-                            size="small"
-                            value={tag.optionQuantity}
-                            onChange={(e) => {
-                                const updatedOptionTags = [...optionTags];
-                                updatedOptionTags[index].optionQuantity = e.target.value;
-                                setOptionTags(updatedOptionTags);
-                            }}
-                        />
-                    </TableCell>
-                </TableRow>
-            ))}
-        </TableBody>
+                                {options.map((option, index) => (
+                                    <TableRow key={`existing-option-${index}`}>
+                                        <TableCell>{option.name}</TableCell>
+                                        <TableCell>{option.values}</TableCell>
+                                        <TableCell>
+                                            <TextField
+                                                type="number"
+                                                size="small"
+                                                value={option.quantity}
+                                                onChange={(e) => {
+                                                    const updatedOptions = [...options];
+                                                    updatedOptions[index].quantity = e.target.value;
+                                                    setOptions(updatedOptions);
+                                                }}
+                                            />
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                            <TableBody>
+                                {optionTags.map((tag, index) => (
+                                    <TableRow key={`new-option-${index}`}>
+                                        <TableCell>{optionName}</TableCell>
+                                        <TableCell>{tag.optionValue}</TableCell>
+                                        <TableCell>
+                                            <TextField
+                                                type="number"
+                                                size="small"
+                                                value={tag.optionQuantity}
+                                                onChange={(e) => {
+                                                    const updatedOptionTags = [...optionTags];
+                                                    updatedOptionTags[index].optionQuantity = e.target.value;
+                                                    setOptionTags(updatedOptionTags);
+                                                }}
+                                            />
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
                         </Table>
                     </TableContainer>
                     <Box sx={{ display: 'flex', gap: 2 }}>
