@@ -16,6 +16,7 @@ body, html {
 }
 
 .nav-div {
+    position: relative;
     height: 90px;
     display: flex;
     justify-content: space-between;
@@ -106,7 +107,7 @@ body, html {
     width: 16px;
     height: 16px;
     position: absolute;
-    top: 0px; /* Adjust the top position as needed */
+    top: -6px; /* Adjust the top position as needed */
     right: 0px; /* Adjust the right position to place it in the top right corner */
 }
 
@@ -123,6 +124,7 @@ body, html {
 .alams{
     width: 30px;
     height: 30px;
+    position: relative;
     margin-top: 10px;
     margin-bottom: 10px;
     border:none;

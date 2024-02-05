@@ -5,28 +5,15 @@ import NotificationModal from '../Common/Modal/NotificationModal';
 import {useRecoilState} from "recoil";
 import {cartCountAtom} from "../../../recoil/atom";
 import axios from "axios";
-import {userApi} from "../../../Api";
+import { EventSourcePolyfill } from 'event-source-polyfill';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import './Header.css'
 import user from '../../../assets/icons/user.svg'
 import heart from '../../../assets/icons/heart.svg'
 import shoppingBag from '../../../assets/icons/shoppingBag.svg'
 import alert from '../../../assets/icons/alert.svg'
-
-const NotificationData = [
-    {
-        notiId: 1,
-        content: '[폴로랄프로렌 치노 베이스볼캡 ..] 주문하신 상품의 배송이 시작되었습니다.',
-        url: '/mydkt/orderInfo',
-        isRead: false,
-        notificationCreatedDate: '2024-02-22T09:48:00.123456',
-    },
-    {
-        notiId: 2,
-        content: '[반품했는데 환불이 ...] 작성하신 문의에 답변이 등록되었습니다.',
-        url: '/mydkt/inquiry',
-        isRead: true,
-        notificationCreatedDate: '2024-01-08T09:48:00.123456',
-    },
-];
+import { notifyApi, productsApi, userApi } from '../../../Api';
 
 function Header() {
     const navigate = useNavigate();
@@ -37,6 +24,10 @@ function Header() {
     const [levelTwoCategories, setLevelTwoCategories] = useState([]);
     const [searchInput, setSearchInput] = useState("");
     const [showNotifications, setShowNotifications] = useState(false);
+    const [lastEventId, setLastEventId] = useState("");
+    const [ eventSource, setEventSource ] = useState(null);
+    const [unreadCount, setUnreadCount] = useState(0);
+    const [notifications, setNotifications] = useState([]);
 
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');
@@ -44,7 +35,7 @@ function Header() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get('http://172.16.210.136:8080/api/products/categories', {
+                const response = await axios.get(`${productsApi}/categories`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -77,7 +68,138 @@ function Header() {
             }
         }
         fetchData();
+    }, [cartCount]);
+
+    useEffect(() => {
+        // 마운트 시 로그인 상태 + sse 연결이 안 된 상태면 연결
+        if (token && !eventSource) {
+            subscribe();
+        }
+
+        // 언마운트 시 sse 연결 종료
+        return () => {
+            if (eventSource) {
+                eventSource.close();
+                console.log("연결 종료");
+                setEventSource(null);
+            }
+        }
+    },[eventSource, token])
+
+    // sse 연결 시작
+    const subscribe = async () => {
+        console.log("연결 시작");
+        const source = new EventSourcePolyfill(
+            `${notifyApi}/subscribe/` + userId,
+            {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                lastEventId: lastEventId,
+            },
+            heartbeatTimeout: 600000,
+            }
+        );
+
+        
+        // mileage 관련 알림 받아옴
+        source.addEventListener("mileage", (e) => {
+            setLastEventId(e.lastEventId);
+            console.log(lastEventId);
+            const data = JSON.parse(e.data);
+            console.log(data);
+            toast(data.content);
+            setNotifications((prevNotifications) => [data, ...prevNotifications]);
+            console.log(notifications);
+            setUnreadCount((prevCount) => prevCount + 1);
+        });
+        
+        // 문의 답변 알림
+        source.addEventListener("inquiry", (e) => {
+            setLastEventId(e.lastEventId);
+            console.log(lastEventId);
+            const data = JSON.parse(e.data);
+            console.log(data.content);
+            toast(data.content);
+            setNotifications((prevNotifications) => [data, ...prevNotifications]);
+            console.log(notifications);
+            setUnreadCount((prevCount) => prevCount + 1);
+        });
+        
+        // 상품 QnA 답변 알림
+        source.addEventListener("qna", (e) => {
+            setLastEventId(e.lastEventId);
+            console.log(lastEventId);
+            const data = JSON.parse(e.data);
+            toast(data.content);
+            setNotifications((prevNotifications) => [data, ...prevNotifications]);
+            setUnreadCount((prevCount) => prevCount + 1);
+        });
+
+        // 배송 상태 변경 알림
+        source.addEventListener("delivery", (e) => {
+            setLastEventId(e.lastEventId);
+            console.log(lastEventId);
+            const data = JSON.parse(e.data);
+            console.log(data);
+            toast(data.content);
+            setNotifications((prevNotifications) => [data, ...prevNotifications]);
+            console.log(notifications);
+            setUnreadCount((prevCount) => prevCount + 1);
+        });
+    
+        // 반품 상태 변경 알림
+        source.addEventListener("return", (e) => {
+            setLastEventId(e.lastEventId);
+            console.log(lastEventId);
+            const data = JSON.parse(e.data);
+            console.log(data);
+            toast(data.content);
+            setNotifications((prevNotifications) => [data, ...prevNotifications]);
+            console.log(notifications);
+            setUnreadCount((prevCount) => prevCount + 1);
+        });
+        
+        setEventSource(source);
+    }
+    // sse 연결
+
+    // 알림 조회
+    useEffect(() => {
+        if (token && userId) {
+            axios.get(`${notifyApi}/${userId}/notifications`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                setNotifications(response.data);
+            })
+            .catch((error) => {
+                console.error('Could not fetch notifications', error);
+            });
+        }
     }, []);
+    //알림 조회
+
+
+    // 알림 개수
+    useEffect(() => {
+        const fetchUnreadCount = async () => {
+            try {
+                const response = await axios.get(`${notifyApi}/${userId}/unreadCount`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setUnreadCount(response.data);
+            } catch (error) {
+                console.error('Could not fetch unread notification count', error);
+            }
+        };
+        fetchUnreadCount();
+    }, []);
+    // 알림 개수
+
 
     const handleSearch = (e) => {
         if (e.key === 'Enter') {
@@ -127,6 +249,7 @@ function Header() {
 
     return (
         <div className="header-div">
+            <ToastContainer stacked closeOnClick hideProgressBar theme="dark"/>
             <div className="nav-div">
                 <div onClick={navigateToMain} className="logo"></div>
                 <div className='search-box-div'>
@@ -168,13 +291,24 @@ function Header() {
                     </div>
                     <div className='alams' onClick={toggleNotifications}>
                         <img alt={"alert-icon"} src={alert}/>
+                        <div className='bucket-count'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 21 20" fill="none">
+                                <circle cx="10.8359" cy="10" r="10" fill="black"/>
+                                <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="white" font-size="12">
+                                    {unreadCount}
+                                </text>
+                            </svg>
+                        </div>
                     </div>
-                    {showNotifications && (
-                        <NotificationModal
-                            notifications={NotificationData}
-                            onClose={() => setShowNotifications(false)}
-                        />
-                    )}
+                    <div>
+                        {showNotifications && (
+                            <NotificationModal
+                                notifications={notifications}
+                                onClose={() => setShowNotifications(false)}
+                                setUnreadCount={setUnreadCount}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
             <div className="category-div">

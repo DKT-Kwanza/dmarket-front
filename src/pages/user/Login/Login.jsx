@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -6,6 +7,7 @@ import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
 import './Login.css';
 import logo from '../../../assets/images/logo.png'
 import chevronRight from '../../../assets/icons/chevron-right.svg'
+import { isLoginState } from '../../../components/commmon/AuthState'
 
 function Login() {
   const navigate = useNavigate();
