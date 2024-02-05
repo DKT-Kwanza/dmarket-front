@@ -15,6 +15,7 @@ import heart from '../../../assets/icons/heart.svg'
 import shoppingBag from '../../../assets/icons/shoppingBag.svg'
 import alert from '../../../assets/icons/alert.svg'
 import { notifyApi, productsApi, userApi } from '../../../Api';
+import { IoIosLogOut } from "react-icons/io";
 
 function Header() {
     const navigate = useNavigate();
@@ -314,15 +315,16 @@ function Header() {
                             </svg>
                         </div>
                     </div>
-                    <div>
-                        {showNotifications && (
-                            <NotificationModal
-                                notifications={notifications}
-                                onClose={() => setShowNotifications(false)}
-                                setUnreadCount={setUnreadCount}
-                            />
-                        )}
-                    </div>
+                    {showNotifications && (
+                        <NotificationModal
+                            notifications={notifications}
+                            onClose={() => setShowNotifications(false)}
+                            setUnreadCount={setUnreadCount}
+                        />
+                    )}
+                    {isLoggedIn && (
+                        <div onClick={onLogout} className="logout-button"><IoIosLogOut size={30}/></div>
+                    )}
                 </div>
             </div>
             <div className="category-div">
@@ -352,9 +354,6 @@ function Header() {
                             <div onClick={navigateToAdmin} className="cate-admin">관리자</div>
                         )}
                         <div onClick={navigateToCustomer} className="cate-customer">고객센터</div>
-                        {isLoggedIn && (
-                            <div onClick={onLogout} className="logout-button">로그아웃</div>
-                        )}
                     </div>
                 </div>
                 {
