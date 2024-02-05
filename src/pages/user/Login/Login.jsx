@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from "recoil";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
 import './Login.css';
 import logo from '../../../assets/images/logo.png'
 import chevronRight from '../../../assets/icons/chevron-right.svg'
+import { isLoggedInState } from '../../../recoil/atom';
 
 function Login() {
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
   const [password, setPassword] = useState('');
   const [passwordValid, setPasswordValid] = useState(true);
   const [inputId,setInputId] = useState("");
@@ -33,9 +36,15 @@ function Login() {
         .then(res =>{
             const token = res.data.data.accesstoken;
             const userId = res.data.data.userId;
+            const role = res.data.data.role;
             console.log(res.data)
             sessionStorage.setItem('token', token);
             sessionStorage.setItem('userId', userId);
+            sessionStorage.setItem('role', role);
+
+            console.log(res.data);
+
+            setIsLoggedIn(true); 
             alert("로그인 되었습니다!");
             navigate("../../");
         })

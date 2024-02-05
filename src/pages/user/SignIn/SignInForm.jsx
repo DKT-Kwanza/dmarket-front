@@ -55,7 +55,7 @@ function SignInForm() {
             })
             .then((res)=> {
                 alert("회원가입에 성공했습니다!");
-                navigate("../../",{replace : true});
+                navigate("../login",{replace : true});
             })
             .catch(function(error){
                 console.log(error);
