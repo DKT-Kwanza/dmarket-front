@@ -10,23 +10,7 @@ import heart from '../../../assets/icons/heart.svg'
 import shoppingBag from '../../../assets/icons/shoppingBag.svg'
 import alert from '../../../assets/icons/alert.svg'
 import NotificationModal from '../Common/Modal/NotificationModal';
-
-// const NotificationData = [
-//     {
-//         notiId: 1,
-//         content: '[폴로랄프로렌 치노 베이스볼캡 ..] 주문하신 상품의 배송이 시작되었습니다.',
-//         url: '/mydkt/orderInfo',
-//         isRead: false,
-//         notificationCreatedDate: '2024-02-22T09:48:00.123456',
-//     },
-//     {
-//         notiId: 2,
-//         content: '[반품했는데 환불이 ...] 작성하신 문의에 답변이 등록되었습니다.',
-//         url: '/mydkt/inquiry',
-//         isRead: true,
-//         notificationCreatedDate: '2024-01-08T09:48:00.123456',
-//     },
-// ];
+import { notifyApi, productsApi, userApi } from '../../../Api';
 
 function Header() {
     const navigate = useNavigate();
@@ -47,7 +31,7 @@ function Header() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get('http://172.16.210.136:8080/api/products/categories', {
+                const response = await axios.get(`${productsApi}/categories`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -67,7 +51,7 @@ function Header() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/users/${userId}/cart-count`,{
+                const response = await axios.get(`${userApi}/${userId}/cart-count`,{
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -100,7 +84,7 @@ function Header() {
     const subscribe = async () => {
         console.log("연결 시작");
         const source = new EventSourcePolyfill(
-            `http://localhost:8080/api/notify/subscribe/` + userId,
+            `${notifyApi}/subscribe/` + userId,
             {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -176,7 +160,7 @@ function Header() {
     // 알림 조회
     useEffect(() => {
         if (token && userId) {
-            axios.get(`http://localhost:8080/api/notify/${userId}/notifications`, {
+            axios.get(`${notifyApi}/${userId}/notifications`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -196,7 +180,7 @@ function Header() {
     useEffect(() => {
         const fetchUnreadCount = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/notify/${userId}/unreadCount`, {
+                const response = await axios.get(`${notifyApi}/${userId}/unreadCount`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -298,21 +282,26 @@ function Header() {
                             alt={"heart-icon"}
                             src={heart}/>
                     </div>
-
-                    {/* 알림 카운트 */}
-                        {unreadCount > 0 && <span>{unreadCount}</span>}
-                    {/* 알림 카운트 */}
-                    
                     <div className='alams' onClick={toggleNotifications}>
-                            <img alt={"alert-icon"} src={alert}/>
+                        <img alt={"alert-icon"} src={alert}/>
+                        <div className='bucket-count'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 21 20" fill="none">
+                                <circle cx="10.8359" cy="10" r="10" fill="black"/>
+                                <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="white" font-size="12">
+                                    {unreadCount}
+                                </text>
+                            </svg>
+                        </div>
                     </div>
-                    {showNotifications && (
-                        <NotificationModal
-                            notifications={notifications}
-                            onClose={() => setShowNotifications(false)}
-                            setUnreadCount={setUnreadCount}
-                        />
-                    )}
+                    <div>
+                        {showNotifications && (
+                            <NotificationModal
+                                notifications={notifications}
+                                onClose={() => setShowNotifications(false)}
+                                setUnreadCount={setUnreadCount}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
             <div className="category-div">

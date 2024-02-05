@@ -3,6 +3,7 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import './NotificationModal.css'
 import { formatDate } from '../../../../utils/Format';
+import { notifyApi } from '../../../../Api';
 
 const NotificationItem = ({ notification, setUnreadCount }) => {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ const NotificationItem = ({ notification, setUnreadCount }) => {
         
         if (!notification.isRead) {
             try {
-            await axios.put(`http://localhost:8080/api/notify`,{
+            await axios.put(notifyApi,{
                 notiId : notification.notiId,
                 receiver : userId
             },{
