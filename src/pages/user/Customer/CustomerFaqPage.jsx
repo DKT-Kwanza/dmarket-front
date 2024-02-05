@@ -4,7 +4,6 @@ import {useParams, useNavigate} from 'react-router-dom';
 import CustomerCenterFAQList from "../../../components/user/List/CustomerCenterFAQList";
 import axios from 'axios';
 import {boardApi} from "../../../Api";
-import {Pagination} from "@mui/material";
 
 function CustomerCenterFAQ() {
     const navigate = useNavigate();
@@ -33,7 +32,7 @@ function CustomerCenterFAQ() {
             }
         };
         fetchData();
-    }, []);
+    }, [token]);
 
     useEffect(() => {
         if (params.tab) {

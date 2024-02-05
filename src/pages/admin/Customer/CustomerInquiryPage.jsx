@@ -61,10 +61,8 @@ function CustomerInquiry() {
 
 
     /* 모달 상태 관리 변수 */
-    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
-    const [isConfirming, setIsConfirming] = useState(false);
     const [selectedInquiryId, setSelectedInquiryId] = useState(null);
 
     /* 문의 삭제 handler */
