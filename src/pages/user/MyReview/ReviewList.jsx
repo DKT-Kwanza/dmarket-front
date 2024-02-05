@@ -5,16 +5,16 @@ import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import OrderList from "../../../components/user/List/OrderList";
 import OrderReviewList from "../../../components/user/List/OrderReviewList";
+import ConfirmCancelModal from "../../../components/commmon/Modal/ConfirmCancelModal";
 import {Pagination} from "@mui/material";
 import axios from 'axios';
-import {userApi} from "../../../Api";
+import {productsApi, userApi} from "../../../Api";
 
 const ReviewList = () => {
     const navigate = useNavigate();
     const [availableReviews, setAvailableReviews] = useState([]);
     const [writtenReviews, setWrittenReviews] = useState([]);
     const [review, setReview] = useState(true);
-    const [reviewed, setReviewed] = useState(false);
 
     const userId = sessionStorage.getItem("userId");
     const token = sessionStorage.getItem("token");
@@ -22,7 +22,6 @@ const ReviewList = () => {
     /* 리뷰 페이지네이션 */
     const [reviewCurrentPage, setReviewCurrentPage] = useState(1);
     const [reviewTotalPages, setReviewTotalPages] = useState(0);
-    const [totalPageList, setTotalPageList] = useState([]);
     const handleReviewPageChange = (event, value) => {
         setReviewCurrentPage(value);
         navigate(`?page=${value}`);
@@ -45,7 +44,10 @@ const ReviewList = () => {
                 console.error("Error fetching data: ", e);
             }
         };
-        fetchData();
+
+        if (review) {
+            fetchData();
+        }
     }, [review, reviewCurrentPage]);
 
     /* 작성한 리뷰 */
@@ -64,19 +66,62 @@ const ReviewList = () => {
                 console.error("Error fetching data: ", e);
             }
         };
-        fetchData();
+
+        if (!review) {
+            fetchData();
+        }
     }, [review, reviewCurrentPage]);
 
     /* 작성 가능한 리뷰, 작성한 리뷰 toggle 버튼 */
     const onClickReview = () => {
         setReview(true);
-        setReviewed(false);
         setReviewCurrentPage(1);
     }
     const onClickReviewed = () => {
         setReview(false);
-        setReviewed(true);
         setReviewCurrentPage(1);
+    }
+
+    /* 리뷰 삭제 모달 */
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [reviewIdToDelete, setReviewIdToDelete] = useState(null);
+    const handleOpenDeleteModal = (reviewId) => {
+        setReviewIdToDelete(reviewId);
+        setIsDeleteModalOpen(true);
+    }
+    const handleCloseDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+    };
+
+    /* 리뷰 삭제 api 호출 */
+    const handleDeleteReview = async (reviewId) => {
+        try {
+            if (reviewIdToDelete) {
+                await axios.delete(`${productsApi}/reviews/${reviewIdToDelete}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                /* 삭제된 리뷰를 제외한 새로운 배열 생성 */
+                const updatedReviews = writtenReviews
+                    .filter(order => !(
+                        order.orderDetailList &&
+                        order.orderDetailList.length === 1 &&
+                        order.orderDetailList[0].reviewId === reviewIdToDelete
+                    ))
+                    .map(order => ({
+                        ...order,
+                        orderDetailList: order.orderDetailList.filter(review => review.reviewId !== reviewIdToDelete),
+                    }));
+                setWrittenReviews(updatedReviews);
+
+                handleCloseDeleteModal();
+            }
+        } catch (e) {
+            console.error("Error fetching data: ", e);
+        }
     }
 
     return (
@@ -98,25 +143,24 @@ const ReviewList = () => {
                         {/* 작성가능한리뷰만 불러오기 */}
                         <div className="productreview-div-review-divide">|</div>
                         <button className="productreview-btn-review-togglebtn"
-                                style={{color: reviewed ? "#000" : "#A9AFB3"}} onClick={onClickReviewed}>작성한 리뷰
+                                style={{color: review ? "#A9AFB3" : "#000"}} onClick={onClickReviewed}>작성한 리뷰
                         </button>
-                        {/* 작성한리뷰만 불러오기 */}
                     </div>
                     {
                         review
-                            ? <>
-                                {/* 작성 가능한 리뷰 */}
-                                <OrderList orders={availableReviews}/>
-                            </>
-                            : <>
-                                {/* 작성한 리뷰 */}
-                                <OrderReviewList orders={writtenReviews}/>
-                            </>
+                            ? <OrderList orders={availableReviews}/>
+                            : <OrderReviewList orders={writtenReviews} deleteReview={handleOpenDeleteModal}/>
                     }
                     <Pagination count={reviewTotalPages} page={reviewCurrentPage}
                                 onChange={handleReviewPageChange}/>
                 </div>
             </div>
+            {isDeleteModalOpen && (
+                <ConfirmCancelModal isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}
+                                    onConfirm={() => handleDeleteReview()} color='#ff5d5d'>
+                    <div>해당 리뷰를 삭제하시겠습니까?</div>
+                </ConfirmCancelModal>
+            )}
         </div>
     );
 }

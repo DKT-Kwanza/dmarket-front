@@ -44,9 +44,7 @@
 .productreview-title-content {
     padding-left: 15px;
     font-size: 26px;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
 }
 
 .productreview-hr-line{
@@ -66,9 +64,7 @@
     background-color: transparent;
     color: #A9AFB3;
     font-size: 16px;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
     cursor: pointer;
 
 }
@@ -76,9 +72,7 @@
     border:none;
     background-color: transparent;
     font-size: 16px;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
     cursor: pointer;
     color: #000;
 
@@ -113,9 +107,7 @@
 .productreview-p-review-star-num{
     color: #000;
     font-size: 20px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
     margin:0;
 }
 .productreview-div-review-star{
@@ -125,16 +117,13 @@
 
 .productreview-div-review-created-review{
     color: #000;
-    font-family: Noto Sans KR;
     font-size: 15px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
 }
 
 .productreview-div-reviewed-item-wrapper{
     display: flex;
     flex-direction: row;
-    margin: 30px 0px;
+    margin: 30px 0;
     gap: 32px;
 }

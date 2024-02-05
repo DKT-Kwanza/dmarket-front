@@ -1,8 +1,8 @@
+import './OrderList.css'
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import OrderInfo from '../Info/OrderInfo';
 import OrderItem from '../Item/OrderItem';
-import './OrderList.css'
 
 const OrderList = ({ orders }) => {
   const navigate = useNavigate();
