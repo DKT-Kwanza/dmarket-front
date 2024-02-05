@@ -17,32 +17,23 @@ function CustomerCenterFAQ() {
     /* 세션 스토리지에서 토큰, userId 가져오기 */
     const token = sessionStorage.getItem('token');
 
-    /* faq 페이지네이션 */
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
-    const handlePageChange = (event, value) => {
-        setCurrentPage(value);
-        navigate(`?page=${value}`);
-    };
-
     /* 고객센터 faq 데이터 */
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const url = `${boardApi}/faq?page=${currentPage}`;
+                const url = `${boardApi}/faq`;
                 const response = await axios.get(url, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                setCustomerCenterFaqs(response.data.data.content);
-                setTotalPages(response.data.data.totalPages);
+                setCustomerCenterFaqs(response.data.data);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
         fetchData();
-    }, [currentPage]);
+    }, []);
 
     useEffect(() => {
         if (params.tab) {
@@ -55,7 +46,7 @@ function CustomerCenterFAQ() {
     useEffect(() => {
         const filtered = customerCenterFaqs.filter(faq => `${faq.faqType} 문의` === selectedMenu);
         setFilteredFaqs(filtered);
-    }, [selectedMenu, customerCenterFaqs, currentPage]);
+    }, [selectedMenu, customerCenterFaqs]);
 
     const handleMenuClick = (menu) => { // 탭 선택 시 url 변경
         setSelectedMenu(menu);
@@ -109,8 +100,6 @@ function CustomerCenterFAQ() {
                         <div style={{marginBottom: '20px'}}>
                             <CustomerCenterFAQList items={filteredFaqs}/>
                         </div>
-                        <Pagination count={totalPages} page={currentPage}
-                                    onChange={handlePageChange}/>
                         <div className='faq-main-menu-cantfind'>
                             원하는 정보를 찾지 못하셨나요?
                         </div>
