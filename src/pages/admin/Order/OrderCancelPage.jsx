@@ -1,10 +1,10 @@
+import {useEffect, useState} from "react";
 import LeftNav from "../../../components/admin/Sidebar/LeftNav";
 import Header from "../../../components/admin/Header/Header";
 import OrderCancelTable from "../../../components/admin/Table/OrderCancelTable";
+import axios from "axios";
 import {Paper, Box} from "@mui/material";
 import {indigo} from '@mui/material/colors';
-import {useEffect, useState} from "react";
-import axios from "axios";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -25,6 +25,7 @@ function OrderCancel() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     },
                 });
+                console.log(response.data);
                 setOrderCancel(response.data.data);
             } catch (e) {
                 console.error("Error fetching data: ", e);

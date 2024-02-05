@@ -28,3 +28,8 @@ export const formatPrice = (value) => {
 export const removeCommas = (value) => {
     return value.replace(/,/g, '');
 };
+
+/* 글자 수 초과 시 ... 처리 */
+export const truncate = (str, n) => {
+    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+};

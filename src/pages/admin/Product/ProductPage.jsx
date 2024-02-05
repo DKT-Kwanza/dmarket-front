@@ -21,7 +21,9 @@ function ProductPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [search, setSearch] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
+    const [searchCategoryId, setSearchCategoryId] = useState('');
+    
+    const tableHeader = ['상품번호', '브랜드', '상품', '옵션', '판매가', '카테고리', '재고', '등록일', ''];
 
     const getButtonVariant = (filter) => {
         return activeFilter === filter ? 'contained' : 'outlined';
@@ -29,6 +31,10 @@ function ProductPage() {
 
     /* 세션 스토리지에서 토큰 가져오기 */
     const token = sessionStorage.getItem('token');
+
+    useEffect(() => {
+        fetchData(categoryId, currentPage);
+    }, [categoryId, currentPage]); 
 
     /* 카테고리 별 상품 조회 */
     const fetchData = async () => {
@@ -41,8 +47,9 @@ function ProductPage() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                setProducts(response.data.data.content);
-                setTotalPages(response.data.data.totalPage);
+                setProducts(response.data.data.productList);
+                setTotalPages(response.data.data.totalPages);
+                setSearchCategoryId(categoryId);
                 console.log(response.data)
             } catch (e) {
                 console.error(e);
@@ -51,30 +58,36 @@ function ProductPage() {
     };
 
     const handleCategoryClick = (categoryId) => {
-        setCategoryId(categoryId);
-        fetchData(categoryId);
-    };
-    
+        if (categoryId) {
+            setCategoryId(categoryId);
+            setCurrentPage(1);
+            navigate(`?category=${categoryId}&page=1`);
+            fetchData(categoryId, 1);
+        }
+    };    
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
-        navigate(`?page=${value}`);
-    };
+        const categoryParam = categoryId ? `category=${categoryId}` : '';
+        navigate(`?${categoryParam}&page=${value}`);
+        fetchData(categoryId, value);
+    };   
 
-    const tableHeader = ['상품번호', '브랜드', '상품', '옵션', '판매가', '카테고리', '재고', '등록일', ''];
-
+    /* 카테고리 별 상품 검색 */
     const handleSearch = async () => {
-        console.log(search)
-        const url = `http://172.16.210.136:8080/api/admin/products/search?q=${search}&page=${currentPage}`;
-        try {
-            const response = await axios.get(url, {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            setProducts(response.data.data.content);
-            setTotalPages(response.data.data.totalPage);
-            console.log(response.data)
-        } catch (e) {
-            console.error(e);
+        if (search.trim() === '') {
+            fetchData(categoryId);
+        } else {
+            const url = `http://172.16.210.136:8080/api/admin/products/categories/${searchCategoryId}/search?q=${search}&page=${currentPage}`;
+            try {
+                const response = await axios.get(url, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                setProducts(response.data.data.productList);
+                setTotalPages(response.data.data.totalPages);
+            } catch (e) {
+                console.error(e);
+            }
         }
     };
 
@@ -98,7 +111,12 @@ function ProductPage() {
                 <Category onCategoryClick={handleCategoryClick} /> 
                 <SearchBar text={search} onChange={handleSearchInputChange} onSearch={handleSearch} />
                 <Paper square elevation={2} sx={{ p: '20px 30px' }}>
-                    <EditProductTable headers={tableHeader} rows={{ product: products }} />
+                    <EditProductTable
+                        headers={tableHeader}
+                        rows={{ product: products }}
+                        products={products}
+                        setProducts={setProducts}
+                    />
                     <Button
                         variant="outlined"
                         sx={{ float: 'right' }}

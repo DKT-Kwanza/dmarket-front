@@ -1,15 +1,16 @@
+import React, {useEffect, useState} from "react";
+import { useNavigate, useLocation } from 'react-router-dom';
 import LeftNav from "../../../components/admin/Sidebar/LeftNav";
 import Header from "../../../components/admin/Header/Header";
 import CustomerNoticeTable from "../../../components/admin/Table/CustomerNoticeTable";
-import {Paper, Box, Button, Pagination} from "@mui/material";
-import {indigo} from '@mui/material/colors';
-import React, {useEffect, useState} from "react";
-import { useNavigate, useLocation } from 'react-router-dom';
-import axios from "axios";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import NoticeModal from "../../../components/admin/Modal/NoticeModal";
 import NoticeWriteModal from "../../../components/admin/Modal/NoticeWriteModal";
+import {Paper, Box, Button, Pagination} from "@mui/material";
+import axios from "axios";
+import {indigo} from '@mui/material/colors';
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import {adminApi} from "../../../Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -38,7 +39,8 @@ function CustomerNotice() {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/admin/board/notices?page=${page}`, {
+                const url = `${adminApi}/board/notices?page=${page}`;
+                const response = await axios.get(url, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -54,7 +56,8 @@ function CustomerNotice() {
 
     const fetchNotices = async () => {
         try {
-            const response = await axios.get(`http://172.16.210.136:8080/api/admin/board/notices?page=${currentPage}`, {
+            const url = `${adminApi}/board/notices?page=${currentPage}`;
+            const response = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -70,7 +73,8 @@ function CustomerNotice() {
         if (!selectedNoticeId) return;
 
         try {
-            await axios.delete(`http://172.16.210.136:8080/api/admin/board/notice/${selectedNoticeId}`, {
+            const url = `${adminApi}/board/notice/${selectedNoticeId}`;
+            await axios.delete(url, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -144,8 +148,8 @@ function CustomerNotice() {
                         endIcon={<BorderColorIcon/>}>
                         작성하기
                     </Button>
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
                 </Paper>
-                <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             </Box>
             {isConfirmModalOpen && (
                 <ConfirmModal color={'#FF5D5D'} isOpen={isConfirmModalOpen} onClose={closeConfirmModalHandler}

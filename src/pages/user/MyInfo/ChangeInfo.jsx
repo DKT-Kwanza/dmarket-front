@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import axios from "axios";
 import './ChangeInfo.css';
+import React, {useEffect, useState} from 'react';
 import MyPageSubHeader from '../../../components/user/Header/MyPageSubHeader';
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
+import axios from "axios";
 
 function ChangeInfo() {
     const [userInfo, setUserInfo] = useState({});
@@ -54,7 +54,6 @@ function ChangeInfo() {
             }, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            alert("배송지가 수정되었습니다!");
             setIsOpen(true);
         } catch (error) {
             console.error("Error updating address: ", error);

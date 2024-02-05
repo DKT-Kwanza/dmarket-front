@@ -22,6 +22,7 @@ function OrderHistoryDetail() {
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');
 
+    /* 주문 상세 내역 조회 데이터 가져오기 */
     useEffect(() => {
         const fetchData = async () => {
             const url = `${userApi}/${userId}/mypage/orders/${orderId}`;
@@ -33,7 +34,6 @@ function OrderHistoryDetail() {
                     }
                 });
                 setOrderDetailProducts(response.data.data);
-                console.log(response.data.data);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -45,8 +45,6 @@ function OrderHistoryDetail() {
         <div className="orderHistoryDetail">
             <MyPageSubHeader/>
             <div className="orderHistoryDetail-body">
-
-
                 <div className="orderHistoryDetail-container">
                     {/*왼쪽 메뉴 바 영역 입니다.*/}
                     <MyPageSidebar/>
@@ -97,6 +95,7 @@ function OrderHistoryDetail() {
                         {orderDetailProducts?.productDetailList?.map((product, index) => (
                             <OrderDetailItem
                                 key={index}
+                                orderId={orderId}
                                 detailId={product.detailId}
                                 brand={product.productBrand}
                                 name={product.productName}
@@ -104,7 +103,7 @@ function OrderHistoryDetail() {
                                 option={product.productOption}
                                 count={product.productCount}
                                 price={product.productTotalSalePrice}
-                                status={product.orderStauts}
+                                orderStatus={product.orderStauts}
                             />
                         ))}
                     </div>

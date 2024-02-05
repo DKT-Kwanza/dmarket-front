@@ -1,12 +1,15 @@
+import './CartPage.css';
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
-import axios from 'axios';
-import './CartPage.css';
+import {useSetRecoilState} from "recoil";
 import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
 import CartList from "../../../components/user/List/CartList";
 import CartOrderInfo from "../../../components/user/Info/CartOrderInfo";
 import ConfirmCancelModal from "../../../components/commmon/Modal/ConfirmCancelModal";
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
+import axios from 'axios';
+import {userApi} from "../../../Api";
+import {cartCountAtom} from "../../../recoil/atom";
 
 function Cart() {
     const navigate = useNavigate();
@@ -22,7 +25,7 @@ function Cart() {
     /* 장바구니 데이터 조회 */
     useEffect(() => {
         const fetchData = async () => {
-            const url = `http://172.16.210.136:8080/api/users/${userId}/cart`;
+            const url = `${userApi}/${userId}/cart`;
             try {
                 const response = await axios.get(url, {
                     headers: {
@@ -31,13 +34,12 @@ function Cart() {
                 });
                 setCarts(response.data.data);
                 setCartCount(response.data.data.cartCount);
-                console.log(response.data.data)
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
         fetchData();
-    }, []);
+    }, [token, userId]);
 
     const navigateToOrder = () => {
         navigate("../../order");
@@ -87,6 +89,7 @@ function Cart() {
     };
 
     /* 모달 확인 버튼 클릭 시 장바구니 삭제 */
+    const setHeaderCartCount = useSetRecoilState(cartCountAtom);
     const handleDeleteSelectedItems = async () => {
         /* 선택된 상품들의 cartId를 추출 */
         const selectedCartIds = carts.cartList
@@ -107,7 +110,7 @@ function Cart() {
             /* 선택된 상품들을 삭제하는 API 호출 */
             try {
                 await Promise.all(selectedCartIds.map(async cartId => {
-                    const url = `http://172.16.210.136:8080/api/users/${userId}/cart/${cartId}`;
+                    const url = `${userApi}/${userId}/cart/${cartId}`;
                     await axios.delete(url, {
                         headers: {
                             'Authorization': `Bearer ${token}`,
@@ -115,19 +118,22 @@ function Cart() {
                     });
                 }));
                 /* 선택된 상품의 개수 계산 */
-                // const selectedItemCount = Object.values(checkedItems).filter(Boolean).length;
                 setCartCount(cartCount - selectedItemCount);
                 setIsDeleteModalOpen(false);
+
+                /* 상품 추가 후, 장바구니 개수를 다시 가져오는 axios get 요청 */
+                const cartCountResponse = await axios.get(`${userApi}/${userId}/cart-count`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                });
+                /* cartCountAtom을 업데이트 */
+                setHeaderCartCount(cartCountResponse.data.data.cartCount);
             } catch (e) {
                 console.error("Error deleting Cart data: ", e);
             }
         }
     };
-
-    /* 선택된 상품의 가격 배열 생성 */
-    const selectedItemsPrices = carts.cartList
-        .filter((_, index) => checkedItems[index])
-        .map(item => item.productTotalSalePrice);
 
     /* 선택된 상품의 개수와 총 가격 계산 */
     const selectedItemCount = Object.values(checkedItems).filter(Boolean).length;
@@ -137,6 +143,17 @@ function Cart() {
         }
         return total;
     }, 0);
+
+    const getSelectedItemsDetails = () => {
+        return carts.cartList
+            .filter((_, index) => checkedItems[index])
+            .map(item => ({
+                productId: item.productId,
+                productCount: item.productCount,
+                optionId: item.optionId,
+                price: item.productTotalSalePrice,
+            }));
+    };
 
     return (
         <div className='cart-body'>
@@ -158,7 +175,7 @@ function Cart() {
                 navigateToOrder={navigateToOrder}
                 itemCount={selectedItemCount}
                 totalPrice={selectedItemTotalPrice}
-                prices={selectedItemsPrices}
+                selectedItemsDetails={getSelectedItemsDetails()}
             />
             {isDeleteModalOpen && (
                 <ConfirmCancelModal isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal} onConfirm={handleDeleteSelectedItems} color='#ff5d5d'>

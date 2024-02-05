@@ -1,19 +1,20 @@
+import React, { useEffect, useState } from "react";
 import LeftNav from "../../../components/admin/Sidebar/LeftNav";
 import Header from "../../../components/admin/Header/Header";
 import TabMenu from "../../../components/admin/Common/TabMenu/TabMenu";
 import CustomerFaqTable from "../../../components/admin/Table/CustomerFaqTable";
-import {Paper, Box, Button, Pagination} from "@mui/material";
-import {indigo} from '@mui/material/colors';
-import React, {useEffect, useState} from "react";
-import axios from "axios";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
 import FaqModal from "../../../components/admin/Modal/FaqModal";
 import FaqWriteModal from "../../../components/admin/Modal/FaqWriteModal";
+import { Paper, Box, Button, Pagination } from "@mui/material";
+import { indigo } from '@mui/material/colors';
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import axios from "axios";
+import {adminApi} from "../../../Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
 
-function AdiminCustomerFaqPage() {
+function AdminCustomerFaqPage() {
     const [faqList, setFaqList] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
@@ -26,10 +27,10 @@ function AdiminCustomerFaqPage() {
     const [selectedFaqId, setSelectedFaqId] = useState(null);
 
     const menuList = [
-        {title: '회원 문의'},
-        {title: '주문/결제 문의'},
-        {title: '반품/환불 문의'},
-        {title: '마일리지 문의'}
+        { title: '회원 문의' },
+        { title: '주문/결제 문의' },
+        { title: '반품/환불 문의' },
+        { title: '마일리지 문의' }
     ];
 
     const token = sessionStorage.getItem('token');
@@ -40,7 +41,8 @@ function AdiminCustomerFaqPage() {
 
     const fetchFAQs = async (faqType, page) => {
         try {
-            const response = await axios.get(`http://172.16.210.136:8080/api/admin/board/faq?type=${faqType}&page=${page}`, {
+            const url = `${adminApi}/board/faq?type=${faqType}&page=${page}`;
+            const response = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -51,7 +53,7 @@ function AdiminCustomerFaqPage() {
             console.error("Error fetching data: ", e);
         }
     };
-    
+
     const handleTabChange = (tabTitle) => {
         setSelectedTab(tabTitle);
         setCurrentPage(0); // 탭을 변경할 때 페이지 번호를 초기화합니다.
@@ -72,7 +74,6 @@ function AdiminCustomerFaqPage() {
         setIsDetailModalOpen(true);
     };
 
-
     const handleWriteButtonClick = () => {
         setIsWriteModalOpen(true);
     }
@@ -83,7 +84,7 @@ function AdiminCustomerFaqPage() {
 
     const onDeleteClick = async (faqId) => {
         try {
-            const url = `http://172.16.210.136:8080/api/admin/board/faq/${faqId}`;
+            const url = `${adminApi}/board/faq/${faqId}`;
             await axios.delete(url, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -94,40 +95,35 @@ function AdiminCustomerFaqPage() {
         } catch (error) {
             console.log(error);
         }
-    };    
+    };
 
     return (
         <Box>
-            <LeftNav/>
-            <Header title={'FAQ'}/>
+            <LeftNav />
+            <Header title={'FAQ'} />
             {/*컨텐츠 영역입니다.*/}
             <Box
                 bgcolor={primary}
                 component="main"
-                sx={{height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px`}}>
+                sx={{ height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px` }}>
                 <Paper square elevation={2}
-                       sx={{p: '20px 30px'}}>
-                    <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange}/>
+                    sx={{ p: '20px 30px' }}>
+                    <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange} />
                     <CustomerFaqTable headers={tableHeader} rows={faqList} onDeleteClick={onDeleteClick}
-                                      onRowClick={handleRowClick}/>
+                        onRowClick={handleRowClick} />
                     <Button
-                        sx={{float: 'right'}}
+                        sx={{ float: 'right' }}
                         variant="contained"
                         endIcon={<BorderColorIcon />}
                         onClick={handleWriteButtonClick}>
                         작성하기
                     </Button>
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
                 </Paper>
-                <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
             </Box>
-            {/* {isConfirmModalOpen && (
-                <ConfirmModal color={'#FF5D5D'} isOpen={isConfirmModalOpen} onClose={closeConfirmModalHandler} onConfirm={handleConfirm}>
-                    <div>해당 글을 삭제합니다.</div>
-                </ConfirmModal>
-            )} */}
             {
                 selectedFaqId !== null && (
-                    <FaqModal open={isDetailModalOpen} handleClose={handleCloseDetailModal} faqId={selectedFaqId} faqList={faqList}/>
+                    <FaqModal open={isDetailModalOpen} handleClose={handleCloseDetailModal} faqId={selectedFaqId} faqList={faqList} />
                 )
             }
             {
@@ -137,4 +133,4 @@ function AdiminCustomerFaqPage() {
     );
 }
 
-export default AdiminCustomerFaqPage;
+export default AdminCustomerFaqPage;

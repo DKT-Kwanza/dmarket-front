@@ -8,6 +8,8 @@ import ScrollToTopBtn from "../../../components/user/Common/Button/ScrollToTopBt
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { Pagination } from "@mui/material";
 import { FaAngleRight } from "react-icons/fa6";
+import { removeCommas } from "../../../utils/Format";
+import {productsApi} from "../../../Api";
 
 function ProductPage(){
     const location = useLocation();
@@ -27,13 +29,16 @@ function ProductPage(){
 
     useEffect(() => {
         const fetchData = async () => {
-            const url = `http://172.16.210.136:8080/api/products/categories/${categoryId}?sorter=${sorter}&min-price=${minPrice}&max-price=${maxPrice}&star=${star}&page=${currentPage}`;
+            const formattedMinPrice = removeCommas(minPrice);
+            const formattedMaxPrice = removeCommas(maxPrice);
+
+            const url = `${productsApi}/categories/${categoryId}?sorter=${sorter}&min-price=${formattedMinPrice}&max-price=${formattedMaxPrice}&star=${star}&page=${currentPage}`;
             try {
                 const response = await axios.get(url, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 setProducts(response.data.data.content);
-                setTotalPages(response.data.data.totalPage);
+                setTotalPages(response.data.data.totalPages);
                 console.log(response.data)
             } catch (e) {
                 console.error(e);
@@ -61,6 +66,10 @@ function ProductPage(){
         }
     }, [location]);
 
+    const navigateToProductDetail = ({productId}) => {
+        navigate(`/product/detail/${productId}`);
+    }
+
     return (
         <div className="productList-body">
             <div className='productList-category'>{category1depthName} <FaAngleRight /> {category2depthName}</div>
@@ -80,7 +89,9 @@ function ProductPage(){
                         sales={item.productSalePrice}
                         ratingAvg={item.productRating}
                         reviewCnt={item.productReviewCount}
-                    />
+                        onClick={() => {
+                            navigateToProductDetail({productId: item.productId})
+                        }}/>
                 ))}
             </div>
             <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />

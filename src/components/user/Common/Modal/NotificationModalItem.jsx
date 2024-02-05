@@ -17,7 +17,7 @@ const NotificationItem = ({ notification, setUnreadCount }) => {
             console.error("No token or userId")
             return;
         }
-        
+        // 읽지 않은 상태면 읽음 상태로 변환 요청
         if (!notification.isRead) {
             try {
             await axios.put(notifyApi,{
@@ -31,12 +31,13 @@ const NotificationItem = ({ notification, setUnreadCount }) => {
             })
             notification.isRead = true;
             setUnreadCount((prevCount) => prevCount - 1);
-            navigate(url);
             }
             catch (e) {
                 console.error("Error fetching data: ", e);
             }
         }
+
+        navigate(url);
     };
 
     return (

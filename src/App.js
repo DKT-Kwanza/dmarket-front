@@ -112,14 +112,14 @@ function App() {
                   <Route path='mileage' element={<UserMileagePage/>}/>
               </Route>
 
-              <Route path='/productMng'>
-                  <Route path='' element={<Product/>}/>
-                  <Route path='add' element={<ProductAddPage/>}/>
-                  <Route path='edit' element={<ProductEditPage/>}/>
-                  <Route path='qna' element={<ProductQnaPage/>}/>
-                  <Route path='quantity' element={<ProductQuantityPage/>}/>
-                  <Route path='review' element={<ProductReviewPage/>}/>
-              </Route>
+                <Route path='/productMng'>
+                    <Route path='' element={<Product/>}/>
+                    <Route path='add' element={<ProductAddPage/>}/>
+                    <Route path="edit/:productId" element={<ProductEditPage />} />
+                    <Route path='qna' element={<ProductQnaPage/>}/>
+                    <Route path='quantity' element={<ProductQuantityPage/>}/>
+                    <Route path='review' element={<ProductReviewPage/>}/>
+                </Route>
 
               <Route path='/orderMng'>
                   <Route path='' element={<OrderStatus/>}/>

@@ -54,7 +54,7 @@ export default function OrderStatusTable({headers, rows, onChangeOrderStatusClic
                             <TableCell>{row.productCount}</TableCell>
                             <TableCell>{formatDate(row.orderDate)}</TableCell>
                             <TableCell>
-                                <SelectBox text={row.orderStatus} options={['결제 완료', '배송 준비', '배송중']} onChange={handleStatusChange}/>
+                                <SelectBox text={row.orderStatus} options={['결제 완료', '배송 준비', '배송중', '배송 완료']} onChange={handleStatusChange}/>
                             </TableCell>
                             <TableCell>
                                 <Button
@@ -62,8 +62,7 @@ export default function OrderStatusTable({headers, rows, onChangeOrderStatusClic
                                         event.stopPropagation();
                                         onChangeOrderStatusClick(row.detailId, selectedStatus);
                                     }}
-                                    variant="outlined"
-                                    href="#text-buttons">등록</Button>
+                                    variant="outlined">등록</Button>
                             </TableCell>
                         </TableRow>
                     ))}
