@@ -11,6 +11,8 @@ import ImageIcon from '@mui/icons-material/Image';
 import Typography from '@mui/material/Typography';
 import Write from "../../../components/admin/Common/Input/Write";
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
+import axios from "axios";
+import { adminApi, bucketToken, bucketURL } from "../../../Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -22,18 +24,20 @@ const categories = ['여성 의류', '남성 의류', '유아 의류', '신발',
                     
 function ProductAddPage () {
     const navigate = useNavigate();
+    const {v4} = require('uuid');
+    const token = sessionStorage.getItem('token');
     const [productDes, setProductDes] = useState("");
     const [images, setImages] = useState(Array(5).fill(null));
+    const [objecImages, setObjectImages] = useState(Array(5).fill(null));
     const [category, setCategory] = useState('');
     const [brand, setBrand] = useState(''); 
     const [productName, setProductName] = useState('');
+    const [price, setPrice] = useState({ cost: '', sale: '' });
     const [options, setOptions] = useState([]);
     const [optionInput, setOptionInput] = useState('');
     const [optionValueInput, setOptionValueInput] = useState('');
     const [optionTags, setOptionTags] = useState([]);
-    const [price, setPrice] = useState({ cost: '', sale: '' });
-    const [isOpen, setIsOpen] = useState(false);
-    const [addSubmitted, setAddSubmitted] = useState(false);
+    const [optionQuantities, setOptionQuantities] = useState({}); 
 
     const handleImageChange = (event, index) => {
         const file = event.target.files[0];
@@ -41,8 +45,11 @@ function ProductAddPage () {
             const reader = new FileReader();
             reader.onloadend = () => {
                 const newImages = [...images];
+                const objectNewImages = [...objecImages];
                 newImages[index] = reader.result;
+                objectNewImages[index] = file;
                 setImages(newImages);
+                setObjectImages(objectNewImages);
             };
             reader.readAsDataURL(file);
         }
@@ -61,8 +68,7 @@ function ProductAddPage () {
     };
 
     function onEditorChange(value) {
-        const content = value;
-        setProductDes(content);
+        setProductDes(value);
     }
 
     const handleOptionChange = (e) => {
@@ -73,52 +79,103 @@ function ProductAddPage () {
         setOptionValueInput(e.target.value);
     };
 
+    /* 옵션 값 */
     const handleAddOptionTag = () => {
-    if (optionValueInput) {
-        setOptionTags([...optionTags, optionValueInput]);
-        setOptionValueInput('');
-    }
+        if (optionValueInput.trim()) { 
+            const newOptionTag = {
+                optionValue: optionValueInput.trim(),
+                optionQuantity: 0 
+            };
+            setOptionTags([...optionTags, newOptionTag]);
+            setOptionValueInput('');
+        }
+    };
+    
+    /* 옵션 값에 수량 업데이트 */
+    const handleOptionQuantityChange = (index, quantity) => {
+        const updatedOptionTags = [...optionTags];
+        updatedOptionTags[index] = {
+            ...updatedOptionTags[index],
+            optionQuantity: parseInt(quantity, 10)
+        };
+        setOptionTags(updatedOptionTags);
     };
 
+    /* 옵션값 삭제 */
     const handleDeleteOptionTag = (tagToDelete) => {
         setOptionTags(optionTags.filter(tag => tag !== tagToDelete));
+        const updatedQuantities = {...optionQuantities};
+        delete updatedQuantities[tagToDelete];
+        setOptionQuantities(updatedQuantities);
     };
 
     const handlePriceChange = (prop) => (event) => {
         setPrice({ ...price, [prop]: event.target.value });
     };
-
-    /* 옵션 추가하기 */
-    const handleAddOption = () => {
-        if (optionInput && optionTags.length > 0) {
-            const newOption = { name: optionInput, values: [...optionTags] };
-            setOptions([...options, newOption]);
-            setOptionInput('');
-            setOptionTags([]);
-        }
-    };
-
-    /* 옵션값 스페이스바로 분리 */
+    
+    /* 옵션값 스페이스바, 엔터로 분리 */
     const handleKeyUp = (event) => {
         if (event.key === ' ' || event.key === 'Enter') {
             handleAddOptionTag();
         }
     };
+    
+    const handleAddSubmit = async(e) => {
+    
+        // Object Storage 저장
+        const newImgList = [];
+        for (let index = 0; index < objecImages.length; index++) {
+            const file = objecImages[index];
+            if (file) {
+                const newProductImgSrc = `${bucketURL}${v4()}.${file.type.split('/')[1]}`;
+                newImgList.push(newProductImgSrc);
+                try {
+                    await axios.put(newProductImgSrc, file, {
+                        headers: {
+                            'X-Auth-Token': bucketToken,
+                            'Content-Type': file.type
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error during request:', error);
+                }
+            }
+        }
+    
+        // 서버로 이미지 및 새 상품 데이터 전송
+        if (!token) {
+            console.log('Token is missing');
+            return;
+        }
 
-    const handleAddSubmit = (e) => {
-        e.preventDefault(); 
-        // 상품 등록 api 연동
+        try {
+            const finalOptionList = optionTags.map(tag => ({
+                optionName: optionInput, 
+                optionValue: tag.optionValue,
+                optionQuantity: tag.optionQuantity
+            }));
+    
+            const response = await axios.post(`${adminApi}/product`, {
+                brand: brand,
+                productName: productName,
+                categoryName: category,
+                productPrice: price.cost,
+                productDes: productDes,
+                productSalePrice: price.sale,
+                imgList: newImgList,
+                optionList: finalOptionList
+            }, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
 
-        setAddSubmitted(true);
-        setIsOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setIsOpen(false);
-        navigate('/productMng');
+            alert(`상품이 등록되었습니다.`);
+            navigate('/productMng');
+        } catch (error) {
+            console.error("상품 등록 에러:", error);
+            alert("상품 등록 중 오류가 발생했습니다.");
+        }
     };
     
-
     return (
         <Box>
             <LeftNav />
@@ -206,51 +263,42 @@ function ProductAddPage () {
                         variant="outlined"
                         value={optionValueInput}
                         onChange={handleOptionValueChange}
-                        onKeyUp={(e) => { if (e.key === ' ') handleAddOptionTag(); }}
+                        onKeyUp={handleKeyUp}
                     />
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                         {optionTags.map((tag, index) => (
-                        <Chip
-                            key={index}
-                            label={tag}
-                            onDelete={() => handleDeleteOptionTag(tag)}
-                            variant="outlined"
-                        />
+                            <Chip
+                                key={index}
+                                label={`${tag.optionValue} 수량: ${tag.optionQuantity}`}
+                                onDelete={() => handleDeleteOptionTag(tag)}
+                                variant="outlined"
+                            />
                         ))}
                     </Box>
                     {optionInput.length > 0 ? (
                         <TableContainer>
                             <Table>
-                            <TableHead>
-                                <TableRow>
-                                <TableCell>{optionInput}</TableCell>
-                                <TableCell>수량</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {options.map((option) => (
-                                <TableRow key={option.name}>
-                                    <TableCell>{option.name}</TableCell>
-                                    <TableCell>
-                                    <TextField
-                                        type="number"
-                                        size="small"
-                                    />
-                                    </TableCell>
-                                </TableRow>
-                                ))}
-                                {optionTags.map((tag) => (
-                                <TableRow key={tag}>
-                                    <TableCell>{tag}</TableCell>
-                                    <TableCell>
-                                    <TextField
-                                        type="number"
-                                        size="small"
-                                    />
-                                    </TableCell>
-                                </TableRow>
-                                ))}
-                            </TableBody>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>{optionInput}</TableCell>
+                                        <TableCell>수량</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {optionTags.map((tag, index) => (
+                                        <TableRow key={index}>
+                                            <TableCell>{tag.optionValue}</TableCell>
+                                            <TableCell>
+                                                <TextField
+                                                    type="number"
+                                                    size="small"
+                                                    value={tag.optionQuantity}
+                                                    onChange={(e) => handleOptionQuantityChange(index, e.target.value)}
+                                                />
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
                             </Table>
                         </TableContainer>
                     ) : (
@@ -269,7 +317,7 @@ function ProductAddPage () {
                         }}
                         />
                         <TextField
-                        label="원가"
+                        label="판매가"
                         type="number"
                         value={price.sale}
                         onChange={handlePriceChange('sale')}
@@ -282,17 +330,14 @@ function ProductAddPage () {
                 <Button
                     sx={{ float: 'right'}}
                     variant="outlined"
-                    onClick={handleAddSubmit}
+                    onClick={() => {
+                        handleAddSubmit();
+                    }}
                 >
                     등록
                 </Button>
             </Paper>
         </Box>
-        {addSubmitted && isOpen && (
-            <ConfirmModal color={'#3377FF'} isOpen={isOpen} onClose={handleCloseModal} onConfirm={handleCloseModal}>
-                <div>상품 등록이 완료되었습니다.</div>
-            </ConfirmModal>
-        )}
     </Box>
     );
 }

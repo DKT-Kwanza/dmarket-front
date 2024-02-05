@@ -62,9 +62,7 @@ body, html {
     color: #767676;
     font-family: 'Noto Sans HK', sans-serif;
     font-size: 15px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
     display: flex;
     align-items: center;
 }
@@ -165,9 +163,7 @@ body, html {
 .category-text{
     color: #000;
     font-size: 16px;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
     margin-left: 10px;
     cursor: pointer;
 }
@@ -191,9 +187,7 @@ body, html {
     cursor: pointer;
     color: #000;
     font-size: 15px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
 }
 
 .sub-category button:hover{
@@ -215,29 +209,34 @@ body, html {
     align-items: center;
     justify-content: space-evenly;
     color: #919191;
-    font-family: 'Noto Sans KR', sans-serif;
     font-size: 15px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
     cursor: pointer;
 }
 
 .sub-category-container {
-    margin-top: 30px;
     display: flex;
     background: #FFF;
 }
 
 .sub-category-box-container {
     display: flex;
+    justify-content: center;
+    width: 1280px;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+.sub-category-box {
+    width: 780px;
+    display: flex;
     justify-content: space-between;
-    margin-top: 25px;
 }
 
 .sub-category-box-whole {
     background-color: white;
-    margin-top: 30px;
+    border-bottom: 1px solid #EDEDED;
+    margin-top: 2px;
 }
 
 .sub-category-contents-details-button{
@@ -250,9 +249,6 @@ body, html {
 
 .sub-sub-category-contents-details button:hover {
     color: black;
-}
-
-.sub-sub-category-contents-details button:hover{
     font-weight: 700;
 }
 

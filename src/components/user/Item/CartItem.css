@@ -58,6 +58,7 @@
     font-weight: 400;
     display: flex;
     gap: 8px;
+    align-items: center;
 }
 
 .cartItem-bar {

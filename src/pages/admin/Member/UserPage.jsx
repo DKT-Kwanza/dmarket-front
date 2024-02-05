@@ -5,8 +5,8 @@ import SearchBar from "../../../components/admin/Common/SearchBar/SearchBar";
 import UserTable from "../../../components/admin/Table/UserTable";
 import {Paper, Box, Button} from "@mui/material";
 import {indigo} from '@mui/material/colors';
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useState} from 'react';
 import axios from 'axios';
 
 const primary = indigo[50];
@@ -15,26 +15,36 @@ const drawerWidth = 260;
 function MemberList() {
     const navigate = useNavigate();
     const [rows, setRows] = useState([]);
+    const [isData, setIsData] = useState(false);
+    const [search, setSearch] = useState('')
+
+    const token = sessionStorage.getItem('token');
 
     const tableHeader = ['이름', '사번', '이메일', '사용자', '입사일', ''];
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get("/api/AdminUserData.json");
-                setRows(response.data);
-                
-            } catch (e) {
-                console.error("Error fetching data: ", e);
-            }
-        };
-        fetchData();
-    }, []);
+    const handleSearch = async () => {
+        try {
+            const url = `http://172.16.210.136:8080/api/admin/admin-user?q=${search}`;
+            const response = await axios.get(url, {
+                headers: {'Authorization': `Bearer ${token}`}
+            });
+            setRows(response.data.data[0]);
+            setIsData(true);
+            console.log(response.data.data[0]);
+        } catch (e) {
+            console.error(e);
+            setIsData(false);
+        }
+    };
+
+    const handleSearchInputChange = (event) => {
+        const searchText = event.target.value;
+        setSearch(searchText);
+    };
 
     const navigateToRegister = () => {
         navigate('../addUser');
     }
-
 
     return (
         <Box>
@@ -44,19 +54,27 @@ function MemberList() {
             <Box
                 bgcolor={primary}
                 component="main"
-                sx={{height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px`}}>
-                <SearchBar/>
-                <Paper square elevation={2}
-                    sx={{p: '20px 30px'}}>
-                    <UserTable headers={tableHeader} rows={rows} />
-                    <Button
-                        variant="outlined"
-                        sx={{ float: 'right'}}
-                        onClick={navigateToRegister}
-                    >
-                        등록
-                    </Button>
-                </Paper>
+                sx={{
+                    height: '100vh',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    flex: 1,
+                    p: 3,
+                    mt: 9,
+                    ml: `${drawerWidth}px`
+                }}>
+                <SearchBar text={'사용자 검색'} onChange={handleSearchInputChange} onSearch={handleSearch}/>
+                {
+                    <Paper square elevation={2} sx={{p: '20px 30px'}}>
+                        {isData && rows && <UserTable headers={tableHeader} rows={rows}/>}
+                        <Button
+                            variant="outlined"
+                            sx={{float: 'right'}}
+                            onClick={navigateToRegister}>
+                            등록
+                        </Button>
+                    </Paper>
+                }
             </Box>
         </Box>
 

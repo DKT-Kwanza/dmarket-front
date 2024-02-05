@@ -1,8 +1,9 @@
 import React from "react";
 import './PaymentListItem.css'
+import styled from 'styled-components';
 import { formatPrice } from "../../../utils/Format";
 
-export default function PaymentListItem({ productImg, productBrand, productName, productOption, productTotalSalePrice, productTotalPrice, productCount }){
+function PaymentListItem({ productImg, productBrand, productName, productOption, productTotalSalePrice, productTotalPrice, productCount }){
     return(
         <div className="payment-product-wrap">
             <table>
@@ -23,8 +24,11 @@ export default function PaymentListItem({ productImg, productBrand, productName,
                             <p className="payment-product-productName">{productName}</p>
                             <div className='payment-product-description-bar'></div>
                             <div className='payment-product-option'>
-                                <div>{productOption}</div>
-                                <div className='cartItem-option-value'>{productCount}</div>
+                                <div>옵션</div>
+                                <Value>{productOption}</Value>
+                                <Line/>
+                                <div>수량</div>
+                                <Value><div className='cartItem-option-value'>{productCount}</div></Value>
                             </div>
                         </td>
                         <td className="payment-product-td-price">
@@ -45,3 +49,17 @@ export default function PaymentListItem({ productImg, productBrand, productName,
         </div>
     )
 }
+
+const Line = styled.div`
+  width: 1px;
+  height: 12px;
+  background: #DBDBDB;
+  margin: 0 10px;
+`
+
+const Value = styled.div`
+  color: #505050;
+  font-weight: 500;
+`
+
+export default PaymentListItem;

@@ -1,33 +1,51 @@
 import styled from "styled-components";
+import {useEffect, useState} from "react";
 import cancel from "../../../../assets/icons/cancel.svg";
 import plus from "../../../../assets/icons/plus.svg";
 import minus from "../../../../assets/icons/minus.svg";
-import {useState} from "react";
 
-function ProductOptionTab({option, name}) {
-    const [tab, setTab] = useState({option});
+function ProductOptionTab({option, name, onCountChange}) {
+    const [tab, setTab] = useState(option);
     const [count, setCount] = useState(1);
+
+    useEffect(() => {
+        if (tab) {
+            onCountChange({ count, optionId: option.optionId });
+        } else {
+            onCountChange({ count: 0, optionId: option.optionId });
+        }
+    }, [count, option.optionId, tab]);
 
     if (!tab) {
         return null;
     }
-
     const closeTabHandler = () => {
         setTab(null);
     }
 
     const addCount = () => {
-        setCount(count+1);
+        if (count < option.optionQuantity) {
+            const newCount = count + 1;
+            setCount(newCount);
+            onCountChange({ count: newCount, optionId: option.optionId });
+        }
     }
 
     const minusCount = () => {
-        setCount(count-1);
+        /* count가 0이 되면 tab 이 닫힘 */
+        if (count === 1) {
+            closeTabHandler();
+        } else {
+            const newCount = count - 1;
+            setCount(newCount);
+            onCountChange({ count: newCount, optionId: option.optionId });
+        }
     }
 
     return(
         <TabArea>
             <InfoArea>
-                <Text>[{option}] {name}</Text>
+                <Text>[{option.optionValue}] {name}</Text>
                 <CancelBtn onClick={closeTabHandler}>
                     <img
                         alt={"cancel btn"}
@@ -41,15 +59,23 @@ function ProductOptionTab({option, name}) {
                             src={minus}/>
                     </CountBtn>
                     <Count>{count}</Count>
-                    <CountBtn onClick={addCount}>
+                    {/* count가 option.optionQuantity 이상이면 버튼 비활성화 */}
+                    <CountBtn onClick={addCount} disabled={count >= option.optionQuantity}>
                         <img
                             alt={"plus btn"}
                             src={plus}/>
                     </CountBtn>
+                    <QuantityText>{option.optionQuantity}개 수량 제한</QuantityText>
                 </CountArea>
         </TabArea>
     );
 }
+
+const QuantityText = styled.div`
+  color: red;
+  padding-left: 10px;
+  font-size: 14px;
+`;
 
 const TabArea = styled.div`
   width: 538px;
@@ -83,13 +109,18 @@ const CancelBtn = styled.button`
 const CountArea = styled.div`
   margin-top: 20px;
   display: flex;
+  align-items: center;
 `;
 
 const CountBtn = styled.button`
   border: 1px solid #D9D9D9;
-  background: #FFF;
+  /* 배경 색 동적으로 변경 */
+  background: ${props => props.disabled ? '#F1F1F1' : '#FFF'}; 
   outline: none;
   padding-top: 4px;
+  height: 27px;
+  /* 비활성화일 때 커서 스타일 변경 */
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
 `;
 
 const Count = styled.div`
@@ -97,6 +128,8 @@ const Count = styled.div`
   border: 1px solid #D9D9D9;
   background: #FFF;
   text-align: center;
+  outline: none;
+  height: 26px;
 `;
 
 export default ProductOptionTab;

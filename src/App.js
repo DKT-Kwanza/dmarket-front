@@ -52,6 +52,9 @@ function App() {
     const applyBodyStyle = !noBodyStylePaths.some(path => location.pathname.startsWith(path));
     const hideHeaderFooter = (location.pathname.startsWith('/member') || location.pathname.startsWith('/memberMng') || location.pathname.startsWith('/productMng') || location.pathname.startsWith('/orderMng') || location.pathname.startsWith('/customerMng'));
 
+    const token = sessionStorage.getItem('token');
+
+
   return (
     <div className="App">
         {!hideHeaderFooter && <Header />}
@@ -112,7 +115,7 @@ function App() {
                 <Route path='/productMng'>
                     <Route path='' element={<Product/>}/>
                     <Route path='add' element={<ProductAddPage/>}/>
-                    <Route path='edit' element={<ProductEditPage/>}/>
+                    <Route path="edit/:productId" element={<ProductEditPage />} />
                     <Route path='qna' element={<ProductQnaPage/>}/>
                     <Route path='quantity' element={<ProductQuantityPage/>}/>
                     <Route path='review' element={<ProductReviewPage/>}/>

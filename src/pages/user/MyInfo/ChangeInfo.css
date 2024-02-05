@@ -42,9 +42,7 @@
     color: #000;
     padding-left: 15px;
     font-size: 26px;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
 }
 
 .InfoChange-title-line {
@@ -72,26 +70,20 @@
     margin-right: 141px;
     color: #000;
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
 }
 
 .InfoChange-info-contents {
     color: #363A3C;
     font-size: 15px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
 }
 
 .InfoChange-address-title {
     margin-bottom: 13px;
     color: #000;
     font-size: 20px;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
 }
 
 .InfoChange-address-box {
@@ -113,9 +105,7 @@
     margin-left: 10px;
     color: #BDBDBD;
     font-size: 10px;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
 }
 
 .InfoChange-address-minus {
@@ -123,9 +113,7 @@
     color: #363A3C;
     text-align: center;
     font-size: 16px;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
 }
 
 .InfoChange-address-box2 {
@@ -134,6 +122,12 @@
     justify-content: start;
     border: none;
     padding-top: 12px;
+}
+
+.InfoChange-address-postalcode{
+    height: 28px;
+    border-radius: 5px;
+    border: 1px solid #EAEEEF;
 }
 
 .InfoChange-address-detail{
@@ -157,10 +151,7 @@
     background: #FFD465;
     border: none;
     color: #363A3C;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+    font-size: 16px;
     cursor: pointer;
     text-decoration: none;
 }

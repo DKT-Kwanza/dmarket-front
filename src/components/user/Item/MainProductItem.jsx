@@ -1,5 +1,6 @@
 import React from 'react';
 import './MainProductItem.css'
+import {formatPrice} from "../../../utils/Format";
 
 const ProductItem = ({ brand, productName, productImg, sales, onClick }) => {
   return (
@@ -15,7 +16,7 @@ const ProductItem = ({ brand, productName, productImg, sales, onClick }) => {
           <p className='main-p-product-name'>{productName}</p>
         </div>
         <div className='main-div-product-price-wrapper'>
-          <p className='main-p-product-price'>{sales}</p>
+          <p className='main-p-product-price'>{formatPrice(sales)}</p>
           <p className='main-p-product-won'>원</p>
         </div>
       </div>

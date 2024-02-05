@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 import { formatDate, formatPrice } from '../../../utils/Format';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -23,40 +24,62 @@ const style = {
     p: 4,
 };
 
-export default function MileageReqTable({ headers, rows }) {
+export default function MileageReqTable({ headers, rows, fetchData }) {
     const navigate = useNavigate();
     const [isApproveModalOpen, setIsApproveModalOpen] = useState(false);
     const [isRefuseModalOpen, setIsRefuseModalOpen] = useState(false);
     const [selectedRequest, setSelectedRequest] = useState(null);
 
+    const token = sessionStorage.getItem('token');
+
     const openApproveModal = (request) => {
         setSelectedRequest(request);
         setIsApproveModalOpen(true);
     };
-
-    const closeApproveModal = () => {
-        setIsApproveModalOpen(false);
-    };
-
-    const handleApprove = () => {
-        // 승인 처리 API 추가
-        console.log('Approving:', selectedRequest);
-        closeApproveModal();
-    };
-
+    
     const openRefuseModal = (request) => {
         setSelectedRequest(request);
         setIsRefuseModalOpen(true);
     };
 
-    const closeRefuseModal = () => {
-        setIsRefuseModalOpen(false);
+    const handleApprove = async () => {
+        const mileageReqId = selectedRequest.mileageReqId; 
+    
+        try {
+            await axios.put(`http://172.16.210.136:8080/api/admin/users/mileage/approval/${mileageReqId}`, {}, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            alert("승인되었습니다!");
+            closeApproveModal();
+            fetchData();
+        } catch (error) {
+            console.error(error)
+        }
     };
 
-    const handleRefuse = () => {
-        // 거부 처리 API 추가
-        console.log('Refusing:', selectedRequest);
-        closeRefuseModal();
+    const closeApproveModal = () => {
+        setIsApproveModalOpen(false);
+        fetchData(); 
+    };
+
+    const closeRefuseModal = () => {
+        setIsRefuseModalOpen(false);
+        fetchData();
+    };
+
+    const handleRefuse = async () => {
+        const mileageReqId = selectedRequest.mileageReqId; 
+    
+        try {
+            await axios.put(`http://172.16.210.136:8080/api/admin/users/mileage/refusal/${mileageReqId}`, {}, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            alert("거부되었습니다!");
+            closeRefuseModal();
+            fetchData(); 
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -65,8 +88,8 @@ export default function MileageReqTable({ headers, rows }) {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            {headers.map((header) => (
-                                <TableCell>{header}</TableCell>
+                            {headers.map((header, index) => (
+                                <TableCell key={index}>{header}</TableCell>
                             ))}
                         </TableRow>
                     </TableHead>
@@ -92,21 +115,21 @@ export default function MileageReqTable({ headers, rows }) {
                                 </TableCell>
                                 <TableCell>{formatPrice(item.mileageCharge)} P</TableCell>
                                 <TableCell>
-                                    <Button
-                                        variant="outlined"
-                                        sx={{ mr: '20px' }}
-                                        onClick={() => openApproveModal(item)}
-                                    >
-                                        승인
-                                    </Button>
-                                    <Button 
-                                        variant="outlined" 
-                                        color="error"
-                                        onClick={() => openRefuseModal(item)}
-                                    >
-                                        거부
-                                    </Button>
-                                </TableCell>
+                                <Button
+                                    variant="outlined"
+                                    sx={{ mr: '20px' }}
+                                    onClick={() => openApproveModal(item)}
+                                >
+                                    승인
+                                </Button>
+                                <Button 
+                                    variant="outlined" 
+                                    color="error"
+                                    onClick={() => openRefuseModal(item)}
+                                >
+                                    거부
+                                </Button>
+                                    </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

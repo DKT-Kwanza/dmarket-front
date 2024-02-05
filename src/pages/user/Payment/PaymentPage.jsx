@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect} from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import "./PaymentPage.css";
 import useDetectClose from "./UseDetectClose";
 import { MsgDropDown } from "../../../components/user/Common/Select/MsgDropDown";
@@ -11,6 +11,11 @@ import AddressConfirmModal from "../../../components/user/Common/Modal/AddressCo
 
 function Payment(){
     const navigate = useNavigate();
+    const location = useLocation();
+    const orderData = location.state?.orderData.data;
+
+    console.log(orderData)
+
     const dropDownRef = useRef();
     const [msgIdentify, setMsgIdentify] = useState('배송기사에게 전달되는 메시지 입니다. 선택해 주세요.');
     const delReqList = ['배송기사에게 전달되는 메시지 입니다. 선택해 주세요.',
@@ -19,26 +24,10 @@ function Payment(){
                         '배송전에 연락주세요', '문 앞에 두고 가주세요'];  
 
     const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
-    const [paymentProducts, setPaymentProducts] = useState([]);
+    const [paymentProducts, setPaymentProducts] = useState(orderData || {});
     const [isModalOpen, setIsModalOpen] = useState(false);
     const productListCnt = paymentProducts.productList ? paymentProducts.productList.length : 0;
     const discount = paymentProducts.totalPrice - paymentProducts.totalPay;
-    
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get("/api/PaymentProductsData.json");
-                setPaymentProducts(response.data);
-
-                if (!response.data.userPostalCode || !response.data.userAddress || !response.data.userDetailAddress) {
-                    setIsModalOpen(true);
-                }
-            } catch (e) {
-                console.error("Error fetching data: ", e);
-            }
-        };
-        fetchData();
-    }, [navigate]);
 
     const closeModal = () => {
         setIsModalOpen(false);
@@ -70,12 +59,12 @@ function Payment(){
                         </span>
                         <div className="payment-deliveryAddr-input">
                             <div className="payment-deliverAddr-input-add1">
-                                <div>{paymentProducts.userName}</div>
-                                <div>{paymentProducts.userPhoneNum}</div>
+                                <div>{orderData.userName}</div>
+                                <div>{orderData.userPhoneNum}</div>
                             </div>
                             <div className="payment-deliverAddr-input-add2">
-                                <div>{paymentProducts.userPostalCode}</div>
-                                <div>{paymentProducts.userAddress} {paymentProducts.userDetailAddress}</div>
+                                <div>{orderData.userPostalCode}</div>
+                                <div>{orderData.userAddress} {orderData.userDetailAddress}</div>
                             </div>
                         </div>
                     </div>
@@ -126,6 +115,7 @@ function Payment(){
                         totalPrice={paymentProducts.totalPrice}
                         discount={discount}
                         totalPay={paymentProducts.totalPay}
+                        productList={paymentProducts.productList || []}
                     />
                 </div>
             </div>

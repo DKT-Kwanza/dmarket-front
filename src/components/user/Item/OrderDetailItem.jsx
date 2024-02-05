@@ -1,19 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import GreyBtn from '../Common/Button/GreyBtn';
 import styled from 'styled-components';
-import ConfirmCancelModal from '../../user/Common/Modal/ConfirmCancelModal'
-import SelectBox from "../../commmon/SelectBox/SelectBox";
+import ConfirmCancelModal from "../../commmon/Modal/ConfirmCancelModal";
+import {formatPrice} from "../../../utils/Format";
+import {userApi} from "../../../Api";
+import axios from "axios";
 
-function OrderDetailItem({img, brand, name, option, count, price, status}) {
-    const [statusText, setStatusText] = useState("");
+function OrderDetailItem({orderId, detailId, img, brand, name, option, count, price, orderStatus}) {
+    const [status, setStatus] = useState(orderStatus);
+    const [statusButton, setStatusButton] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     const [isConfirming, setIsConfirming] = useState(false);
 
     useEffect(() => {
-        if (status === "결제 확인") {
-            setStatusText("주문취소");
+        if (status === "결제 완료") {
+            setStatusButton("주문취소");
         } else if (status === "배송 완료") {
-            setStatusText("반품신청");
+            setStatusButton("반품신청");
         }
     }, []);
 
@@ -25,9 +28,63 @@ function OrderDetailItem({img, brand, name, option, count, price, status}) {
         setIsOpen(false);
     };
 
-    const handleConfirm = () => {
-        // modal 의 확인 을 누르면 button 이 disabled
-        setIsConfirming(true);
+    // const handleConfirm = () => {
+    //     // modal 의 확인 을 누르면 button 이 disabled
+    //     setIsConfirming(true);
+    // };
+
+    /* 세션 스토리지에서 토큰 가져오기 */
+    const token = sessionStorage.getItem('token');
+    const userId = sessionStorage.getItem('userId');
+
+    /* 모달의 확인 버튼 클릭 */
+    const [selectedReason, setSelectedReason] = useState('');
+    const handleReasonChange = (event) => {
+        setSelectedReason(event.target.value);
+    };
+
+    const handleConfirm = async (statusButton) => {
+        if (statusButton === "주문취소") {
+            /* 주문 취소 API 호출 */
+            try {
+                const url = `${userApi}/${userId}/mypage/order/cancel`;
+                const requestData = {
+                    orderId: orderId,
+                    orderDetailId: detailId
+                };
+                const response = await axios.post(url, requestData, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    }
+                });
+                setIsConfirming(true);
+                setStatus("주문 취소");
+            } catch (e) {
+                console.error("주문 취소 에러: ", e)
+            }
+        } else {
+            /* 반품 신청 API 호출 */
+            console.log(selectedReason);
+            const requestData = {
+                orderDetailId: detailId,
+                returnContents: selectedReason
+            };
+            try {
+                const url = `${userApi}/${userId}/mypage/order/return`;
+                const response = await axios.post(url, requestData, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    }
+                });
+                setStatus("환불/반품 신청");
+                setIsConfirming(true);
+            } catch (e) {
+                console.error("반품 신청 에러: ", e)
+            }
+        }
+        closeModalHandler();
     };
 
     return (
@@ -49,7 +106,7 @@ function OrderDetailItem({img, brand, name, option, count, price, status}) {
                             <InfoContent>
                                 {/* 상품 옵션 */}
                                 <div>{option}</div>
-                                <Line />
+                                <Line/>
                                 {/* 상품 수량 */}
                                 <OptionTitle>수량</OptionTitle>
                                 <div>{count}</div>
@@ -57,25 +114,36 @@ function OrderDetailItem({img, brand, name, option, count, price, status}) {
                         </tr>
                         <tr>
                             <InfoTitle>결제금액</InfoTitle>
-                            <InfoContent>{price} 원</InfoContent> {/* 상품 금액 */}
+                            <InfoContent>{formatPrice(price)} 원</InfoContent> {/* 상품 금액 */}
                         </tr>
                     </Info>
-                    {status === "결제 확인" || status === "배송 완료" ? (
-                        <GreyBtn onClick={openModalHandler}>{statusText}</GreyBtn>
+                    {status === "결제 완료" || status === "배송 완료" ? (
+                        <InfoProcess>
+                            <div style={{paddingRight: '40px'}}>{status}</div>
+                            <GreyBtn onClick={() => {
+                                openModalHandler()
+                            }}>{statusButton}</GreyBtn>
+                        </InfoProcess>
                     ) : (
                         <InfoProcess>{status}</InfoProcess>
                     )}
                 </Item>
             </div>
             {isOpen && (
-                <ConfirmCancelModal isOpen={isOpen} onClose={closeModalHandler} onConfirm={handleConfirm}>
+                <ConfirmCancelModal isOpen={isOpen} onClose={closeModalHandler}
+                                    onConfirm={() => handleConfirm(statusButton)} color='#ffd465'>
                     {
-                        statusText === "주문취소"
+                        statusButton === "주문취소"
                             ? <div>해당 상품에 대한 주문이 취소됩니다.</div>
                             :
                             <div style={{display: 'flex', flexDirection: 'column'}}>
                                 <div>해당 상품을 반품신청 합니다.</div>
-                                <SelectBox text={'반품신청 사유를 선택하세요'} options={['단순변심', '제품하자', '오배송']}/>
+                                <Select name="options" onChange={handleReasonChange}>
+                                    <option disabled selected hidden>반품신청 사유를 선택하세요.</option>
+                                    {['단순변심', '제품하자', '오배송'].map((option, index) => (
+                                        <option key={index} value={option}>{option}</option>
+                                    ))}
+                                </Select>
                             </div>
                     }
                 </ConfirmCancelModal>
@@ -83,6 +151,10 @@ function OrderDetailItem({img, brand, name, option, count, price, status}) {
         </div>
     );
 }
+
+const Select = styled.select`
+  margin-top: 10px;
+`
 
 const Item = styled.div`
   display: flex;
@@ -134,6 +206,8 @@ const InfoProcess = styled.div`
   font-weight: 700;
   line-height: normal;
   margin-left: auto;
+  display: flex;
+  align-items: center;
 `
 
 const Line = styled.div`

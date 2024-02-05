@@ -2,11 +2,10 @@ import LeftNav from "../../../components/admin/Sidebar/LeftNav";
 import Header from "../../../components/admin/Header/Header";
 import TabMenu from "../../../components/admin/Common/TabMenu/TabMenu";
 import CustomerInquiryTable from "../../../components/admin/Table/CustomerInquiryTable";
-import {Paper, Box} from "@mui/material";
-import {indigo} from '@mui/material/colors';
-import React, {useEffect, useState} from "react";
+import { Paper, Box, Button, Pagination } from "@mui/material";
+import { indigo } from '@mui/material/colors';
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import InquiryModal from "../../../components/admin/Modal/InquiryModal";
 
 const primary = indigo[50];
@@ -14,41 +13,52 @@ const drawerWidth = 260;
 
 function CustomerInquiry() {
     const [inquiryList, setInquiryList] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
     const [selectedTab, setSelectedTab] = useState('회원 문의');
     const tableHeader = ['구분', '제목', '작성자', '작성일', '답변상태', ''];
+    const [inquiryType, setInquiryType] = useState('');
+    const [inquiryPage, setInquiryPage] = useState('');
+    
     const menuList = [
-        {title: '회원 문의'},
-        {title: '주문/결제 문의'},
-        {title: '반품/환불 문의'},
-        {title: '마일리지 문의'}
+        { title: '회원 문의' },
+        { title: '주문/결제 문의' },
+        { title: '반품/환불 문의' },
+        { title: '마일리지 문의' }
     ];
 
     /* 세션 스토리지에서 토큰 가져오기 */
     const token = sessionStorage.getItem('token');
 
-    /* inquiryType 에 맞는 데이터 가져오기 */
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const encodedTab = encodeURIComponent(selectedTab.split(' ')[0]);
-                const response = await axios.get(`http://172.16.210.136:8080/api/admin/board/inquiry?type=${encodedTab}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json; charset=UTF-8',
-                    }
-                });
-                setInquiryList(response.data.data.content);
-                // console.log(response.data.data);
-            } catch (e) {
-                console.error("Error fetching data: ", e);
-            }
-        };
-        fetchData();
-    }, [selectedTab]);
+        fetchInquirys(selectedTab.replace(' 문의', ''), currentPage);
+    }, [selectedTab, currentPage]);
+
+    const fetchInquirys = async (type, page) => {
+        try {
+            const response = await axios.get(`http://172.16.210.136:8080/api/admin/board/inquiry?type=${type}&page=${page}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setInquiryList(response.data.data.content);
+            setTotalPages(response.data.data.totalPages);
+            setInquiryPage(page);
+            setInquiryType(type);
+        } catch (e) {
+            console.error("Error fetching data: ", e);
+        }
+    };
 
     const handleTabChange = async (tabTitle) => {
         setSelectedTab(tabTitle);
+        setCurrentPage(0); // 탭을 변경할 때 페이지 번호를 초기화합니다.
     };
+    // 페이지네이션 핸들러
+    const handlePageChange = (event, newPage) => {
+        setCurrentPage(newPage);
+    };
+
 
     /* 모달 상태 관리 변수 */
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
@@ -69,6 +79,7 @@ function CustomerInquiry() {
             });
             alert("해당 문의를 삭제합니다.");
             setInquiryList(inquiryList.filter(inquiry => inquiry.inquiryId !== selectedInquiryId));
+            fetchInquirys(inquiryType, inquiryPage);
         } catch (error) {
             console.error('Delete API 호출 실패:', error);
         }
@@ -80,13 +91,15 @@ function CustomerInquiry() {
         setIsDetailModalOpen(true);
     };
     const handleCloseDetailModal = () => {
+        fetchInquirys(inquiryType, inquiryPage);
         setIsDetailModalOpen(false);
     };
 
     return (
         <Box>
-            <LeftNav/>
-            <Header title={'문의 게시판'}/>
+            
+            <LeftNav />
+            <Header title={'문의 게시판'} />
             {/*컨텐츠 영역입니다.*/}
             <Box
                 bgcolor={primary}
@@ -101,15 +114,16 @@ function CustomerInquiry() {
                     ml: `${drawerWidth}px`
                 }}>
                 <Paper square elevation={2}
-                       sx={{p: '20px 30px'}}>
-                    <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange}/>
+                    sx={{ p: '20px 30px' }}>
+                    <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange} />
                     <CustomerInquiryTable headers={tableHeader} rows={inquiryList}
-                                          onDeleteClick={onDeleteClick} onRowClick={handleRowClick}/>
+                        onDeleteClick={onDeleteClick} onRowClick={handleRowClick} />
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
                 </Paper>
             </Box>
             {selectedInquiryId !== null && (
                 <InquiryModal
-                    open={isDetailModalOpen} handleClose={handleCloseDetailModal} inquiryId={selectedInquiryId}/>
+                    open={isDetailModalOpen} handleClose={handleCloseDetailModal} inquiryId={selectedInquiryId} />
             )}
         </Box>
     );
