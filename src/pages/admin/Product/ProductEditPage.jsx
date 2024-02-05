@@ -208,9 +208,13 @@ function ProductEditPage() {
                 optionValue: tag.optionValue,
                 optionQuantity: tag.optionQuantity
             }));
-            
-            const updatedOptions = [...product.options, ...newOptions];
     
+            const updatedOptions = options.map(option => ({
+                optionName: option.name,
+                optionValue: option.values[0],
+                optionQuantity: option.quantity
+            })).concat(newOptions);
+
             const updatedProductData = {
                 productBrand: brand || product.brand,
                 productName: productName || product.productName,
@@ -218,11 +222,7 @@ function ProductEditPage() {
                 productPrice: price.cost || product.price.cost,
                 productSalePrice: price.sale || product.price.sale,
                 productDes: productDes || product.productDes,
-                optionList: updatedOptions.map(option => ({
-                    optionName: option.optionName,
-                    optionValue: option.optionValue,
-                    optionQuantity: option.optionQuantity
-                })),
+                optionList: updatedOptions,
                 imgList: newImgList
             };
 
@@ -346,39 +346,45 @@ function ProductEditPage() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {options.map((option, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell>{option.values.join(', ')}</TableCell>
-                                        <TableCell>
-                                            <TextField
-                                                type="number"
-                                                size="small"
-                                                value={option.quantity}
-                                                onChange={(e) => {
-                                                    const updatedOptions = [...options];
-                                                    updatedOptions[index].quantity = e.target.value;
-                                                    setOptions(updatedOptions);
-                                                }}
-                                            />
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                            <TableBody>
-                                {optionTags.map((tag, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell>{tag.optionValue}</TableCell>
-                                        <TableCell>
-                                            <TextField
-                                                type="number"
-                                                size="small"
-                                                value={tag.optionQuantity}
-                                                onChange={(e) => handleOptionQuantityChange(index, e.target.value)}
-                                            />
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
+            {options.map((option, index) => (
+                <TableRow key={`existing-option-${index}`}>
+                    <TableCell>{option.name}</TableCell>
+                    <TableCell>{option.values}</TableCell>
+                    <TableCell>
+                        <TextField
+                            type="number"
+                            size="small"
+                            value={option.quantity}
+                            onChange={(e) => {
+                                const updatedOptions = [...options];
+                                updatedOptions[index].quantity = e.target.value;
+                                setOptions(updatedOptions);
+                            }}
+                        />
+                    </TableCell>
+                </TableRow>
+            ))}
+        </TableBody>
+        <TableBody>
+            {optionTags.map((tag, index) => (
+                <TableRow key={`new-option-${index}`}>
+                    <TableCell>{optionName}</TableCell>
+                    <TableCell>{tag.optionValue}</TableCell>
+                    <TableCell>
+                        <TextField
+                            type="number"
+                            size="small"
+                            value={tag.optionQuantity}
+                            onChange={(e) => {
+                                const updatedOptionTags = [...optionTags];
+                                updatedOptionTags[index].optionQuantity = e.target.value;
+                                setOptionTags(updatedOptionTags);
+                            }}
+                        />
+                    </TableCell>
+                </TableRow>
+            ))}
+        </TableBody>
                         </Table>
                     </TableContainer>
                     <Box sx={{ display: 'flex', gap: 2 }}>
