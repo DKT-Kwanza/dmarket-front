@@ -28,11 +28,6 @@ function OrderDetailItem({orderId, detailId, img, brand, name, option, count, pr
         setIsOpen(false);
     };
 
-    // const handleConfirm = () => {
-    //     // modal 의 확인 을 누르면 button 이 disabled
-    //     setIsConfirming(true);
-    // };
-
     /* 세션 스토리지에서 토큰 가져오기 */
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');

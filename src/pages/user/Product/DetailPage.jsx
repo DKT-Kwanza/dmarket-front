@@ -1,5 +1,5 @@
 import './DetailPage.css';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {useSetRecoilState} from 'recoil';
 import DetailQnaList from "../../../components/user/List/DetailQnaList";
@@ -15,6 +15,8 @@ import {formatPrice} from "../../../utils/Format";
 import axios from 'axios';
 import {productsApi, userApi, orderApi} from "../../../Api";
 import {cartCountAtom} from "../../../recoil/atom";
+import styled from "styled-components";
+import {css} from "@emotion/react";
 import {Pagination} from "@mui/material";
 import {FaHeart} from "react-icons/fa";
 import heart from '../../../assets/icons/heart.svg';
@@ -28,6 +30,7 @@ function Detail() {
     const {productId} = useParams();
 
     const [product, setProduct] = useState([]);
+    const [productImg, setProductImg] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [qna, setQna] = useState([]);
     const [recommendProducts, setRecommendProducts] = useState([]);
@@ -49,6 +52,7 @@ function Detail() {
                     }
                 });
                 setProduct(response.data.data);
+                setProductImg(response.data.data.imgList);
             } catch (e) {
                 console.error("Error fetching Product data: ", e);
             }
@@ -150,6 +154,15 @@ function Detail() {
         fetchData();
     }, [token, productId]);
 
+    /* 서브 이미지 클릭 */
+    const handleSubImgClick = (index) => {
+        if (index > 0 && index < productImg.length) {
+            const newProductImg = [...productImg];
+            [newProductImg[0], newProductImg[index]] = [newProductImg[index], newProductImg[0]];
+            setProductImg(newProductImg);
+        }
+    }
+
     /* 위시 리스트 추가 */
     const handleWishClick = async () => {
         const url = `${userApi}/${userId}/wish`;
@@ -175,8 +188,8 @@ function Detail() {
     const handleSelect = (e) => {
         const selectedOption = {
             "optionValue": e.target.value,
-            "optionId": e.target.options[e.target.selectedIndex].getAttribute("optionId"),
-            "optionQuantity": e.target.options[e.target.selectedIndex].getAttribute("optionQuantity")
+            "optionId": e.target.options[e.target.selectedIndex].getAttribute("optionid"),
+            "optionQuantity": e.target.options[e.target.selectedIndex].getAttribute("optionquantity")
         };
 
         // 이미 선택된 optionId가 order에 있으면 alert 표시
@@ -344,6 +357,40 @@ function Detail() {
         }
     };
 
+    const [scannerPosition, setScannerPosition] = useState({ left: 0, top: 0 });
+    const [imageRect, setImageRect] = useState(null);
+    const imageRef = useRef();
+
+    useEffect(() => {
+        if (imageRef.current) {
+            setImageRect(imageRef.current.getBoundingClientRect());
+        }
+    }, [imageRef]);
+
+    const onMouseMove = (e) => {
+        const scannerWidth = 150;
+        const scannerHeight = 150;
+        if (imageRect) {
+            // 헤더의 높이를 고려하여 조정
+            const headerHeight = 166;
+            let scannerPosLeft = e.clientX - scannerWidth / 2 - imageRect.left;
+            let scannerPosTop = e.clientY - scannerHeight / 2 - imageRect.top + headerHeight;
+
+            scannerPosLeft = Math.max(0, Math.min(imageRect.width - scannerWidth, scannerPosLeft));
+            scannerPosTop = Math.max(0, Math.min(imageRect.height - scannerHeight, scannerPosTop));
+
+            const scannerPosition = { left: scannerPosLeft, top: scannerPosTop };
+
+            setScannerPosition(scannerPosition);
+        }
+    };
+
+    const onMouseLeave = () => {
+        if (imageRect) {
+            setScannerPosition(null);
+        }
+    };
+
 
     return (
         <>
@@ -352,18 +399,19 @@ function Detail() {
                     <text>{product.productCategory}</text>
                 </div>
                 <div className='productArea'>
-                    <div className='repImg'>
-                        {
-                            product.imgList && <img alt={product.productName}
-                                                    src={product.imgList[0]}/>
-                        }
+                    <div className='detail-repImg' onMouseMove={onMouseMove}>
+                        {productImg && <img alt={product.productName} src={productImg[0]}/>}
+                        {imageRect && scannerPosition && <ScannerWrapper position={scannerPosition} />}
                     </div>
 
-                    <div className='subImgArea'>
-                        {product.imgList && product.imgList.length > 1 && (
-                            product.imgList.slice(1).map((imgSrc, index) => (
-                                <div key={index} className='subImg'>
-                                    <img alt={`SubImage ${index + 1}`} src={imgSrc}/>
+                    <div className='detail-subImgArea'>
+                        {productImg && productImg.length > 1 && (
+                            productImg.slice(1).map((img, index) => (
+                                <div key={index} className='detail-subImg'
+                                     onClick={() => {
+                                         handleSubImgClick(index + 1);
+                                     }}>
+                                    <img alt={`SubImage ${index + 1}`} src={img}/>
                                 </div>
                             ))
                         )}
@@ -406,8 +454,8 @@ function Detail() {
                                 <option value="" disabled selected hidden>옵션을 선택하세요.</option>
                                 {product.optionList && product.optionList.map((option, index) => (
                                     <option key={index} value={option.optionValue}
-                                            optionId={option.optionId}
-                                            optionQuantity={option.optionQuantity}>{option.optionValue}</option>
+                                            optionid={option.optionId}
+                                            optionquantity={option.optionQuantity}>{option.optionValue}</option>
                                 ))}
                             </select>
                         </div>
@@ -461,9 +509,9 @@ function Detail() {
                 </div>
                 <div className='productDetailBox'>
                     <ReactQuill
-                    value={product.productDes}
-                    readOnly={true}
-                    theme={'bubble'}
+                        value={product.productDes}
+                        readOnly={true}
+                        theme={'bubble'}
                     />
                 </div>
 
@@ -508,7 +556,8 @@ function Detail() {
                         <div className='qna-category-line'/>
                         <button className='qnaReplyWaiting'>답변대기 ({qnaPendingAnswersCount})</button>
                     </div>
-                    <button onClick={handleToggle} className='qnaEnroll'>Q&A 작성하기 <img alt={''} src={arrowRight}/></button>
+                    <button onClick={handleToggle} className='qnaEnroll'>Q&A 작성하기 <img alt={''} src={arrowRight}/>
+                    </button>
                 </div>
                 <DetailQnaList qnas={qna.content || []}/>
                 {
@@ -582,5 +631,17 @@ function Detail() {
     );
 }
 
+/* 스캐너 스타일 */
+const ScannerWrapper = styled.span`
+  position: absolute;
+  top: ${props => props.position.top}px;
+  left: ${props => props.position.left}px;
+  width: 150px;
+  height: 150px;
+  border: 1px solid #000;
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  display: inline-block;
+`;
 
 export default Detail;

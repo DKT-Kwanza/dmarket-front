@@ -16,23 +16,24 @@
 .productArea {
     display: flex;
 }
-.repImg {
+
+.detail-repImg {
     width: 550px;
     height: 550px;
     background-color: #D9D9D9;
 }
 
-.repImg img {
+.detail-repImg img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.subImgArea {
+.detail-subImgArea {
     width: 110px;
     height: 550px;
 }
-.subImg {
+.detail-subImg {
     display: flex;
     width: 100px;
     height: 100px;

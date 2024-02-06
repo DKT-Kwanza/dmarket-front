@@ -36,14 +36,14 @@ function ProductEditPage() {
     const [optionValueInput, setOptionValueInput] = useState('');
     const [optionTags, setOptionTags] = useState([]);
     const [optionQuantities, setOptionQuantities] = useState({}); 
-    const [price, setPrice] = useState({ cost: '', sale: '' });
+    const [price, setPrice] = useState({ cost: '', discount: '', sale: '' });
     const [product, setProduct] = useState({
         productDes: '',
         images: [],
         category: '',
         brand: '',
         productName: '',
-        price: { cost: '', sale: '' },
+        price: { cost: '', discount: '', sale: '' },
         options: [],
     });
 
@@ -66,7 +66,7 @@ function ProductEditPage() {
                     category: data.productCategory,
                     brand: data.productBrand,
                     productName: data.productName,
-                    price: { cost: data.productPrice, sale: data.productSalePrice },
+                    price: { cost: data.productPrice, discount: data.productDiscountRate, sale: data.productSalePrice },
                     options: data.optionList.map(o => ({
                         optionName: o.optionName,
                         optionValue: o.optionValue,
@@ -76,9 +76,9 @@ function ProductEditPage() {
                 setBrand(response.data.data.productBrand);
                 setProductName(response.data.data.productName);
                 setCategory(response.data.data.productCategory);
-                setPrice({ cost: response.data.data.productPrice, sale: response.data.data.productSalePrice });
+                setPrice({ cost: response.data.data.productPrice, discount:response.data.data.productDiscountRate, sale: response.data.data.productSalePrice });
                 setProductDes(response.data.data.productDes);
-                setOptionName(response.data.data.optionList[1].optionName);
+                setOptionName(response.data.data.optionList[0].optionName);
                 setOptions(response.data.data.optionList.map(o => ({
                     name: o.optionName,
                     values: [o.optionValue],
@@ -91,6 +91,12 @@ function ProductEditPage() {
         };
         fetchData();
     }, [productId, token]);
+
+    useEffect(()=>{
+        if(price.cost && price.discount){
+            setPrice({...price, sale: Number(price.cost) * (1 - Number(price.discount) * 0.01)});
+        }
+    }, [price.cost, price.discount])
 
     const handleImageChange = (event, index) => {
         const file = event.target.files[0];
@@ -240,7 +246,7 @@ function ProductEditPage() {
     return (
         <Box>
             <LeftNav />
-            <Header title={'상품추가'} />
+            <Header title={'상품편집'} />
             <Box
             bgcolor={primary}
             component="main"
@@ -387,7 +393,7 @@ function ProductEditPage() {
                         </Table>
                     </TableContainer>
                     <Box sx={{ display: 'flex', gap: 2 }}>
-                        <TextField
+                    <TextField
                         label="원가"
                         type="number"
                         value={price.cost}
@@ -397,12 +403,21 @@ function ProductEditPage() {
                         }}
                         />
                         <TextField
+                        label="할인율"
+                        type="number"
+                        value={price.discount}
+                        onChange={handlePriceChange('discount')}
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                        }}
+                        />
+                        <TextField
                         label="판매가"
                         type="number"
                         value={price.sale}
-                        onChange={handlePriceChange('sale')}
                         InputProps={{
-                            endAdornment: <InputAdornment position="end">KRW</InputAdornment>,
+                            readOnly: true,
+                            endAdornment: <InputAdornment position="end">KRW</InputAdornment>
                         }}
                         />
                     </Box>

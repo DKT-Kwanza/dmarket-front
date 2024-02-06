@@ -67,7 +67,6 @@ function Header() {
                 });
                 /* cartCountAtom을 업데이트 */
                 setCartCount(cartCountResponse.data.data.cartCount);
-                console.log(cartCountResponse.data)
             } catch (e) {
                 console.error('Error fetching data:', e);
             }
@@ -104,7 +103,6 @@ function Header() {
             heartbeatTimeout: 600000,
             }
         );
-
         
         // mileage 관련 알림 받아옴
         source.addEventListener("mileage", (e) => {
@@ -186,7 +184,6 @@ function Header() {
     }, []);
     //알림 조회
 
-
     // 알림 개수
     useEffect(() => {
         const fetchUnreadCount = async () => {
@@ -213,7 +210,6 @@ function Header() {
             setSearchInput("");
         }
     };
-
 
     /* 아이콘 클릭 이후 페이지 변경 */
     const navigateToPage = (menu) => {
@@ -291,7 +287,7 @@ function Header() {
                         <img src={shoppingBag}/>
                         <div className='bucket-count'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 21 20"
-                                 fill="none">
+                                fill="none">
                                 <circle cx="10.8359" cy="10" r="10" fill="black"/>
                                 <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="white" fontSize="12">
                                     {cartCount}
@@ -315,16 +311,16 @@ function Header() {
                             </svg>
                         </div>
                     </div>
-                    {showNotifications && (
-                        <NotificationModal
-                            notifications={notifications}
-                            onClose={() => setShowNotifications(false)}
-                            setUnreadCount={setUnreadCount}
-                        />
-                    )}
-                    {isLoggedIn && (
-                        <div onClick={onLogout} className="logout-button"><IoIosLogOut size={30}/></div>
-                    )}
+                    <div>
+                        {showNotifications && (
+                            <NotificationModal
+                                notifications={notifications}
+                                setNotifications={setNotifications}
+                                onClose={() => setShowNotifications(false)}
+                                setUnreadCount={setUnreadCount}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
             <div className="category-div">
