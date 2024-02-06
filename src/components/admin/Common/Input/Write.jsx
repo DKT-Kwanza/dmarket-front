@@ -2,6 +2,9 @@ import React, { Component} from 'react';
 import ReactQuill, { Quill } from "react-quill";
 import ImageResize from "quill-image-resize-module-react";
 import 'react-quill/dist/quill.snow.css';
+import axios from 'axios';
+import { bucketURL, bucketToken } from "../../../../Api";
+import { v4 } from 'uuid';
 
 Quill.register("modules/imageResize", ImageResize);
 
@@ -26,19 +29,30 @@ class Write extends Component {
         input.setAttribute('type', 'file');
         input.setAttribute('accept', 'image/*');
         input.click();
-
+    
         input.onchange = async () => {
             const file = input.files[0];
-            const reader = new FileReader();
-
-            reader.onload = () => {
-                const range = this.quillRef.getEditor().getSelection(true);
-                this.quillRef.getEditor().insertEmbed(range.index, 'image', reader.result);
-            };
-            reader.readAsDataURL(file);
+            if (file) {
+                const inquiryImgURL = `${bucketURL}${v4()}.${file.type.split('/')[1]}`; 
+    
+                try {
+                    await axios.put(inquiryImgURL, file, {
+                        headers: {
+                            'X-Auth-Token': bucketToken,
+                            'Content-Type': file.type
+                        }
+                    });
+    
+                    const editor = this.quillRef.getEditor();
+                    const range = editor.getSelection();
+                    editor.insertEmbed(range.index, 'image', inquiryImgURL);
+                } catch (error) {
+                    console.error('Error uploading image:', error);
+                }
+            }
         };
     }
-
+    
     modules = {
         toolbar: [
             [{ 'header': [1, 2, false] }],
