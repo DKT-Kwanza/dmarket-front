@@ -12,7 +12,7 @@
   
 .login-box {
   width: 518px;
-  height: 673px;
+  height: 700px;
   margin: auto;
   background: white;
   position: relative;
@@ -71,6 +71,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-top: 10px;
 }
 
 .login-pw-input-error {
@@ -89,7 +90,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-  margin-bottom: 38px;
+  margin-bottom: 25px;
   align-self: flex-start;
 }
   

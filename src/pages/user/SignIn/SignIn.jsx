@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignIn.css';
 import logo from '../../../assets/images/logo.png'
+import { userApi } from '../../../Api';
 
 function SignIn() {
     const navigate = useNavigate();
@@ -43,7 +44,7 @@ function SignIn() {
         e.preventDefault();
     
         try {
-            const response = await axios.post('http://172.16.210.136:8080/api/users/email', email, {
+            const response = await axios.post(`${userApi}/email`, email, {
                 headers: {
                     'Content-Type': 'text/plain',
                 },
@@ -63,7 +64,7 @@ function SignIn() {
         e.preventDefault();
         try {
             const codeInt = parseInt(code, 10);
-            const response = await axios.post('http://172.16.210.136:8080/api/users/email/verify', {
+            const response = await axios.post(`${userApi}/email/verify`, {
                 userEmail: email,
                 code: codeInt,
             });
@@ -109,7 +110,8 @@ function SignIn() {
                         <p className='signIn-title1'>회원가입 인증</p>
                         <div className='signIn-border2'></div>
                         <p className='signIn-title5'>메일함에서 인증 코드를 확인하세요.</p>
-                        <p className='signIn-title6'>인증코드가 오지 않았다면 스팸함을 확인해 주세요.</p>
+                        <div className='signIn-title6'>인증코드가 오지 않았다면 스팸함을 확인해 주세요.</div>
+                        <div className='signIn-title7'>인증이 불가능한 경우 고객센터로 문의바랍니다.</div>
                         <div className='signIn-email-display'>
                             {email}
                         </div>
@@ -134,11 +136,11 @@ function SignIn() {
                 )}
                 <div className='signIn-info'>
                     <p>
-                        업무 시 개인 메일 사용 임직원은 <br />
+                        업무 시 개인 메일 사용 임직원은<br/>
                         고객센터로 인증 요청 후 가입 가능합니다. 
                     </p>
                     <p> 
-                        이용 중 불편한 사항이 있는 경우 고객센터로 문의하시기 바랍니다.<br />
+                        이용 중 불편한 사항이 있는 경우 고객센터로 문의하시기 바랍니다.<br/>
                         고객센터 운영시간 : 평일 09:00 ~ 18:00 
                     </p>
                 </div>
