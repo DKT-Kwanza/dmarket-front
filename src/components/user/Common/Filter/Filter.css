@@ -29,6 +29,12 @@
     padding: 1px 12px;
 }
 
+.filter-validation {
+    color: red;
+    font-size: 12px;
+    padding-left: 10px;
+}
+
 .filter-rating-container {
     display: flex;
     margin-top: 24px;
@@ -78,7 +84,7 @@
 .filter-search-btn {
     width: 72px;
     height: 29px;
-    border: 0px;
+    border: 0;
     border-radius: 5px;
     background: #FFD465;
     margin-right: 6px;
@@ -90,7 +96,7 @@
 .filter-clear-btn {
     width: 72px;
     height: 29px;
-    border: 0px;
+    border: 0;
     border-radius: 5px;
     background: #F3F3F3;
     color: #919191;

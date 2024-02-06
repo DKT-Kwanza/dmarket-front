@@ -1,8 +1,16 @@
 import styled from 'styled-components';
 import React from "react";
-import { formatPrice } from '../../../utils/Format';
+import {formatPrice} from '../../../utils/Format';
 
-function OrderItem({productImg, productBrand, productName, productOption, productCount, productTotalSalePrice, children}) {
+function OrderItem({
+                       productImg,
+                       productBrand,
+                       productName,
+                       productOption,
+                       productCount,
+                       productTotalSalePrice,
+                       children
+                   }) {
     return (
         <Item>
             <img src={productImg} className='productreview-img-review-content-img' alt="상품 이미지"/> {/* 상품 이미지 */}
@@ -20,7 +28,7 @@ function OrderItem({productImg, productBrand, productName, productOption, produc
                     <InfoContent>
                         {/* 상품 옵션 */}
                         <div>{productOption}</div>
-                        <Line />
+                        <Line/>
                         {/* 상품 수량 */}
                         <OptionTitle>수량</OptionTitle>
                         <div>{productCount}</div>
