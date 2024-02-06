@@ -78,7 +78,7 @@ const Main = () => {
     const fetchPopularData = async (categoryId) => {
         console.log(categoryId);
         try {
-            const response = await axios.get(`http://172.16.210.136:8080/api/products/popular/${categoryId || ''}`, {
+            const response = await axios.get(`${productsApi}/popular/${categoryId || ''}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json; charset=UTF-8',

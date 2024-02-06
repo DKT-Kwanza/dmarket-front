@@ -2,6 +2,7 @@ import './CartOrderInfo.css'
 import {formatPrice} from "../../../utils/Format";
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import { orderApi } from '../../../Api';
 
 export default function CartOrderInfo({ itemCount, selectedItemsDetails, totalPrice }) {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ export default function CartOrderInfo({ itemCount, selectedItemsDetails, totalPr
 
         try {
             console.log(purchaseData)
-            const response = await axios.post('http://172.16.210.136:8080/api/order/products', purchaseData, {
+            const response = await axios.post(`${orderApi}/products`, purchaseData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',

@@ -9,8 +9,7 @@ import axios from "axios";
 
 const OrderReviewsList = ({ orders }) => {
 
-  /* 리뷰 삭제 구현 필요 */
-  const deleteReview = async (reviewId,productId) => {
+  const deleteReview = async (reviewId, productId) => {
     const token = sessionStorage.getItem("token");
     const userId = sessionStorage.getItem("userId");
     if (!token || !userId) {

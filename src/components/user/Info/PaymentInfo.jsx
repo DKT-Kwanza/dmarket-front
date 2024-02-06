@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { formatPrice } from "../../../utils/Format";
 import {ReactComponent as ShoppingBag} from "../../../assets/icons/shopping-bag-03.svg";
 import './PaymentInfo.css'
+import { orderApi } from '../../../Api';
 
 export default function PaymentInfo({ userName, totalPrice, discount, totalPay, productList }) {
     const navigate = useNavigate();
@@ -34,7 +35,7 @@ export default function PaymentInfo({ userName, totalPrice, discount, totalPay, 
         };
 
         try {
-            const response = await axios.post('http://172.16.210.136:8080/api/order/payment', orderPayload, {
+            const response = await axios.post(`${orderApi}/payment`, orderPayload, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
