@@ -1,5 +1,5 @@
 import './DetailPage.css';
-import React, {useState, useEffect, useRef, useCallback} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {useSetRecoilState} from 'recoil';
 import DetailQnaList from "../../../components/user/List/DetailQnaList";
@@ -97,7 +97,8 @@ function Detail() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                console.log(response.data.data);
+                // 리뷰 재확인 필요
+                // console.log(response.data.data);
                 setReviews(response.data.data);
                 setReviewTotalPages(response.data.data.totalPage);
             } catch (e) {
@@ -357,16 +358,6 @@ function Detail() {
         }
     };
 
-    // const useClientRect = () => {
-    //     const rectRef = useRef();
-    //     const setRectRef = (element) => {
-    //         if (element) {
-    //             rectRef.current = element.getBoundingClientRect();
-    //         }
-    //     };
-    //     return [rectRef.current, setRectRef];
-    // }
-
     const useClientRect = () => {
         const [rect, setRect] = useState(null);
 
@@ -381,20 +372,16 @@ function Detail() {
 
     const [imageRect, setImageRectRef] = useClientRect();
     const [scannerPosition, setScannerPosition] = useState({ left: 0, top: 0 });
-    const [viewPosition, setViewPosition] = useState({});
+    const [viewPosition, setViewPosition] = useState(null);
     const onMouseMove = (e) => {
         const scannerWidth = 150;
         const scannerHeight = 150;
 
         if (imageRect) {
-            console.log("마우스 위치: ", e.clientX, e.clientY);
-            console.log("imageRect 위치: ", imageRect.x, imageRect.y);
             const scannerPosLeft = e.clientX - scannerWidth / 2;
             const scannerPosTop = e.clientY - scannerHeight / 2;
 
-            console.log("스캐너 위치: ", scannerPosLeft, scannerPosTop );
-
-            /* 대표 이미지 위의 카테고리 설명이 이유는 모르지만 imageRect 영역으로 함께 잡혀서 24 를 더해줍니다. */
+            /* 대표 이미지 위의 카테고리 설명이 imageRect 영역으로 함께 잡혀서 24 를 더해줍니다. */
             const allowedPosLeft = scannerPosLeft >= imageRect.x && scannerPosLeft <= imageRect.x + imageRect.width - scannerWidth;
             const allowedPosTop = scannerPosTop >= (imageRect.y+24) && scannerPosTop <= (imageRect.y+24) + imageRect.height- scannerHeight;
 
@@ -402,7 +389,6 @@ function Detail() {
             newScannerPosition.left = scannerPosLeft;
             newScannerPosition.top = scannerPosTop;
 
-            console.log(allowedPosLeft);
             if (allowedPosLeft) {
                 newScannerPosition.left = scannerPosLeft;
             } else {
@@ -413,7 +399,6 @@ function Detail() {
                 }
             }
 
-            console.log(allowedPosTop);
             if (allowedPosTop) {
                 newScannerPosition.top = scannerPosTop;
             } else {
@@ -425,14 +410,17 @@ function Detail() {
             }
 
             setScannerPosition(newScannerPosition);
-
+            setViewPosition({
+                left: (newScannerPosition.left-imageRect.x) * -1.3,
+                top: (newScannerPosition.top-(imageRect.y+24)) * -1.3,
+            })
         }
     };
 
     const onMouseLeave = () => {
         setScannerPosition(null);
+        setViewPosition(null);
     };
-
 
     return (
         <>
@@ -444,7 +432,7 @@ function Detail() {
                     <div className='detail-repImg' onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} >
                         {productImg && <img alt={product.productName} src={productImg[0]} ref={setImageRectRef}/>}
                         {imageRect && scannerPosition && <ScannerWrapper position={scannerPosition} />}
-                        {imageRect && viewPosition }
+                        {imageRect && viewPosition && <ViewWrapper position={viewPosition} img={productImg[0]} left={imageRect.x + imageRect.width + 140} top={240}/>}
                     </div>
 
                     <div className='detail-subImgArea'>
@@ -567,7 +555,7 @@ function Detail() {
                         <text>{reviews.productRating}</text>
                     </div>
                     <div className='ratingStar'>
-                        <StarRating rating={reviews.productRating} style={"none"}/>
+                        <StarRating rating={reviews.productRating} style="none"/>
                         <text style={{fontSize: '16px'}}>총 {reviews.productReviewCount}건 리뷰</text>
                     </div>
                 </div>
@@ -690,10 +678,10 @@ const ScannerWrapper = styled.span`
 const ViewWrapper = styled.div`
   z-index: 1;
   position: absolute;
-  top: 0;
+  top: ${(props) => props.top}px;
   left: ${(props) => props.left}px;
-  width: 500px;
-  height: 500px;
+  width: 550px;
+  height: 550px;
   background-image: url(${(props) => props.img});
   background-repeat: no-repeat;
   background-position: ${(props) => `${props.position.left}px ${props.position.top}px`};
