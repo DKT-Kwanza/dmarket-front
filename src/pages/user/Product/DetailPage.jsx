@@ -1,5 +1,5 @@
 import './DetailPage.css';
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {useSetRecoilState} from 'recoil';
 import DetailQnaList from "../../../components/user/List/DetailQnaList";
@@ -16,7 +16,6 @@ import axios from 'axios';
 import {productsApi, userApi, orderApi} from "../../../Api";
 import {cartCountAtom} from "../../../recoil/atom";
 import styled from "styled-components";
-import {css} from "@emotion/react";
 import {Pagination} from "@mui/material";
 import {FaHeart} from "react-icons/fa";
 import heart from '../../../assets/icons/heart.svg';
@@ -98,6 +97,8 @@ function Detail() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
+                // 리뷰 재확인 필요
+                // console.log(response.data.data);
                 setReviews(response.data.data);
                 setReviewTotalPages(response.data.data.totalPage);
             } catch (e) {
@@ -357,51 +358,81 @@ function Detail() {
         }
     };
 
+    const useClientRect = () => {
+        const [rect, setRect] = useState(null);
+
+        const handleRef = useCallback((node) => {
+            if (node !== null) {
+                setRect(node.getBoundingClientRect());
+            }
+        }, []);
+
+        return [rect, handleRef];
+    };
+
+    const [imageRect, setImageRectRef] = useClientRect();
     const [scannerPosition, setScannerPosition] = useState({ left: 0, top: 0 });
-    const [imageRect, setImageRect] = useState(null);
-    const imageRef = useRef();
-
-    useEffect(() => {
-        if (imageRef.current) {
-            setImageRect(imageRef.current.getBoundingClientRect());
-        }
-    }, [imageRef]);
-
+    const [viewPosition, setViewPosition] = useState(null);
     const onMouseMove = (e) => {
         const scannerWidth = 150;
         const scannerHeight = 150;
+
         if (imageRect) {
-            // 헤더의 높이를 고려하여 조정
-            const headerHeight = 166;
-            let scannerPosLeft = e.clientX - scannerWidth / 2 - imageRect.left;
-            let scannerPosTop = e.clientY - scannerHeight / 2 - imageRect.top + headerHeight;
+            const scannerPosLeft = e.clientX - scannerWidth / 2;
+            const scannerPosTop = e.clientY - scannerHeight / 2;
 
-            scannerPosLeft = Math.max(0, Math.min(imageRect.width - scannerWidth, scannerPosLeft));
-            scannerPosTop = Math.max(0, Math.min(imageRect.height - scannerHeight, scannerPosTop));
+            /* 대표 이미지 위의 카테고리 설명이 imageRect 영역으로 함께 잡혀서 24 를 더해줍니다. */
+            const allowedPosLeft = scannerPosLeft >= imageRect.x && scannerPosLeft <= imageRect.x + imageRect.width - scannerWidth;
+            const allowedPosTop = scannerPosTop >= (imageRect.y+24) && scannerPosTop <= (imageRect.y+24) + imageRect.height- scannerHeight;
 
-            const scannerPosition = { left: scannerPosLeft, top: scannerPosTop };
+            const newScannerPosition = { left: 0, top: 0 };
+            newScannerPosition.left = scannerPosLeft;
+            newScannerPosition.top = scannerPosTop;
 
-            setScannerPosition(scannerPosition);
+            if (allowedPosLeft) {
+                newScannerPosition.left = scannerPosLeft;
+            } else {
+                if (scannerPosLeft < imageRect.x) {
+                    newScannerPosition.left = imageRect.x;
+                } else {
+                    newScannerPosition.left = imageRect.x + imageRect.width - scannerWidth;
+                }
+            }
+
+            if (allowedPosTop) {
+                newScannerPosition.top = scannerPosTop;
+            } else {
+                if (scannerPosTop < imageRect.y+24) {
+                    newScannerPosition.top = (imageRect.y+24);
+                } else {
+                    newScannerPosition.top = (imageRect.y+24) + imageRect.height - scannerHeight;
+                }
+            }
+
+            setScannerPosition(newScannerPosition);
+            setViewPosition({
+                left: (newScannerPosition.left-imageRect.x) * -1.3,
+                top: (newScannerPosition.top-(imageRect.y+24)) * -1.3,
+            })
         }
     };
 
     const onMouseLeave = () => {
-        if (imageRect) {
-            setScannerPosition(null);
-        }
+        setScannerPosition(null);
+        setViewPosition(null);
     };
-
 
     return (
         <>
             <div id="container1">
                 <div className='category'>
-                    <text>{product.productCategory}</text>
+                    <div>{product.productCategory}</div>
                 </div>
                 <div className='productArea'>
-                    <div className='detail-repImg' onMouseMove={onMouseMove}>
-                        {productImg && <img alt={product.productName} src={productImg[0]}/>}
+                    <div className='detail-repImg' onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} >
+                        {productImg && <img alt={product.productName} src={productImg[0]} ref={setImageRectRef}/>}
                         {imageRect && scannerPosition && <ScannerWrapper position={scannerPosition} />}
+                        {imageRect && viewPosition && <ViewWrapper position={viewPosition} img={productImg[0]} left={imageRect.x + imageRect.width + 140} top={240}/>}
                     </div>
 
                     <div className='detail-subImgArea'>
@@ -524,7 +555,7 @@ function Detail() {
                         <text>{reviews.productRating}</text>
                     </div>
                     <div className='ratingStar'>
-                        <StarRating rating={reviews.productRating} style={"none"}/>
+                        <StarRating rating={reviews.productRating} style="none"/>
                         <text style={{fontSize: '16px'}}>총 {reviews.productReviewCount}건 리뷰</text>
                     </div>
                 </div>
@@ -642,6 +673,19 @@ const ScannerWrapper = styled.span`
   background-color: rgba(255, 255, 255, 0.4);
   cursor: pointer;
   display: inline-block;
+`;
+
+const ViewWrapper = styled.div`
+  z-index: 1;
+  position: absolute;
+  top: ${(props) => props.top}px;
+  left: ${(props) => props.left}px;
+  width: 550px;
+  height: 550px;
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  background-position: ${(props) => `${props.position.left}px ${props.position.top}px`};
+  background-size: 200% 200%;
 `;
 
 export default Detail;

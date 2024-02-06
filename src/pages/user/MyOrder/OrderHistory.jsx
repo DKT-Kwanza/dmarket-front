@@ -36,6 +36,7 @@ function OrderHistory() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
+                console.log(response.data.data);
                 setOrderHistory(response.data.data);
                 setOrderHistoryProducts(response.data.data.orderList);
                 setOrderTotalPages(response.data.data.orderList.totalPages);
