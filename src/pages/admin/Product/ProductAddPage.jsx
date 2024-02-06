@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LeftNav from "../../../components/admin/Sidebar/LeftNav";
 import Header from "../../../components/admin/Header/Header";
@@ -32,12 +32,19 @@ function ProductAddPage () {
     const [category, setCategory] = useState('');
     const [brand, setBrand] = useState(''); 
     const [productName, setProductName] = useState('');
-    const [price, setPrice] = useState({ cost: '', sale: '' });
+    const [price, setPrice] = useState({ cost: '', discount: '', sale: '' });
     const [options, setOptions] = useState([]);
     const [optionInput, setOptionInput] = useState('');
     const [optionValueInput, setOptionValueInput] = useState('');
     const [optionTags, setOptionTags] = useState([]);
     const [optionQuantities, setOptionQuantities] = useState({}); 
+
+    // 상품 가격 혹은 할인율 변경 시 판매가 계산
+    useEffect(()=>{
+        if(price.cost && price.discount){
+            setPrice({...price, sale: Math.trunc(Number(price.cost) * (1 - Number(price.discount) * 0.01))});
+        }
+    }, [price.cost, price.discount])
 
     const handleImageChange = (event, index) => {
         const file = event.target.files[0];
@@ -112,7 +119,7 @@ function ProductAddPage () {
     const handlePriceChange = (prop) => (event) => {
         setPrice({ ...price, [prop]: event.target.value });
     };
-    
+
     /* 옵션값 스페이스바, 엔터로 분리 */
     const handleKeyUp = (event) => {
         if (event.key === ' ' || event.key === 'Enter') {
@@ -160,6 +167,7 @@ function ProductAddPage () {
                 productName: productName,
                 categoryName: category,
                 productPrice: price.cost,
+                productDiscountRate: price.discount,
                 productDes: productDes,
                 productSalePrice: price.sale,
                 imgList: newImgList,
@@ -317,12 +325,21 @@ function ProductAddPage () {
                         }}
                         />
                         <TextField
+                        label="할인율"
+                        type="number"
+                        value={price.discount}
+                        onChange={handlePriceChange('discount')}
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                        }}
+                        />
+                        <TextField
                         label="판매가"
                         type="number"
                         value={price.sale}
-                        onChange={handlePriceChange('sale')}
                         InputProps={{
-                            endAdornment: <InputAdornment position="end">KRW</InputAdornment>,
+                            readOnly: true,
+                            endAdornment: <InputAdornment position="end">KRW</InputAdornment>
                         }}
                         />
                     </Box>
