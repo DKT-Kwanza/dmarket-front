@@ -1,5 +1,5 @@
 .filter-container {
-    padding: 0 70px;
+    padding-left: 70px;
 }
 
 .filter-price-container {
@@ -31,8 +31,9 @@
 
 .filter-rating-container {
     display: flex;
-    margin-top: 24px;
     align-items: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 .filter-radio-btn {
@@ -71,8 +72,6 @@
 
 .filter-btn-container {
     text-align: right;
-    margin-bottom: 16px;
-    padding: 0 70px;
 }
 
 .filter-search-btn {

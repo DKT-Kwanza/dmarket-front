@@ -60,12 +60,12 @@ function SearchPage() {
 
     return (
         <div className="searchList-body">
-            <div className='searchList-title'>{`'${query}'에 대한 검색 결과입니다.`}</div>
-            <div className='searchList-title-bar'></div>
-            <Filter setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} setStar={setStar} />
-            <div className='searchList-bar'></div>
-            <Dropdown setSorter={setSorter} />
-            <div className='searchList-bar'></div>
+            <div className="searchList-filter">
+                <div className='searchList-title'>{`'${query}'에 대한 검색 결과입니다.`}</div>
+                <div className='searchList-title-bar'></div>
+                <Filter setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} setStar={setStar} setSorter={setSorter} />
+                <div className='searchList-bar'></div>
+            </div>
             <div className='searchList-container'>
                 {products.map((item) => (
                     <ProductItem 
