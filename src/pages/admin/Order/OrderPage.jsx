@@ -61,7 +61,7 @@ function OrderStatus() {
 
         try {
             /* 주문상태 변경 API 호출 */
-            const url = `http://172.16.210.136:8080/api/admin/orders/${detailId}`
+            const url = `${adminApi}/orders/${detailId}`
             const response = await axios.put(url, requestData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,

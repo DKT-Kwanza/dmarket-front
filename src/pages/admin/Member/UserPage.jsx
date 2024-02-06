@@ -8,6 +8,7 @@ import {indigo} from '@mui/material/colors';
 import {useNavigate} from 'react-router-dom';
 import {useState} from 'react';
 import axios from 'axios';
+import {adminApi} from "../../../Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -24,7 +25,7 @@ function MemberList() {
 
     const handleSearch = async () => {
         try {
-            const url = `http://172.16.210.136:8080/api/admin/admin-user?q=${search}`;
+            const url = `${adminApi}/admin-user?q=${search}`;
             const response = await axios.get(url, {
                 headers: {'Authorization': `Bearer ${token}`}
             });
@@ -63,7 +64,7 @@ function MemberList() {
                     mt: 9,
                     ml: `${drawerWidth}px`
                 }}>
-                <SearchBar text={'사용자 검색'} onChange={handleSearchInputChange} onSearch={handleSearch}/>
+                <SearchBar text={'사용자 검색 : 이메일을 입력하세요'} onChange={handleSearchInputChange} onSearch={handleSearch}/>
                 {
                     <Paper square elevation={2} sx={{p: '20px 30px'}}>
                         {isData && rows && <UserTable headers={tableHeader} rows={rows}/>}
@@ -71,7 +72,7 @@ function MemberList() {
                             variant="outlined"
                             sx={{float: 'right'}}
                             onClick={navigateToRegister}>
-                            등록
+                            새로운 사용자 등록
                         </Button>
                     </Paper>
                 }

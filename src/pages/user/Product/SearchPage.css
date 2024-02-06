@@ -1,19 +1,25 @@
 .searchList-body {
     width: 1280px;
     margin: 0 auto;
-    padding-bottom: 200px;
+    padding-bottom: 100px;
 }
 
 .searchList-category {
     font-size: 16px;
 }
 
+.searchList-filter {
+    position: fixed;
+    width: 1280px;
+    z-index: 10; 
+    background-color: white; 
+}
+
 .searchList-title {
     font-size: 24px;
     font-weight: 500;
-    margin: 18px auto;
+    margin: 5px auto;
     text-align: center;
-    padding-top: 30px;
 }
 
 .searchList-title-bar {
@@ -151,4 +157,5 @@
     place-items: center;
     align-items: start;
     margin-top: 17px;
+    padding-top: 160px;
 }

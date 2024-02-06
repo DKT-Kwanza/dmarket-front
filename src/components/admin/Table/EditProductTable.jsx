@@ -47,12 +47,7 @@ export default function EditProductTable({headers, products, setProducts}) {
             });
             alert("해당 상품에 대한 옵션이 삭제되었습니다!");
 
-            const updatedProducts = products.map(product => ({
-                ...product,
-                optionList: product.optionList.filter(option => option.optionId !== targetOptionId)
-            })).filter(product => product.optionList.length > 0);
-
-            setProducts(updatedProducts);
+            setProducts(products.filter(product => product.optionId !== targetOptionId));
         } catch (e) {
             console.error(e);
         }
@@ -107,7 +102,7 @@ export default function EditProductTable({headers, products, setProducts}) {
                                 </Button>
                                 <Button
                                     variant="outlined"
-                                    onClick={() => handleConfirmDelete(product.productId)}
+                                    onClick={() => handleConfirmDelete(product.productId, product.optionId)}
                                     color="error"
                                 >
                                     삭제

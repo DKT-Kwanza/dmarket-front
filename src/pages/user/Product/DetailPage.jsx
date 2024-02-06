@@ -419,7 +419,7 @@ function Detail() {
 
                     <div className='detailArea'>
                         <div className='title'>
-                            <text>{product.productBrand} &gt;</text>
+                            <text>{product.productBrand}</text>
                         </div>
                         <div className='subTitle'>
                             <text>{product.productName}</text>

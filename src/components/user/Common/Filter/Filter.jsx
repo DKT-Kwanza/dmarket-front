@@ -2,8 +2,9 @@ import './Filter.css';
 import React, {useEffect, useState} from 'react';
 import {formatPrice} from '../../../../utils/Format';
 import {PiStarFill, PiStarLight} from "react-icons/pi";
+import Dropdown from '../Select/Dropdown';
 
-function Filter({setMinPrice, setMaxPrice, setStar}) {
+function Filter({ setMinPrice, setMaxPrice, setStar, setSorter }) {
     const [localMinPrice, setLocalMinPrice] = useState('');
     const [localMaxPrice, setLocalMaxPrice] = useState('');
     const [priceValidation, setPriceValidation] = useState(true);
@@ -90,11 +91,12 @@ function Filter({setMinPrice, setMaxPrice, setStar}) {
                             </label>
                         </div>
                     ))}
+                    <div className="filter-btn-container">
+                        <button className="filter-search-btn" onClick={applyFilters} disabled={!priceValidation}>검색</button>
+                        <button onClick={handleClearFilter} className="filter-clear-btn">전체해제</button>
+                    </div>
+                    <Dropdown setSorter={setSorter} />
                 </div>
-            </div>
-            <div className="filter-btn-container">
-                <button className="filter-search-btn" onClick={applyFilters} disabled={!priceValidation}>검색</button>
-                <button onClick={handleClearFilter} className="filter-clear-btn">전체해제</button>
             </div>
         </div>
     );

@@ -72,7 +72,7 @@ function AdminModal({ open, handleClose }) {
                 }
             );
             console.log(response.data);
-            
+            alert('역할이 변경되었습니다!');
             handleClose(); // 요청이 성공적으로 끝나면 모달 창을 닫음
         } catch (e) {
             console.error("Error sending data: ", e);

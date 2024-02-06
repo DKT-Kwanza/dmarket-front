@@ -6,7 +6,6 @@ import ReviewItem from '../Item/ReviewItem';
 import {formatDate} from '../../../utils/Format';
 
 const OrderReviewsList = ({orders, deleteReview}) => {
-
     return (
         <div>
             {orders && orders.map((order, index) => (

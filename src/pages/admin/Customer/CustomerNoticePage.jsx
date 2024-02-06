@@ -22,10 +22,8 @@ function CustomerNotice() {
     const tableHeader = ['제목', '작성자', '작성일', ''];
 
     /* 모달 상태 관리 변수 */
-    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
     const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
-    const [isConfirming, setIsConfirming] = useState(false);
     const [selectedNoticeId, setSelectedNoticeId] = useState(null);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
@@ -69,36 +67,24 @@ function CustomerNotice() {
         }
     };
 
-    const handleConfirm = async () => {
-        if (!selectedNoticeId) return;
-
+    const onDeleteClick = async (noticeId) => {
         try {
-            const url = `${adminApi}/board/notice/${selectedNoticeId}`;
+            const url = `${adminApi}/board/notice/${noticeId}`;
             await axios.delete(url, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            closeConfirmModalHandler();
+            alert('해당 공지사항이 삭제되었습니다!')
             fetchNotices(); 
         } catch (e) {
             console.error("Error deleting notice:", e);
         }
     };
 
-    const openConfirmModalHandler = (event, noticeId) => {
-        event.stopPropagation();
-        setSelectedNoticeId(noticeId);
-        setIsConfirmModalOpen(true);
-    };
-
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
         navigate(`?page=${value}`);
-    };
-
-    const closeConfirmModalHandler = () => {
-        setIsConfirmModalOpen(false);
     };
 
     const handleRowClick = (event, noticeId) => {
@@ -137,10 +123,7 @@ function CustomerNotice() {
                     mt: 9,
                     ml: `${drawerWidth}px`
                 }}>
-                <Paper square elevation={2}
-                       sx={{p: '20px 30px'}}>
-                    <CustomerNoticeTable headers={tableHeader} rows={notice} onDeleteClick={openConfirmModalHandler}
-                                         onRowClick={handleRowClick}/>
+                <Paper square elevation={2} sx={{p: '20px 30px'}}>
                     <Button
                         sx={{float: 'right'}}
                         variant="contained"
@@ -148,15 +131,10 @@ function CustomerNotice() {
                         endIcon={<BorderColorIcon/>}>
                         작성하기
                     </Button>
+                    <CustomerNoticeTable headers={tableHeader} rows={notice} onDeleteClick={onDeleteClick} onRowClick={handleRowClick}/>
                     <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
                 </Paper>
             </Box>
-            {isConfirmModalOpen && (
-                <ConfirmModal color={'#FF5D5D'} isOpen={isConfirmModalOpen} onClose={closeConfirmModalHandler}
-                              onConfirm={handleConfirm}>
-                    <div>해당 글을 삭제하시겠습니까?</div>
-                </ConfirmModal>
-            )}
             {selectedNoticeId !== null && (
                 <NoticeModal
                     open={isDetailModalOpen} handleClose={handleCloseDetailModal} noticeId={selectedNoticeId}

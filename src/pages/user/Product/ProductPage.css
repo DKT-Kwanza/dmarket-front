@@ -1,26 +1,35 @@
 .productList-body {
     width: 1280px;
     margin: 0 auto;
-    padding-bottom: 200px;
+    padding-bottom: 100px;
 }
 
 .productList-category {
-    font-size: 16px;
+    font-size: 20px;
     display: flex;
     align-items: center;
-    padding-top: 30px;
+    font-weight: 700;
+    margin: 10px;
 }
 
 .productList-title {
     font-size: 32px;
     font-weight: 500;
-    margin: 18px auto;
+    margin: 0 auto;
     text-align: center;
 }
 
 .productList-title-bar {
     background: #000;
     height: 2px;    
+    margin-bottom: -10px;
+}
+
+.productList-filter {
+    position: fixed;
+    width: 1280px;
+    z-index: 10; 
+    background-color: white; 
 }
 
 .productList-bar {
@@ -34,6 +43,7 @@
     place-items: center;
     align-items: start;
     margin-top: 17px;
+    padding-top: 160px;
 }
 
 .productList-empty {

@@ -10,7 +10,6 @@ import Stack from '@mui/material/Stack';
 import { indigo } from '@mui/material/colors';
 import ImageIcon from '@mui/icons-material/Image';
 import Write from "../../../components/admin/Common/Input/Write";
-import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import { adminApi, bucketToken, bucketURL } from "../../../Api";
 
 const primary = indigo[50];

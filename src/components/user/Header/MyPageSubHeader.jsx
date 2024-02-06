@@ -4,6 +4,7 @@ import axios from 'axios';
 import { formatDate, formatPrice } from '../../../utils/Format'
 import './MyPageSubHeader.css'
 import right from '../../../assets/icons/chevron-right.svg'
+import { userApi } from '../../../Api';
 
 const MyPageSubHeader = () => {
 
@@ -17,7 +18,7 @@ const MyPageSubHeader = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/users/${userId}/mypage/mileage`,{
+                const response = await axios.get(`${userApi}/${userId}/mypage/mileage`,{
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }

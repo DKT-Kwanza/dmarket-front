@@ -78,17 +78,17 @@ function ProductPage() {
 
     return (
         <div className="productList-body">
-            <div className='productList-category'>{category1depthName} <FaAngleRight/> {category2depthName}</div>
-            <div className='productList-title'>{category2depthName}</div>
-            <div className='productList-title-bar'></div>
-            <Filter setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} setStar={setStar}/>
-            <div className='productList-bar'></div>
+            <div className="productList-filter">
+                <div className='productList-category'>{category1depthName} <FaAngleRight/> {category2depthName}</div>
+                <div className='productList-title'>{category2depthName}</div>
+                <div className='productList-title-bar'></div>
+                <Filter setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} setStar={setStar} setSorter={setSorter}/>
+                <div className='productList-bar'></div>
+            </div>
             {
                 isEmpty
                     ? <div className='productList-empty'>해당하는 상품이 없습니다.</div>
                     : <>
-                        <Dropdown setSorter={setSorter}/>
-                        <div className='productList-bar'></div>
                         <div className='productList-container'>
                             {products.map((item, index) => (
                                 <ProductItem

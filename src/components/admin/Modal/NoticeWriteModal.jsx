@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, Modal, TextField, Button } from '@mui/material';
 import axios from 'axios';
+import {adminApi} from "../../../Api";
 
 const NoticeModalStyle = {
     position: 'absolute',
@@ -27,7 +28,7 @@ function NoticeWriteModal({ open, handleClose, fetchNotices }) {
         }
 
         try {
-            await axios.post('http://172.16.210.136:8080/api/admin/board/notice', {
+            await axios.post(`${adminApi}/board/notice`, {
                 userId: parseInt(userId, 10),
                 noticeTitle,
                 noticeContents

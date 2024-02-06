@@ -32,7 +32,8 @@ export default function CustomerNoticeTable({headers, rows, onDeleteClick, onRow
                             <TableCell>
                                 <Button
                                     onClick={(event) => {
-                                        onDeleteClick(event, row.noticeId)
+                                        event.stopPropagation();
+                                        onDeleteClick(row.noticeId);
                                     }}
                                     variant="outlined"
                                     color="error"

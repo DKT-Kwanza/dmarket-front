@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import ConfirmCancelModal from '../../commmon/Modal/ConfirmCancelModal';
+import {adminApi} from "../../../Api";
 
 const style = {
     position: 'absolute',
@@ -46,7 +47,7 @@ export default function MileageReqTable({ headers, rows, fetchData }) {
         const mileageReqId = selectedRequest.mileageReqId; 
     
         try {
-            await axios.put(`http://172.16.210.136:8080/api/admin/users/mileage/approval/${mileageReqId}`, {}, {
+            await axios.put(`${adminApi}/users/mileage/approval/${mileageReqId}`, {}, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             alert("승인되었습니다!");
@@ -71,7 +72,7 @@ export default function MileageReqTable({ headers, rows, fetchData }) {
         const mileageReqId = selectedRequest.mileageReqId; 
     
         try {
-            await axios.put(`http://172.16.210.136:8080/api/admin/users/mileage/refusal/${mileageReqId}`, {}, {
+            await axios.put(`${adminApi}/users/mileage/refusal/${mileageReqId}`, {}, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             alert("거부되었습니다!");

@@ -8,6 +8,7 @@ import Dropdown from '../../../components/user/Common/Select/Dropdown';
 import ScrollToTopBtn from "../../../components/user/Common/Button/ScrollToTopBtn";
 import { Pagination } from "@mui/material";
 import { removeCommas } from "../../../utils/Format";
+import {productsApi} from "../../../Api";
 
 function SearchPage() {
     const navigate = useNavigate();
@@ -27,8 +28,8 @@ function SearchPage() {
         const fetchData = async () => {
             const formattedMinPrice = removeCommas(minPrice);
             const formattedMaxPrice = removeCommas(maxPrice);
-
-            const url = `http://172.16.210.136:8080/api/products/search?q=${query}&sorter=${sorter}&min-price=${formattedMinPrice}&max-price=${formattedMaxPrice}&star=${star}&page=${currentPage}`;
+           
+            const url = `${productsApi}/search?q=${query}&sorter=${sorter}&min-price=${formattedMinPrice}&max-price=${formattedMaxPrice}&star=${star}&page=${currentPage}`;
             try {
                 const response = await axios.get(url, {
                     headers: { 'Authorization': `Bearer ${token}` }
@@ -59,12 +60,12 @@ function SearchPage() {
 
     return (
         <div className="searchList-body">
-            <div className='searchList-title'>{`'${query}'에 대한 검색 결과입니다.`}</div>
-            <div className='searchList-title-bar'></div>
-            <Filter setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} setStar={setStar} />
-            <div className='searchList-bar'></div>
-            <Dropdown setSorter={setSorter} />
-            <div className='searchList-bar'></div>
+            <div className="searchList-filter">
+                <div className='searchList-title'>{`'${query}'에 대한 검색 결과입니다.`}</div>
+                <div className='searchList-title-bar'></div>
+                <Filter setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} setStar={setStar} setSorter={setSorter} />
+                <div className='searchList-bar'></div>
+            </div>
             <div className='searchList-container'>
                 {products.map((item) => (
                     <ProductItem 

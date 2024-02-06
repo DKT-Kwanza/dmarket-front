@@ -4,6 +4,7 @@ import MyPageSubHeader from '../../../components/user/Header/MyPageSubHeader';
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import axios from "axios";
+import { userApi } from '../../../Api';
 
 function ChangeInfo() {
     const [userInfo, setUserInfo] = useState({});
@@ -19,7 +20,7 @@ function ChangeInfo() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/users/${userId}/mypage/myinfo`, {
+                const response = await axios.get(`${userApi}/${userId}/mypage/myinfo`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 setUserInfo(response.data.data);
@@ -47,7 +48,7 @@ function ChangeInfo() {
 
     const openModalHandler = async () => {
         try {
-            const response = await axios.put(`http://172.16.210.136:8080/api/users/${userId}/mypage/myinfo`, {
+            const response = await axios.put(`${userApi}/${userId}/mypage/myinfo`, {
                 userPostalCode: userPostalCode,
                 userAddress: userAddress,
                 userDetailedAddress: userAddressDetail

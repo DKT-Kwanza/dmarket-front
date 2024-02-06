@@ -108,16 +108,16 @@ function AdminCustomerFaqPage() {
                 sx={{ height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px` }}>
                 <Paper square elevation={2}
                     sx={{ p: '20px 30px' }}>
+                    <Button
+                    sx={{ float: 'right' }}
+                    variant="contained"
+                    endIcon={<BorderColorIcon />}
+                    onClick={handleWriteButtonClick}>
+                        작성하기
+                    </Button>
                     <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange} />
                     <CustomerFaqTable headers={tableHeader} rows={faqList} onDeleteClick={onDeleteClick}
                         onRowClick={handleRowClick} />
-                    <Button
-                        sx={{ float: 'right' }}
-                        variant="contained"
-                        endIcon={<BorderColorIcon />}
-                        onClick={handleWriteButtonClick}>
-                        작성하기
-                    </Button>
                     <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
                 </Paper>
             </Box>

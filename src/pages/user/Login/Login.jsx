@@ -8,6 +8,7 @@ import './Login.css';
 import logo from '../../../assets/images/logo.png'
 import chevronRight from '../../../assets/icons/chevron-right.svg'
 import { isLoggedInState } from '../../../recoil/atom';
+import { userApi } from '../../../Api';
 
 function Login() {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ function Login() {
 
   const onClickLogin = () => {
     axios
-        .post('http://172.16.210.136:8080/api/users/login', formData)
+        .post(`${userApi}/login`, formData)
         .then(res =>{
             const token = res.data.data.accesstoken;
             const userId = res.data.data.userId;
@@ -83,10 +84,10 @@ function Login() {
               </div>
             )} */}
               <div className="login-maintain">
-                <CheckBox />
+                {/* <CheckBox />
                 <label className='login-checkbox-label'>
                   로그인 상태 유지
-                </label>
+                </label> */}
               </div>
               <button type="submit" className="login-btn" onClick={onClickLogin}>
                 로그인
@@ -99,11 +100,11 @@ function Login() {
               </div>
               <div className='login-info'>
                 <p>
-                  DKTechin 임직원들을 위한 쇼핑몰 입니다.
+                  DKTechin 임직원들을 위한 쇼핑몰 입니다.<br/>
                   임직원 인증을 통해 로그인한 고객만 세부 내용을 확인할 수 있습니다.
                 </p>
                 <p>
-                  이용 중 불편한 사항이 있는 경우 고객센터로 문의하시기 바랍니다.
+                  이용 중 불편한 사항이 있는 경우 고객센터로 문의하시기 바랍니다.<br/>
                   고객센터 운영시간 : 평일 09:00 ~ 18:00
                 </p>
               </div>

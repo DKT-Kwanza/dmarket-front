@@ -6,6 +6,7 @@ import axios from "axios";
 import {Paper, Box, Pagination} from "@mui/material";
 import {indigo} from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
+import {adminApi} from "../../../Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -23,7 +24,7 @@ function OrderCancel() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/admin/cancel-order-details`,{
+                const response = await axios.get(`${adminApi}/cancel-order-details`,{
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json; charset=UTF-8',

@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReviewTable from '../../../components/admin/Table/ReviewTable.jsx'
 import ReviewModal from '../../../components/admin/Modal/ReviewModal.jsx';
+import {adminApi} from "../../../Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -32,7 +33,7 @@ function ProductReviewPage() {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://172.16.210.136:8080/api/admin/products/review?pageNo=${page}`, {
+                const response = await axios.get(`${adminApi}/products/review?pageNo=${page}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 setRows(response.data.data.content);

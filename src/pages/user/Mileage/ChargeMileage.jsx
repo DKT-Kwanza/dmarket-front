@@ -3,6 +3,7 @@ import axios from 'axios';
 import './ChargeMileage.css'
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
+import { userApi } from '../../../Api';
 
 function ChargeMileage(){
 
@@ -20,7 +21,7 @@ function ChargeMileage(){
         console.log(chargeAmount);
 
         try {
-            const response = await axios.post(`http://172.16.210.136:8080/api/users/${userId}/mypage/mileage-charge`, {
+            const response = await axios.post(`${userApi}/${userId}/mypage/mileage-charge`, {
                 mileageCharge: chargeAmount
             }, {
                 headers: {
@@ -28,7 +29,7 @@ function ChargeMileage(){
                 }
             });
 
-            alert('충전 요청이 성공적으로 처리되었습니다.');
+            alert('충전 요청이 성공적으로 처리되었습니다!\n\n아래 가상 계좌로 24시간 내 입금 부탁드립니다.\n입금 확인이 완료된 후 충전 금액을 확인하실 수 있습니다.\n\ndkt은행 000000-00-000000\n');
             setChargeAmount('');
         } catch (error) {
             console.error('Error submitting charge request:', error);
