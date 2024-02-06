@@ -76,6 +76,7 @@ function SearchPage() {
                         sales={item.productSalePrice}
                         ratingAvg={item.productRating}
                         reviewCnt={item.productReviewCount}
+                        discountRate={item.productDiscountRate}
                     />
                 ))}
             </div>
