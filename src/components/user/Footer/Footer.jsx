@@ -1,4 +1,5 @@
 import './Footer.css'
+import { Link } from 'react-router-dom';
 
 function Footer(){
     
@@ -51,7 +52,7 @@ function Footer(){
                                 <div className='bar-style'></div>
                                 <div>호스팅서비스 사업자 : 관자시스템</div>
                                 <div className='bar-style'></div>
-                                <div>사업자등록번호 : 222-11-000333 </div>
+                                <div>사업자등록번호 : 111-22-333333 </div>
                             </div>
                             <div className='down-footer-left-first-content-B'>
                                 <div>통신판매업신고 : 2016 - 서울아무동-8888</div>
@@ -75,11 +76,11 @@ function Footer(){
                 <div className='down-footer-right'>
                     <div className='down-footer-right-title'>
                         <div className='down-footer-right-title-text'>고객센터</div>
-                        <div className='down-footer-right-title-number'>1555-4444</div>
+                        <div className='down-footer-right-title-number'>1111-1111</div>
                     </div>
                     <div className='down-footer-right-contents'>
                         <div>운영시간: 평일 09:00 ~ 18:00</div>
-                        <div>고객센터 바로가기</div>
+                        <Link to="../customer">고객센터 바로가기</Link>
                     </div>
                 </div>
             </div>
