@@ -2,22 +2,20 @@ import * as React from "react";
 import LeftNav from "../../../components/admin/Sidebar/LeftNav";
 import Header from "../../../components/admin/Header/Header";
 import SearchBar from "../../../components/admin/Common/SearchBar/SearchBar";
-import TabMenu from "../../../components/admin/Common/TabMenu/TabMenu";
 import OptionQuantityTable from "../../../components/admin/Table/OptionQuantityTable";
 import Category from "../../../components/admin/Common/Category/Category";
-import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {Paper, Box, Pagination} from "@mui/material";
 import {indigo} from '@mui/material/colors';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import {adminApi} from "../../../Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
 
 function ProductQuantityPage() {
     const navigate = useNavigate();
-    const [selectedTab, setSelectedTab] = React.useState(0);
     const [rows, setRows] = useState([]);
     const [categoryId, setCategoryId] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
@@ -35,7 +33,7 @@ function ProductQuantityPage() {
 
     const fetchData = async () => {
         if (categoryId !== null) {
-            const url = `http://172.16.210.136:8080/api/admin/products/categories/${categoryId}?page=${currentPage}`;
+            const url = `${adminApi}/products/categories/${categoryId}?page=${currentPage}`;
             try {
                 const response = await axios.get(url, {
                     headers: {
@@ -74,7 +72,7 @@ function ProductQuantityPage() {
         if (search.trim() === '') {
             fetchData(categoryId);
         } else {
-            const url = `http://172.16.210.136:8080/api/admin/products/categories/${searchCategoryId}/search?q=${search}&page=${currentPage}`;
+            const url = `${adminApi}/products/categories/${searchCategoryId}/search?q=${search}&page=${currentPage}`;
             try {
                 const response = await axios.get(url, {
                     headers: { 'Authorization': `Bearer ${token}` }

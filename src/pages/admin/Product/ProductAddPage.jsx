@@ -10,7 +10,6 @@ import { indigo } from '@mui/material/colors';
 import ImageIcon from '@mui/icons-material/Image';
 import Typography from '@mui/material/Typography';
 import Write from "../../../components/admin/Common/Input/Write";
-import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import axios from "axios";
 import { adminApi, bucketToken, bucketURL } from "../../../Api";
 

@@ -6,7 +6,7 @@ import {indigo} from '@mui/material/colors';
 import React, {useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
+import {adminApi} from "../../../Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -26,7 +26,7 @@ function Refund() {
     /* 수거 완료인 상태 리스트 조회 */
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://172.16.210.136:8080/api/admin/orders/returns?status=${selectedTab}&page=${currentPage}`, {
+            const response = await axios.get(`${adminApi}/orders/returns?status=${selectedTab}&page=${currentPage}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },
@@ -45,7 +45,7 @@ function Refund() {
     /* 환불 요청 */
     const onChangeRefundStatusClick = async (returnId, refundPercent) => {
         try {
-            await axios.put(`http://172.16.210.136:8080/api/admin/cancel-order-details`, {
+            await axios.put(`${adminApi}/cancel-order-details`, {
                 returnId: returnId,
                 refundPercent: refundPercent,
             }, {

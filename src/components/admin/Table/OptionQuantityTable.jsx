@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import {adminApi} from "../../../Api";
 
 export default function EditProductTable({headers, rows, fetchData, setRows}) {
 
@@ -39,7 +40,7 @@ export default function EditProductTable({headers, rows, fetchData, setRows}) {
                 addCount: parseInt(quantity),
             };
             
-            axios.put(`http://172.16.210.136:8080/api/admin/products/stock`, requestBody, {
+            axios.put(`${adminApi}/products/stock`, requestBody, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

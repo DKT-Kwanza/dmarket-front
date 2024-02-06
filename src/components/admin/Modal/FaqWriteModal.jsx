@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, Modal, TextField, Button } from '@mui/material';
 import SelectBox from "../../commmon/SelectBox/SelectBox";
 import axios from 'axios';
+import {adminApi} from "../../../Api";
 
 const FaqModalStyle = {
     position: 'absolute',
@@ -41,7 +42,7 @@ function FaqWriteModal({ open, handleClose }) {
             const updatedFaqData = { ...faqData, faqType: faqData.faqType.toLowerCase() };
 
             const response = await axios.post(
-                'http://172.16.210.136:8080/api/admin/board/faq',
+                `${adminApi}/board/faq`,
                 updatedFaqData,
                 {
                     headers: {

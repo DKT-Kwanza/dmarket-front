@@ -5,6 +5,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import {productsApi} from "../../../../Api";
 
 export default function Category({ onCategoryClick }) {
     const [categories, setCategories] = useState([]);
@@ -14,7 +15,7 @@ export default function Category({ onCategoryClick }) {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get('http://172.16.210.136:8080/api/products/categories', {
+                const response = await axios.get(`${productsApi}/categories`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }

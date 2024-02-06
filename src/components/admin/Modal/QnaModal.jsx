@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Box, Typography, Modal, TextField, Button } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { formatDate } from '../../../utils/Format';
+import {adminApi} from "../../../Api";
 
 const QnaModalStyle = {
     position: 'absolute',
@@ -26,7 +27,7 @@ function QnaModal({ open, handleClose, qnaId, fetchQnaList }) {
 
     const fetchQnaDetail = async () => {
         try {
-            const response = await axios.get(`http://172.16.210.136:8080/api/admin/products/qna/${qnaId}`, {
+            const response = await axios.get(`${adminApi}/products/qna/${qnaId}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             setQna(response.data.data);
@@ -37,7 +38,7 @@ function QnaModal({ open, handleClose, qnaId, fetchQnaList }) {
 
     const handleReplySubmit = async () => {
         try {
-            await axios.post(`http://172.16.210.136:8080/api/admin/products/qna/${qnaId}`, {
+            await axios.post(`${adminApi}/products/qna/${qnaId}`, {
                 qnaReplyContents: replyContent
             }, {
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -53,7 +54,7 @@ function QnaModal({ open, handleClose, qnaId, fetchQnaList }) {
 
     const handleReplyDelete = async () => {
         try {
-            await axios.delete(`http://172.16.210.136:8080/api/admin/products/qna/reply/${qna.qnaReplyId}`, {
+            await axios.delete(`${adminApi}/products/qna/reply/${qna.qnaReplyId}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             alert("답변이 삭제되었습니다.");

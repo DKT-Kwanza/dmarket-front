@@ -7,6 +7,7 @@ import {indigo} from '@mui/material/colors';
 import {useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import {adminApi} from "../../../Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -28,7 +29,7 @@ function ReturnStatus() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://172.16.210.136:8080/api/admin/orders/returns?status=${selectedTab}&page=${currentPage}`, {
+            const response = await axios.get(`${adminApi}/orders/returns?status=${selectedTab}&page=${currentPage}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },
@@ -51,7 +52,7 @@ function ReturnStatus() {
 
     const onChangeReturnStatusClick = async (returnId, selectedStatus) => {
         try {
-            await axios.put(`http://172.16.210.136:8080/api/admin/orders/returns/${returnId}`, {
+            await axios.put(`${adminApi}/orders/returns/${returnId}`, {
                 returnStatus: selectedStatus,
             }, {
                 headers: {

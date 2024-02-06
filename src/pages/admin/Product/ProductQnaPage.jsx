@@ -7,6 +7,7 @@ import {indigo} from '@mui/material/colors';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import {adminApi} from "../../../Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -26,7 +27,7 @@ function ProductQnaPage() {
 
     const fetchQnaList = async () => {
         try {
-            const response = await axios.get(`http://172.16.210.136:8080/api/admin/products/qna?page=${currentPage}`, {
+            const response = await axios.get(`${adminApi}/products/qna?page=${currentPage}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             setRows(response.data.data.content);

@@ -5,8 +5,8 @@ import { Box, Button, TextField, Paper } from '@mui/material';
 import {indigo} from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import axios from "axios";
+import { userApi } from '../../../Api';
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -63,7 +63,7 @@ function UserRegisterPage() {
             return;
         }
 
-        axios.post('http://172.16.210.136:8080/api/users/join', {
+        axios.post(`${userApi}/join`, {
                 userEmail: state.inputId,
                 userPassword: state.inputPw,
                 userDktNum: state.dktNum,

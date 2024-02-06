@@ -120,9 +120,9 @@ function AdminPage() {
                 component="main"
                 sx={{ height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px` }}>
                 <Paper square elevation={2} sx={{ p: '20px 30px' }}>
+                    <FilledButton onClick={handleButtonClick} children={'등록/변경'}>등록/변경</FilledButton>
                     <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange} />
                     <ManagerTable headers={tableHeader} rows={filteredManager} />
-                    <FilledButton onClick={handleButtonClick} children={'등록/변경'}>등록/변경</FilledButton>
                 </Paper>
             </Box>
             {

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from 'react-router-dom';
-import {formatDate} from '../../../utils/Format';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,8 +9,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import SelectBox from "../../commmon/SelectBox/SelectBox";
-import ConfirmCancelModal from "../../../components/commmon/Modal/ConfirmCancelModal";
 import axios from 'axios';
+import {adminApi} from "../../../Api";
 
 const style = {
     position: 'absolute',
@@ -39,7 +38,7 @@ export default function UserTable({ headers, rows, children, onRoleChange }) {
     const handleConfirmDelete = async (userId) => {
         try {
             /* 삭제 API 호출 */
-            const response = await axios.delete(`http://172.16.210.136:8080/api/admin/users/${userId}`, {
+            const response = await axios.delete(`${adminApi}/users/${userId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json; charset=UTF-8',

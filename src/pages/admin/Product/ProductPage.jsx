@@ -9,6 +9,7 @@ import SearchBar from '../../../components/admin/Common/SearchBar/SearchBar';
 import Category from '../../../components/admin/Common/Category/Category';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import EditProductTable from '../../../components/admin/Table/EditProductTable';
+import {adminApi} from "../../../Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -39,7 +40,7 @@ function ProductPage() {
     /* 카테고리 별 상품 조회 */
     const fetchData = async () => {
         if (categoryId !== null) {
-            const url = `http://172.16.210.136:8080/api/admin/products/categories/${categoryId}?page=${currentPage}`;
+            const url = `${adminApi}/products/categories/${categoryId}?page=${currentPage}`;
             try {
                 const response = await axios.get(url, {
                     headers: {
@@ -78,7 +79,7 @@ function ProductPage() {
         if (search.trim() === '') {
             fetchData(categoryId);
         } else {
-            const url = `http://172.16.210.136:8080/api/admin/products/categories/${searchCategoryId}/search?q=${search}&page=${currentPage}`;
+            const url = `${adminApi}/products/categories/${searchCategoryId}/search?q=${search}&page=${currentPage}`;
             try {
                 const response = await axios.get(url, {
                     headers: { 'Authorization': `Bearer ${token}` }
@@ -111,11 +112,6 @@ function ProductPage() {
                 <Category onCategoryClick={handleCategoryClick} /> 
                 <SearchBar text={search} onChange={handleSearchInputChange} onSearch={handleSearch} />
                 <Paper square elevation={2} sx={{ p: '20px 30px' }}>
-                    <EditProductTable
-                        headers={tableHeader}
-                        products={products}
-                        setProducts={setProducts}
-                    />
                     <Button
                         variant="outlined"
                         sx={{ float: 'right' }}
@@ -123,6 +119,11 @@ function ProductPage() {
                         onClick={navigateToAdd}>
                         상품추가
                     </Button>
+                    <EditProductTable
+                        headers={tableHeader}
+                        products={products}
+                        setProducts={setProducts}
+                    />
                     <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
                 </Paper>
             </Box>
