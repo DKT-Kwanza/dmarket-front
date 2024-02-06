@@ -248,7 +248,10 @@ function ProductAddPage () {
                         value={productName}
                         onChange={handleProductNameChange}
                     />
-                    <div>상세설명</div>
+                    <div style={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}>
+                        <div>상세설명</div>
+                        <div style={{marginLeft: '20px', fontSize: '13px'}}> 이미지 최소 크기 &#40;500*500&#41; &#47; 폰트 사이즈 &#40;Heading1&#41; 권장 </div>
+                    </div>
                     <Write value={productDes} onChange={onEditorChange} />
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                     <TextField
