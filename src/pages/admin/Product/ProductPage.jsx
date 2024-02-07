@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { Box, Button, Paper, Pagination } from '@mui/material';
-import { indigo } from '@mui/material/colors';
-import LeftNav from '../../../components/admin/Sidebar/LeftNav';
-import Header from '../../../components/admin/Header/Header';
-import SearchBar from '../../../components/admin/Common/SearchBar/SearchBar';
-import Category from '../../../components/admin/Common/Category/Category';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
-import EditProductTable from '../../../components/admin/Table/EditProductTable';
-import {adminApi} from "../../../api/Api";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import LeftNav from "@components/admin/Sidebar/LeftNav";
+import Header from "@components/admin/Header/Header";
+import SearchBar from "@components/admin/Common/SearchBar/SearchBar";
+import Category from "@components/admin/Common/Category/Category";
+import EditProductTable from "@components/admin/Table/EditProductTable";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { Box, Button, Paper, Pagination } from "@mui/material";
+import { indigo } from "@mui/material/colors";
+import {adminApi} from "@api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;

@@ -1,13 +1,13 @@
-import LeftNav from "../../../components/admin/Sidebar/LeftNav";
-import Header from "../../../components/admin/Header/Header";
-import TabMenu from "../../../components/admin/Common/TabMenu/TabMenu";
-import OrderStatusTable from "../../../components/admin/Table/OrderStatusTable";
-import {Paper, Box, Pagination} from "@mui/material";
-import {indigo} from '@mui/material/colors';
 import React, {useEffect, useState} from "react";
-import axios from "axios";
-import {adminApi} from "../../../api/Api";
 import {useNavigate} from "react-router-dom";
+import LeftNav from "@components/admin/Sidebar/LeftNav";
+import Header from "@components/admin/Header/Header";
+import TabMenu from "@components/admin/Common/TabMenu/TabMenu";
+import OrderStatusTable from "@components/admin/Table/OrderStatusTable";
+import {Paper, Box, Pagination} from "@mui/material";
+import {indigo} from "@mui/material/colors";
+import axios from "axios";
+import {adminApi} from "@api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;

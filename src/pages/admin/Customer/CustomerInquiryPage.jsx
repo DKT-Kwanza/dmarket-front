@@ -1,13 +1,13 @@
-import LeftNav from "../../../components/admin/Sidebar/LeftNav";
-import Header from "../../../components/admin/Header/Header";
-import TabMenu from "../../../components/admin/Common/TabMenu/TabMenu";
-import CustomerInquiryTable from "../../../components/admin/Table/CustomerInquiryTable";
-import { Paper, Box, Button, Pagination } from "@mui/material";
-import { indigo } from '@mui/material/colors';
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
+import LeftNav from "@components/admin/Sidebar/LeftNav";
+import Header from "@components/admin/Header/Header";
+import TabMenu from "@components/admin/Common/TabMenu/TabMenu";
+import CustomerInquiryTable from "@components/admin/Table/CustomerInquiryTable";
+import InquiryModal from "@components/admin/Modal/InquiryModal";
+import {Paper, Box, Pagination} from "@mui/material";
+import {indigo} from "@mui/material/colors";
 import axios from "axios";
-import InquiryModal from "../../../components/admin/Modal/InquiryModal";
-import {adminApi} from "../../../api/Api";
+import {adminApi} from "@api/Api";
 
 
 const primary = indigo[50];
@@ -21,12 +21,12 @@ function CustomerInquiry() {
     const tableHeader = ['구분', '제목', '작성자', '작성일', '답변상태', ''];
     const [inquiryType, setInquiryType] = useState('');
     const [inquiryPage, setInquiryPage] = useState('');
-    
+
     const menuList = [
-        { title: '회원 문의' },
-        { title: '주문/결제 문의' },
-        { title: '반품/환불 문의' },
-        { title: '마일리지 문의' }
+        {title: '회원 문의'},
+        {title: '주문/결제 문의'},
+        {title: '반품/환불 문의'},
+        {title: '마일리지 문의'}
     ];
 
     /* 세션 스토리지에서 토큰 가져오기 */
@@ -99,9 +99,9 @@ function CustomerInquiry() {
 
     return (
         <Box>
-            
-            <LeftNav />
-            <Header title={'문의 게시판'} />
+
+            <LeftNav/>
+            <Header title={'문의 게시판'}/>
             {/*컨텐츠 영역입니다.*/}
             <Box
                 bgcolor={primary}
@@ -116,16 +116,16 @@ function CustomerInquiry() {
                     ml: `${drawerWidth}px`
                 }}>
                 <Paper square elevation={2}
-                    sx={{ p: '20px 30px' }}>
-                    <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange} />
+                       sx={{p: '20px 30px'}}>
+                    <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange}/>
                     <CustomerInquiryTable headers={tableHeader} rows={inquiryList}
-                        onDeleteClick={onDeleteClick} onRowClick={handleRowClick} />
-                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
+                                          onDeleteClick={onDeleteClick} onRowClick={handleRowClick}/>
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange}/>
                 </Paper>
             </Box>
             {selectedInquiryId !== null && (
                 <InquiryModal
-                    open={isDetailModalOpen} handleClose={handleCloseDetailModal} inquiryId={selectedInquiryId} />
+                    open={isDetailModalOpen} handleClose={handleCloseDetailModal} inquiryId={selectedInquiryId}/>
             )}
         </Box>
     );

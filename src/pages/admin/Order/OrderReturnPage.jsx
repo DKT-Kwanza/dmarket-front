@@ -1,13 +1,13 @@
-import LeftNav from "../../../components/admin/Sidebar/LeftNav";
-import Header from "../../../components/admin/Header/Header";
-import TabMenu from "../../../components/admin/Common/TabMenu/TabMenu";
-import ReturnStatusTable from "../../../components/admin/Table/ReturnStatusTable";
-import {Paper, Box, Pagination} from "@mui/material";
-import {indigo} from '@mui/material/colors';
 import {useEffect, useState} from "react";
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from "react-router-dom";
+import LeftNav from "@components/admin/Sidebar/LeftNav";
+import Header from "@components/admin/Header/Header";
+import TabMenu from "@components/admin/Common/TabMenu/TabMenu";
+import ReturnStatusTable from "@components/admin/Table/ReturnStatusTable";
+import {Paper, Box, Pagination} from "@mui/material";
+import {indigo} from "@mui/material/colors";
 import axios from "axios";
-import {adminApi} from "../../../api/Api";
+import {adminApi} from "@api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -37,8 +37,8 @@ function ReturnStatus() {
             setReturnStatus(response.data.data.returnList.content);
             setTotalPages(response.data.data.returnList.totalPages);
             setMenuList([
-                { title: '반품 요청', count: response.data.data.returnReqCount },
-                { title: '수거중', count: response.data.data.returnColCount }
+                {title: '반품 요청', count: response.data.data.returnReqCount},
+                {title: '수거중', count: response.data.data.returnColCount}
             ]);
         } catch (e) {
             console.error(e);
@@ -59,7 +59,7 @@ function ReturnStatus() {
                     'Authorization': `Bearer ${token}`,
                 },
             });
-    
+
             alert("반품 상태가 변경되었습니다.");
             setReturnStatus(prevStatus => prevStatus.filter(item => item.returnId !== returnId));
         } catch (error) {
@@ -91,9 +91,10 @@ function ReturnStatus() {
                 }}>
                 <Paper square elevation={2}
                        sx={{p: '20px 30px'}}>
-                    <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange} />
-                    <ReturnStatusTable headers={tableHeader} rows={returnStatus} onChangeReturnStatusClick={onChangeReturnStatusClick} />
-                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
+                    <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange}/>
+                    <ReturnStatusTable headers={tableHeader} rows={returnStatus}
+                                       onChangeReturnStatusClick={onChangeReturnStatusClick}/>
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange}/>
                 </Paper>
             </Box>
         </Box>

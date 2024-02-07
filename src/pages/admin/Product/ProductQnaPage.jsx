@@ -1,13 +1,13 @@
 import * as React from "react";
-import LeftNav from "../../../components/admin/Sidebar/LeftNav";
-import Header from "../../../components/admin/Header/Header";
-import QnaTable from "../../../components/admin/Table/QnaTable";
+import {useNavigate, useLocation} from "react-router-dom";
+import {useState, useEffect} from "react";
+import LeftNav from "@components/admin/Sidebar/LeftNav";
+import Header from "@components/admin/Header/Header";
+import QnaTable from "@components/admin/Table/QnaTable";
 import {Paper, Box, Pagination} from "@mui/material";
-import {indigo} from '@mui/material/colors';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import {adminApi} from "../../../api/Api";
+import {indigo} from "@mui/material/colors";
+import axios from "axios";
+import {adminApi} from "@api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -28,7 +28,7 @@ function ProductQnaPage() {
     const fetchQnaList = async () => {
         try {
             const response = await axios.get(`${adminApi}/products/qna?page=${currentPage}`, {
-                headers: { 'Authorization': `Bearer ${token}` }
+                headers: {'Authorization': `Bearer ${token}`}
             });
             setRows(response.data.data.content);
             setTotalPages(response.data.data.totalPages);
@@ -60,11 +60,20 @@ function ProductQnaPage() {
             <Box
                 bgcolor={primary}
                 component="main"
-                sx={{height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px`}}>
+                sx={{
+                    height: '100vh',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    flex: 1,
+                    p: 3,
+                    mt: 9,
+                    ml: `${drawerWidth}px`
+                }}>
                 <Paper square elevation={2}
-                    sx={{p: '20px 30px'}}>
-                    <QnaTable headers={tableHeader} rows={rows} onRowClick={handleRowClick} fetchQnaList={fetchQnaList}/>
-                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
+                       sx={{p: '20px 30px'}}>
+                    <QnaTable headers={tableHeader} rows={rows} onRowClick={handleRowClick}
+                              fetchQnaList={fetchQnaList}/>
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange}/>
                 </Paper>
             </Box>
         </Box>

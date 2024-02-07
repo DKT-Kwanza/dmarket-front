@@ -1,14 +1,14 @@
 import * as React from "react";
-import LeftNav from "../../../components/admin/Sidebar/LeftNav.jsx";
-import Header from "../../../components/admin/Header/Header.jsx";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import LeftNav from "@components/admin/Sidebar/LeftNav.jsx";
+import Header from "@components/admin/Header/Header.jsx";
+import ReviewTable from "@components/admin/Table/ReviewTable.jsx"
+import ReviewModal from "@components/admin/Modal/ReviewModal.jsx";
 import {Paper, Box, Pagination} from "@mui/material";
-import {indigo} from '@mui/material/colors';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import ReviewTable from '../../../components/admin/Table/ReviewTable.jsx'
-import ReviewModal from '../../../components/admin/Modal/ReviewModal.jsx';
-import {adminApi} from "../../../api/Api";
+import {indigo} from "@mui/material/colors";
+import axios from "axios";
+import {adminApi} from "@api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;

@@ -1,14 +1,14 @@
 import * as React from "react";
-import LeftNav from "../../../components/admin/Sidebar/LeftNav";
-import Header from "../../../components/admin/Header/Header";
-import SearchBar from "../../../components/admin/Common/SearchBar/SearchBar";
-import UserTable from "../../../components/admin/Table/UserTable";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import LeftNav from "@components/admin/Sidebar/LeftNav";
+import Header from "@components/admin/Header/Header";
+import SearchBar from "@components/admin/Common/SearchBar/SearchBar";
+import UserTable from "@components/admin/Table/UserTable";
 import {Paper, Box, Button} from "@mui/material";
-import {indigo} from '@mui/material/colors';
-import {useNavigate} from 'react-router-dom';
-import {useState} from 'react';
-import axios from 'axios';
-import {adminApi} from "../../../api/Api";
+import {indigo} from "@mui/material/colors";
+import axios from "axios";
+import {adminApi} from "@api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;

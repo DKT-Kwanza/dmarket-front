@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from "react";
-import { useNavigate, useLocation } from 'react-router-dom';
-import LeftNav from "../../../components/admin/Sidebar/LeftNav";
-import Header from "../../../components/admin/Header/Header";
-import CustomerNoticeTable from "../../../components/admin/Table/CustomerNoticeTable";
-import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
-import NoticeModal from "../../../components/admin/Modal/NoticeModal";
-import NoticeWriteModal from "../../../components/admin/Modal/NoticeWriteModal";
+import {useNavigate, useLocation} from "react-router-dom";
+import LeftNav from "@components/admin/Sidebar/LeftNav";
+import Header from "@components/admin/Header/Header";
+import CustomerNoticeTable from "@components/admin/Table/CustomerNoticeTable";
+import NoticeModal from "@components/admin/Modal/NoticeModal";
+import NoticeWriteModal from "@components/admin/Modal/NoticeWriteModal";
 import {Paper, Box, Button, Pagination} from "@mui/material";
-import axios from "axios";
-import {indigo} from '@mui/material/colors';
+import {indigo} from "@mui/material/colors";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import {adminApi} from "../../../api/Api";
+import axios from "axios";
+import {adminApi} from "@api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -27,7 +26,7 @@ function CustomerNotice() {
     const [selectedNoticeId, setSelectedNoticeId] = useState(null);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
-    
+
     const token = sessionStorage.getItem('token');
 
     useEffect(() => {
@@ -43,7 +42,7 @@ function CustomerNotice() {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                setNotice(response.data.data.content); 
+                setNotice(response.data.data.content);
                 setTotalPages(response.data.data.totalPages);
             } catch (e) {
                 console.error(e);
@@ -76,7 +75,7 @@ function CustomerNotice() {
                 }
             });
             alert('해당 공지사항이 삭제되었습니다!')
-            fetchNotices(); 
+            fetchNotices();
         } catch (e) {
             console.error("Error deleting notice:", e);
         }
@@ -131,8 +130,9 @@ function CustomerNotice() {
                         endIcon={<BorderColorIcon/>}>
                         작성하기
                     </Button>
-                    <CustomerNoticeTable headers={tableHeader} rows={notice} onDeleteClick={onDeleteClick} onRowClick={handleRowClick}/>
-                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
+                    <CustomerNoticeTable headers={tableHeader} rows={notice} onDeleteClick={onDeleteClick}
+                                         onRowClick={handleRowClick}/>
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange}/>
                 </Paper>
             </Box>
             {selectedNoticeId !== null && (
@@ -142,7 +142,7 @@ function CustomerNotice() {
             )}
             {
                 <NoticeWriteModal
-                    open={isWriteModalOpen} handleClose={handleCloseWriteModal} fetchNotices={fetchNotices} />
+                    open={isWriteModalOpen} handleClose={handleCloseWriteModal} fetchNotices={fetchNotices}/>
             }
         </Box>
     );
