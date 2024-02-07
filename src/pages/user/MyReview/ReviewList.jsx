@@ -8,7 +8,7 @@ import OrderReviewList from "../../../components/user/List/OrderReviewList";
 import ConfirmCancelModal from "../../../components/commmon/Modal/ConfirmCancelModal";
 import {Pagination} from "@mui/material";
 import axios from 'axios';
-import {productsApi, userApi} from "../../../Api";
+import {productsApi, userApi} from "@/Api";
 
 const ReviewList = () => {
     const navigate = useNavigate();
