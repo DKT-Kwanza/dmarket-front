@@ -1,12 +1,12 @@
 import * as React from "react";
-import LeftNav from "../../../components/admin/Sidebar/LeftNav";
-import Header from "../../../components/admin/Header/Header";
-import { Box, Button, TextField, Paper } from '@mui/material';
-import {indigo} from '@mui/material/colors';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import {useNavigate} from "react-router-dom";
+import {useState} from "react";
+import LeftNav from "@components/admin/Sidebar/LeftNav";
+import Header from "@components/admin/Header/Header";
+import {Box, Button, TextField, Paper} from "@mui/material";
+import {indigo} from "@mui/material/colors";
 import axios from "axios";
-import { userApi } from '../../../api/Api';
+import {userApi} from "@api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -26,7 +26,7 @@ function UserRegisterPage() {
 
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         if (name === 'phoneNumber') {
             const input = value.replace(/\D/g, '');
             const formattedPhoneNumber = input.replace(/(\d{3})(\d{0,4})(\d{0,4})/, (match, p1, p2, p3) => {
@@ -38,15 +38,15 @@ function UserRegisterPage() {
                     return p1;
                 }
             });
-            setState({ ...state, [name]: formattedPhoneNumber });
+            setState({...state, [name]: formattedPhoneNumber});
         } else {
-            setState({ ...state, [name]: value });
+            setState({...state, [name]: value});
         }
     };
 
 
     const handleFormSubmit = (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         const token = sessionStorage.getItem('token');
         const regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^])(?=.*[0-9]).{8,25}$/;
         if (!token) {
@@ -57,33 +57,33 @@ function UserRegisterPage() {
             alert("비밀번호는 8자리 이상이며 영문자, 숫자, 특수문자(!@#$%^)가 포함되어야 합니다.");
             return;
         }
-        if (state.passwordValid !== state.inputPw){
+        if (state.passwordValid !== state.inputPw) {
             alert("비밀번호가 일치하지 않습니다.");
             console.error("Password mismatch");
             return;
         }
 
         axios.post(`${userApi}/join`, {
-                userEmail: state.inputId,
-                userPassword: state.inputPw,
-                userDktNum: state.dktNum,
-                userName: state.inputName,
-                userPhoneNum: state.phoneNumber,
-                userJoinDate: state.joinDate,
-                userPostalCode: state.postalCode,
-                userAddress: state.address,
-                userDetailedAddress: state.detailedAddress
-            }, {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then((res)=> {
+            userEmail: state.inputId,
+            userPassword: state.inputPw,
+            userDktNum: state.dktNum,
+            userName: state.inputName,
+            userPhoneNum: state.phoneNumber,
+            userJoinDate: state.joinDate,
+            userPostalCode: state.postalCode,
+            userAddress: state.address,
+            userDetailedAddress: state.detailedAddress
+        }, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => {
                 alert('사용자가 등록되었습니다.');
                 navigate(`/memberMng/user`);
             })
-            .catch(function(error){
+            .catch(function (error) {
                 alert(error.response.data.msg);
                 console.error('Error submitting user:', error);
             });
@@ -96,9 +96,17 @@ function UserRegisterPage() {
             <Box
                 bgcolor={primary}
                 component="main"
-                sx={{height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px`}}>
+                sx={{
+                    height: '100vh',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    flex: 1,
+                    p: 3,
+                    mt: 9,
+                    ml: `${drawerWidth}px`
+                }}>
                 <Paper square elevation={2}
-                sx={{p: '20px 30px'}}>
+                       sx={{p: '20px 30px'}}>
                     <TextField
                         required
                         fullWidth
@@ -168,7 +176,7 @@ function UserRegisterPage() {
                         label="입사일"
                         type="date"
                         InputLabelProps={{
-                        shrink: true,
+                            shrink: true,
                         }}
                         margin="normal"
                         name="joinDate"
@@ -178,7 +186,7 @@ function UserRegisterPage() {
                     <Button
                         type="submit"
                         variant="outlined"
-                        sx={{ float: "right", mt: 3, mb: 2 }}
+                        sx={{float: "right", mt: 3, mb: 2}}
                         onClick={handleFormSubmit}
                     >
                         등록

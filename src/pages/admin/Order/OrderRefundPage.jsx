@@ -1,12 +1,12 @@
-import LeftNav from "../../../components/admin/Sidebar/LeftNav";
-import Header from "../../../components/admin/Header/Header";
-import OrderRefundTable from "../../../components/admin/Table/OrderRefundTable";
-import {Paper, Box, Pagination} from "@mui/material";
-import {indigo} from '@mui/material/colors';
 import React, {useEffect, useState} from "react";
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from "react-router-dom";
+import LeftNav from "@components/admin/Sidebar/LeftNav";
+import Header from "@components/admin/Header/Header";
+import OrderRefundTable from "@components/admin/Table/OrderRefundTable";
+import {Paper, Box, Pagination} from "@mui/material";
+import {indigo} from "@mui/material/colors";
 import axios from "axios";
-import {adminApi} from "../../../api/Api";
+import {adminApi} from "@api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -53,10 +53,10 @@ function Refund() {
                     'Authorization': `Bearer ${token}`,
                 },
             });
-    
+
             alert("환불 요청이 완료되었습니다!");
-            setOrderCancel(prevStatus => prevStatus.filter(item => item.returnId !== returnId));      
-    
+            setOrderCancel(prevStatus => prevStatus.filter(item => item.returnId !== returnId));
+
         } catch (error) {
             console.error(error);
         }
@@ -71,15 +71,23 @@ function Refund() {
         <Box>
             <LeftNav/>
             <Header title={'환불 요청'}/>
-            <Box bgcolor={primary} component="main" sx={{height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px`}}>
+            <Box bgcolor={primary} component="main" sx={{
+                height: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                flex: 1,
+                p: 3,
+                mt: 9,
+                ml: `${drawerWidth}px`
+            }}>
                 <Paper square elevation={2} sx={{p: '20px 30px'}}>
-                <OrderRefundTable
-                    headers={tableHeader}
-                    rows={orderCancel}
-                    refundPercents={refundPercents}
-                    onApplyClick={onChangeRefundStatusClick}
-                />
-                <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
+                    <OrderRefundTable
+                        headers={tableHeader}
+                        rows={orderCancel}
+                        refundPercents={refundPercents}
+                        onApplyClick={onChangeRefundStatusClick}
+                    />
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange}/>
                 </Paper>
             </Box>
         </Box>

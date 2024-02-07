@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import LeftNav from "../../../components/admin/Sidebar/LeftNav";
-import Header from "../../../components/admin/Header/Header";
-import TabMenu from "../../../components/admin/Common/TabMenu/TabMenu";
-import CustomerFaqTable from "../../../components/admin/Table/CustomerFaqTable";
-import FaqModal from "../../../components/admin/Modal/FaqModal";
-import FaqWriteModal from "../../../components/admin/Modal/FaqWriteModal";
-import { Paper, Box, Button, Pagination } from "@mui/material";
-import { indigo } from '@mui/material/colors';
+import React, {useEffect, useState} from "react";
+import LeftNav from "@components/admin/Sidebar/LeftNav";
+import Header from "@components/admin/Header/Header";
+import TabMenu from "@components/admin/Common/TabMenu/TabMenu";
+import CustomerFaqTable from "@components/admin/Table/CustomerFaqTable";
+import FaqModal from "@components/admin/Modal/FaqModal";
+import FaqWriteModal from "@components/admin/Modal/FaqWriteModal";
+import {Paper, Box, Button, Pagination} from "@mui/material";
+import {indigo} from "@mui/material/colors";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import axios from "axios";
-import {adminApi} from "../../../api/Api";
+import {adminApi} from "@api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -27,10 +27,10 @@ function AdminCustomerFaqPage() {
     const [selectedFaqId, setSelectedFaqId] = useState(null);
 
     const menuList = [
-        { title: '회원 문의' },
-        { title: '주문/결제 문의' },
-        { title: '반품/환불 문의' },
-        { title: '마일리지 문의' }
+        {title: '회원 문의'},
+        {title: '주문/결제 문의'},
+        {title: '반품/환불 문의'},
+        {title: '마일리지 문의'}
     ];
 
     const token = sessionStorage.getItem('token');
@@ -99,35 +99,44 @@ function AdminCustomerFaqPage() {
 
     return (
         <Box>
-            <LeftNav />
-            <Header title={'FAQ'} />
+            <LeftNav/>
+            <Header title={'FAQ'}/>
             {/*컨텐츠 영역입니다.*/}
             <Box
                 bgcolor={primary}
                 component="main"
-                sx={{ height: '100vh', display: 'flex', flexDirection: 'column', flex: 1, p: 3, mt: 9, ml: `${drawerWidth}px` }}>
+                sx={{
+                    height: '100vh',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    flex: 1,
+                    p: 3,
+                    mt: 9,
+                    ml: `${drawerWidth}px`
+                }}>
                 <Paper square elevation={2}
-                    sx={{ p: '20px 30px' }}>
+                       sx={{p: '20px 30px'}}>
                     <Button
-                    sx={{ float: 'right' }}
-                    variant="contained"
-                    endIcon={<BorderColorIcon />}
-                    onClick={handleWriteButtonClick}>
+                        sx={{float: 'right'}}
+                        variant="contained"
+                        endIcon={<BorderColorIcon/>}
+                        onClick={handleWriteButtonClick}>
                         작성하기
                     </Button>
-                    <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange} />
+                    <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange}/>
                     <CustomerFaqTable headers={tableHeader} rows={faqList} onDeleteClick={onDeleteClick}
-                        onRowClick={handleRowClick} />
-                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
+                                      onRowClick={handleRowClick}/>
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange}/>
                 </Paper>
             </Box>
             {
                 selectedFaqId !== null && (
-                    <FaqModal open={isDetailModalOpen} handleClose={handleCloseDetailModal} faqId={selectedFaqId} faqList={faqList} />
+                    <FaqModal open={isDetailModalOpen} handleClose={handleCloseDetailModal} faqId={selectedFaqId}
+                              faqList={faqList}/>
                 )
             }
             {
-                <FaqWriteModal open={isWriteModalOpen} handleClose={handleCloseWriteModal} />
+                <FaqWriteModal open={isWriteModalOpen} handleClose={handleCloseWriteModal}/>
             }
         </Box>
     );
