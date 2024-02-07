@@ -31,6 +31,7 @@ COPY ./nginx.conf /etc/nginx/conf.d
 
 # 컨테이너의 80번 포트를 열어준다.
 EXPOSE 80
+EXPOSE 443
 
 #추가내용 작성
 RUN apk add python3 python3-dev py3-pip build-base libressl-dev musl-dev libffi-dev
