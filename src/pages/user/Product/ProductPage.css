@@ -25,13 +25,6 @@
     margin-bottom: -10px;
 }
 
-.productList-filter {
-    position: fixed;
-    width: 1280px;
-    z-index: 10; 
-    background-color: white; 
-}
-
 .productList-bar {
     background: #DBDBDB;
     height: 2px;    
@@ -43,7 +36,6 @@
     place-items: center;
     align-items: start;
     margin-top: 17px;
-    padding-top: 210px;
 }
 
 .productList-empty {

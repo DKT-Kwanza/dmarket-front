@@ -8,10 +8,10 @@ body, html {
 .header-div {
     height: 166px;
     background: white;
-    position: fixed;
+    /* position: fixed;
     top: 0;
     left: 0;
-    right: 0;
+    right: 0; */
     z-index: 1000;
 }
 
@@ -85,13 +85,13 @@ body, html {
     margin: auto 0;
 }
 
-.mypage{
+/* .mypage{
     width: 30px;
     height: 30px;
     cursor: pointer;
     border:none;
     background-color: #FFF;
-}
+} */
 
 .bucket{
     width: 30px;
@@ -106,17 +106,17 @@ body, html {
     width: 16px;
     height: 16px;
     position: absolute;
-    top: -6px; /* Adjust the top position as needed */
-    right: 0px; /* Adjust the right position to place it in the top right corner */
+    top: -6px; 
+    right: 0px; 
 }
 
-.likes{
+/* .likes{
     width: 30px;
     height: 30px;
     border:none;
     background-color: #FFF;
     cursor: pointer;
-}
+} */
 
 .alams{
     width: 30px;
@@ -228,21 +228,28 @@ body, html {
 .sub-category-box-container {
     display: flex;
     justify-content: center;
-    width: 1280px;
+    width: 100%;
     margin: 0 auto;
-    padding: 10px 0;
 }
 
 .sub-category-box {
+    width: 100%;
+    position: fixed;
+    background-color: white;
+    margin: 0 auto;
+}
+
+.sub-category-box-box {
     width: 780px;
     display: flex;
     justify-content: space-between;
+    margin: 0 auto;
+    padding: 0 210px;
 }
 
 .sub-category-box-whole {
     background-color: white;
-    border-bottom: 1px solid #EDEDED;
-    margin-top: 2px;
+    border-top: 1px solid #EDEDED;
 }
 
 .sub-category-contents-details-button{
