@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignIn.css';
-import logo from '../../../assets/images/logo.png'
-import { userApi } from '../../../api/Api';
+import logo from '@assets/images/logo.png'
+import { userApi } from '@api/Api';
 
 function SignIn() {
     const navigate = useNavigate();

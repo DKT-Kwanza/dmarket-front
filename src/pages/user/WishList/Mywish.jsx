@@ -1,11 +1,11 @@
 import './Mywish.css';
 import React, { useState, useEffect } from 'react';
 import {useNavigate} from "react-router-dom";
-import WishItemList from '../../../components/user/List/WishItemList';
-import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
+import WishItemList from '@components/user/List/WishItemList';
+import CheckBox from "@components/user/Common/CheckBox/CheckBox";
 import {Pagination} from "@mui/material";
 import axios from 'axios';
-import {userApi} from "../../../api/Api";
+import {userApi} from "@api/Api";
 
 function WishList() {
     const navigate = useNavigate();

@@ -2,13 +2,12 @@ import React, {useState, useEffect} from "react";
 import {useLocation, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import './SearchPage.css';
-import ProductItem from '../../../components/user/Item/ProductItem';
-import Filter from '../../../components/user/Common/Filter/Filter';
-import Dropdown from '../../../components/user/Common/Select/Dropdown';
-import ScrollToTopBtn from "../../../components/user/Common/Button/ScrollToTopBtn";
+import ProductItem from '@components/user/Item/ProductItem';
+import Filter from '@components/user/Common/Filter/Filter';
+import ScrollToTopBtn from "@components/user/Common/Button/ScrollToTopBtn";
 import { Pagination } from "@mui/material";
-import { removeCommas } from "../../../utils/Format";
-import {productsApi} from "../../../api/Api";
+import { removeCommas } from "@utils/Format";
+import {productsApi} from "@api/Api";
 
 function SearchPage() {
     const navigate = useNavigate();

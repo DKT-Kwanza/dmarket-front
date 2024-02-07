@@ -3,18 +3,14 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import NotificationModal from '../Common/Modal/NotificationModal';
 import {useRecoilState} from "recoil";
-import {cartCountAtom} from "../../../recoil/atom";
-import { isLoggedInState } from '../../../recoil/atom';
+import {cartCountAtom} from "@recoil/atom";
+import { isLoggedInState } from '@recoil/atom';
 import axios from "axios";
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import './Header.css'
-import user from '../../../assets/icons/user.svg'
-import heart from '../../../assets/icons/heart.svg'
-import shoppingBag from '../../../assets/icons/shoppingBag.svg'
-import alert from '../../../assets/icons/alert.svg'
-import { notifyApi, productsApi, userApi } from '../../../api/Api';
+import { notifyApi, productsApi, userApi } from '@api/Api';
 import { IoIosLogOut } from "react-icons/io";
 import { LiaUser } from "react-icons/lia";
 import { HiOutlineShoppingCart } from "react-icons/hi2";

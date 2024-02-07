@@ -1,6 +1,6 @@
 import './WishItem.css';
 import CheckBox from '../Common/CheckBox/CheckBox';
-import {formatPrice} from "../../../utils/Format";
+import {formatPrice} from "@utils/Format";
 
 function WishItem({ productImg, brand, productName, sales, checked, onCheck, onClick }) {
     return(

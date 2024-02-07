@@ -1,13 +1,13 @@
 import './HistoryMileage.css'
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
-import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
-import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import MileageHistoryItem from "../../../components/user/Item/MileageHistoryItem";
+import MyPageSubHeader from "@components/user/Header/MyPageSubHeader";
+import MyPageSidebar from "@components/user/Sidebar/MyPageSidebar";
+import MileageHistoryItem from "@components/user/Item/MileageHistoryItem";
 import {Pagination} from "@mui/material";
-import {formatDate} from "../../../utils/Format";
+import {formatDate} from "@utils/Format";
 import axios from 'axios';
-import {userApi} from "../../../api/Api";
+import {userApi} from "@api/Api";
 
 function HistoryMileage() {
     const navigate = useNavigate();

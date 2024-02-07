@@ -1,13 +1,12 @@
-import React, {useRef, useState, useEffect} from "react";
-import axios from "axios";
+import React, {useRef, useState} from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import "./PaymentPage.css";
 import useDetectClose from "./UseDetectClose";
-import { MsgDropDown } from "../../../components/user/Common/Select/MsgDropDown";
-import {ReactComponent as DropDownImg} from "../../../assets/icons/dropdown.svg";
-import PaymentList from "../../../components/user/List/PaymentList";
-import PaymentInfo from "../../../components/user/Info/PaymentInfo";
-import AddressConfirmModal from "../../../components/user/Common/Modal/AddressConfirmModal";
+import { MsgDropDown } from "@components/user/Common/Select/MsgDropDown";
+import {ReactComponent as DropDownImg} from "@assets/icons/dropdown.svg";
+import PaymentList from "@components/user/List/PaymentList";
+import PaymentInfo from "@components/user/Info/PaymentInfo";
+import AddressConfirmModal from "@components/user/Common/Modal/AddressConfirmModal";
 
 function Payment(){
     const navigate = useNavigate();

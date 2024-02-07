@@ -1,6 +1,6 @@
 import React from "react";
 import "./OrderInfo.css";
-import { formatDate, formatTime } from '../../../utils/Format';
+import { formatDate, formatTime } from '@utils/Format';
 
 const OrderInfo = ({ orderDate, orderId }) => {
   

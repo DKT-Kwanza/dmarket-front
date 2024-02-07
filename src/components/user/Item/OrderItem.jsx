@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from "react";
-import {formatPrice} from '../../../utils/Format';
+import {formatPrice} from '@utils/Format';
 
 function OrderItem({
                        productImg,

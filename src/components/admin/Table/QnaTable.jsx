@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { formatDate } from '../../../utils/Format';
+import { formatDate } from '@utils/Format';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';

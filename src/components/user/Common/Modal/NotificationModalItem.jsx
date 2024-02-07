@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import './NotificationModal.css'
-import { formatDate } from '../../../../utils/Format';
-import { notifyApi } from '../../../../api/Api';
+import { formatDate } from '@utils/Format';
+import { notifyApi } from '@api/Api';
 
 const NotificationItem = ({ notification, setUnreadCount }) => {
     const navigate = useNavigate();

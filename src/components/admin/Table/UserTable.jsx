@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import SelectBox from "../../commmon/SelectBox/SelectBox";
 import axios from 'axios';
-import {adminApi} from "../../../api/Api";
+import {adminApi} from "@api/Api";
 
 const style = {
     position: 'absolute',

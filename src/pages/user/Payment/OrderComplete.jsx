@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import { useLocation } from 'react-router-dom';
-import axios from "axios";
-import { formatDate, formatTime, formatPrice } from '../../../utils/Format';
+import { formatDate, formatTime, formatPrice } from '@utils/Format';
 import "./OrderComplete.css";
 
 

@@ -1,11 +1,11 @@
 import "./WriteReviewPage.css";
 import React, {useState, useCallback} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
-import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
-import {formatPrice} from '../../../utils/Format';
+import MyPageSidebar from "@components/user/Sidebar/MyPageSidebar";
+import MyPageSubHeader from "@components/user/Header/MyPageSubHeader";
+import {formatPrice} from '@utils/Format';
 import axios from "axios";
-import {productsApi} from "../../../api/Api";
+import {productsApi} from "@api/Api";
 
 function WriteReview() {
     const navigate = useNavigate();

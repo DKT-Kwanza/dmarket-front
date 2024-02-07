@@ -1,12 +1,12 @@
 import './Inquiry.css';
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
-import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
-import InquiryItem from "../../../components/user/Item/InquiryItem";
-import {formatDate} from '../../../utils/Format';
+import MyPageSidebar from "@components/user/Sidebar/MyPageSidebar";
+import MyPageSubHeader from "@components/user/Header/MyPageSubHeader";
+import InquiryItem from "@components/user/Item/InquiryItem";
+import {formatDate} from '@utils/Format';
 import axios from 'axios';
-import {userApi} from "../../../api/Api";
+import {userApi} from "@api/Api";
 import {Pagination} from "@mui/material";
 
 const Inquiry = () => {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FaAngleLeft, FaAngleRight, FaPause, FaPlay } from "react-icons/fa";
-import banner01 from '../../assets/images/banner01.png'
-import banner02 from '../../assets/images/banner02.png'
-import banner03 from '../../assets/images/banner03.png'
+import banner01 from '@assets/images/banner01.png'
+import banner02 from '@assets/images/banner02.png'
+import banner03 from '@assets/images/banner03.png'
 
 const MainBanner = () => {
     const [currentIndex, setCurrentIndex] = useState(0);

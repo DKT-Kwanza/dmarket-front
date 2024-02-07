@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import NotificationModalItem from './NotificationModalItem';
 import { IoClose } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import './NotificationModal.css';
+import { notifyApi } from '@api/Api';
 
 const NotificationModal = ({ notifications, setNotifications, onClose, setUnreadCount }) => {
     const navigate = useNavigate();
@@ -14,8 +15,7 @@ const NotificationModal = ({ notifications, setNotifications, onClose, setUnread
     // 전체 삭제 눌렀을 때
     const handleDeleteAll = async() => {
         if (token && userId) {
-            //axios.get(`${notifyApi}/${userId}/notifications`, {
-            axios.delete(`http://localhost:8080/api/notification/${userId}`, {
+            axios.get(`${notifyApi}/${userId}/notifications`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
@@ -33,8 +33,7 @@ const NotificationModal = ({ notifications, setNotifications, onClose, setUnread
     // 전체 읽음 버튼 눌렀을 때
     const handleReadeAll = async() => {
         if (token && userId) {
-            //axios.get(`${notifyApi}/${userId}/notifications`, {
-            axios.put(`http://localhost:8080/api/notification/${userId}`, {}, {
+            axios.put(`${notifyApi}/${userId}/notifications`, {}, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

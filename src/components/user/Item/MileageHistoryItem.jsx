@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatPrice } from '../../../utils/Format';
+import { formatPrice } from '@utils/Format';
 import './MileageHistoryItem.css'
 
 const MileageItem = ({ date, contents, addMileage, curMileage  }) => {

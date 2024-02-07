@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
 import axios from 'axios';
-import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
+import MyPageSidebar from "@components/user/Sidebar/MyPageSidebar";
+import MyPageSubHeader from "@components/user/Header/MyPageSubHeader";
 import './Qna.css';
-import QnaItem from '../../../components/user/Item/QnaItem';
+import QnaItem from '@components/user/Item/QnaItem';
 import {Pagination} from "@mui/material";
-import {formatDate} from '../../../utils/Format';
-import {userApi} from "../../../api/Api";
+import {formatDate} from '@utils/Format';
+import {userApi} from "@api/Api";
 
 const Qna = () => {
     const navigate = useNavigate();

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Box, Typography, Modal, TextField, Button } from '@mui/material';
-import { formatDate } from '../../../utils/Format';
-import {adminApi} from "../../../api/Api";
+import { formatDate } from '@utils/Format';
+import {adminApi} from "@api/Api";
 
 const InquiryModalStyle = {
     position: 'absolute',

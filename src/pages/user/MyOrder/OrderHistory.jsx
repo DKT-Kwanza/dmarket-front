@@ -1,12 +1,12 @@
 import "./OrderHistory.css";
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
-import OrderHistoryItem from '../../../components/user/Item/OrderHistoryItem';
-import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
-import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
+import OrderHistoryItem from '@components/user/Item/OrderHistoryItem';
+import MyPageSubHeader from "@components/user/Header/MyPageSubHeader";
+import MyPageSidebar from "@components/user/Sidebar/MyPageSidebar";
 import {Pagination} from "@mui/material";
 import axios from 'axios';
-import {userApi} from "../../../api/Api";
+import {userApi} from "@api/Api";
 
 function OrderHistory() {
     const navigate = useNavigate();

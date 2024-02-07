@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { ReactComponent as ChevronDown } from "../../../assets/icons/chevron-down.svg";
+import { ReactComponent as ChevronDown } from "@assets/icons/chevron-down.svg";
 
 
 export default function SelectBox({ text, options, onChange }) {

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import StarRating from "../Common/Rating/StarRating";
-import {formatDate} from "../../../utils/Format";
+import {formatDate} from "@utils/Format";
 
 function DetailReviewItem({rating, writer, reviewDate, option, imageSrc, content}) {
     return (

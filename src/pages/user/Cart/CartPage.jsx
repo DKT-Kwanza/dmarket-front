@@ -2,14 +2,14 @@ import './CartPage.css';
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useSetRecoilState} from "recoil";
-import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
-import CartList from "../../../components/user/List/CartList";
-import CartOrderInfo from "../../../components/user/Info/CartOrderInfo";
-import ConfirmCancelModal from "../../../components/commmon/Modal/ConfirmCancelModal";
-import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
+import CheckBox from "@components/user/Common/CheckBox/CheckBox";
+import CartList from "@components/user/List/CartList";
+import CartOrderInfo from "@components/user/Info/CartOrderInfo";
+import ConfirmCancelModal from "@components/commmon/Modal/ConfirmCancelModal";
+import ConfirmModal from "@components/commmon/Modal/ConfirmModal";
 import axios from 'axios';
-import {userApi} from "../../../api/Api";
-import {cartCountAtom} from "../../../recoil/atom";
+import {userApi} from "@api/Api";
+import {cartCountAtom} from "@recoil/atom";
 
 function Cart() {
     const navigate = useNavigate();
