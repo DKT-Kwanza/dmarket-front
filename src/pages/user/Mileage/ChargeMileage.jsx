@@ -3,7 +3,7 @@ import axios from 'axios';
 import './ChargeMileage.css'
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import { userApi } from '../../../Api';
+import { userApi } from '../../../api/Api';
 
 function ChargeMileage(){
 

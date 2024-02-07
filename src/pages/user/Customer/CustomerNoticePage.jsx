@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import CustomerCenterNoticeItem from "../../../components/user/Item/CustomerCenterNoticeItem";
 import {formatDate} from '../../../utils/Format';
 import axios from 'axios';
-import {boardApi} from "../../../Api";
+import {boardApi} from "../../../api/Api";
 import {Pagination} from "@mui/material";
 
 function CustomerCenterNotice() {

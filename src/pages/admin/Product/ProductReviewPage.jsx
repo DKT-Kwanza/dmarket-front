@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReviewTable from '../../../components/admin/Table/ReviewTable.jsx'
 import ReviewModal from '../../../components/admin/Modal/ReviewModal.jsx';
-import {adminApi} from "../../../Api";
+import {adminApi} from "../../../api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;

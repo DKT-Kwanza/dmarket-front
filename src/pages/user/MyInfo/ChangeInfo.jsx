@@ -4,7 +4,7 @@ import MyPageSubHeader from '../../../components/user/Header/MyPageSubHeader';
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import axios from "axios";
-import { userApi } from '../../../Api';
+import { userApi } from '../../../api/Api';
 
 function ChangeInfo() {
     const [userInfo, setUserInfo] = useState({});

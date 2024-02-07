@@ -1,6 +1,6 @@
 import {selector} from "recoil";
 import {cartCountAtom} from "./atom";
-import {userApi} from "../Api";
+import {userApi} from "../api/Api";
 import axios from "axios";
 
 export const cartCountState = selector({

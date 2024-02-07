@@ -4,7 +4,7 @@ import axios from 'axios';
 import { formatDate, formatPrice } from '../../../utils/Format'
 import './MyPageSubHeader.css'
 import right from '../../../assets/icons/chevron-right.svg'
-import { userApi } from '../../../Api';
+import { userApi } from '../../../api/Api';
 
 const MyPageSubHeader = () => {
 

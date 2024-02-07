@@ -11,7 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import {adminApi} from "../../../Api";
+import {adminApi} from "../../../api/Api";
 
 export default function EditProductTable({headers, rows, fetchData, setRows}) {
 

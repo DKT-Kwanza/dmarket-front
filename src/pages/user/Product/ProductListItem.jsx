@@ -1,6 +1,6 @@
 import './ProductListItem.css'
-import StarRating from "../../../components/user/Common/Rating/StarRating";
-import {formatPrice} from "../../../utils/Format";
+import StarRating from "@components/user/Common/Rating/StarRating";
+import {formatPrice} from "@utils/Format";
 
 function ProductListItem({onClick, brand, productName, productImg, sales, ratingAvg, reviewCnt}) {
 

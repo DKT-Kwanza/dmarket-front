@@ -10,7 +10,7 @@ import Stack from '@mui/material/Stack';
 import { indigo } from '@mui/material/colors';
 import ImageIcon from '@mui/icons-material/Image';
 import Write from "../../../components/admin/Common/Input/Write";
-import { adminApi, bucketToken, bucketURL } from "../../../Api";
+import { adminApi, bucketToken, bucketURL } from "../../../api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;

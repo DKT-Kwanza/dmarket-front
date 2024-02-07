@@ -7,7 +7,7 @@ import {indigo} from '@mui/material/colors';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {adminApi} from "../../../Api";
+import {adminApi} from "../../../api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;

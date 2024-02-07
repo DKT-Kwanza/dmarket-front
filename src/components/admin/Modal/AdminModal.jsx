@@ -4,7 +4,7 @@ import { Box, Modal, Button, Typography } from '@mui/material';
 import axios from "axios";
 import UserTable from "../Table/UserTable";
 import SearchBar from "../Common/SearchBar/SearchBar";
-import {adminApi} from "../../../Api";
+import {adminApi} from "../../../api/Api";
 
 const AdminModalStyle = {
     position: 'absolute',

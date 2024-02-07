@@ -6,7 +6,7 @@ import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import {Pagination} from "@mui/material";
 import axios from 'axios';
-import {userApi} from "../../../Api";
+import {userApi} from "../../../api/Api";
 
 function OrderHistory() {
     const navigate = useNavigate();

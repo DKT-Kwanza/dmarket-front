@@ -6,7 +6,7 @@ import {Paper, Box, Pagination} from "@mui/material";
 import {indigo} from '@mui/material/colors';
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {adminApi} from "../../../Api";
+import {adminApi} from "../../../api/Api";
 import {useNavigate} from "react-router-dom";
 
 const primary = indigo[50];

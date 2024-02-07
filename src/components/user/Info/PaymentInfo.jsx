@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { formatPrice } from "../../../utils/Format";
 import {ReactComponent as ShoppingBag} from "../../../assets/icons/shopping-bag-03.svg";
 import './PaymentInfo.css'
-import { orderApi } from '../../../Api';
+import { orderApi } from '../../../api/Api';
 
 export default function PaymentInfo({ userName, totalPrice, discount, totalPay, productList }) {
     const navigate = useNavigate();

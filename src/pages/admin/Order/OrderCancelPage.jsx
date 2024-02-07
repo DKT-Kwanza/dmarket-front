@@ -6,7 +6,7 @@ import axios from "axios";
 import {Paper, Box, Pagination} from "@mui/material";
 import {indigo} from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
-import {adminApi} from "../../../Api";
+import {adminApi} from "../../../api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;

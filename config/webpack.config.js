@@ -313,8 +313,14 @@ module.exports = function (webpackEnv) {
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
+        '@src': path.resolve(__dirname, '../src'),
+        '@components': path.resolve(__dirname, '../src/components'),
+        '@assets': path.resolve(__dirname, '../src/assets'),
+        '@utils': path.resolve(__dirname, '../src/utils'),
+        '@pages': path.resolve(__dirname, '../src/pages'),
+        '@api': path.resolve(__dirname, '../src/api'),
+        '@recoil': path.resolve(__dirname, '../src/recoil'),
 
-        src: path.resolve(__dirname, "../src/*"),
 
         // Allows for better profiling with ReactDevTools
         ...(isEnvProductionProfile && {
@@ -323,6 +329,7 @@ module.exports = function (webpackEnv) {
         }),
         ...(modules.webpackAliases || {}),
       },
+
       plugins: [
         // Prevents users from importing files from outside of src/ (or node_modules/).
         // This often causes confusion because we only process files within src/ with babel.

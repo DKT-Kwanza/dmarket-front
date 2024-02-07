@@ -7,7 +7,7 @@ import './Qna.css';
 import QnaItem from '../../../components/user/Item/QnaItem';
 import {Pagination} from "@mui/material";
 import {formatDate} from '../../../utils/Format';
-import {userApi} from "../../../Api";
+import {userApi} from "../../../api/Api";
 
 const Qna = () => {
     const navigate = useNavigate();

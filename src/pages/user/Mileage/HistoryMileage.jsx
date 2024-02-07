@@ -7,7 +7,7 @@ import MileageHistoryItem from "../../../components/user/Item/MileageHistoryItem
 import {Pagination} from "@mui/material";
 import {formatDate} from "../../../utils/Format";
 import axios from 'axios';
-import {userApi} from "../../../Api";
+import {userApi} from "../../../api/Api";
 
 function HistoryMileage() {
     const navigate = useNavigate();

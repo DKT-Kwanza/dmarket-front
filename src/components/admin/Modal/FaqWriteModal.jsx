@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, Modal, TextField, Button } from '@mui/material';
 import SelectBox from "../../commmon/SelectBox/SelectBox";
 import axios from 'axios';
-import {adminApi} from "../../../Api";
+import {adminApi} from "../../../api/Api";
 
 const FaqModalStyle = {
     position: 'absolute',

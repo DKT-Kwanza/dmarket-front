@@ -5,10 +5,10 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
 import './Login.css';
-import logo from '../../../assets/images/logo.png'
-import chevronRight from '../../../assets/icons/chevron-right.svg'
-import { isLoggedInState } from '../../../recoil/atom';
-import { userApi } from '../../../Api';
+import logo from '@assets/images/logo.png'
+import chevronRight from '@assets/icons/chevron-right.svg'
+import { isLoggedInState } from '@src/recoil/atom';
+import { userApi } from '@api/Api';
 
 function Login() {
   const navigate = useNavigate();

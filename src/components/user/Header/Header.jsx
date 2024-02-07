@@ -14,7 +14,7 @@ import user from '../../../assets/icons/user.svg'
 import heart from '../../../assets/icons/heart.svg'
 import shoppingBag from '../../../assets/icons/shoppingBag.svg'
 import alert from '../../../assets/icons/alert.svg'
-import { notifyApi, productsApi, userApi } from '../../../Api';
+import { notifyApi, productsApi, userApi } from '../../../api/Api';
 import { IoIosLogOut } from "react-icons/io";
 
 function Header() {
