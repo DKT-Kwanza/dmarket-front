@@ -5,7 +5,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {formatDate} from "../../../utils/Format";
+import {formatDate} from "@utils/Format";
 
 export default function OrderCancelTable({headers, rows}) {
     return (

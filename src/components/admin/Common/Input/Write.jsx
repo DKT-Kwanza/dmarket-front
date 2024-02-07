@@ -3,7 +3,7 @@ import ReactQuill, { Quill } from "react-quill";
 import ImageResize from "quill-image-resize-module-react";
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
-import { bucketURL, bucketToken } from "../../../../api/Api";
+import { bucketURL, bucketToken } from "@api/Api";
 import { v4 } from 'uuid';
 
 Quill.register("modules/imageResize", ImageResize);

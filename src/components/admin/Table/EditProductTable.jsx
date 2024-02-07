@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import {adminApi} from "../../../api/Api";
-import { formatDate, formatPrice } from '../../../utils/Format';
+import {adminApi} from "@api/Api";
+import { formatDate, formatPrice } from '@utils/Format';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';

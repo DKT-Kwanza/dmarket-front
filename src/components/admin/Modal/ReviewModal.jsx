@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Modal, Button } from '@mui/material';
-import { formatDate } from '../../../utils/Format';
+import { formatDate } from '@utils/Format';
 
 const ReviewModalStyle = {
     position: 'absolute',

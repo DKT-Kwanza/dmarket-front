@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {Box, Typography, Modal, TextField, Button} from '@mui/material';
-import {formatDate} from '../../../utils/Format';
+import {Box, Typography, Modal, Button} from '@mui/material';
+import {formatDate} from '@utils/Format';
 
 const NoticeModalStyle = {
     position: 'absolute',

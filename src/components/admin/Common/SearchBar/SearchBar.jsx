@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {useState} from 'react';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';

@@ -6,7 +6,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import {formatDate} from "../../../utils/Format";
+import {formatDate} from "@utils/Format";
 
 export default function CustomerNoticeTable({headers, rows, onDeleteClick, onRowClick}) {
     return (

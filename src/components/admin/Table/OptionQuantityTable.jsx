@@ -1,7 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import { formatDate, formatPrice } from '../../../utils/Format';
+import { formatDate, formatPrice } from '@utils/Format';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,7 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import {adminApi} from "../../../api/Api";
+import {adminApi} from "@api/Api";
 
 export default function EditProductTable({headers, rows, fetchData, setRows}) {
 
