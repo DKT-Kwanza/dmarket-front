@@ -99,6 +99,7 @@ function ProductPage() {
                                     sales={item.productSalePrice}
                                     ratingAvg={item.productRating}
                                     reviewCnt={item.productReviewCount}
+                                    discountRate={item.productDiscountRate}
                                     onClick={() => {
                                         navigateToProductDetail({productId: item.productId})
                                     }}/>

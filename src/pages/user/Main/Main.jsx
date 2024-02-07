@@ -40,7 +40,6 @@ const Main = () => {
                     }
                 });
                 setNewProducts(response.data.data);
-                console.log(response.data.data);
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
@@ -78,21 +77,25 @@ const Main = () => {
     }, []);
 
     /* 카테고리별 할인율 높은 순 조회 데이터 */
-    const fetchPopularData = async (categoryId) => {
-        console.log(categoryId);
+    const fetchPopularData = async (categoryId = '') => {
+        const url = categoryId 
+            ? `${productsApi}/high-discount-rate/${categoryId}` 
+            : `${productsApi}/high-discount-rate`;
+    
         try {
-            const response = await axios.get(`${productsApi}/high-discount-rate/${categoryId || ''}`, {
+            const response = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json; charset=UTF-8',
                 }
             });
-            setDiscountProducts(response.data.data);
-            console.log(response.data);
+            setDiscountProducts(Array.isArray(response.data.data) ? response.data.data : []);
+            console.log(discountProducts)
         } catch (e) {
             console.error("Error fetching data: ", e);
+            setDiscountProducts([]); 
         }
-    };
+    };    
 
     useEffect(() => {
         fetchPopularData(null);
@@ -108,7 +111,7 @@ const Main = () => {
     const displayedDiscountProducts = showMoreDiscount ? discountProducts : discountProducts.slice(0, 8);
 
     const toggleShowMoreDiscount = () => {
-        setDiscountProducts(!showMoreDiscount)
+        setShowMoreDiscount(!showMoreDiscount);
     };
 
     const navigateToProductDetail = ({productId}) => {
@@ -132,6 +135,7 @@ const Main = () => {
                             productName={product.productName}
                             productImg={product.productImg}
                             sales={product.productSalePrice}
+                            discountRate={product.productDiscountRate}
                             onClick={() => {
                                 navigateToProductDetail({productId: product.productId})
                             }}/>
@@ -173,6 +177,7 @@ const Main = () => {
                             productName={product.productName}
                             productImg={product.productImg}
                             sales={product.productSalePrice}
+                            discountRate={product.productDiscountRate}
                             onClick={() => navigateToProductDetail({productId: product.productId})}
                         />
                     ))}

@@ -4,6 +4,8 @@ import './ChargeMileage.css'
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import { userApi } from '../../../api/Api';
+import { formatPrice, removeCommas } from '../../../utils/Format';
+
 
 function ChargeMileage(){
 
@@ -12,17 +14,28 @@ function ChargeMileage(){
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');
 
+    const handleChargeAmountChange = (e) => {
+        const formattedAmount = formatNumberWithCommas(e.target.value.replace(/[^0-9]/g, ''));
+        setChargeAmount(formattedAmount);
+    };
+
+    const formatNumberWithCommas = (number) => {
+        var parts = number.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
+
     const handleChargeRequest = async () => {
         if (!chargeAmount) {
             alert('충전 금액을 입력해주세요.');
             return;
         }
 
-        console.log(chargeAmount);
+        const numericChargeAmount = chargeAmount.replace(/,/g, '');
 
         try {
             const response = await axios.post(`${userApi}/${userId}/mypage/mileage-charge`, {
-                mileageCharge: chargeAmount
+                mileageCharge: numericChargeAmount
             }, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -82,10 +95,11 @@ function ChargeMileage(){
                                         <div className='contents-right-charge-price-enalbe-A'>*충전 가능 금액</div>
                                         <div className='contents-right-charge-price-enalbe-B'>1,000,000원</div>
                                     </div>
-                                    <input placeholder='   충전 금액을 입력하세요.' 
-                                        className='contents-right-charge-price-inputbox' 
+                                    <input
+                                        placeholder='   충전 금액을 입력하세요.'
+                                        className='contents-right-charge-price-inputbox'
                                         value={chargeAmount}
-                                        onChange={(e) => setChargeAmount(e.target.value)}
+                                        onChange={handleChargeAmountChange}
                                     />
                                 </div>
                                 <div className='contents-right-charge-request'>

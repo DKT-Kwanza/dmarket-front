@@ -33,12 +33,22 @@
     font-weight: 400;
     color: #000;
 }
+
+.productListItem-price-info {
+    display: flex;
+    align-items: center;
+}
+
 .productListItem-price {
     font-size: 24px;
     font-weight: 500;
     color: #000;
 }
 
+.productListItem-discount{
+    color: #FF4248;
+    margin-left: 10px;
+}
 .productListItem-rating {
     display: flex;
     gap: 5px;
