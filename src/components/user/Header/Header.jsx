@@ -10,12 +10,12 @@ import { EventSourcePolyfill } from 'event-source-polyfill';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import './Header.css'
-import user from '../../../assets/icons/user.svg'
-import heart from '../../../assets/icons/heart.svg'
-import shoppingBag from '../../../assets/icons/shoppingBag.svg'
-import alert from '../../../assets/icons/alert.svg'
 import { notifyApi, productsApi, userApi } from '../../../Api';
 import { IoIosLogOut } from "react-icons/io";
+import { LiaUser } from "react-icons/lia";
+import { HiOutlineShoppingCart } from "react-icons/hi2";
+import { GoHeart } from "react-icons/go";
+import { HiOutlineBell } from "react-icons/hi2";
 
 function Header() {
     const navigate = useNavigate();
@@ -281,14 +281,14 @@ function Header() {
                 </div>
                 <div className="icons">
                     <div className='mypage' onClick={() => navigateToPage('orderInfo')}>
-                        <img src={user}/>
+                        <LiaUser size={30} style={{ cursor: 'pointer', color: '#919191' }}/>
                     </div>
                     <div className='bucket' onClick={() => navigateToPage('mycart')}>
-                        <img src={shoppingBag}/>
+                        <HiOutlineShoppingCart size={25} style={{ cursor: 'pointer', color: '#919191' }}/>
                         <div className='bucket-count'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 21 20"
                                 fill="none">
-                                <circle cx="10.8359" cy="10" r="10" fill="black"/>
+                                <circle cx="10.8359" cy="10" r="10" fill="#919191"/>
                                 <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="white" fontSize="12">
                                     {cartCount}
                                 </text>
@@ -296,21 +296,22 @@ function Header() {
                         </div>
                     </div>
                     <div className='likes' onClick={() => navigateToPage('mywish')}>
-                        <img
-                            alt={"heart-icon"}
-                            src={heart}/>
+                        <GoHeart size={25} style={{ cursor: 'pointer', color: '#919191' }}/>
                     </div>
                     <div className='alams' onClick={toggleNotifications}>
-                        <img alt={"alert-icon"} src={alert}/>
+                        <HiOutlineBell size={25} style={{ cursor: 'pointer', color: '#919191' }}/>
                         <div className='bucket-count'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 21 20" fill="none">
-                                <circle cx="10.8359" cy="10" r="10" fill="black"/>
+                                <circle cx="10.8359" cy="10" r="10" fill="#919191"/>
                                 <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="white" font-size="12">
                                     {unreadCount}
                                 </text>
                             </svg>
                         </div>
                     </div>
+                    {isLoggedIn && (
+                        <div onClick={onLogout} className="logout-button"><IoIosLogOut size={25} style={{ cursor: 'pointer', color: '#919191' }}/></div>
+                    )}
                     <div>
                         {showNotifications && (
                             <NotificationModal
@@ -357,22 +358,24 @@ function Header() {
                         ? (<div className='sub-category-box-whole' onMouseLeave={handleMouseLeaveMain}>
                             <div className='sub-category-box-container'>
                                 <div className='sub-category-box'>
-                                    {categories.filter(cat => cat.categoryDepth === 1).map((category, index) => (
-                                        <div className='sub-sub-category-contents-details' key={index}>
-                                            {category.child.map((subCategory) => (
-                                                <div key={subCategory.categoryId}>
-                                                    <div className='sub-sub-category-contents-details-style'>
-                                                        <button
-                                                            onClick={() => navigateToCategory(subCategory.categoryId, category.categoryName, subCategory.categoryName)}
-                                                            className='sub-category-contents-details-button'
-                                                        >
-                                                            {subCategory.categoryName}
-                                                        </button>
+                                    <div className='sub-category-box-box'>
+                                        {categories.filter(cat => cat.categoryDepth === 1).map((category, index) => (
+                                            <div className='sub-sub-category-contents-details' key={index}>
+                                                {category.child.map((subCategory) => (
+                                                    <div key={subCategory.categoryId}>
+                                                        <div className='sub-sub-category-contents-details-style'>
+                                                            <button
+                                                                onClick={() => navigateToCategory(subCategory.categoryId, category.categoryName, subCategory.categoryName)}
+                                                                className='sub-category-contents-details-button'
+                                                            >
+                                                                {subCategory.categoryName}
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ))}
+                                                ))}
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>) : null
