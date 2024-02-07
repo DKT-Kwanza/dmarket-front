@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import {useEffect, useState} from "react";
-import cancel from "../../../../assets/icons/cancel.svg";
-import plus from "../../../../assets/icons/plus.svg";
-import minus from "../../../../assets/icons/minus.svg";
+import cancel from "@assets/icons/cancel.svg";
+import plus from "@assets/icons/plus.svg";
+import minus from "@assets/icons/minus.svg";
 
 function ProductOptionTab({option, name, onCountChange}) {
     const [tab, setTab] = useState(option);

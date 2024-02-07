@@ -3,7 +3,7 @@ import React from 'react';
 import OrderInfo from '../Info/OrderInfo';
 import OrderItem from '../Item/OrderItem';
 import ReviewItem from '../Item/ReviewItem';
-import {formatDate} from '../../../utils/Format';
+import {formatDate} from '@utils/Format';
 
 const OrderReviewsList = ({orders, deleteReview}) => {
     return (

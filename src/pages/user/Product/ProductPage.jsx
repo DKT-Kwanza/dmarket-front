@@ -1,15 +1,14 @@
 import './ProductPage.css'
 import React, {useState, useEffect} from "react";
-import ProductItem from '../../../components/user/Item/ProductItem';
-import Filter from '../../../components/user/Common/Filter/Filter';
-import Dropdown from '../../../components/user/Common/Select/Dropdown';
-import ScrollToTopBtn from "../../../components/user/Common/Button/ScrollToTopBtn";
+import ProductItem from '@components/user/Item/ProductItem';
+import Filter from '@components/user/Common/Filter/Filter';
+import ScrollToTopBtn from "@components/user/Common/Button/ScrollToTopBtn";
 import {useLocation, useParams, useNavigate} from 'react-router-dom';
 import {Pagination} from "@mui/material";
 import {FaAngleRight} from "react-icons/fa6";
-import {removeCommas} from "../../../utils/Format";
+import {removeCommas} from "@utils/Format";
 import axios from "axios";
-import {productsApi} from "../../../api/Api";
+import {productsApi} from "@api/Api";
 
 function ProductPage() {
     const location = useLocation();

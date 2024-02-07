@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { formatDate, formatPrice } from '../../../utils/Format'
+import { formatDate, formatPrice } from '@utils/Format'
 import './MyPageSubHeader.css'
-import right from '../../../assets/icons/chevron-right.svg'
-import { userApi } from '../../../api/Api';
+import right from '@assets/icons/chevron-right.svg'
+import { userApi } from '@api/Api';
 
 const MyPageSubHeader = () => {
 

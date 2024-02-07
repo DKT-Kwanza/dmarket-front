@@ -1,7 +1,7 @@
 import './QnaItem.css'
 import React from 'react';
 import { CiLock } from "react-icons/ci";
-import {truncate} from "../../../utils/Format";
+import {truncate} from "@utils/Format";
 
 const QnaItem = ({ productName, title, contents, createdAt, isSecret, status, replyContents, qnaReplyDate, isExpanded, onToggle  }) => {
 

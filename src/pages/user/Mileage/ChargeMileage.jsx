@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './ChargeMileage.css'
-import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
-import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import { userApi } from '../../../api/Api';
-import { formatPrice, removeCommas } from '../../../utils/Format';
+import MyPageSubHeader from "@components/user/Header/MyPageSubHeader";
+import MyPageSidebar from "@components/user/Sidebar/MyPageSidebar";
+import { userApi } from '@api/Api';
 
 
 function ChargeMileage(){

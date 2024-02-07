@@ -1,6 +1,6 @@
 import React from 'react';
 import './MainProductItem.css'
-import {formatPrice} from "../../../utils/Format";
+import {formatPrice} from "@utils/Format";
 
 const ProductItem = ({ brand, productName, productImg, sales, discountRate, onClick }) => {
   return (

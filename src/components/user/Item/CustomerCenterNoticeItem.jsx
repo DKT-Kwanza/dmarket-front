@@ -1,6 +1,6 @@
 import React from 'react';
-import { ReactComponent as ChevronDown } from "../../../assets/icons/chevron-down.svg";
-import { ReactComponent as ChevronUp } from "../../../assets/icons/chevron-up.svg";
+import { ReactComponent as ChevronDown } from "@assets/icons/chevron-down.svg";
+import { ReactComponent as ChevronUp } from "@assets/icons/chevron-up.svg";
 import './CustomerCenterNoticeItem.css'
 
 function CustomerCenterNoticeItem({ noticeTitle, isExpanded, onToggle, noticeCreatedDate, children }) {

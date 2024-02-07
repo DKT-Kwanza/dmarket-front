@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import {formatDate, formatTime, formatPrice} from '../../../utils/Format';
+import {formatDate, formatTime, formatPrice} from '@utils/Format';
 import "./OrderHistoryDetail.css";
-import OrderDetailItem from "../../../components/user/Item/OrderDetailItem";
-import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
-import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import {userApi} from "../../../api/Api";
+import OrderDetailItem from "@components/user/Item/OrderDetailItem";
+import MyPageSubHeader from "@components/user/Header/MyPageSubHeader";
+import MyPageSidebar from "@components/user/Sidebar/MyPageSidebar";
+import {userApi} from "@api/Api";
 import {useLocation} from "react-router-dom";
 
 function OrderHistoryDetail() {

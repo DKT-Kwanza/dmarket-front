@@ -1,7 +1,7 @@
 import React from "react";
 import './PaymentListItem.css'
 import styled from 'styled-components';
-import { formatPrice } from "../../../utils/Format";
+import { formatPrice } from "@utils/Format";
 
 function PaymentListItem({ productImg, productBrand, productName, productOption, productTotalSalePrice, productTotalPrice, productCount }){
     return(

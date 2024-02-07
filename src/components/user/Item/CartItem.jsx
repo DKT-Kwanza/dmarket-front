@@ -1,7 +1,7 @@
 import './CartItem.css';
 import styled from 'styled-components';
 import CheckBox from '../Common/CheckBox/CheckBox';
-import {formatPrice} from "../../../utils/Format";
+import {formatPrice} from "@utils/Format";
 
 function CartItem({productImg, brand, productName, price, option, quantity, checked, onCheck, onClick}) {
 

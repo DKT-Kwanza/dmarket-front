@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
+import CheckBox from "@components/user/Common/CheckBox/CheckBox";
 import './SignInForm.css';
-import { userApi } from '../../../api/Api';
+import { userApi } from '@api/Api';
 
 function SignInForm() {
     const navigate = useNavigate();
