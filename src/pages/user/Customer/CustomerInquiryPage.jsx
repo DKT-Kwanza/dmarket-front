@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './CustomerInquiryPage.css';
 import { ReactComponent as ChevronDown } from "../../../assets/icons/chevron-down.svg";
 import axios from "axios";
-import {userApi,bucketToken,bucketURL} from "../../../Api";
+import {userApi,bucketToken,bucketURL} from "../../../api/Api";
 
 
 function CustomerInquiryPage() {

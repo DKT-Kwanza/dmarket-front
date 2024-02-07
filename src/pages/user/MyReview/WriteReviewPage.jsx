@@ -5,7 +5,7 @@ import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import {formatPrice} from '../../../utils/Format';
 import axios from "axios";
-import {productsApi} from "../../../Api";
+import {productsApi} from "../../../api/Api";
 
 function WriteReview() {
     const navigate = useNavigate();

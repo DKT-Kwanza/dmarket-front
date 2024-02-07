@@ -9,7 +9,7 @@ import {Pagination} from "@mui/material";
 import {FaAngleRight} from "react-icons/fa6";
 import {removeCommas} from "../../../utils/Format";
 import axios from "axios";
-import {productsApi} from "../../../Api";
+import {productsApi} from "../../../api/Api";
 
 function ProductPage() {
     const location = useLocation();

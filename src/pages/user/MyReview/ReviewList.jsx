@@ -1,14 +1,14 @@
 import "./ReviewList.css";
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
-import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
-import OrderList from "../../../components/user/List/OrderList";
-import OrderReviewList from "../../../components/user/List/OrderReviewList";
-import ConfirmCancelModal from "../../../components/commmon/Modal/ConfirmCancelModal";
+import MyPageSidebar from "@components/user/Sidebar/MyPageSidebar";
+import MyPageSubHeader from "@components/user/Header/MyPageSubHeader";
+import OrderList from "@components/user/List/OrderList";
+import OrderReviewList from "@components/user/List/OrderReviewList";
+import ConfirmCancelModal from "@components/commmon/Modal/ConfirmCancelModal";
 import {Pagination} from "@mui/material";
 import axios from 'axios';
-import {productsApi, userApi} from "../../../Api";
+import {productsApi, userApi} from "@api/Api";
 
 const ReviewList = () => {
     const navigate = useNavigate();

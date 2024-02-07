@@ -10,7 +10,7 @@ import {Paper, Box, Button, Pagination} from "@mui/material";
 import axios from "axios";
 import {indigo} from '@mui/material/colors';
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import {adminApi} from "../../../Api";
+import {adminApi} from "../../../api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;

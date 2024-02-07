@@ -8,7 +8,7 @@ import Dropdown from '../../../components/user/Common/Select/Dropdown';
 import ScrollToTopBtn from "../../../components/user/Common/Button/ScrollToTopBtn";
 import { Pagination } from "@mui/material";
 import { removeCommas } from "../../../utils/Format";
-import {productsApi} from "../../../Api";
+import {productsApi} from "../../../api/Api";
 
 function SearchPage() {
     const navigate = useNavigate();

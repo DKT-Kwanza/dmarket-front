@@ -5,7 +5,7 @@ import "./OrderHistoryDetail.css";
 import OrderDetailItem from "../../../components/user/Item/OrderDetailItem";
 import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
-import {userApi} from "../../../Api";
+import {userApi} from "../../../api/Api";
 import {useLocation} from "react-router-dom";
 
 function OrderHistoryDetail() {

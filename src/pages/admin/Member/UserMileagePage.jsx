@@ -6,7 +6,7 @@ import { indigo } from "@mui/material/colors";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import {adminApi} from "../../../Api";
+import {adminApi} from "../../../api/Api";
 import MileageTable from "../../../components/admin/Table/MileageTable";
 import MileageReqTable from "../../../components/admin/Table/MileageReqTable";
 

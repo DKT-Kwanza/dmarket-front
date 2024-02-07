@@ -7,7 +7,7 @@ import { indigo } from '@mui/material/colors';
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import InquiryModal from "../../../components/admin/Modal/InquiryModal";
-import {adminApi} from "../../../Api";
+import {adminApi} from "../../../api/Api";
 
 
 const primary = indigo[50];

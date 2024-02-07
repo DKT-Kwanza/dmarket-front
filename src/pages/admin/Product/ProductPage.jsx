@@ -9,7 +9,7 @@ import SearchBar from '../../../components/admin/Common/SearchBar/SearchBar';
 import Category from '../../../components/admin/Common/Category/Category';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import EditProductTable from '../../../components/admin/Table/EditProductTable';
-import {adminApi} from "../../../Api";
+import {adminApi} from "../../../api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;

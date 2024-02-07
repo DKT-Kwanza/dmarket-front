@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, Modal, TextField, Button } from '@mui/material';
 import axios from 'axios';
-import {adminApi} from "../../../Api";
+import {adminApi} from "../../../api/Api";
 
 const NoticeModalStyle = {
     position: 'absolute',

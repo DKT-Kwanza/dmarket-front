@@ -5,7 +5,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import {productsApi} from "../../../../Api";
+import {productsApi} from "../../../../api/Api";
 
 export default function Category({ onCategoryClick }) {
     const [categories, setCategories] = useState([]);

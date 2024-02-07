@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import CustomerCenterFAQList from "../../../components/user/List/CustomerCenterFAQList";
 import axios from 'axios';
-import {boardApi} from "../../../Api";
+import {boardApi} from "../../../api/Api";
 
 function CustomerCenterFAQ() {
     const navigate = useNavigate();

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import CheckBox from "../../../components/user/Common/CheckBox/CheckBox";
 import './SignInForm.css';
-import { userApi } from '../../../Api';
+import { userApi } from '../../../api/Api';
 
 function SignInForm() {
     const navigate = useNavigate();

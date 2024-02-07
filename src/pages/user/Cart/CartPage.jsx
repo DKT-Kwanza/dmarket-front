@@ -8,7 +8,7 @@ import CartOrderInfo from "../../../components/user/Info/CartOrderInfo";
 import ConfirmCancelModal from "../../../components/commmon/Modal/ConfirmCancelModal";
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import axios from 'axios';
-import {userApi} from "../../../Api";
+import {userApi} from "../../../api/Api";
 import {cartCountAtom} from "../../../recoil/atom";
 
 function Cart() {

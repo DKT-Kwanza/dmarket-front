@@ -6,7 +6,7 @@ import MyPageSubHeader from "../../../components/user/Header/MyPageSubHeader";
 import InquiryItem from "../../../components/user/Item/InquiryItem";
 import {formatDate} from '../../../utils/Format';
 import axios from 'axios';
-import {userApi} from "../../../Api";
+import {userApi} from "../../../api/Api";
 import {Pagination} from "@mui/material";
 
 const Inquiry = () => {

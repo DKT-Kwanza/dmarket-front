@@ -2,7 +2,7 @@ import './CartOrderInfo.css'
 import {formatPrice} from "../../../utils/Format";
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import { orderApi } from '../../../Api';
+import { orderApi } from '../../../api/Api';
 
 export default function CartOrderInfo({ itemCount, selectedItemsDetails, totalPrice }) {
     const navigate = useNavigate();

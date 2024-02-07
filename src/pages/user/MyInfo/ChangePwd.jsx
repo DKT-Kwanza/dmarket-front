@@ -5,7 +5,7 @@ import MyPageSidebar from "../../../components/user/Sidebar/MyPageSidebar";
 import ConfirmModal from "../../../components/commmon/Modal/ConfirmModal";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import {userApi} from "../../../Api";
+import {userApi} from "../../../api/Api";
 
 function ChangePwd() {
     const navigate = useNavigate();

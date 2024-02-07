@@ -11,7 +11,7 @@ import ImageIcon from '@mui/icons-material/Image';
 import Typography from '@mui/material/Typography';
 import Write from "../../../components/admin/Common/Input/Write";
 import axios from "axios";
-import { adminApi, bucketToken, bucketURL } from "../../../Api";
+import { adminApi, bucketToken, bucketURL } from "../../../api/Api";
 
 const primary = indigo[50];
 const drawerWidth = 260;

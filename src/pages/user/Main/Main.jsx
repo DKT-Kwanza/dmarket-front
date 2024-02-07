@@ -3,11 +3,11 @@ import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import axios from 'axios';
 import {useRecoilState} from "recoil";
-import MainProductItem from "../../../components/user/Item/MainProductItem";
-import ScrollToTopBtn from '../../../components/user/Common/Button/ScrollToTopBtn';
-import {productsApi} from "../../../Api";
-import MainBanner from '../../../components/user/MainBanner';
-import { isLoggedInState } from '../../../recoil/atom';
+import MainProductItem from "@components/user/Item/MainProductItem";
+import ScrollToTopBtn from '@components/user/Common/Button/ScrollToTopBtn';
+import {productsApi} from "@api/Api";
+import MainBanner from '@components/user/MainBanner';
+import { isLoggedInState } from '@recoil/atom';
 
 const Main = () => {
     const navigate = useNavigate();
