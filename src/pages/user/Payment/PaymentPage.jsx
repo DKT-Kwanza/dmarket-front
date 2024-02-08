@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import "./PaymentPage.css";
 import useDetectClose from "./UseDetectClose";
@@ -12,9 +12,6 @@ function Payment(){
     const navigate = useNavigate();
     const location = useLocation();
     const orderData = location.state?.orderData.data;
-
-    console.log(orderData)
-
     const dropDownRef = useRef();
     const [msgIdentify, setMsgIdentify] = useState('배송기사에게 전달되는 메시지 입니다. 선택해 주세요.');
     const delReqList = ['배송기사에게 전달되는 메시지 입니다. 선택해 주세요.',
@@ -27,6 +24,14 @@ function Payment(){
     const [isModalOpen, setIsModalOpen] = useState(false);
     const productListCnt = paymentProducts.productList ? paymentProducts.productList.length : 0;
     const discount = paymentProducts.totalPrice - paymentProducts.totalPay;
+
+    useEffect(() => {
+        const isAddressRegistered = orderData && orderData.userAddress && orderData.userDetailAddress;
+        
+        if (!isAddressRegistered) {
+            setIsModalOpen(true);
+        }
+    }, [orderData]);
 
     const closeModal = () => {
         setIsModalOpen(false);
