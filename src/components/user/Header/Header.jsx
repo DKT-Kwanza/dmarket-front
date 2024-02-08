@@ -241,7 +241,7 @@ function Header() {
         navigate(`/category/${categoryId}?category1depthName=${encodedCategoryName1}&category2depthName=${encodedCategoryName2}`);
     };
     const navigateToAdmin = () => {
-        navigate('./memberMng/manager');
+        navigate('./customerMng/notice');
     }
 
     const toggleNotifications = () => {
