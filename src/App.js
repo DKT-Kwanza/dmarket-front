@@ -1,4 +1,4 @@
-import {Router, Route, Routes, useLocation} from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
 
 import './App.css';
 import Header from "./components/user/Header/Header";
@@ -45,22 +45,75 @@ import CustomerNotice from "./pages/admin/Customer/CustomerNoticePage";
 import ReturnStatus from "./pages/admin/Order/OrderReturnPage";
 import CustomerInquiry from "./pages/admin/Customer/CustomerInquiryPage";
 import AdminCustomerFaqPage from "./pages/admin/Customer/AdminCustomerFaqPage";
+import NotFoundPage from "./pages/user/error/NotFoundPage";
+import RoleRoute from "./route/RoleRoute";
 
 function App() {
     const location = useLocation();
     const noBodyStylePaths = ['/memberMng', '/productMng', '/orderMng', '/customerMng'];
+    const knownPaths = [
+      '/member/login', 
+      '/member/signin', 
+      '/member/signinForm', 
+      '/',
+      '/category/:categoryId',
+      '/search', 
+      '/product',
+      '/product/detail/:productId',
+      '/product/detail',
+      '/order', 
+      '/order/complete',
+      '/mydkt/orderInfo', 
+      '/mydkt/orderInfoDetail', 
+      '/mydkt/mycart', 
+      '/mydkt/mywish', 
+      '/mydkt/review', 
+      '/mydkt/writeReview', 
+      '/mydkt/qna', 
+      '/mydkt/inquiry', 
+      '/mydkt/changeinfo', 
+      '/mydkt/changePwd', 
+      '/mydkt/charge', 
+      '/mydkt/mileageInfo', 
+      '/customer', 
+      '/customer/faq/:tab', 
+      '/customer/writeInquiry', 
+      '/memberMng/manager', 
+      '/memberMng/user', 
+      '/memberMng/addUser', 
+      '/memberMng/mileage', 
+      '/productMng', 
+      '/productMng/add', 
+      '/productMng/edit/:productId', 
+      '/productMng/qna', 
+      '/productMng/quantity', 
+      '/productMng/review', 
+      '/orderMng', 
+      '/orderMng/cancel', 
+      '/orderMng/return', 
+      '/orderMng/refund', 
+      '/customerMng/notice', 
+      '/customerMng/inquiry', 
+      '/customerMng/faq', 
+    ];    
+    const fullPath = decodeURIComponent(location.pathname) + location.search;
+    const isKnownPath = knownPaths.some(knownPath => {
+      const regex = new RegExp(`^${knownPath.replace(/:[^\s/]+/g, '([\\w-]+)')}(/?.*)?$`);
+      return regex.test(fullPath);
+    });
     const applyBodyStyle = !noBodyStylePaths.some(path => location.pathname.startsWith(path));
-    const hideHeaderFooter = (location.pathname.startsWith('/member') || location.pathname.startsWith('/memberMng') || location.pathname.startsWith('/productMng') || location.pathname.startsWith('/orderMng') || location.pathname.startsWith('/customerMng'));
-
-    const token = sessionStorage.getItem('token');
-
+    const hideHeaderFooter = location.pathname.startsWith('/member') ||
+      location.pathname.startsWith('/memberMng') ||
+      location.pathname.startsWith('/productMng') ||
+      location.pathname.startsWith('/orderMng') ||
+      location.pathname.startsWith('/customerMng') ||
+      !isKnownPath;
 
   return (
     <div className="App">
       {!hideHeaderFooter && <Header />}
       <div className={applyBodyStyle ? "body" : ""}>
           <Routes>
-
             <Route path='/member'>
               <Route path='login' element={<Login />} />
               <Route path='signin' element={<SignIn/>}/>
@@ -92,7 +145,7 @@ function App() {
               <Route path='writeReview' element={<WriteReviewPage/>} />
               <Route path='qna' element={<Qna />} />
               <Route path='inquiry' element={<Inquiry />} />
-              <Route path='changeInfo' element={<ChangeInfo/>} />
+              <Route path='changeinfo' element={<ChangeInfo/>} />
               <Route path='changePwd' element={<ChangePwd/>} />
               <Route path='charge' element={<ChargeMileage/>} />
               <Route path='mileageInfo' element={<HistoryMileage/>} />
@@ -105,35 +158,61 @@ function App() {
             </Route>
 
             {/* 관리자 라우팅 */}
-            <Route path='/memberMng'>
-                  <Route path='manager' element={<AdminList />}/>
-                  <Route path='user' element={<MemberList/>}/>
-                  <Route path='addUser' element={<UserRegisterPage/>}/>
-                  <Route path='mileage' element={<UserMileagePage/>}/>
-              </Route>
+            <Route path='/memberMng/manager' element={
+              <RoleRoute element={<AdminList />} roles={['ROLE_GM', 'ROLE_SM']} />
+            } />
+            <Route path='/memberMng/user' element={
+              <RoleRoute element={<MemberList />} roles={['ROLE_GM', 'ROLE_SM']} />
+            } />
+            <Route path='/memberMng/addUser' element={
+              <RoleRoute element={<UserRegisterPage />} roles={['ROLE_GM', 'ROLE_SM']} />
+            } />
+            <Route path='/memberMng/mileage' element={
+              <RoleRoute element={<UserMileagePage />} roles={['ROLE_GM', 'ROLE_SM']} />
+            } />
 
-                <Route path='/productMng'>
-                    <Route path='' element={<Product/>}/>
-                    <Route path='add' element={<ProductAddPage/>}/>
-                    <Route path="edit/:productId" element={<ProductEditPage />} />
-                    <Route path='qna' element={<ProductQnaPage/>}/>
-                    <Route path='quantity' element={<ProductQuantityPage/>}/>
-                    <Route path='review' element={<ProductReviewPage/>}/>
-                </Route>
+            <Route path='/productMng' element={
+              <RoleRoute element={<Product />} roles={['ROLE_GM', 'ROLE_PM']} />
+            } />
+            <Route path='/productMng/add' element={
+              <RoleRoute element={<ProductAddPage />} roles={['ROLE_GM', 'ROLE_PM']} />
+            } />
+            <Route path='/productMng/edit/:productId' element={
+              <RoleRoute element={<ProductEditPage />} roles={['ROLE_GM', 'ROLE_PM']} />
+            } />
+            <Route path='/productMng/qna' element={
+              <RoleRoute element={<ProductQnaPage />} roles={['ROLE_GM', 'ROLE_PM']} />
+            } />
+            <Route path='/productMng/quantity' element={
+              <RoleRoute element={<ProductQuantityPage />} roles={['ROLE_GM', 'ROLE_PM']} />
+            } />
+            <Route path='/productMng/review' element={
+              <RoleRoute element={<ProductReviewPage />} roles={['ROLE_GM', 'ROLE_PM']} />
+            } />
 
-              <Route path='/orderMng'>
-                  <Route path='' element={<OrderStatus/>}/>
-                  <Route path='cancel' element={<OrderCancel/>}/>
-                  <Route path='return' element={<ReturnStatus/>}/>
-                  <Route path='refund' element={<Refund/>}/>
-              </Route>
+            <Route path='/orderMng' element={
+              <RoleRoute element={<OrderStatus />} roles={['ROLE_GM', 'ROLE_PM']} />
+            } />
+            <Route path='/orderMng/cancel' element={
+              <RoleRoute element={<OrderCancel />} roles={['ROLE_GM', 'ROLE_PM']} />
+            } />
+            <Route path='/orderMng/return' element={
+              <RoleRoute element={<ReturnStatus />} roles={['ROLE_GM', 'ROLE_PM']} />
+            } />
+            <Route path='/orderMng/refund' element={
+              <RoleRoute element={<Refund />} roles={['ROLE_GM', 'ROLE_PM']} />
+            } />
 
-              <Route path='/customerMng'>
-                  <Route path='notice' element={<CustomerNotice/>}/>
-                  <Route path='inquiry' element={<CustomerInquiry/>}/>
-                  <Route path='faq' element={<AdminCustomerFaqPage/>}/>
-              </Route>
-
+            <Route path='/customerMng/notice' element={
+              <RoleRoute element={<CustomerNotice />} roles={['ROLE_GM', 'ROLE_SM', 'ROLE_PM']} />
+            } />
+            <Route path='/customerMng/inquiry' element={
+              <RoleRoute element={<CustomerInquiry />} roles={['ROLE_GM', 'ROLE_SM', 'ROLE_PM']} />
+            } />
+            <Route path='/customerMng/faq' element={
+              <RoleRoute element={<AdminCustomerFaqPage />} roles={['ROLE_GM', 'ROLE_SM', 'ROLE_PM']} />
+            } />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       {!hideHeaderFooter && <Footer />}

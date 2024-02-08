@@ -1,6 +1,5 @@
 import {Toolbar, List, Divider, ListItemButton, ListSubheader} from '@mui/material';
 import {Container, Drawer, CssBaseline, ListItemIcon, ListItemText, Collapse} from '@mui/material';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
@@ -9,7 +8,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 260;
 
@@ -17,7 +16,10 @@ export const LeftNav = () => {
 
     const [openIndex, setOpenIndex] = useState(null);
     const navigate = useNavigate();
-    const location = useLocation(); // 현재 페이지의 위치
+
+    const navigateToMain = () => {
+        navigate('../../');
+    }
 
     const MENU_LIST = [
         {title: '관리자 관리', list: ['관리자 목록']},
@@ -77,9 +79,11 @@ export const LeftNav = () => {
                 variant="permanent"
                 anchor="left">
                 <Toolbar>
-                    <img
-                        style={{width: '210px'}}
-                        src={require('../../../../src/assets/images/logo.png')}/>
+                    <div onClick={navigateToMain}>
+                        <img
+                            style={{width: '210px', cursor: 'pointer'}}
+                            src={require('../../../../src/assets/images/logo.png')}/>
+                    </div>
                 </Toolbar>
                 <Divider/>
                 <List
@@ -92,12 +96,6 @@ export const LeftNav = () => {
                         </ListSubheader>
                     }
                 >
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <DashboardIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="대시보드"/>
-                    </ListItemButton>
                     {
                         MENU_LIST.map((object, index) => (
                             <div key={object.title}>

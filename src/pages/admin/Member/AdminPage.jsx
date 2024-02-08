@@ -60,7 +60,7 @@ function AdminPage() {
                 {title: '상품관리자', count: manager.pmcount},
             ]);
         }
-    }, [manager]) // 의존성 배열에 manager 추가
+    }, [manager])
 
     const handleTabChange = (newValue) => {
         setSelectedTab(newValue);
@@ -74,7 +74,7 @@ function AdminPage() {
 
     const handleCloseAdminModal = () => {
         setIsAdminModalOpen(false);
-        setShouldReload(true); // 모달 창이 닫힐 때 shouldReload를 true로 설정합니다.
+        setShouldReload(true);
     }
 
     const filteredManager = manager.managerList.filter((row) => {
@@ -100,13 +100,13 @@ function AdminPage() {
                     }
                 });
                 setManager(response.data.data);
-                setShouldReload(false); // API 호출이 완료된 후에 shouldReload를 false로 설정합니다.
+                setShouldReload(false); 
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }
         };
         fetchData();
-    }, [shouldReload]); // 의존성 배열에 shouldReload를 추가합니다.
+    }, [shouldReload]); 
 
 
     return (
