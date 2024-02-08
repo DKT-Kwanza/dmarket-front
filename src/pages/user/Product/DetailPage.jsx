@@ -50,6 +50,7 @@ function Detail() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
+                console.log(response.data.data);
                 setProduct(response.data.data);
                 setProductImg(response.data.data.imgList);
             } catch (e) {
@@ -358,6 +359,7 @@ function Detail() {
         }
     };
 
+    /* 대표 이미지 호버 시 zoom */
     const useClientRect = () => {
         const [rect, setRect] = useState(null);
 
@@ -371,23 +373,21 @@ function Detail() {
     };
 
     const [imageRect, setImageRectRef] = useClientRect();
-    const [scannerPosition, setScannerPosition] = useState({ left: 0, top: 0 });
+    const [scannerPosition, setScannerPosition] = useState(null);
     const [viewPosition, setViewPosition] = useState(null);
     const onMouseMove = (e) => {
         const scannerWidth = 150;
         const scannerHeight = 150;
 
         if (imageRect) {
-            const scannerPosLeft = e.clientX - scannerWidth / 2;
-            const scannerPosTop = e.clientY - scannerHeight / 2;
+            const scannerPosLeft = e.pageX - scannerWidth / 2;
+            const scannerPosTop = e.pageY - scannerHeight / 2;
 
             /* 대표 이미지 위의 카테고리 설명이 imageRect 영역으로 함께 잡혀서 24 를 더해줍니다. */
             const allowedPosLeft = scannerPosLeft >= imageRect.x && scannerPosLeft <= imageRect.x + imageRect.width - scannerWidth;
-            const allowedPosTop = scannerPosTop >= (imageRect.y+24) && scannerPosTop <= (imageRect.y+24) + imageRect.height- scannerHeight;
+            const allowedPosTop = scannerPosTop >= (imageRect.y + 24) && scannerPosTop <= (imageRect.y + 24) + imageRect.height - scannerHeight;
 
-            const newScannerPosition = { left: 0, top: 0 };
-            newScannerPosition.left = scannerPosLeft;
-            newScannerPosition.top = scannerPosTop;
+            const newScannerPosition = {left: 0, top: 0};
 
             if (allowedPosLeft) {
                 newScannerPosition.left = scannerPosLeft;
@@ -402,17 +402,17 @@ function Detail() {
             if (allowedPosTop) {
                 newScannerPosition.top = scannerPosTop;
             } else {
-                if (scannerPosTop < imageRect.y+24) {
-                    newScannerPosition.top = (imageRect.y+24);
+                if (scannerPosTop < (imageRect.y + 24)) {
+                    newScannerPosition.top = (imageRect.y + 24);
                 } else {
-                    newScannerPosition.top = (imageRect.y+24) + imageRect.height - scannerHeight;
+                    newScannerPosition.top = (imageRect.y + 24) + imageRect.height - scannerHeight;
                 }
             }
 
             setScannerPosition(newScannerPosition);
             setViewPosition({
-                left: (newScannerPosition.left-imageRect.x) * -1.3,
-                top: (newScannerPosition.top-(imageRect.y+24)) * -1.3,
+                left: (newScannerPosition.left - imageRect.x) * -1.3,
+                top: (newScannerPosition.top - (imageRect.y + 24)) * -1.3,
             })
         }
     };
@@ -429,10 +429,12 @@ function Detail() {
                     <div>{product.productCategory}</div>
                 </div>
                 <div className='productArea'>
-                    <div className='detail-repImg' onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} >
+                    <div className='detail-repImg' onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
                         {productImg && <img alt={product.productName} src={productImg[0]} ref={setImageRectRef}/>}
-                        {imageRect && scannerPosition && <ScannerWrapper position={scannerPosition} />}
-                        {imageRect && viewPosition && <ViewWrapper position={viewPosition} img={productImg[0]} left={imageRect.x + imageRect.width + 140} top={240}/>}
+                        {imageRect && scannerPosition && <ScannerWrapper position={scannerPosition}/>}
+                        {imageRect && viewPosition && <ViewWrapper position={viewPosition} img={productImg[0]}
+                                                                   left={imageRect.x + imageRect.width + 140}
+                                                                   top={240}/>}
                     </div>
 
                     <div className='detail-subImgArea'>
@@ -478,17 +480,23 @@ function Detail() {
                         </div>
                         <div className='detail-option-select'>
                             {
-                                product.optionList &&
-                                <text style={{marginTop: '2px'}}>{product.optionList[0].optionName}</text>
+                                (product.optionList && product.optionList.length > 0)
+                                ?
+                                    <>
+                                        <text style={{marginTop: '2px'}}>{product.optionList[0].optionName}</text>
+                                        <select className='detail-options' name="options" onChange={handleSelect}>
+                                            <option value="" disabled selected hidden>옵션을 선택하세요.</option>
+                                            {product.optionList && product.optionList.map((option, index) => (
+                                                <option key={index} value={option.optionValue}
+                                                        optionid={option.optionId}
+                                                        optionquantity={option.optionQuantity}>{option.optionValue}</option>
+                                            ))}
+                                        </select>
+                                    </>
+                                :
+                                    <div style={{color: 'red'}}>죄송합니다. 재고 부족으로 상품 준비 중입니다.</div>
                             }
-                            <select className='detail-options' name="options" onChange={handleSelect}>
-                                <option value="" disabled selected hidden>옵션을 선택하세요.</option>
-                                {product.optionList && product.optionList.map((option, index) => (
-                                    <option key={index} value={option.optionValue}
-                                            optionid={option.optionId}
-                                            optionquantity={option.optionQuantity}>{option.optionValue}</option>
-                                ))}
-                            </select>
+
                         </div>
                         {
                             selected.map((value, index) => (
