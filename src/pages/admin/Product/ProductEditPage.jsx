@@ -232,6 +232,7 @@ function ProductEditPage() {
                 categoryName: category || product.category,
                 productPrice: price.cost || product.price.cost,
                 productSalePrice: price.sale || product.price.sale,
+                productDiscountRate: price.discount || product.price.productDiscountRate,
                 productDes: productDes || product.productDes,
                 optionList: updatedOptions,
                 imgList: newImgList

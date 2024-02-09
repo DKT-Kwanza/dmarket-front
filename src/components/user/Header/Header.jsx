@@ -169,7 +169,7 @@ function Header() {
     // 알림 조회
     useEffect(() => {
         if (token && userId) {
-            axios.get(`${notifyApi}/${userId}/notifications`, {
+            axios.get(`${notifyApi}/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
