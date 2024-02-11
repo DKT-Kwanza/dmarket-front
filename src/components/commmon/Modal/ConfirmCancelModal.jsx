@@ -1,7 +1,8 @@
 /* 확인, 취소 버튼이 있는 popup modal 입니다. */
-import styled from 'styled-components';
+import styled from "styled-components";
+import theme from "@styles/commonStyles";
 import {useState} from "react";
-import {darken} from 'polished';
+import {darken} from "polished";
 
 function ConfirmCancelModal({isOpen, onClose, onConfirm, children, color}) {
     const [isConfirmed, setIsConfirmed] = useState(false);
@@ -95,12 +96,12 @@ const ConfirmBtn = styled.button`
   outline: none;
   border: none;
   border-radius: 0 0 5px 0;
-  background: ${(props) => props.color || '#3377FF'};
+  background: ${(props) => props.color || theme.colors.$blue_0};
   color: white;
   &:active,
   &:hover,
   &:focus {
-    background: ${props => (props.color ? darken(0.1, props.color) : darken(0.1, '#3377FF'))};
+    background: ${props => (props.color ? darken(0.1, props.color) : theme.colors.$blue_d1)};
   }
 `
 
