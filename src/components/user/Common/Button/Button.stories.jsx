@@ -4,8 +4,10 @@ import Button from "./Button";
 export default {
     title: "Button",
     component: Button,
+    tags: ['autodocs'],
     argTypes: {
         variant: {
+            description: 'primary | secondary | tertiary | warn',
             control: { type: "radio" },
             options: ["primary", "secondary", "tertiary", "warn"],
         },
@@ -17,6 +19,9 @@ export default {
 };
 const Template = (args) => <Button {...args} />;
 
+/**
+ * 기본 버튼
+ */
 export const Primary = Template.bind({});
 Primary.args = {
     variant: 'primary',
@@ -25,6 +30,9 @@ Primary.args = {
     width: 'base',
 };
 
+/**
+ * 두번째 버튼
+ */
 export const Secondary = Template.bind({});
 Secondary.args = {
     variant: 'secondary',
