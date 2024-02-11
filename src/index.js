@@ -1,9 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
 import {BrowserRouter} from 'react-router-dom';
-import App from './App';
-import ScrollToTop from '../src/components/commmon/ScrollToTop'
+import App from "./App";
+import ScrollToTop from "@components/commmon/ScrollToTop"
 import {RecoilRoot} from "recoil";
+import {ThemeProvider} from "styled-components";
+import theme from "@styles/commonStyles";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -11,7 +13,9 @@ root.render(
         <RecoilRoot>
             <BrowserRouter>
                 <ScrollToTop/>
-                <App />
+                <ThemeProvider theme={theme}>
+                    <App/>
+                </ThemeProvider>
             </BrowserRouter>
         </RecoilRoot>
     </React.StrictMode>
