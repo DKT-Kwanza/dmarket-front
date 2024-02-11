@@ -103,7 +103,7 @@ function OrderHistoryDetail() {
                                 option={product.productOption}
                                 count={product.productCount}
                                 price={product.productTotalSalePrice}
-                                orderStatus={product.orderStauts}
+                                orderStatus={product.orderStatus}
                             />
                         ))}
                     </div>

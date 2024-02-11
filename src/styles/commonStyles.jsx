@@ -9,6 +9,13 @@ export const fontSizes = {
     small: calcRem(12),
 }
 
+export const buttonSizes = {
+    small: calcRem(72),
+    base: calcRem(100),
+    lg: calcRem(166),
+    xl: calcRem(394),
+}
+
 export const colors = {
     black: "#000000",
     white: "#FFFFFF",
@@ -39,6 +46,7 @@ export const colors = {
 
 export const theme = {
     fontSizes,
+    buttonSizes,
     colors,
 };
 
