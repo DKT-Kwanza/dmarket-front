@@ -2,7 +2,7 @@ import React, {useRef, useState, useEffect} from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import "./PaymentPage.css";
 import useDetectClose from "./UseDetectClose";
-import { MsgDropDown } from "@components/user/Common/Select/MsgDropDown";
+import MsgDropDown from "@components/user/Common/Select/MsgDropDown";
 import {ReactComponent as DropDownImg} from "@assets/icons/dropdown.svg";
 import PaymentList from "@components/user/List/PaymentList";
 import PaymentInfo from "@components/user/Info/PaymentInfo";
@@ -96,17 +96,6 @@ function Payment(){
                                 </div>
                             </div>                  
                         </div>
-
-                    {/* <div className="payment-deliveryInfo">
-                        <div className="payment-deliveryInfo-num">
-                            <span className="payment-deliveryInfo-num-span">휴대폰</span>
-                            <span>010-1234-1234</span>
-                        </div>
-                        <div className="payment-deliveryInfo-name">
-                            <span className="payment-deliveryInfo-name-span">주문자명 / 이메일</span>
-                            <span>홍길동 / gildong@dktechin.com</span>
-                        </div>  
-                    </div> */}
                     </div>
                     <div className="payment-products">
                         <span className="payment-products-title">주문상품: {productListCnt}개</span> {/*주문 상품 개수 불러오기*/}
