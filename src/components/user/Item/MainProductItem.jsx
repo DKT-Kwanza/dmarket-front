@@ -17,7 +17,7 @@ const ProductItem = ({ brand, productName, productImg, sales, discountRate, onCl
         </div>
         <div className='main-div-product-price-wrapper'>
           <p className='main-p-product-price'>{formatPrice(sales)}</p>
-          <p className='main-p-product-won'>원</p>
+          <p className='main-p-product-won'>&nbsp;원</p>
           <div className='main-p-product-discount'>SALE {discountRate}%</div>
         </div>
       </div>

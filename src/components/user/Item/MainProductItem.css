@@ -3,7 +3,7 @@
     flex-direction: column;
     margin: 0;
     width: 290px;
-    height: 495px;
+    height: 455px;
     cursor: pointer;
     transition: transform .3s;
     position: relative;
@@ -44,7 +44,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    margin:1px 0px;
+    margin: 3px 0;
 }
 .main-p-product-name{
     color: #505050;
@@ -52,13 +52,13 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin: 1px 0px 6px 0px
+    margin: 1px 0 6px 0;
 }
 .main-div-product-price-wrapper{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 6px 0px 0px 0px;;
+    margin: 6px 0 0 0;
 }
 
 .main-p-product-price{
@@ -72,7 +72,6 @@
 
 .main-p-product-won{
     color: #191919;
-    font-family: Noto Sans KR;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -81,6 +80,7 @@
 }
 
 .main-p-product-discount{
-    color: #FF4248;
+    color: #ff5d5d;
+    font-size: 14px;
     margin-left: 10px;
 }

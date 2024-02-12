@@ -37,12 +37,9 @@ function Login() {
             const token = res.data.data.accesstoken;
             const userId = res.data.data.userId;
             const role = res.data.data.role;
-            console.log(res.data)
             sessionStorage.setItem('token', token);
             sessionStorage.setItem('userId', userId);
             sessionStorage.setItem('role', role);
-
-            console.log(res.data);
 
             setIsLoggedIn(true); 
             alert("로그인 되었습니다!");

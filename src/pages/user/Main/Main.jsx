@@ -90,7 +90,6 @@ const Main = () => {
                 }
             });
             setDiscountProducts(Array.isArray(response.data.data) ? response.data.data : []);
-            console.log(discountProducts)
         } catch (e) {
             console.error("Error fetching data: ", e);
             setDiscountProducts([]); 
