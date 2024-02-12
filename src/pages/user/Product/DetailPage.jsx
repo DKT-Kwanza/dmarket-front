@@ -462,6 +462,7 @@ function Detail() {
                             <text style={{marginLeft: '10px'}}>({product.productReviewCount}건)</text>
                         </div>
                         <div className='price'>
+                            <text className='discount'>{product.productDiscountRate}%&nbsp;&nbsp;</text>
                             <text>{formatPrice(product.productSalePrice)} 원</text>
                         </div>
                         <div className='releasePrice'>
@@ -536,16 +537,6 @@ function Detail() {
                     <li className='returnInfoButton'><a href="#scroll5">배송/반품/교환 안내</a></li>
                 </ul>
                 <hr style={{marginTop: '5px', borderWidth: '2px'}}/>
-                <div className='productNum'>
-                    <text>상품번호 : 1000563057860<br/>모델번호 : J103401008</text>
-                </div>
-                <div className='productDetail'>
-                    <div className="productDetailButtonScroll" id="productDetailButtonScroll">상품상세정보</div>
-                </div>
-                <div className='productDetailImg'>
-                    <img alt={''}
-                         src={productDetail}/>
-                </div>
                 <div className='productDetailBox'>
                     <ReactQuill
                         value={product.productDes}

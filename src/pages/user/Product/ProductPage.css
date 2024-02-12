@@ -17,6 +17,7 @@
     font-weight: 500;
     margin: 0 auto;
     text-align: center;
+    padding-bottom: 17px;
 }
 
 .productList-title-bar {
@@ -35,7 +36,7 @@
     grid-template-columns: repeat(4, 1fr);
     place-items: center;
     align-items: start;
-    margin-top: 17px;
+    margin: 17px 0px;
 }
 
 .productList-empty {
