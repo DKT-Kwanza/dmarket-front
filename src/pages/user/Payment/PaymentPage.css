@@ -161,11 +161,14 @@
     right: -1px;
     border: 1px solid #565656;
     background: #fff;
+    overflow : auto;
+    z-index:1
 }
 .payment-dropdown-scroll{
     overflow : auto;
     margin: 0;
     padding: 0;
+    background-color: white;
 }
 .payment-dropdown-scroll ul{
     list-style-type:none;

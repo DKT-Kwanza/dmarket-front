@@ -26,24 +26,20 @@
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white">
 <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=Node.js&logoColor=white">
 <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=flat-square&logo=Javascript&logoColor=white">
+</div>
+
+<div>
 <img src="https://img.shields.io/badge/Recoil-3578E5?style=flat-square&logo=Recoil&logoColor=white">
+<img src="https://img.shields.io/badge/Styled-DB7093?style=flat-square&logo=styledcomponents&logoColor=white">
+<img src="https://img.shields.io/badge/Storybook-FF4785?style=flat-square&logo=Storybook&logoColor=white">
+</div>
+
+<div>
+<img src="https://img.shields.io/badge/Eslint-4B32C3?style=flat-square&logo=Eslint&logoColor=white">
 <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=Prettier&logoColor=white">
-</div>
-
-<div>
-<img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat-square&logo=Spring Boot&logoColor=white">
-<img src="https://img.shields.io/badge/Gradle-02303A?style=flat-square&logo=Gradle&logoColor=white">
-</div>
-
-<div>
-<img src="https://img.shields.io/badge/MySQL-4479A1.svg?style=flat-square&logo=MySQL&logoColor=white">
-<img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=Redis&logoColor=white">
-</div>
-
-<div>
-<img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=flat-square&logo=Amazon AWS&logoColor=white">
+<img src="https://img.shields.io/badge/Nginx-009639?style=flat-square&logo=Nginx&logoColor=white">
 <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white">
-<img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=flat-square&logo=JSON Web Tokens&logoColor=white">
+
 </div>
 
 <br/>
@@ -111,12 +107,30 @@ Presentation and Container 컴포넌트 패턴을 사용했습니다.
 ### Requirements
 - [Node.js 21.6.1](https://nodejs.org/ca/blog/release/v21.6.1/)
 ### Installation
+
+1. 프로젝트를 클론합니다.
 ``` bash
 $ git clone https://github.com/DKT-Kwanza/dmarket-front.git
 $ cd dmarket-front
-$ npm install
-$ npm start
 ```
+
+<br/>
+
+2. 의존성을 설치합니다.
+``` bash
+$ npm install
+```
+
+<br/>
+
+3. root 디렉토리 내부의 서비스 별로 env 환경변수를 설정해야 합니다. 외부 api 관련 키들을 환경변수로 관리하고 있습니다.
+
+<br/>
+
+4. 다음 명령어를 통해 서비스를 개발환경에서 실행할 수 있습니다.
+``` bash
+$ npm start
+``` 
 
 <br/>
 

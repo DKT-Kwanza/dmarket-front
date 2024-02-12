@@ -1,5 +1,6 @@
 /* 확인 버튼이 있는 popup modal 입니다. */
 import styled from 'styled-components';
+import theme from "@styles/commonStyles";
 import {useState} from 'react';
 import {darken} from 'polished';
 
@@ -56,7 +57,7 @@ const ModalView = styled.div.attrs((props) => ({
   width: 400px;
   height: 231px;
   border-radius: 5px;
-  background: #FFF;
+  background: ${(props) => props.theme.colors.white};
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
 `;
 
@@ -65,7 +66,7 @@ const TextArea = styled.div`
   flex-basis: 180px;
   text-align: center;
   align-items: center;
-  color: #000;
+  color: ${(props) => props.theme.colors.black};
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -83,12 +84,12 @@ const ConfirmBtn = styled.button`
   outline: none;
   border: none;
   border-radius: 0 0 5px 5px;
-  background: ${props => (props.color ? props.color : '#FFD465')};
+  background: ${props => (props.color ? props.color : theme.colors.$mainYellow_0)};
 
   &:active,
   &:hover,
   &:focus {
-    background: ${props => (props.color ? darken(0.1, props.color) : darken(0.1, '#FFD465'))};
+    background: ${props => (props.color ? darken(0.1, props.color) : theme.colors.$mainYellow_d1)};
   }
 `
 

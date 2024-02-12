@@ -320,6 +320,7 @@ module.exports = function (webpackEnv) {
         '@pages': path.resolve(__dirname, '../src/pages'),
         '@api': path.resolve(__dirname, '../src/api'),
         '@recoil': path.resolve(__dirname, '../src/recoil'),
+        '@styles': path.resolve(__dirname, '../src/styles'),
 
 
         // Allows for better profiling with ReactDevTools

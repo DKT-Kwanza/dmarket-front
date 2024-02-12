@@ -3,8 +3,28 @@
     flex-direction: column;
     margin: 0;
     width: 290px;
-    height: 495px;
+    height: 455px;
     cursor: pointer;
+    transition: transform .3s;
+    position: relative;
+    &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 1.3s cubic-bezier(.165, .84, .44, 1);
+    box-shadow: 0 8px 10px 0 rgba(56, 56, 56, 0.2), 0 6px 15px 0 rgba(83, 83, 83, 0.15);
+    content: '';
+    opacity: 0;
+    z-index: -1;
+    }
+    &:hover, &.hover,&:focus {
+    transform: scale3d(1.006, 1.006, 1);
+    &::after {
+        opacity: 1;
+        }
+      }
 }
 
 .main-div-product-img-wrapper{
@@ -24,7 +44,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    margin:1px 0px;
+    margin: 3px 0;
 }
 .main-p-product-name{
     color: #505050;
@@ -32,13 +52,13 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin: 1px 0px 6px 0px
+    margin: 1px 0 6px 0;
 }
 .main-div-product-price-wrapper{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 6px 0px 0px 0px;;
+    margin: 6px 0 0 0;
 }
 
 .main-p-product-price{
@@ -52,7 +72,6 @@
 
 .main-p-product-won{
     color: #191919;
-    font-family: Noto Sans KR;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -61,6 +80,7 @@
 }
 
 .main-p-product-discount{
-    color: #FF4248;
+    color: #ff5d5d;
+    font-size: 14px;
     margin-left: 10px;
 }

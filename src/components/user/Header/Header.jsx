@@ -84,7 +84,6 @@ function Header() {
         return () => {
             if (eventSource) {
                 eventSource.close();
-                console.log("연결 종료");
                 setEventSource(null);
             }
         }
@@ -92,7 +91,6 @@ function Header() {
 
     // sse 연결 시작
     const subscribe = async () => {
-        console.log("연결 시작");
         const source = new EventSourcePolyfill(
             `${notifyApi}/subscribe/` + userId,
             {
@@ -107,31 +105,24 @@ function Header() {
         // mileage 관련 알림 받아옴
         source.addEventListener("mileage", (e) => {
             setLastEventId(e.lastEventId);
-            console.log(lastEventId);
             const data = JSON.parse(e.data);
-            console.log(data);
             toast(data.content);
             setNotifications((prevNotifications) => [data, ...prevNotifications]);
-            console.log(notifications);
             setUnreadCount((prevCount) => prevCount + 1);
         });
         
         // 문의 답변 알림
         source.addEventListener("inquiry", (e) => {
             setLastEventId(e.lastEventId);
-            console.log(lastEventId);
             const data = JSON.parse(e.data);
-            console.log(data.content);
             toast(data.content);
             setNotifications((prevNotifications) => [data, ...prevNotifications]);
-            console.log(notifications);
             setUnreadCount((prevCount) => prevCount + 1);
         });
         
         // 상품 QnA 답변 알림
         source.addEventListener("qna", (e) => {
             setLastEventId(e.lastEventId);
-            console.log(lastEventId);
             const data = JSON.parse(e.data);
             toast(data.content);
             setNotifications((prevNotifications) => [data, ...prevNotifications]);
@@ -141,24 +132,18 @@ function Header() {
         // 배송 상태 변경 알림
         source.addEventListener("delivery", (e) => {
             setLastEventId(e.lastEventId);
-            console.log(lastEventId);
             const data = JSON.parse(e.data);
-            console.log(data);
             toast(data.content);
             setNotifications((prevNotifications) => [data, ...prevNotifications]);
-            console.log(notifications);
             setUnreadCount((prevCount) => prevCount + 1);
         });
     
         // 반품 상태 변경 알림
         source.addEventListener("return", (e) => {
             setLastEventId(e.lastEventId);
-            console.log(lastEventId);
             const data = JSON.parse(e.data);
-            console.log(data);
             toast(data.content);
             setNotifications((prevNotifications) => [data, ...prevNotifications]);
-            console.log(notifications);
             setUnreadCount((prevCount) => prevCount + 1);
         });
         
@@ -169,7 +154,7 @@ function Header() {
     // 알림 조회
     useEffect(() => {
         if (token && userId) {
-            axios.get(`${notifyApi}/${userId}/notifications`, {
+            axios.get(`${notifyApi}/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -303,7 +288,7 @@ function Header() {
                         <div className='bucket-count'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 21 20" fill="none">
                                 <circle cx="10.8359" cy="10" r="10" fill="#919191"/>
-                                <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="white" font-size="12">
+                                <text x="50%" y="50%" textAnchor="middle" dy=".3em" fill="white" fontSize="12">
                                     {unreadCount}
                                 </text>
                             </svg>

@@ -1,6 +1,6 @@
 import './Filter.css';
 import React, {useEffect, useState} from 'react';
-import {formatPrice} from '@utils/Format';
+import {formatPrice} from "../../../../utils/Format";
 import {PiStarFill, PiStarLight} from "react-icons/pi";
 import Dropdown from '../Select/Dropdown';
 
