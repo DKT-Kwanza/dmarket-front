@@ -50,7 +50,6 @@ function Detail() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                console.log(response.data.data);
                 setProduct(response.data.data);
                 setProductImg(response.data.data.imgList);
             } catch (e) {
@@ -190,8 +189,8 @@ function Detail() {
     const handleSelect = (e) => {
         const selectedOption = {
             "optionValue": e.target.value,
-            "optionId": e.target.options[e.target.selectedIndex].getAttribute("optionid"),
-            "optionQuantity": e.target.options[e.target.selectedIndex].getAttribute("optionquantity")
+            "optionId": e.target.options[e.target.selectedIndex].getAttribute("data-id"),
+            "optionQuantity": e.target.options[e.target.selectedIndex].getAttribute("data-quantity")
         };
 
         // 이미 선택된 optionId가 order에 있으면 alert 표시
@@ -313,8 +312,8 @@ function Detail() {
             handleToggle();
             /* 현재의 qna 상태를 복사하여 수정 */
             const newQna = {...qna};
-            newQna.qnaList = newQna.qnaList || [];
-            newQna.qnaList.push(response.data.data);
+            newQna.content = newQna.content || [];
+            newQna.content.push(response.data.data);
             setQna(newQna);
         } catch (e) {
             console.error(e);
@@ -433,8 +432,8 @@ function Detail() {
                         {productImg && <img alt={product.productName} src={productImg[0]} ref={setImageRectRef}/>}
                         {imageRect && scannerPosition && <ScannerWrapper position={scannerPosition}/>}
                         {imageRect && viewPosition && <ViewWrapper position={viewPosition} img={productImg[0]}
-                                                                   left={imageRect.x + imageRect.width + 140}
-                                                                   top={240}/>}
+                                                                   left={imageRect.x + imageRect.width + 150}
+                                                                   top={imageRect.y + 24}/>}
                     </div>
 
                     <div className='detail-subImgArea'>
@@ -452,45 +451,45 @@ function Detail() {
 
                     <div className='detailArea'>
                         <div className='title'>
-                            <text>{product.productBrand}</text>
+                            <div>{product.productBrand}</div>
                         </div>
                         <div className='subTitle'>
-                            <text>{product.productName}</text>
+                            <div>{product.productName}</div>
                         </div>
                         <div className="rating">
                             <StarRating rating={product.productRating}/>
-                            <text style={{marginLeft: '10px'}}>({product.productReviewCount}건)</text>
+                            <div style={{marginLeft: '10px'}}>({product.productReviewCount}건)</div>
                         </div>
                         <div className='price'>
-                            <text className='discount'>{product.productDiscountRate}%&nbsp;&nbsp;</text>
-                            <text>{formatPrice(product.productSalePrice)} 원</text>
+                            <div className='discount'>{product.productDiscountRate} %&nbsp;&nbsp;</div>
+                            <div>{formatPrice(product.productSalePrice)} 원</div>
                         </div>
                         <div className='releasePrice'>
-                            <text>최초출시가 {formatPrice(product.productPrice)} 원</text>
+                            <div>최초출시가 {formatPrice(product.productPrice)} 원</div>
                         </div>
                         <hr style={{marginTop: '13px'}}/>
                         <div className='deliveryInfo'>
-                            <text>배송정보</text>
+                            <div>배송정보</div>
                             <div className='transportation'>
-                                <text>택배배송</text>
+                                <div>택배배송</div>
                             </div>
                         </div>
                         <div className='deliveryFee'>
-                            <text>배송비</text>
-                            <text style={{marginLeft: '77px'}}>무료</text>
+                            <div>배송비</div>
+                            <div style={{marginLeft: '77px'}}>무료</div>
                         </div>
                         <div className='detail-option-select'>
                             {
                                 (product.optionList && product.optionList.length > 0)
                                 ?
                                     <>
-                                        <text style={{marginTop: '2px'}}>{product.optionList[0].optionName}</text>
+                                        <div style={{marginTop: '2px'}}>{product.optionList[0].optionName}</div>
                                         <select className='detail-options' name="options" onChange={handleSelect}>
-                                            <option value="" disabled selected hidden>옵션을 선택하세요.</option>
+                                            <option value="" disabled hidden>옵션을 선택하세요.</option>
                                             {product.optionList && product.optionList.map((option, index) => (
                                                 <option key={index} value={option.optionValue}
-                                                        optionid={option.optionId}
-                                                        optionquantity={option.optionQuantity}>{option.optionValue}</option>
+                                                        data-id={option.optionId}
+                                                        data-quantity={option.optionQuantity}>{option.optionValue}</option>
                                             ))}
                                         </select>
                                     </>
@@ -509,10 +508,10 @@ function Detail() {
                         }
                         <div className='totalCost'>
                             <div className='total'>
-                                <text>합계</text>
+                                <div>합계</div>
                             </div>
                             <div className='cost'>
-                                <text>{formatPrice(totalCount * product.productSalePrice)} 원</text>
+                                <div>{formatPrice(totalCount * product.productSalePrice)} 원</div>
                             </div>
                         </div>
                         <hr style={{marginTop: '19px'}}/>
@@ -551,18 +550,18 @@ function Detail() {
                 </div>
                 <div className='ratingBox'>
                     <div className='ratingNum'>
-                        <text>{reviews.productRating}</text>
+                        <div>{reviews.productRating}</div>
                     </div>
                     <div className='ratingStar'>
                         <StarRating rating={reviews.productRating} style="none"/>
-                        <text style={{fontSize: '16px'}}>총 {reviews.productReviewCount}건 리뷰</text>
+                        <div style={{fontSize: '16px'}}>총 {reviews.productReviewCount}건 리뷰</div>
                     </div>
                 </div>
                 <div className='reviewAnnounce'>
-                    <text>※ 리뷰 등록, 수정, 삭제 및 상세 내용은 [마이페이지 &gt; 나의 활동관리 &gt; 상품 리뷰]에서 확인하실 수 있습니다.</text>
+                    <div>※ 리뷰 등록, 수정, 삭제 및 상세 내용은 [마이페이지 &gt; 나의 활동관리 &gt; 상품 리뷰]에서 확인하실 수 있습니다.</div>
                 </div>
                 <div className='reviewCategory'>
-                    <text>전체({reviews.productReviewCount})</text>
+                    <div>전체({reviews.productReviewCount})</div>
                 </div>
                 <hr style={{marginTop: '8px', borderWidth: '2px'}}/>
                 <div className='reviewList'>
@@ -576,7 +575,7 @@ function Detail() {
                     <div className="qnaButtonScroll" id="qnaButtonScroll">Q&A({qna.totalElements})</div>
                 </div>
                 <div className='qnaAnnounce'>
-                    <text>상품 외 배송, 교환/반품 등에 관한 문의사항은 고객센터에서 확인하실 수 있습니다.</text>
+                    <div>상품 외 배송, 교환/반품 등에 관한 문의사항은 고객센터에서 확인하실 수 있습니다.</div>
                 </div>
                 <div className='qnaCategory'>
                     <div className='qna-category-btn-area'>
@@ -607,44 +606,42 @@ function Detail() {
                 <div className='deliveryContents'>
                     <div className='deliveryIcon'><img className='deliveryIconImg' alt={''} src={parcelIcon}/></div>
                     <div className='deliveryExplain'>
-                        <text style={{color: '#000000', fontWeight: '700'}}>택배배송</text>
-                        <text><br/>주문 후 평균 2~3일 이내 택배 배송됩니다.</text>
+                        <div style={{color: '#000000', fontWeight: '700'}}>택배배송</div>
+                        <div>주문 후 평균 2~3일 이내 택배 배송됩니다.</div>
                     </div>
                     <div className='deliveryCost'>
-                        <text>무료배송</text>
+                        <div>무료배송</div>
                     </div>
                 </div>
                 <div className='returnTitle'>
-                    <text>교환 및 반품 안내</text>
+                    <div>교환 및 반품 안내</div>
                 </div>
                 <hr style={{marginTop: '16px', borderWidth: '2px', marginBottom: '0px'}}/>
                 <div className='returnApplyPeriod'>
                     <div className='returnApplyPeriodTitle'>
-                        <text>교환/반품 신청기간</text>
+                        <div>교환/반품 신청기간</div>
                     </div>
                     <div className='returnApplyPeriodContents'>
-                        <text>단순변심 및 사이즈/색상 불만에 관련된 교환/반품 신청은 배송완료 후 7일 이내에 가능합니다.</text>
+                        <div>단순변심 및 사이즈/색상 불만에 관련된 교환/반품 신청은 배송완료 후 7일 이내에 가능합니다.</div>
                     </div>
                 </div>
                 <div className='returnApplyCost'>
                     <div className='returnApplyCostTitle'>
-                        <text>교환/반품 비용</text>
+                        <div>교환/반품 비용</div>
                     </div>
                     <div className='returnApplyCostContents'>
-                        <text>상품의 회수(배송)비용은 무료입니다.</text>
-                        <text><br/>※ 상품의 불량/하자일 경우에는</text>
-                        <text style={{fontWeight: '700'}}>100% 환불</text>
-                        <text>이지만, 고객님의 단순변심 및 사이즈/색상 불만일 경우에는</text>
-                        <text style={{fontWeight: '700'}}>90% 환불</text>
-                        <text>입니다.</text>
+                        <div>상품의 회수(배송)비용은 무료입니다.</div>
+                        <div>※ 상품의 불량/하자일 경우에는
+                        100% 환불
+                        이지만, 고객님의 단순변심 및 사이즈/색상 불만일 경우에는
+                        90% 환불
+                        입니다.</div>
                     </div>
                 </div>
                 <div className='returnInfo'>
-                    <text>※ 자세한 내용은</text>
-                    <button className='inquiryButton'>고객센터</button>
-                    <text>로 문의 부탁드립니다. (A/S 문의는 제조사로 먼저 문의 시 빠르게 처리 가능합니다.)</text>
-                    <text><br/>※ 전자상거래 등에서의 소비자 보호에 관한 법률에 의한 반품규정이 판매자가 상품상세 페이지 등에서 개별적으로 고지 또는 지정한 반품조건보다 우선합니다.
-                    </text>
+                    <div>※ 자세한 내용은 <button className='inquiryButton'>고객센터</button> 로 문의 부탁드립니다. (A/S 문의는 제조사로 먼저 문의 시 빠르게 처리 가능합니다.)</div>
+                    <div>※ 전자상거래 등에서의 소비자 보호에 관한 법률에 의한 반품규정이 판매자가 상품상세 페이지 등에서 개별적으로 고지 또는 지정한 반품조건보다 우선합니다.
+                    </div>
                 </div>
             </div>
             <div style={{marginBottom: '200px'}}/>
