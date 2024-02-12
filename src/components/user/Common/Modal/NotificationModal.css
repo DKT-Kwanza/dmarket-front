@@ -10,6 +10,7 @@
     padding: 15px;
     display: flex;
     flex-direction: column;
+    z-index: 1;
 }
 
 .notification-header {
