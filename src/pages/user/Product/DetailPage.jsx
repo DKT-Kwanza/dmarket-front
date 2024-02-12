@@ -542,10 +542,6 @@ function Detail() {
                 <div className='productDetail'>
                     <div className="productDetailButtonScroll" id="productDetailButtonScroll">상품상세정보</div>
                 </div>
-                <div className='productDetailImg'>
-                    <img alt={''}
-                         src={productDetail}/>
-                </div>
                 <div className='productDetailBox'>
                     <ReactQuill
                         value={product.productDes}
@@ -659,7 +655,7 @@ function Detail() {
             <div style={{marginBottom: '200px'}}/>
             <ScrollToTopBtn/>
             {isOpen && (
-                <AddToCartModal isOpen={isOpen} onClose={modalHandler}/>
+                <AddToCartModal isOpen={isOpen} onClose={modalHandler} className='cartTestModal'/>
             )}
             {isAlertModalOpen && (
                 <ConfirmModal isOpen={isAlertModalOpen} onClose={alertModalHandler} onConfirm={alertModalHandler}>

@@ -10,7 +10,7 @@ function DetailQnaReply({onClose, content, qnaReplyContent, replyAt}) {
 
     return (
         <Area>
-            <Content>{content}</Content>
+            <Content className='qnaContentsTest'>{content}</Content>
             {
                 qnaReplyContent
                     ?
