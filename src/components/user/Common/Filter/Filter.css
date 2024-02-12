@@ -20,7 +20,16 @@
     margin: 0 14px;
 }
 
-.filter-price {
+.filter-price-min {
+    width: 141px;
+    height: 28px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    background: #fff;
+    padding: 1px 12px;
+}
+
+.filter-price-max {
     width: 141px;
     height: 28px;
     border: 1px solid #E0E0E0;
