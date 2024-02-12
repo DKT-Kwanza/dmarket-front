@@ -19,7 +19,6 @@ import styled from "styled-components";
 import {Pagination} from "@mui/material";
 import {FaHeart} from "react-icons/fa";
 import heart from '@assets/icons/heart.svg';
-import productDetail from '@assets/images/productDetail.png';
 import arrowRight from '@assets/icons/chevron-right.svg';
 import parcelIcon from '@assets/icons/truck-02.png';
 import ReactQuill from 'react-quill';
