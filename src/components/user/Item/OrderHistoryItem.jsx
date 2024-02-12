@@ -27,7 +27,7 @@ const OrderHistoryItem = ({orderDate, orderId, orderItems}) => {
                     productName={item.productName}
                     productOption={item.productOption}
                     productTotalSalePrice={item.productTotalSalePrice}
-                    children={item.orderStauts}
+                    children={item.orderStatus}
                     productCount={item.productCount}
                 />
             ))}

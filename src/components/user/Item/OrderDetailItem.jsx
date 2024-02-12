@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import GreyBtn from '../Common/Button/GreyBtn';
+import Button from '../Common/Button/Button';
 import styled from 'styled-components';
 import ConfirmCancelModal from "../../commmon/Modal/ConfirmCancelModal";
 import {formatPrice} from "@utils/Format";
@@ -115,9 +115,10 @@ function OrderDetailItem({orderId, detailId, img, brand, name, option, count, pr
                     {status === "결제 완료" || status === "배송 완료" ? (
                         <InfoProcess>
                             <div style={{paddingRight: '40px'}}>{status}</div>
-                            <GreyBtn onClick={() => {
-                                openModalHandler()
-                            }}>{statusButton}</GreyBtn>
+                            <Button label={statusButton}
+                                    variant={'secondary'}
+                                    width={'base'}
+                                    onClick={openModalHandler}/>
                         </InfoProcess>
                     ) : (
                         <InfoProcess>{status}</InfoProcess>
