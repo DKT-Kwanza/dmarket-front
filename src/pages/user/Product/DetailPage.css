@@ -58,21 +58,23 @@
     font-weight: 400;
 }
 .rating {
-    font-size: 24px;
-    height: 35px;
+    font-size: 20px;
     margin-top: 8px;
     font-weight: 400;
     display: flex;
 }
 
 .price {
-    font-size: 36px;
+    display: flex;
+    align-items: center;
+    font-size: 32px;
     height: 52px;
     margin-top: 6px;
     font-weight: bold;
 }
 .discount{
-    color: #ED1C14;
+    font-size: 30px;
+    color: #ff5d5d;
 }
 .releasePrice {
     font-size: 16px;
@@ -184,7 +186,6 @@
     display: flex;
     margin-top: 171px;
     height: 29px;
-    margin-left: 32px;
 }
 
 .buttonArea button {

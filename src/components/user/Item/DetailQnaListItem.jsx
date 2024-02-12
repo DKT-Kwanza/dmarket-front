@@ -1,7 +1,7 @@
 import styled from "styled-components";
+import theme from "../../../styles/commonStyles"
 import React from "react";
 import { formatDate } from "@utils/Format";
-
 
 function DetailQnaListItem({onClick, title, createdAt, status, writer}) {
   
@@ -10,7 +10,11 @@ function DetailQnaListItem({onClick, title, createdAt, status, writer}) {
             <Title>{title}</Title>
             <Writer>{writer}</Writer>
             <Date>{formatDate(createdAt)}</Date>
-            <State status={status}>{status}</State>
+            {
+                !status
+                    ? <State status={'답변 대기'}>답변 대기</State>
+                    : <State status={status}>{status}</State>
+            }
         </QnaArea>
     );
 }
@@ -46,6 +50,6 @@ const Date = styled.div`
 const State = styled.div`
   font-size: 14px;
   font-weight: 400;
-  color: ${(props) => props.status === "답변 완료" ? "#FF0000" : "#6F97FF"};
+  color: ${(props) => props.status === "답변 완료" ? theme.colors.$blue_0 : theme.colors.$red_0};
 `;
 export default DetailQnaListItem;
