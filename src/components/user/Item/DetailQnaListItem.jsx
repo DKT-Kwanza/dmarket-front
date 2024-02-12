@@ -7,7 +7,7 @@ function DetailQnaListItem({onClick, title, createdAt, status, writer}) {
   
     return (
         <QnaArea onClick={onClick}>
-            <Title>{title}</Title>
+            <Title className='qnaTitleTest'>{title}</Title>
             <Writer>{writer}</Writer>
             <Date>{formatDate(createdAt)}</Date>
             {

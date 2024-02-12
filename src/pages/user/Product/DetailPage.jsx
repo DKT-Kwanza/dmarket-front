@@ -646,7 +646,7 @@ function Detail() {
             <div style={{marginBottom: '200px'}}/>
             <ScrollToTopBtn/>
             {isOpen && (
-                <AddToCartModal isOpen={isOpen} onClose={modalHandler}/>
+                <AddToCartModal isOpen={isOpen} onClose={modalHandler} className='cartTestModal'/>
             )}
             {isAlertModalOpen && (
                 <ConfirmModal isOpen={isAlertModalOpen} onClose={alertModalHandler} onConfirm={alertModalHandler}>

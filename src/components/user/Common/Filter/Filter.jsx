@@ -50,7 +50,7 @@ function Filter({ setMinPrice, setMaxPrice, setStar, setSorter }) {
                     <div className='filter-label'>가격</div>
                     <input
                         type='number'
-                        className='filter-price'
+                        className='filter-price-min'
                         placeholder='최소 가격'
                         value={localMinPrice}
                         onChange={(e) => handlePriceChange(setLocalMinPrice, e.target.value)}
@@ -58,7 +58,7 @@ function Filter({ setMinPrice, setMaxPrice, setStar, setSorter }) {
                     <div className='filter-font'>~</div>
                     <input
                         type='number'
-                        className='filter-price'
+                        className='filter-price-max'
                         placeholder='최대 가격'
                         value={localMaxPrice}
                         onChange={(e) => handlePriceChange(setLocalMaxPrice, e.target.value)}

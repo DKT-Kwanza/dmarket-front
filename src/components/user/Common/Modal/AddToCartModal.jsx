@@ -22,11 +22,11 @@ function AddToCartModal({isOpen, onClose}) {
 
     return (
         <ModalBackdrop onClick={onClose}>
-            <ModalView onClick={(e) => e.stopPropagation()}>
+            <ModalView onClick={(e) => e.stopPropagation()} className='AddToCartModalTest'>
                 <TextArea>장바구니에 상품을 담았습니다.</TextArea>
                 <BtnArea>
                     <CancelBtn onClick={navigateToCart}>장바구니로 이동</CancelBtn>
-                    <ConfirmBtn onClick={handleConfirm}>확인</ConfirmBtn>
+                    <ConfirmBtn onClick={handleConfirm} className='AddToCartModalConfirmTest'>확인</ConfirmBtn>
                 </BtnArea>
             </ModalView>
         </ModalBackdrop>
