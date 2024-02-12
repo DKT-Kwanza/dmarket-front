@@ -1,4 +1,4 @@
-export const MsgDropDown = ({ value, setMsgIdentify, setIsOpen, isOpen }) => {
+const MsgDropDown = ({ value, setMsgIdentify, setIsOpen, isOpen }) => {
     const ValueClick = () => {
         setMsgIdentify(value)
         setIsOpen(!isOpen)
@@ -7,3 +7,5 @@ export const MsgDropDown = ({ value, setMsgIdentify, setIsOpen, isOpen }) => {
         <li onClick={ValueClick}><span>{value}</span></li>
     )
 }
+
+export default MsgDropDown;
