@@ -98,16 +98,18 @@ function App() {
     ];    
     const fullPath = decodeURIComponent(location.pathname) + location.search;
     const isKnownPath = knownPaths.some(knownPath => {
-      const regex = new RegExp(`^${knownPath.replace(/:[^\s/]+/g, '([\\w-]+)')}(/?.*)?$`);
+      const regexPattern = knownPath.replace(/:[^\s/]+/g, '([\\w-]+)');
+      const regex = new RegExp(`^${regexPattern}$`);
       return regex.test(fullPath);
     });
     const applyBodyStyle = !noBodyStylePaths.some(path => location.pathname.startsWith(path));
-    const hideHeaderFooter = location.pathname.startsWith('/member') ||
+    const hideHeaderFooter = !isKnownPath || (
+      location.pathname.startsWith('/member') ||
       location.pathname.startsWith('/memberMng') ||
       location.pathname.startsWith('/productMng') ||
       location.pathname.startsWith('/orderMng') ||
-      location.pathname.startsWith('/customerMng') ||
-      !isKnownPath;
+      location.pathname.startsWith('/customerMng')
+  );  
 
   return (
     <div className="App">
