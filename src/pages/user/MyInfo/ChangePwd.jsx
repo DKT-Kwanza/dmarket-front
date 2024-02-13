@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import "./ChangePwd.css";
 import MyPageSubHeader from "@components/user/Header/MyPageSubHeader";
 import MyPageSidebar from "@components/user/Sidebar/MyPageSidebar";
-import ConfirmModal from "@components/commmon/Modal/ConfirmModal";
+import ConfirmModal from "@components/common/Modal/ConfirmModal";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {userApi} from "@api/Api";

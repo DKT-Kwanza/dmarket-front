@@ -10,7 +10,7 @@ import RecommendProductList from "@components/user/List/RecommendProductList";
 import DetailWriteQna from "@components/user/Common/Input/DetailWriteQna";
 import ScrollToTopBtn from '@components/user/Common/Button/ScrollToTopBtn';
 import AddToCartModal from "@components/user/Common/Modal/AddToCartModal";
-import ConfirmModal from "@components/commmon/Modal/ConfirmModal";
+import ConfirmModal from "@components/common/Modal/ConfirmModal";
 import {formatPrice} from "@utils/Format";
 import axios from 'axios';
 import {productsApi, userApi, orderApi} from "@api/Api";

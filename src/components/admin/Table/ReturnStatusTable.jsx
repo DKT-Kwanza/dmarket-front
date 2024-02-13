@@ -5,10 +5,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import SelectBox from "../../commmon/SelectBox/SelectBox";
+import SelectBox from "../../common/SelectBox/SelectBox";
 import { formatDate } from "@utils/Format";
+import Button from "@mui/material/Button";
 
-export default function ReturnStatusTable({ headers, rows, onChangeReturnStatusClick }) {
+export default function ReturnStatusTable({ headers, rows, onChangeReturnStatusClick, confirmOrderInfo}) {
     const rowData = Array.isArray(rows) ? rows : rows.content || [];
 
     return (
@@ -47,6 +48,13 @@ export default function ReturnStatusTable({ headers, rows, onChangeReturnStatusC
                             <TableCell>{row.returnContents}</TableCell>
                             <TableCell>{formatDate(row.orderDate)}</TableCell>
                             <TableCell>{formatDate(row.returnReqDate)}</TableCell>
+                            <TableCell>
+                                <Button onClick={(event) => {
+                                            event.stopPropagation();
+                                            confirmOrderInfo(row.orderId);}}
+                                >확인하기
+                                </Button>
+                            </TableCell>
                             <TableCell>
                                 <SelectBox
                                     key={`${row.returnId}-${row.returnStatus}`}

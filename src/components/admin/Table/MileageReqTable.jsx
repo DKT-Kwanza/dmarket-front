@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import ConfirmCancelModal from '../../commmon/Modal/ConfirmCancelModal';
+import ConfirmCancelModal from '../../common/Modal/ConfirmCancelModal';
 import {adminApi} from "@api/Api";
 
 const style = {
