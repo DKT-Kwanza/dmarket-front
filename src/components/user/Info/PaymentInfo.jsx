@@ -78,7 +78,7 @@ export default function PaymentInfo({ userName, totalPrice, discount, totalPay, 
                     <div>
                         <span>주문정보 및 서비스 이용약관에 동의합니다.</span>
                     </div>
-                    <button onClick={handleOrderSubmit}>주문하기</button> {/*버튼 클릭시 주문요청 api*/}
+                    <button onClick={handleOrderSubmit} className='orderTest'>주문하기</button> {/*버튼 클릭시 주문요청 api*/}
                 </div>
             </div>
         </div>

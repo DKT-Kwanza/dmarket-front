@@ -98,7 +98,11 @@ function CustomerCenterNotice() {
                                 noticeCreatedDate={formatDate(notice.noticeCreatedDate)}
                             >
                                 {/* 내용을 children으로 전달 */}
-                                <div dangerouslySetInnerHTML={{__html: notice.noticeContents}}/>
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: notice.noticeContents.replace(/\n/g, '<br>')
+                                    }}
+                                />
                             </CustomerCenterNoticeItem>
                         ))}
                     </div>

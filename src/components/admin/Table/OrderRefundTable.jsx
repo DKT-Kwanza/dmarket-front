@@ -48,13 +48,16 @@ export default function OrderRefundTable({ headers, rows, refundPercents, onAppl
                             <TableCell>{row.returnContents}</TableCell>
                             <TableCell>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <SelectBox
-                                        key={`${row.returnId}-${row.returnStatus}`}
-                                        text={'환불 선택'}
-                                        options={['100% 환불', '90% 환불']}
-                                        value={refundPercents[row.returnId]}
-                                        onChange={() => onApplyClick(row.returnId, refundPercents[row.returnId] === '100% 환불' ? 100 : 90)}
-                                    />
+                                <SelectBox
+                                    key={`${row.returnId}-${row.returnStatus}`}
+                                    text={'환불 선택'}
+                                    options={['100% 환불', '90% 환불']}
+                                    value={refundPercents[row.returnId]}
+                                    onChange={(selectedValue) => { 
+                                        const selectedRefundPercent = selectedValue === '100% 환불' ? 100 : 90;
+                                        onApplyClick(row.returnId, selectedRefundPercent);
+                                    }}
+                                />
                                 </div>
                             </TableCell>
                         </TableRow>

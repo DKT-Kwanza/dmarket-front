@@ -18,7 +18,11 @@ function CustomerCenterFAQList({ items }) {
           isExpanded={expandedItem === index}
           onToggle={() => handleToggle(index)}
         >
-          {item.faqAnswer}
+          <div
+              dangerouslySetInnerHTML={{
+                  __html: item.faqAnswer.replace(/\n/g, '<br>')
+              }}
+          />
         </CustomerCenterFAQListItem>
       ))}
     </div>
