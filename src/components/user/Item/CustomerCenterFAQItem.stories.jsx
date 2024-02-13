@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CustomerCenterFAQItem from "./CustomerCenterFAQItem";
 
 export default {
-    title: "Item",
+    title: "FAQItem",
     component: CustomerCenterFAQItem,
     tags: ["autodocs"],
 }

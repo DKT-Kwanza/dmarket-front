@@ -2,7 +2,7 @@ import React from "react";
 import CartItem from "./CartItem";
 
 export default {
-    title: "Item",
+    title: "CartItem",
     component: CartItem,
     tags: ["autodocs"],
 }
