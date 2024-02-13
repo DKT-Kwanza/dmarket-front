@@ -13,7 +13,7 @@ function DetailQnaListItem({onClick, title, createdAt, status, writer}) {
             {
                 !status
                     ? <State status={'답변 대기'}>답변 대기</State>
-                    : <State status={status}>{status}</State>
+                    : <State status={'답변 완료'}>답변 완료</State>
             }
         </QnaArea>
     );
@@ -32,7 +32,7 @@ const Title = styled.div`
   background-color: #FFFFFF;
   font-size: 14px;
   font-weight: 400;
-  width: 530px;
+  width: 477px;
 `;
 
 const Writer = styled.div`
