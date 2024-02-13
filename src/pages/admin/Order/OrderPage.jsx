@@ -117,9 +117,7 @@ function OrderStatus() {
                     'Authorization': `Bearer ${token}`,
                 },
             });
-            console.log(response.data);
             setOrderInfo(response.data.data);
-            console.log(orderInfo)
             setIsInfoModalOpen(true);
         } catch (error) {
             console.error('API 호출 실패:', error);
