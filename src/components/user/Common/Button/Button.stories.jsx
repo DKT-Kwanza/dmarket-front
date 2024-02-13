@@ -15,7 +15,7 @@ export default {
               `variant, width, label, disabled 선택하여 버튼 스타일을 적용합니다.`,
           },
         },
-      },
+    },
     argTypes: {
         variant: {
             description: '버튼의 디자인을 선택하기 위한 값입니다.',

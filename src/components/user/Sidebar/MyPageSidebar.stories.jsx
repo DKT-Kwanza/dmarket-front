@@ -7,8 +7,13 @@ export default {
     component: MyPageSidebar,
     tags: ['autodocs'],
     parameters: {
-        docs: {
-            inlineStories: false,
+        componentSubtitle:
+          '사용자 UI에서 사용하는 마이페이지 사이드바 컴포넌트',
+        docs: { 
+          description: {
+            component:
+              `마이페이지에서 사용되는 사이드바 컴포넌트입니다. 각 섹션별로 버튼이 제공되며, 현재 페이지에 따라 활성화 상태가 변경됩니다.`,
+          },
         },
     },
 };
