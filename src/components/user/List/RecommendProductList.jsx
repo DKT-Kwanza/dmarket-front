@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ProductListItem from "@pages/user/Product/ProductListItem";
+import ProductItem from "@components/user/Item/ProductItem";
 import React from "react";
 import {useNavigate} from "react-router-dom";
 
@@ -14,7 +14,7 @@ function RecommendProductList({recommendProducts}) {
         <Area>
             {
                 recommendProducts.map((value, index) => (
-                    <ProductListItem key={index}
+                    <ProductItem key={index}
                                      onClick={() => navigateToProductDetail(value.productId)}
                                      brand={value.productBrand}
                                      productName={value.productName}
