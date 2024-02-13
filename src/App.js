@@ -95,13 +95,15 @@ function App() {
       '/customerMng/notice', 
       '/customerMng/inquiry', 
       '/customerMng/faq', 
-    ];    
-    const fullPath = decodeURIComponent(location.pathname) + location.search;
+    ];
+    
+    const fullPath = decodeURIComponent(location.pathname);
     const isKnownPath = knownPaths.some(knownPath => {
-      const regexPattern = knownPath.replace(/:[^\s/]+/g, '([\\w-]+)');
+      const regexPattern = knownPath.replace(/:[^\s/]+/g, '([^/]+)');
       const regex = new RegExp(`^${regexPattern}$`);
       return regex.test(fullPath);
     });
+
     const applyBodyStyle = !noBodyStylePaths.some(path => location.pathname.startsWith(path));
     const hideHeaderFooter = !isKnownPath || (
       location.pathname.startsWith('/member') ||
