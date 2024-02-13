@@ -43,12 +43,6 @@
     align-items: center;
     margin-bottom:120px;
 }
-.main-div-text-wrapper{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 5px 10px;
-}
 
 .main-div-newitem-wrapper > div > h1{
     font-size: 30px;

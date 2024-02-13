@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import theme from "../../../styles/commonStyles"
 import React from "react";
-import { formatDate } from "@utils/Format";
+import { formatDate } from "../../../utils/Format";
 
 function DetailQnaListItem({onClick, title, createdAt, status, writer}) {
   

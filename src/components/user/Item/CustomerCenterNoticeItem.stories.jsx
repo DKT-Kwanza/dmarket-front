@@ -5,6 +5,7 @@ export default {
     title: "NoticeItem",
     component: CustomerCenterNoticeItem,
     tags: ["autodocs"],
+    argTypes: {},
 }
 
 const Template = (args) => {

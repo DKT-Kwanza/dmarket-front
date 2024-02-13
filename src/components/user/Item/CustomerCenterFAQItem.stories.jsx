@@ -5,6 +5,7 @@ export default {
     title: "FAQItem",
     component: CustomerCenterFAQItem,
     tags: ["autodocs"],
+    argTypes: {},
 }
 
 const Template = (args) => {

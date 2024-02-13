@@ -1,6 +1,7 @@
 import React from 'react';
+import styled from "styled-components";
 import './MainProductItem.css'
-import {formatPrice} from "@utils/Format";
+import {formatPrice} from "../../../utils/Format";
 
 const ProductItem = ({ brand, productName, productImg, sales, discountRate, onClick }) => {
   return (
@@ -8,7 +9,7 @@ const ProductItem = ({ brand, productName, productImg, sales, discountRate, onCl
       <div className='main-div-product-img-wrapper'>
         <img src={productImg} className='main-img-product' alt='상품이미지'/>
       </div>
-      <div className='main-div-text-wrapper'>
+      <TextWrapper>
         <div>
           <p className='main-p-product-brandname'>{brand}</p>
         </div>
@@ -20,9 +21,16 @@ const ProductItem = ({ brand, productName, productImg, sales, discountRate, onCl
           <p className='main-p-product-won'>&nbsp;원</p>
           <div className='main-p-product-discount'>SALE {discountRate}%</div>
         </div>
-      </div>
+      </TextWrapper>
     </div>
   );
 }
+
+const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 5px 10px;
+`
 
 export default ProductItem;

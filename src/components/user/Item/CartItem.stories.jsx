@@ -5,6 +5,7 @@ export default {
     title: "CartItem",
     component: CartItem,
     tags: ["autodocs"],
+    argTypes: {},
 }
 
 const Template = (args) => <CartItem {...args} />;
