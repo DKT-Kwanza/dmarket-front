@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import theme from "../../../../styles/commonStyles";
 import {useEffect, useState} from "react";
-import cancel from "@assets/icons/cancel.svg";
-import plus from "@assets/icons/plus.svg";
-import minus from "@assets/icons/minus.svg";
+import cancel from "../../../../assets/icons/cancel.svg";
+import plus from "../../../../assets/icons/plus.svg";
+import minus from "../../../../assets/icons/minus.svg";
 
 function ProductOptionTab({option, name, onCountChange}) {
     const [tab, setTab] = useState(option);
@@ -72,7 +73,7 @@ function ProductOptionTab({option, name, onCountChange}) {
 }
 
 const QuantityText = styled.div`
-  color: red;
+  color: ${theme.colors.$red_0};
   padding-left: 10px;
   font-size: 14px;
 `;
@@ -90,7 +91,7 @@ const InfoArea = styled.div`
 `;
 
 const Text = styled.div`
-  color: #000;
+  color: ${theme.colors.black};
   font-size: 16px;
   font-style: normal;
   font-weight: 400;

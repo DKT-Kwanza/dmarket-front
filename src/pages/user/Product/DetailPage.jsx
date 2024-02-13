@@ -96,8 +96,6 @@ function Detail() {
                         'Content-Type': 'application/json; charset=UTF-8',
                     }
                 });
-                // 리뷰 재확인 필요
-                // console.log(response.data.data);
                 setReviews(response.data.data);
                 setReviewTotalPages(response.data.data.totalPage);
             } catch (e) {

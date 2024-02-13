@@ -26,6 +26,7 @@ function CustomerCenterFAQ() {
                         'Authorization': `Bearer ${token}`
                     }
                 });
+                console.log(response.data.data);
                 setCustomerCenterFaqs(response.data.data);
             } catch (e) {
                 console.error("Error fetching data: ", e);

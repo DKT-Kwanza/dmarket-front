@@ -10,6 +10,7 @@ const CartList = ({ items, checkedItems, onItemCheck }) => {
 
     return (
         <div>
+            {console.log(items)}
           {items.map((item, index) => (
             <CartItem
               key={index}
