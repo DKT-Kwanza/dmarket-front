@@ -56,6 +56,8 @@ function Refund() {
 
             alert("환불 요청이 완료되었습니다!");
             setOrderCancel(prevStatus => prevStatus.filter(item => item.returnId !== returnId));
+            console.log(returnId);
+            console.log(refundPercent);
 
         } catch (error) {
             console.error(error);
