@@ -5,6 +5,7 @@ import MyPageSidebar from './MyPageSidebar';
 export default {
     title: 'Sidebar',
     component: MyPageSidebar,
+    tags: ['autodocs'],
     parameters: {
         docs: {
             inlineStories: false,

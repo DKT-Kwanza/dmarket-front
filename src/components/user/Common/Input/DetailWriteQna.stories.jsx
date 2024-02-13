@@ -2,7 +2,7 @@ import React from "react";
 import DetailWriteQna from "./DetailWriteQna";
 
 export default {
-    title: "QnaInput",
+    title: "Input/QnaInput",
     component: DetailWriteQna,
     tags: ['autodocs'],
 }

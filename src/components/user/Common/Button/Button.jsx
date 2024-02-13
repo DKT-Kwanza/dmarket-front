@@ -14,7 +14,7 @@ const BUTTON_WIDTH = {
 
 const TEXT_COLOR = {
     normal: {
-        primary: `${theme.colors.white}`,
+        primary: `${theme.colors.$grey_7}`,
         secondary: `${theme.colors.black}`,
         tertiary: `${theme.colors.black}`,
         warn: `${theme.colors.white}`,
