@@ -53,6 +53,19 @@ function UserMileagePage() {
         }
     }, [selectedTab, currentPage]);
 
+    const fetchMileageData = async () => {
+        try {
+            const response = await axios.get(`${adminApi}/users/mileage-history?status=PROCESSING&page=${currentPage}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+        setMileageReqData(response.data.data.content);
+        
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
         navigate(`?page=${value}`);
@@ -83,7 +96,7 @@ function UserMileagePage() {
                 <Paper square elevation={2} sx={{ p: "20px 30px" }}>
                     <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange} />
                     {selectedTab === "마일리지 처리 요청" && (
-                        <MileageReqTable headers={tableHeader} rows={mileageReqData} />
+                        <MileageReqTable headers={tableHeader} rows={mileageReqData} fetchData={fetchMileageData} />
                     )}
                     {selectedTab === "마일리지 처리 내역" && (
                         <MileageTable headers={tableHeader} rows={mileageData} />

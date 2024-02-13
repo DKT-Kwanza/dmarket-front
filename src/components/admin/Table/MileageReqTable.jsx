@@ -51,8 +51,8 @@ export default function MileageReqTable({ headers, rows, fetchData }) {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             alert("승인되었습니다!");
+            fetchData(); 
             closeApproveModal();
-            fetchData();
         } catch (error) {
             console.error(error)
         }
@@ -60,12 +60,10 @@ export default function MileageReqTable({ headers, rows, fetchData }) {
 
     const closeApproveModal = () => {
         setIsApproveModalOpen(false);
-        fetchData(); 
     };
 
     const closeRefuseModal = () => {
         setIsRefuseModalOpen(false);
-        fetchData();
     };
 
     const handleRefuse = async () => {
@@ -76,8 +74,8 @@ export default function MileageReqTable({ headers, rows, fetchData }) {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             alert("거부되었습니다!");
-            closeRefuseModal();
             fetchData(); 
+            closeRefuseModal();
         } catch (error) {
             console.error(error);
         }
