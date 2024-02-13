@@ -2,7 +2,7 @@ import React from "react";
 import DetailQnaListItem from "./DetailQnaListItem";
 
 export default {
-    title: "QnaItem",
+    title: "Item/QnaItem",
     component: DetailQnaListItem,
     tags: ["autodocs"],
     argTypes: {},

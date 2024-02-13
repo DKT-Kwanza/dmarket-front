@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import CustomerCenterFAQItem from "./CustomerCenterFAQItem";
 
 export default {
-    title: "FAQItem",
+    title: "Item/FAQItem",
     component: CustomerCenterFAQItem,
     tags: ["autodocs"],
-    argTypes: {},
+    argType: {},
 }
 
 const Template = (args) => {

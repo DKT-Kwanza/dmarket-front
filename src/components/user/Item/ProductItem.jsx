@@ -1,5 +1,5 @@
 import './ProductItem.css'
-import { formatPrice } from "@utils/Format";
+import { formatPrice } from "../../../utils/Format";
 import StarRating from "../Common/Rating/StarRating";
 
 function ProductItem({onClick, brand, productName, imgSrc, sales, ratingAvg, reviewCnt, discountRate}) {

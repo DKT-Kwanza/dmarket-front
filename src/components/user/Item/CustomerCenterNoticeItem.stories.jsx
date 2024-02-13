@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import CustomerCenterNoticeItem from "./CustomerCenterNoticeItem";
 
 export default {
-    title: "NoticeItem",
+    title: "Item/NoticeItem",
     component: CustomerCenterNoticeItem,
     tags: ["autodocs"],
     argTypes: {},

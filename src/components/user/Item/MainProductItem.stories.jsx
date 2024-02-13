@@ -2,7 +2,7 @@ import React from "react";
 import MainProductItem from "./MainProductItem";
 
 export default {
-    title: "ProductItem",
+    title: "Item/ProductItem",
     component: MainProductItem,
     tags: ["autodocs"],
     argType: {},
