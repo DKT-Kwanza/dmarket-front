@@ -1,5 +1,7 @@
 .filter-container {
-    padding-left: 70px;
+    width: 1280px;
+    margin: 0 auto;
+    /* padding-left: 70px; */
 }
 
 .filter-price-container {
@@ -17,7 +19,7 @@
 .filter-font {
     font-size: 16px;
     font-weight: 400;
-    margin: 0 14px;
+    margin: 0 20px;
 }
 
 .filter-price-min {
@@ -27,6 +29,7 @@
     border-radius: 5px;
     background: #fff;
     padding: 1px 12px;
+    margin-left: 12px;
 }
 
 .filter-price-max {
@@ -47,6 +50,7 @@
 .filter-rating-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-top: 15px;
     margin-bottom: 10px;
 }
