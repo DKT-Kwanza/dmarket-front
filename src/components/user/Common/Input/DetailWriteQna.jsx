@@ -1,4 +1,5 @@
 import CheckBox from "../CheckBox/CheckBox";
+import Button from "../Button/Button";
 import React, {useState} from "react";
 import styled from "styled-components";
 
@@ -56,7 +57,9 @@ function DetailWriteQna({onClick}) {
                     onChange={() => handleCheckboxChange(true)}
                 />
             </SecretState>
-            <EnrollBtn onClick={handleEnrollClick}>등록</EnrollBtn>
+            <BtnArea>
+              <Button variant='primary' width='base' label='등록' onClick={handleEnrollClick} />
+            </BtnArea>
         </Area>
     );
 }
@@ -140,17 +143,8 @@ const Private = styled.label`
   font-size: 15px;
 `;
 
-const EnrollBtn = styled.button`
+const BtnArea = styled.div`
   float: inline-end;
   margin-top: 16px;
-  border: none;
-  border-radius: 5px;
-  width: 97px;
-  height: 38px;
-  font-size: 16px;
-  font-weight: 400;
-  color: #444444;
-  background-color: #FFD465;
-  cursor: pointer;
 `;
 export default DetailWriteQna;

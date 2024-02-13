@@ -1,6 +1,6 @@
 /* 확인, 취소 버튼이 있는 popup modal 입니다. */
 import styled from "styled-components";
-import theme from "@styles/commonStyles";
+import theme from "../../../styles/commonStyles";
 import {useState} from "react";
 import {darken} from "polished";
 
