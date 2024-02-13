@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Button from '../Common/Button/Button';
 import styled from 'styled-components';
-import ConfirmCancelModal from "../../commmon/Modal/ConfirmCancelModal";
+import ConfirmCancelModal from "../../common/Modal/ConfirmCancelModal";
 import {formatPrice} from "@utils/Format";
 import {userApi} from "@api/Api";
 import axios from "axios";

@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatDate, formatTime } from '@utils/Format';
+import { formatDate, formatTime } from '../../../utils/Format';
 import './OrderHistoryInfo.css'
 
 const OrderHistoryInfo = ({ orderDate, orderId, navigateToOrderHistoryDetail }) => {

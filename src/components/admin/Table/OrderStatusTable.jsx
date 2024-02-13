@@ -6,11 +6,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import SelectBox from "../../commmon/SelectBox/SelectBox";
+import SelectBox from "../../common/SelectBox/SelectBox";
 import Button from "@mui/material/Button";
 import {formatDate} from "@utils/Format";
 
-export default function OrderStatusTable({headers, rows, onChangeOrderStatusClick}) {
+export default function OrderStatusTable({headers, rows, onChangeOrderStatusClick, confirmOrderInfo}) {
+
     /* 선택된 select box 옵션 */
     const [selectedStatus, setSelectedStatus] = useState('결제 완료');
     const handleStatusChange = (selectedValue) => {
@@ -53,6 +54,13 @@ export default function OrderStatusTable({headers, rows, onChangeOrderStatusClic
                             <TableCell>{row.optionValue}</TableCell>
                             <TableCell>{row.productCount}</TableCell>
                             <TableCell>{formatDate(row.orderDate)}</TableCell>
+                            <TableCell>
+                                <Button onClick={(event) => {
+                                            event.stopPropagation();
+                                            confirmOrderInfo(row.orderId);}}
+                                >확인하기
+                                </Button>
+                            </TableCell>
                             <TableCell>
                                 <SelectBox text={row.orderStatus} options={['결제 완료', '배송 준비', '배송중', '배송 완료']} onChange={handleStatusChange}/>
                             </TableCell>

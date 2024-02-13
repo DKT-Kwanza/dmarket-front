@@ -8,6 +8,7 @@ import {Paper, Box, Pagination} from "@mui/material";
 import {indigo} from "@mui/material/colors";
 import axios from "axios";
 import {adminApi} from "@api/Api";
+import UserInfoModal from "@components/admin/Modal/UserInfoModal";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -20,6 +21,8 @@ function ReturnStatus() {
     const tableHeader = ['주문번호', '상품번호', '브랜드', '상품', '옵션', '주문수량', '요청사유', '주문날짜', '요청날짜', '반품상태 변경'];
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+    const [orderInfo, setOrderInfo] = useState([]);
+    const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
 
     const token = sessionStorage.getItem('token');
 
@@ -72,6 +75,26 @@ function ReturnStatus() {
         navigate(`?page=${value}`);
     };
 
+    /* 주문자 정보 확인 */
+    const confirmOrderInfo = async (orderId) => {
+        try {
+            const url = `${adminApi}/orders/${orderId}/delivery-address`
+            const response = await axios.get(url, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            setOrderInfo(response.data.data);
+            setIsInfoModalOpen(true);
+        } catch (error) {
+            console.error('API 호출 실패:', error);
+        }
+    }
+
+    const handleCloseInfoModal = () => {
+        setIsInfoModalOpen(false);
+    };
+
     return (
         <Box>
             <LeftNav/>
@@ -93,12 +116,12 @@ function ReturnStatus() {
                        sx={{p: '20px 30px'}}>
                     <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange}/>
                     <ReturnStatusTable headers={tableHeader} rows={returnStatus}
-                                       onChangeReturnStatusClick={onChangeReturnStatusClick}/>
+                                       onChangeReturnStatusClick={onChangeReturnStatusClick} confirmOrderInfo={confirmOrderInfo}/>
                     <Pagination count={totalPages} page={currentPage} onChange={handlePageChange}/>
                 </Paper>
             </Box>
+            <UserInfoModal open={isInfoModalOpen} handleClose={handleCloseInfoModal} userInfo={orderInfo}/>
         </Box>
-
     );
 }
 
