@@ -9,11 +9,8 @@ import Paper from '@mui/material/Paper';
 import SelectBox from "../../common/SelectBox/SelectBox";
 import Button from "@mui/material/Button";
 import {formatDate} from "@utils/Format";
-import axios from "axios";
-import {adminApi} from "@api/Api";
 
 export default function OrderStatusTable({headers, rows, onChangeOrderStatusClick, confirmOrderInfo}) {
-    const token = sessionStorage.getItem('token');
 
     /* 선택된 select box 옵션 */
     const [selectedStatus, setSelectedStatus] = useState('결제 완료');
