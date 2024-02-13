@@ -8,6 +8,7 @@ import {Paper, Box, Pagination} from "@mui/material";
 import {indigo} from "@mui/material/colors";
 import axios from "axios";
 import {adminApi} from "@api/Api";
+import UserInfoModal from "@components/admin/Modal/UserInfoModal";
 
 const primary = indigo[50];
 const drawerWidth = 260;
@@ -18,7 +19,9 @@ function OrderStatus() {
     const [order, setOrder] = useState([]);
     const [selectedTab, setSelectedTab] = useState('결제 완료');
     const [menuList, setMenuList] = useState([]);
-    const tableHeader = ['주문번호', '상품번호', '브랜드', '상품', '옵션', '주문수량', '주문날짜', '배송상태 변경', ''];
+    const tableHeader = ['주문번호', '상품번호', '브랜드', '상품', '옵션', '주문수량', '주문날짜', '주문자 정보', '배송상태 변경', ''];
+    const [orderInfo, setOrderInfo] = useState([]);
+    const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
 
     /* 세션 스토리지에서 토큰 가져오기 */
     const token = sessionStorage.getItem('token');
@@ -105,6 +108,28 @@ function OrderStatus() {
         setOrderCurrentPage(0);
     };
 
+    /* 주문자 정보 확인 */
+    const confirmOrderInfo = async (orderId) => {
+        try {
+            const url = `${adminApi}/orders/${orderId}/delivery-address`
+            const response = await axios.get(url, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            console.log(response.data);
+            setOrderInfo(response.data.data);
+            console.log(orderInfo)
+            setIsInfoModalOpen(true);
+        } catch (error) {
+            console.error('API 호출 실패:', error);
+        }
+    }
+
+    const handleCloseInfoModal = () => {
+        setIsInfoModalOpen(false);
+    };
+
     return (
         <Box>
             <LeftNav/>
@@ -127,13 +152,13 @@ function OrderStatus() {
                     <TabMenu menu={menuList} selectedTab={selectedTab} onTabChange={handleTabChange} />
                     {order && order.orderList && order.orderList.content && (
                         <OrderStatusTable headers={tableHeader} rows={order.orderList.content}
-                                          onChangeOrderStatusClick={onChangeOrderStatusClick}/>
+                                          onChangeOrderStatusClick={onChangeOrderStatusClick} confirmOrderInfo={confirmOrderInfo}/>
                     )}
                     <Pagination count={orderTotalPages} page={orderCurrentPage} onChange={handleOrderPageChange} />
                 </Paper>
             </Box>
+            <UserInfoModal open={isInfoModalOpen} handleClose={handleCloseInfoModal} userInfo={orderInfo}/>
         </Box>
-
     );
 }
 
