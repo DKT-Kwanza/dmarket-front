@@ -18,8 +18,8 @@ DefaultMileageItem.args = {
     curMileage: 652120,
 }
 
-export const Secondary = Template.bind({});
-Secondary.args = {
+export const ChargeMileageItem = Template.bind({});
+ChargeMileageItem.args = {
     date: "2024.02.13",
     contents: "충전",
     addMileage: 484200,

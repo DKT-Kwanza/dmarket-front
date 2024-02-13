@@ -14,28 +14,6 @@
     background-color: #D9D9D9;
 }
 
-.main-div-buttonwrapper{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin: 20px 0;
-}
-
-.main-btn-text {
-    font-size: 14px;
-    margin: 0 6px;
-}
-
-.main-div-buttonwrapper > button{
-    border:none;
-    background-color: transparent;
-    font-size: 15px;
-    cursor: pointer;
-}
-.main-btn-movebtn{
-    color:#919191;
-    margin-top: 5px;
-}
 .main-div-newitem-wrapper{
     width: 1280px;
     display: flex;
