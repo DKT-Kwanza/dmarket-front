@@ -1,12 +1,12 @@
 import React from 'react';
-import { formatPrice } from '@utils/Format';
+import {formatPrice} from '../../../utils/Format';
 import './MileageHistoryItem.css'
 
-const MileageItem = ({ date, contents, addMileage, curMileage  }) => {
+const MileageItem = ({date, contents, addMileage, curMileage}) => {
     // +, -에 따른 색상 차이
     const mileageClass = addMileage < 0
-                     ? 'Mileage-contents-content-data-3-negative' 
-                     : 'Mileage-contents-content-data-3-positive';
+        ? 'Mileage-contents-content-data-3-negative'
+        : 'Mileage-contents-content-data-3-positive';
 
     return (
         <ul className='Mileage-contents-content-data-list'>
@@ -16,7 +16,7 @@ const MileageItem = ({ date, contents, addMileage, curMileage  }) => {
                 <div className={`Mileage-contents-content-data-3 ${mileageClass}`}>{formatPrice(addMileage)}</div>
                 <div className='Mileage-contents-content-data-4'>{formatPrice(curMileage)}</div>
             </li>
-            <hr className='Mileage-contents-content-data-list-hr' />
+            <hr className='Mileage-contents-content-data-list-hr'/>
         </ul>
     );
 };

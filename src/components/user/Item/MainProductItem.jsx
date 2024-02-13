@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import './MainProductItem.css'
-import {formatPrice} from "../../../utils/Format";
+import {formatPrice,truncate} from "../../../utils/Format";
 
 const ProductItem = ({ brand, productName, productImg, sales, discountRate, onClick }) => {
   return (
@@ -14,7 +14,7 @@ const ProductItem = ({ brand, productName, productImg, sales, discountRate, onCl
           <p className='main-p-product-brandname'>{brand}</p>
         </div>
         <div>
-          <p className='main-p-product-name'>{productName}</p>
+          <p className='main-p-product-name'>{truncate(productName, 50)}</p>
         </div>
         <div className='main-div-product-price-wrapper'>
           <p className='main-p-product-price'>{formatPrice(sales)}</p>

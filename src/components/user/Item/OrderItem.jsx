@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from "react";
-import {formatPrice} from '@utils/Format';
+import {formatPrice} from '../../../utils/Format';
 
 function OrderItem({
                        productImg,
@@ -13,7 +13,7 @@ function OrderItem({
                    }) {
     return (
         <Item>
-            <img src={productImg} className='productreview-img-review-content-img' alt="상품 이미지"/> {/* 상품 이미지 */}
+            <Img src={productImg} alt="상품 이미지"/> {/* 상품 이미지 */}
             <Info>
                 <tr>
                     <InfoTitle>브랜드</InfoTitle>
@@ -49,6 +49,11 @@ const Item = styled.div`
   flex-direction: row;
   margin: 10px 0;
   align-items: center;
+`
+
+const Img = styled.img`
+  width: 129px;
+  height: 129px;
 `
 
 const Info = styled.table`
