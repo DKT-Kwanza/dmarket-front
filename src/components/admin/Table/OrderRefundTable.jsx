@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import SelectBox from "../../commmon/SelectBox/SelectBox";
+import SelectBox from "../../common/SelectBox/SelectBox";
 
 export default function OrderRefundTable({ headers, rows, refundPercents, onApplyClick }) {
 

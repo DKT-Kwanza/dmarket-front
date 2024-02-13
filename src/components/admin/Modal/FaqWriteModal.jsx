@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Typography, Modal, TextField, Button } from '@mui/material';
-import SelectBox from "../../commmon/SelectBox/SelectBox";
+import SelectBox from "../../common/SelectBox/SelectBox";
 import axios from 'axios';
 import {adminApi} from "@api/Api";
 

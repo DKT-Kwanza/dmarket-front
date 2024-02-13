@@ -5,7 +5,7 @@ import MyPageSidebar from "@components/user/Sidebar/MyPageSidebar";
 import MyPageSubHeader from "@components/user/Header/MyPageSubHeader";
 import OrderList from "@components/user/List/OrderList";
 import OrderReviewList from "@components/user/List/OrderReviewList";
-import ConfirmCancelModal from "@components/commmon/Modal/ConfirmCancelModal";
+import ConfirmCancelModal from "@components/common/Modal/ConfirmCancelModal";
 import {Pagination} from "@mui/material";
 import axios from 'axios';
 import {productsApi, userApi} from "@api/Api";
