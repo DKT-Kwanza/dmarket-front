@@ -484,7 +484,7 @@ function Detail() {
                                     <>
                                         <div style={{marginTop: '2px'}}>{product.optionList[0].optionName}</div>
                                         <select className='detail-options' name="options" onChange={handleSelect}>
-                                            <option value="" disabled hidden>옵션을 선택하세요.</option>
+                                            <option value="" hidden>옵션을 선택하세요.</option>
                                             {product.optionList && product.optionList.map((option, index) => (
                                                 <option key={index} value={option.optionValue}
                                                         data-id={option.optionId}
