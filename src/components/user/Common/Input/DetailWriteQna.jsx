@@ -26,14 +26,14 @@ function DetailWriteQna({onClick}) {
     return (
         <Area>
             <Title>
-                <text>제목</text>
+                <div>제목</div>
                 <TitleInput type="text" name="title" placeholder="제목을 입력해주세요." value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             required></TitleInput>
             </Title>
             <Content>
                 <ContentTitle>
-                    <text>내용</text>
+                    <div>내용</div>
                 </ContentTitle>
                 <ContentInput type="text" name="contents" value={contents} placeholder="내용을 입력해주세요."
                               onChange={(e) => setContents(e.target.value)}
@@ -62,11 +62,12 @@ function DetailWriteQna({onClick}) {
 }
 
 const Area = styled.div`
-  height: 324px;
+  height: 300px;
   border-bottom: 1px solid #c4c4c4;
 `;
 
 const Title = styled.div`
+  display: flex;
   margin-top: 26px;
   height: 30px;
   font-size: 15px;
@@ -75,13 +76,14 @@ const Title = styled.div`
 `;
 
 const TitleInput = styled.input`
-  margin-left: 38px;
+  margin-left: 20px;
   padding-left: 25px;
-  width: 950px;
+  flex: 1;
   height: 36px;
   font-size: 15px;
   border: 1px solid #C6C6C6;
   border-radius: 0;
+  outline: none;
 `;
 
 const Content = styled.div`
@@ -94,24 +96,25 @@ const Content = styled.div`
 `;
 
 const ContentTitle = styled.div`
-  width: 28px;
   height: 22px;
   padding-top: 5px;
 `;
 
 const ContentInput = styled.textarea`
-  margin-left: 37px;
+  margin-left: 20px;
   font-size: 15px;
   padding-left: 25px;
   padding-top: 5px;
-  width: 950px;
+  flex: 1;
   height: 110px;
   border: 1px solid #C6C6C6;
   border-radius: 0;
+  outline: none;
 `;
 
 const SecretState = styled.div`
   display: flex;
+  justify-content: right;
   margin-top: 25px;
   height: 26px;
   font-size: 15px;
@@ -119,7 +122,6 @@ const SecretState = styled.div`
 `;
 
 const Secret = styled.div`
-  margin-left: 800px;
   font-weight: 500;
 `;
 
@@ -139,8 +141,8 @@ const Private = styled.label`
 `;
 
 const EnrollBtn = styled.button`
-  margin-left: 963px;
-  margin-top: 43px;
+  float: inline-end;
+  margin-top: 16px;
   border: none;
   border-radius: 5px;
   width: 97px;
