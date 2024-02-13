@@ -61,7 +61,7 @@ const Title = styled.div`
 
 const Writer = styled.div`
   margin-top: 18px;
-  margin-left: 500px;
+  margin-left: 450px;
 `;
 
 const Date = styled.div`

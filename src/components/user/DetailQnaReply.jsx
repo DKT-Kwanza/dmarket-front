@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { formatDate } from '@utils/Format';
+import { formatDate } from '../../utils/Format';
 
 function DetailQnaReply({onClose, content, qnaReplyContent, replyAt}) {
 
@@ -68,12 +68,13 @@ const ReplyDate = styled.div`
 `;
 
 const ConfirmBtn = styled.div`
-  margin-left: 880px;
+  margin-left: auto;
+  margin-right: 10px;
   border: none;
   border-radius: 5px;
   text-align: center;
   padding: 12px 0;
-  width: 160px;
+  width: 100px;
   font-size: 16px;
   font-weight: 500;
   color: #444444;
