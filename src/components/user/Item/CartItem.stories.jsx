@@ -5,7 +5,99 @@ export default {
     title: "Item/CartItem",
     component: CartItem,
     tags: ["autodocs"],
-    argTypes: {},
+    parameters: {
+        componentSubtitle:
+          '사용자 UI에서 사용하는 장바구니 상품 아이템 컴포넌트',
+        docs: { 
+          description: {
+            component:
+              `장바구니 화면에서 카트에 표시되는 개별 상품을 나타내는 컴포넌트입니다.`,
+          },
+        },
+    },
+    argTypes: {
+        cartId: {
+            description: "카트 아이템의 고유 식별 아이디 입니다.",
+            control: {
+                type: "number",
+            },
+            table: {
+                type: { summary: 'number' },
+            },
+        },
+        optionId: {
+            description: "카트 아이템의 선택 옵션 식별 아이디 입니다.",
+            control: {
+                type: "number",
+            },
+            table: {
+                type: { summary: 'number' },
+            },
+        },
+        brand: {
+            description: "상품 브랜드 이름입니다.",
+            control: {
+                type: "text",
+            },
+            table: {
+                type: { summary: 'string' },
+            },
+        },
+        quantity: {
+            description: "상품 수량입니다.",
+            control: {
+                type: "number",
+            },
+            table: {
+                type: { summary: 'number' },
+            },
+        },
+        productId: {
+            description: "상품 식별자입니다.",
+            control: {
+                type: "number",
+            },
+            table: {
+                type: { summary: 'number' },
+            },
+        },
+        productImg: {
+            description: "상품 이미지 URL입니다.",
+            control: {
+                type: "string",
+            },
+            table: {
+                type: { summary: 'string' },
+            },
+        },
+        productName: {
+            description: "상품 이름입니다.",
+            control: {
+                type: "text",
+            },
+            table: {
+                type: { summary: 'string' },
+            },
+        },
+        option: {
+            description: "선택된 옵션 정보입니다.",
+            control: {
+                type: "text",
+            },
+            table: {
+                type: { summary: 'string' },
+            },
+        },
+        price: {
+            description: "상품 가격입니다.",
+            control: {
+                type: "number",
+            },
+            table: {
+                type: { summary: 'number' },
+            },
+        },
+    },
 }
 
 const Template = (args) => <CartItem {...args} />;
