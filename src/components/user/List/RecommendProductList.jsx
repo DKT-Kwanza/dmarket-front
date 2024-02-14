@@ -21,7 +21,9 @@ function RecommendProductList({recommendProducts}) {
                                      imgSrc={value.productImg}
                                      sales={value.productSalePrice}
                                      ratingAvg={value.productRatingAvg}
-                                     reviewCnt={value.productReviewCount}/>
+                                     reviewCnt={value.productReviewCount}
+                                     discountRate={value.productDiscountRate}
+                                     />
                 ))
             }
         </Area>
