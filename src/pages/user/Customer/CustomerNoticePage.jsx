@@ -34,7 +34,6 @@ function CustomerCenterNotice() {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                console.log(response.data.data);
                 setCustomerCenterNotices(response.data.data.content);
                 setTotalPages(response.data.data.totalPages);
             } catch (e) {

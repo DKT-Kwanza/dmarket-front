@@ -586,9 +586,13 @@ function Detail() {
                     </button>
                 </div>
                 <DetailQnaList qnas={qna.content || []}/>
+
+                <div className='qna-layout'>
                 {
                     isExpanded && <DetailWriteQna onClick={handleWriteQna}/>
                 }
+                </div>
+
                 <Pagination count={qnaTotalPages} page={qnaCurrentPage} onChange={handleQnaPageChange}/>
 
                 <div className='recommandTitle'>
