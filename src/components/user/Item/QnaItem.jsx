@@ -11,7 +11,7 @@ const QnaItem = ({ productName, title, contents, createdAt, isSecret, status, re
                 <div className='Qna-contents-content-data-1'>{truncate(productName, 20)}</div>
                 <div className='Qna-contents-content-data-2'>
                     {title}
-                    {!isSecret && <CiLock style={{ marginLeft: "5px" }} size={20} />}
+                    {isSecret && <CiLock style={{ marginLeft: "5px" }} size={20} />}
                 </div>
                 <div className='Qna-contents-content-data-3'>{createdAt}</div>
                 <div className={`Qna-contents-content-data-${status === '답변 완료' ? '6' : '5'}`}>{status}</div>

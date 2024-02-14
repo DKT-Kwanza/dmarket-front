@@ -2,19 +2,23 @@ import styled from "styled-components";
 import theme from "../../../styles/commonStyles"
 import React from "react";
 import { formatDate } from "../../../utils/Format";
+import { CiLock } from "react-icons/ci";
 
-function DetailQnaListItem({onClick, title, createdAt, status, writer}) {
-  
+function DetailQnaListItem({onClick, title, qnaIsSecret, createdAt, status, writer}) {
+
     return (
         <QnaArea onClick={onClick}>
-            <Title className='qnaTitleTest'>{title}</Title>
+            <Title className='qnaTitleTest'>
+              {title}
+              {qnaIsSecret && (
+                <CiLock fontSize="large" />
+              )}
+            </Title>
             <Writer>{writer}</Writer>
             <Date>{formatDate(createdAt)}</Date>
-            {
-                !status
-                    ? <State status={'답변 대기'}>답변 대기</State>
-                    : <State status={'답변 완료'}>답변 완료</State>
-            }
+            <State status={status}>
+              {status}
+            </State>
         </QnaArea>
     );
 }
@@ -33,6 +37,8 @@ const Title = styled.div`
   font-size: 14px;
   font-weight: 400;
   width: 477px;
+  display: flex;
+  align-items: center;
 `;
 
 const Writer = styled.div`
