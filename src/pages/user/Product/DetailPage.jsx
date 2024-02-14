@@ -126,6 +126,7 @@ function Detail() {
                 });
                 setQna(response.data.data);
                 setQnaTotalPages(response.data.data.totalPages);
+                console.log(response.data)
             } catch (e) {
                 console.error("Error fetching QNA data: ", e);
             }
@@ -145,7 +146,6 @@ function Detail() {
                     }
                 });
                 setRecommendProducts(response.data.data);
-                console.log(response.data.data)
             } catch (e) {
                 console.error("Error fetching data: ", e);
             }

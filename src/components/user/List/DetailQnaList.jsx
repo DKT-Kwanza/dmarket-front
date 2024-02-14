@@ -30,7 +30,7 @@ function DetailQnaList({qnas}) {
             {
                 qnas.map((data, index) => (
                     <div key={index}>
-                        <DetailQnaListItem onClick={() => qnaClickHandler(index)} title={data.qnaTitle}
+                        <DetailQnaListItem onClick={() => qnaClickHandler(index)} title={data.qnaTitle} qnaIsSecret={data.qnaIsSecret}
                                            createdAt={data.qnaCreatedDate} status={data.qnaStatus} writer={data.qnaWriter} />
                         {openReplyIndexes.includes(index) &&
                             <DetailQnaReply onClose={() => qnaClickHandler(index)} content={data.qnaContents}
