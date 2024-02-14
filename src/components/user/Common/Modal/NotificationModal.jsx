@@ -15,7 +15,7 @@ const NotificationModal = ({ notifications, setNotifications, onClose, setUnread
     // 전체 삭제 눌렀을 때
     const handleDeleteAll = async() => {
         if (token && userId) {
-            axios.get(`${notifyApi}/${userId}/notifications`, {
+            axios.delete(`${notifyApi}/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
@@ -33,7 +33,7 @@ const NotificationModal = ({ notifications, setNotifications, onClose, setUnread
     // 전체 읽음 버튼 눌렀을 때
     const handleReadeAll = async() => {
         if (token && userId) {
-            axios.put(`${notifyApi}/${userId}/notifications`, {}, {
+            axios.put(`${notifyApi}/${userId}`, {}, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
