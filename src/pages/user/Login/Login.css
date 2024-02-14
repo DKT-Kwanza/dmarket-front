@@ -12,7 +12,6 @@
   
 .login-box {
   width: 518px;
-  height: 700px;
   margin: auto;
   background: white;
   position: relative;
@@ -140,6 +139,10 @@
   line-height: normal;
   cursor: pointer;
   margin-bottom: 40px;
+}
+
+.login-btn:hover {
+  background: #ffb84a;
 }
   
 .login-signup {

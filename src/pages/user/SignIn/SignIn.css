@@ -189,22 +189,19 @@
   width: 100%;
   height: 56px;
   border-radius: 5px;
-  background: #FFD465;
+  background-color: #FFD465;
   border: none;
   color: #363A3C;
   font-size: 18px;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
   cursor: pointer;
   margin-bottom: 40px;
-  text-decoration: none;
 }
 
 .signIn-btn2:hover,
 .signIn-btn2:focus,
 .signIn-btn2:active {
-  text-decoration: none;
+  background-color: #ffb84a;
 }
 
 .signIn-info{

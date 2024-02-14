@@ -78,7 +78,7 @@ function ProductPage() {
     return (
         <div className="productList-body">
             <div className="productList-filter">
-                <div className='productList-category'>{category1depthName} <FaAngleRight/> {category2depthName}</div>
+                <div className='productList-category'>{category1depthName} <FaAngleRight color='#878d91' style={{marginTop: '2px'}} /> {category2depthName}</div>
                 <div className='productList-title'>{category2depthName}</div>
                 <div className='productList-title-bar'></div>
                 <Filter setMinPrice={setMinPrice} setMaxPrice={setMaxPrice} setStar={setStar} setSorter={setSorter}/>

@@ -43,7 +43,6 @@ export default function PaymentInfo({ userName, totalPrice, discount, totalPay, 
 
             if (response.data.code === 200) {
                 alert("주문이 완료되었습니다!");
-                console.log(response.data)
                 navigate('../order/complete', { state: { orderData: response.data.data, orderCompleteData } });
             } else {
             }

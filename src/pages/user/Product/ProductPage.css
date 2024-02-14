@@ -5,10 +5,9 @@
 }
 
 .productList-category {
-    font-size: 20px;
+    font-size: 16px;
     display: flex;
     align-items: center;
-    font-weight: 700;
     margin: 10px;
 }
 

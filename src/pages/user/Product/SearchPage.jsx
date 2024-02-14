@@ -35,7 +35,6 @@ function SearchPage() {
                 });
                 setProducts(response.data.data.content);
                 setTotalPages(response.data.data.totalPages);
-                console.log(response.data)
             } catch (e) {
                 console.error(e);
             }
@@ -50,12 +49,14 @@ function SearchPage() {
         setCurrentPage(currentPage);
     
     }, [location.search]);
-    
 
     const handlePageChange = (event, value) => {
         navigate(`?q=${query}&page=${value}`);
     };
-    
+
+    const navigateToProductDetail = ({productId}) => {
+        navigate(`/product/detail/${productId}`);
+    }
 
     return (
         <div className="searchList-body">
@@ -76,6 +77,9 @@ function SearchPage() {
                         ratingAvg={item.productRating}
                         reviewCnt={item.productReviewCount}
                         discountRate={item.productDiscountRate}
+                        onClick={() => {
+                            navigateToProductDetail({productId: item.productId})
+                        }}
                     />
                 ))}
             </div>

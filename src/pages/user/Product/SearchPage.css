@@ -11,7 +11,7 @@
 .searchList-title {
     font-size: 24px;
     font-weight: 500;
-    margin: 5px auto;
+    margin: 10px auto;
     text-align: center;
 }
 
@@ -19,11 +19,11 @@
     background: #000;
     height: 2px;    
 }
-/* 
-.searchList-filter-container {
-    padding: 0 70px;
-}
 
+.searchList-filter {
+    margin-top: 30px;
+}
+/*
 .searchList-price-container {
     display: flex;
     margin-top: 24px;

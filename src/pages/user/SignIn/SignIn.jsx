@@ -76,11 +76,6 @@ function SignIn() {
             console.error('Code verification error:', error);
         }
     };
-    
-
-    const navigateToSignForm = () => {
-        navigate("../signinForm");
-    }
 
     return (
         <div className="signIn-container">

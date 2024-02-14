@@ -10,11 +10,8 @@ export default function CartOrderInfo({ itemCount, selectedItemsDetails, totalPr
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('userId');
 
-    console.log(selectedItemsDetails)
-
      /* 주문 */
     const handleCheckout = async () => {
-        console.log(selectedItemsDetails)
         if (!selectedItemsDetails || selectedItemsDetails.length === 0) {
             alert("주문할 상품을 선택해주세요!");
             return;
@@ -32,16 +29,12 @@ export default function CartOrderInfo({ itemCount, selectedItemsDetails, totalPr
         };
 
         try {
-            console.log(purchaseData)
             const response = await axios.post(`${orderApi}/products`, purchaseData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
             });
-
-            console.log(response.data)
-
             navigate('/order', { state: { orderData: response.data } });
         } catch (error) {
             console.error(error);

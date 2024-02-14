@@ -4,17 +4,20 @@
   padding-bottom: 200px;
 }
 
+.CustomerCenterInquiry-body {
+  margin-top: 40px;
+}
+
 .CustomerCenterName{
   color: #000;
   font-size: 40px;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
+  margin-bottom: 6px;
 }
 
 .notice-bar {
   width: 1280px;
-  height: 5px;
+  height: 3px;
   background-color: #000000;
 }
 
@@ -26,14 +29,13 @@
   margin-top: 65px;
   margin-bottom: 65px;
   color: #000;
-  font-family: Noto Sans KR;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   padding-left: 180px;
   display: flex;
-  margin-left: 3;
+  margin-left: 3px;
 }
 
 .notice-required-item-title{
