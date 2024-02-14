@@ -44,7 +44,7 @@ function MemberList() {
     };
 
     const navigateToRegister = () => {
-        navigate('../addUser');
+        navigate('../memberMng/addUser');
     }
 
     return (

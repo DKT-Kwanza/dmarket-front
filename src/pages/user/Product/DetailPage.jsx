@@ -126,6 +126,7 @@ function Detail() {
                 });
                 setQna(response.data.data);
                 setQnaTotalPages(response.data.data.totalPages);
+                console.log(response.data)
             } catch (e) {
                 console.error("Error fetching QNA data: ", e);
             }
@@ -530,7 +531,7 @@ function Detail() {
                     </li>
                     <li className='qnaButton'><a href="#qnaButtonScroll">상품 Q&A({qna.totalElements})</a></li>
                     <li className='recommandButton'><a href="#recommandButtonScroll">추천 상품</a></li>
-                    <li className='returnInfoButton'><a href="#scroll5">배송/반품/교환 안내</a></li>
+                    <li className='returnInfoButton'><a href="#deliveryTitleScroll">배송/반품/교환 안내</a></li>
                 </ul>
                 <hr style={{marginTop: '5px', borderWidth: '2px'}}/>
                 <div className='productDetailBox'>

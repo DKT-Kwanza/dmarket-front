@@ -18,7 +18,7 @@ function RecommendProductList({recommendProducts}) {
                                      onClick={() => navigateToProductDetail(value.productId)}
                                      brand={value.productBrand}
                                      productName={value.productName}
-                                     productImg={value.productImg}
+                                     imgSrc={value.productImg}
                                      sales={value.productSalePrice}
                                      ratingAvg={value.productRatingAvg}
                                      reviewCnt={value.productReviewCount}/>
