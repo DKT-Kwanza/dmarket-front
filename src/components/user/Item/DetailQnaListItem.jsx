@@ -2,7 +2,7 @@ import styled from "styled-components";
 import theme from "../../../styles/commonStyles"
 import React from "react";
 import { formatDate } from "../../../utils/Format";
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { CiLock } from "react-icons/ci";
 
 function DetailQnaListItem({onClick, title, qnaIsSecret, createdAt, status, writer}) {
 
@@ -11,7 +11,7 @@ function DetailQnaListItem({onClick, title, qnaIsSecret, createdAt, status, writ
             <Title className='qnaTitleTest'>
               {title}
               {qnaIsSecret && (
-                <LockOutlinedIcon fontSize="small" sx={{ ml: 0.5 }} />
+                <CiLock fontSize="large" />
               )}
             </Title>
             <Writer>{writer}</Writer>
