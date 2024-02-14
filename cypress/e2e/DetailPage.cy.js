@@ -31,6 +31,7 @@ describe('상품 상세 페이지 테스트', () => {
         cy.get('.subTitle').should('exist');
         cy.get('.price').should('exist');
         cy.get('.productDetail').should('exist');
+        // cy.get('.productDetailBox').should('exist');
     });
 
     it('이미지 갤러리 작동 확인', () => {
