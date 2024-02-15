@@ -1,0 +1,26 @@
+[
+  {
+    "productId": 452,
+    "orderId": 2,
+    "productName" : "에스쁘아 파운데이션",
+    "productBrand" : "에스쁘아",
+    "optionValue" : "21호/바닐라",
+    "productImg": "https://amazonaws.com/image.png",
+    "optionName": "사이즈",
+    "orderDate": "2024-01-09 09:48:00",
+    "productCount" : 1,
+    "orderStatus": "취소 완료"
+  },
+  {
+    "productId": 452,
+    "orderId": 2,
+    "productName" : "바비브라운 파운데이션",
+    "productBrand" : "바비브라운",
+    "optionValue" : "21호/바닐라",
+    "productImg": "https://amazonaws.com/image.png",
+    "optionName": "사이즈",
+    "orderDate": "2024-01-09 09:48:00",
+    "productCount" : 1,
+    "orderStatus": "취소 완료"
+  }
+]

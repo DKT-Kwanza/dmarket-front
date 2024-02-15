@@ -1,0 +1,11 @@
+.ScrollToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #FFD465;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 18px;
+}

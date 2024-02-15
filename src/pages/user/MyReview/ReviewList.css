@@ -1,0 +1,129 @@
+.productreview-div-global-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 200px;
+}
+.productreview-div-sidebar{
+    width: 220px;
+    height: 500px;
+    border-radius: 20px;
+    border: 2px #e1e4e6 solid;
+    margin: 53px 20px 0 0;
+}
+.productreview-div-review-wrapper{
+    width: 1040px;
+    margin-left: 22px;
+}
+.productreview-div-subheader-container {
+    width: 1920px;
+    height: 240px;
+    background-color: #FFE39A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.productreview-div-review-container{
+    display:flex;
+    margin-top: 40px;
+}
+
+.productreview-div-review-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.productreview-title-bar {
+    width: 5px;
+    height: 34px;
+    background-color: #000000;
+}
+
+.productreview-title-content {
+    padding-left: 15px;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.productreview-hr-line{
+    height: 2px;
+    background-color: #000;
+    border:none;
+    margin-top: 16px;
+}
+
+.productreview-div-review-togglewrapper{
+    display: flex;
+    font-size: 16px;
+    gap: 20px;
+}
+.productreview-btn-review-togglebtn{
+    border:none;
+    background-color: transparent;
+    color: #A9AFB3;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+
+}
+.productreview-btn-review-togglebtn-active{
+    border:none;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #000;
+
+}
+
+.productreview-hr-line2{
+    height: 1px;
+    background-color: #919191;
+    border:none;
+}
+
+.productreview-hr-line3{
+    height: 2px;
+    background-color: #DBDBDB;
+    border:none;
+}
+
+.productreview-PiStarLight-star-lg{
+    color: #FFD465;
+}
+
+.productreview-div-review-content-text2-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 750px;
+}
+.productreview-div-reveiw-star-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.productreview-p-review-star-num{
+    color: #000;
+    font-size: 20px;
+    font-weight: 400;
+    margin:0;
+}
+.productreview-div-review-star{
+    display: flex;
+    align-items: center;
+}
+
+.productreview-div-review-created-review{
+    color: #000;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.productreview-div-reviewed-item-wrapper{
+    display: flex;
+    flex-direction: row;
+    margin: 30px 0;
+    gap: 32px;
+}

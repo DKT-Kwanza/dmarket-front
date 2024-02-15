@@ -1,0 +1,108 @@
+.CustomerCenterNotice{
+  width: 1280px;
+  margin: 0 auto;
+  padding-bottom: 200px;
+}
+
+.CustomerCenterNotice-body {
+  margin-top: 40px;
+}
+
+.CustomerCenterName{
+  color: #000;
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.notice-bar {
+  width: 1280px;
+  height: 3px;
+  background-color: #000000;
+}
+
+.notice-submenu{
+  display: flex;
+  margin-top: 8px;
+}
+
+.notice-submenu-content-left{
+  color: #A9AFB3;
+  font-size: 16px;
+  margin-right: 20px;
+  border:none;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+.notice-submenu-content-mid{
+  color: #A9AFB3;
+  font-size: 16px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border:none;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+.notice-submenu-content-right{
+  color: #A9AFB3;
+  font-size: 16px;
+  margin-left: 20px;
+  border:none;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.submenu-line{
+  width: 1px;
+  height: 16px;
+  background: #DBDBDB;
+}
+
+.Center-notice-body{
+  margin-top: 63px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.Center-notice{
+  color: #000;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.Operating-time{
+  color: #919191;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.notice-main-body{
+  margin-top: 20px;
+}
+
+.notice-main{
+  width: 1280px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #FFD465;
+}
+
+.notice-main-text{
+  width: 179px;
+  height: 40px;
+  flex-shrink: 0;
+  color: #363A3C;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 550px;
+}
+
+.notice-main-menu{
+  width: 1280px;
+  margin-bottom: 20px;
+}

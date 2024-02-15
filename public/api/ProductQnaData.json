@@ -1,0 +1,38 @@
+{
+  "qnaCount": 3,
+  "qnaList" : [
+    {
+      "qnaId": "10",
+      "qnaIsSecret": true,
+      "qnaWriter": "홍**",
+      "qnaTitle": "정사이즈로 나온 건가요?",
+      "qnaContents" : "사이즈가 정사이즈로 나온 건지 궁금합니다",
+      "qnaCreatedDate": "2024-01-12 09:00:00",
+      "qnaStatus": "답변 완료",
+      "qnaReplyDate":"2024-01-12 09:00:00",
+      "qnaReplyContents":"사이즈표를 참조해주세요"
+    },
+    {
+      "qnaId": "11",
+      "qnaIsSecret": true,
+      "qnaWriter": "홍**",
+      "qnaTitle": "포인트 충전 어떻게 하나요?",
+      "qnaContents" : "포인트 충전 방법 좀 알려주세요.",
+      "qnaCreatedDate": "2024-01-12 09:00:00",
+      "qnaStatus": "답변 대기",
+      "qnaReplyDate": null,
+      "qnaReplyContents": null
+    },
+    {
+      "qnaId": "12",
+      "qnaIsSecret": true,
+      "qnaWriter": "홍**",
+      "qnaTitle": "반품신청 했는데 언제 환불 되나요?",
+      "qnaContents" : "환불 되는 날짜 알려주세요.",
+      "qnaCreatedDate": "2024-01-12 09:00:00",
+      "qnaStatus": "답변 대기",
+      "qnaReplyDate": null,
+      "qnaReplyContents": null
+    }
+  ]
+}

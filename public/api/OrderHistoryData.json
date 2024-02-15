@@ -1,0 +1,66 @@
+{
+    "confPayCount": 1,
+    "preShipCount":0,
+    "inTransitCount": 0,
+    "cmpltDilCount" :1,
+    "orderCancelCount": 1,
+    "returnCount": 0,
+    "orderList": [
+        {
+            "orderId": "12",
+            "orderDate": "2024-01-11 20:20:00",
+            "orderDetailList": [
+                {
+                    "detailId": "42",
+                    "productId": "32",
+                    "productBrand": "바비브라운",
+                    "productName": "바비브라운 파운데이션",
+                    "productImg": "https://amazonaws.com/image.png",
+                    "productOption": "21호",
+                    "productCount": 3,
+                    "productTotalSalePrice": 23000,
+                    "productStatus": "배송 준비 중"
+                },
+                {
+                    "detailId": "43",
+                    "productId": "38",
+                    "productBrand": "에스쁘아",
+                    "productName": "에스쁘아 파운데이션",
+                    "productImg": "https://amazonaws.com/image.png",
+                    "productOption": "21호",
+                    "productCount": 3,
+                    "productTotalSalePrice": 23000,
+                    "productStatus": "결제확인"
+                },
+                {
+                    "detailId": "48",
+                    "productId": "65",
+                    "productBrand": "아이폰 13",
+                    "productName": "아이폰 13 mini",
+                    "productImg": "https://amazonaws.com/image.png",
+                    "productOption": "pink",
+                    "productCount": 1,
+                    "productTotalSalePrice": 23000,
+                    "productStatus": "배송완료"
+                }
+            ]
+        },
+        {
+            "orderId": "13",
+            "orderDate": "2024-01-11 20:20:00",
+            "orderDetailList": [
+                {
+                    "detailId": "85",
+                    "productId": "32",
+                    "productBrand": "바비브라운",
+                    "productName": "바비브라운 파운데이션",
+                    "productImg": "https://amazonaws.com/image.png",
+                    "productOption": "21호",
+                    "productCount": 3,
+                    "productTotalSalePrice": 23000,
+                    "productStatus": "주문취소"
+                }
+            ]
+        }
+    ]
+}

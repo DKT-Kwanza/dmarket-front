@@ -1,0 +1,80 @@
+.myPage-subHeader {
+    width: 100%;
+    height: 200px;
+    background-color: #FFE39A;
+    padding-top: 40px;
+}
+
+.myPage-subHeader-wrapper {
+    width: 1280px;
+    height: 160px;
+    display: flex;
+    margin: 0 auto;
+}
+
+.myPage-subHeader-wrapper-userInfo {
+    width: 572px;
+    height: 160px;
+    background-color: white;
+    margin-right: 7px;
+    text-align: left;
+}
+
+.myPage-subHeader-wrapper-userInfo-name {
+    margin-top: 38px;
+    margin-left: 23px;
+    font-size: 30px;
+}
+
+.myPage-subHeader-wrapper-userInfo-date {
+    margin-top: 20px;
+    margin-left: 26px;
+    font-size: 18px;
+}
+
+.myPage-subHeader-wrapper-mileage {
+    width: 271px;
+    height: 160px;
+    background-color: white;
+    margin-right: 8px;
+    text-align: left;
+    font-size: 24px;
+}
+
+.myPage-subHeader-wrapper-mileage-title {
+    margin-top: 19px;
+    margin-left: 21px;
+}
+
+.myPage-subHeader-wrapper-mileage-content {
+    margin-top: 57px;
+    text-align: right;
+    margin-right: 20px;
+}
+
+.myPage-subHeader-box {
+    width: 422px;
+}
+
+.myPage-subHeader-button {
+    width: 422px;
+    height: 76px;
+    margin-right: 4px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+    background-color: white;
+    text-align: left;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    padding-left: 24px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+
+.myPage-subHeader-button-right {
+    height: 28px;
+    margin-right: 28px;
+}

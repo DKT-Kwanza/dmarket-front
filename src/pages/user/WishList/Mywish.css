@@ -1,0 +1,55 @@
+.wishList-body {
+    width: 1100px;
+    margin: 0 auto;
+    padding: 30px 70px 200px 70px;
+}
+
+.wishList-title {
+    height: 90px;
+}
+
+.wishList-title-content {
+    color: #000;
+    text-align: center;
+    font-size: 36px;
+}
+
+.wishList-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wishList-checkbox {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.wishList-count {
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: auto;
+}
+
+.wishList-delete-button {
+    width: 70px;
+    height: 29px;
+    border: 0px;
+    border-radius: 5px;
+    background-color: #FF4248;
+    color: #FFF;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.wishList-bar {
+    height: 2px;
+    margin: 8px 0;
+    background: #DBDBDB;
+}
+
+.wishList-item-list {
+    margin-top: 46px;
+}

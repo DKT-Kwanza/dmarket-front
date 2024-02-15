@@ -1,0 +1,552 @@
+#container1 {
+	width: 1280px;
+	margin: 0 auto;
+}
+
+#container2 {
+	width: 1060px;
+	margin: 0 auto;
+}
+
+.category {
+    padding-top: 50px;
+    padding-bottom: 10px;
+    font-size: 16px;
+}
+
+.productArea {
+    display: flex;
+}
+
+.detail-repImg {
+    width: 550px;
+    height: 550px;
+    background-color: #D9D9D9;
+}
+
+.detail-repImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detail-subImgArea {
+    width: 110px;
+    height: 550px;
+}
+.detail-subImg {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+    margin-bottom: 13px;
+    background-color: #D9D9D9;
+}
+
+.detailArea {
+    width: 577px;
+    margin-left: 43px;
+}
+.title {
+    width: 577px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.subTitle {
+    margin-top: 8px;
+    font-size: 25px;
+    font-weight: 400;
+}
+.rating {
+    font-size: 20px;
+    margin-top: 8px;
+    font-weight: 400;
+    display: flex;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    font-size: 32px;
+    height: 52px;
+    margin-top: 6px;
+    font-weight: bold;
+}
+.discount{
+    font-size: 30px;
+    color: #ff5d5d;
+}
+.releasePrice {
+    font-size: 16px;
+    height: 23px;
+    margin-top: 7px;
+    font-weight: 400;
+    color: #767676;
+}
+
+.deliveryInfo {
+    display: flex;
+    font-size: 16px;
+    height: 50px;
+    margin-top: 12px;
+    font-weight: 400;
+}
+
+.transportation {
+    margin-left: 63px;
+    font-weight: 700;
+}
+
+.deliveryFee {
+    display: flex;
+    font-size: 16px;
+    height: 23px;
+    margin-top: 6px;
+    font-weight: 400;
+}
+
+.detail-option-select {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    height: 30px;
+    margin: 35px 0;
+    font-weight: 400;
+}
+
+.detail-options {
+    height: 30px;
+    width: 453px;
+}
+
+.totalCost {
+    display: flex;
+    margin-top: 18px;
+    justify-content: space-between;
+}
+.total {
+    margin-left: 320px;
+    margin-top: 13px;
+    font-size: 20px;
+    height: 35px;
+    font-weight: 400;
+}
+
+.cost {
+    margin-left: 13px;
+    font-size: 36px;
+    height: 52px;
+    font-weight: 700;
+    color : #ED1C14;
+}
+
+.purchaseArea {
+    display: flex;
+    margin-top: 15px;
+    margin-left: 702px;
+    height: 58px;
+}
+
+.wishlistButton {
+    width: 55px;
+    height: 58px;
+    font-size: 24px;
+    padding-top: 7px;
+    font-weight: 700;
+    border: 2px solid #c4c4c4;
+    border-right: none;
+    border-radius: 0;
+    cursor: pointer;
+    background-color: #FFFFFF;
+}
+
+.cartButton {
+    width: 250px;
+    height: 58px;
+    font-size: 24px;
+    font-weight: 500;
+    border: 2px solid #c4c4c4;
+    border-radius: 0;
+    cursor: pointer;
+    background-color: #FFFFFF;
+}
+
+.purchaseButton {
+    width:277px;
+    height: 58px;
+    font-size: 24px;
+    font-weight: 500;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    background-color: #FFD465;
+}
+
+.buttonArea {
+    display: flex;
+    margin-top: 171px;
+    height: 29px;
+}
+
+.buttonArea button {
+    font-size: 20px;
+    font-weight: 700;
+    color: #919191;
+    border-radius: 0;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+.buttonArea li:hover,
+.buttonArea li:active {
+    color: #000000;
+    font-weight: 600;
+}
+
+.productDetailButton {
+    width: 191px;
+    height: 29px;
+    border: none;
+    border-right: 2px solid #cfcfcf;
+    text-align: center;
+}
+
+.reviewButton {
+    width: 187px;
+    height: 29px;
+    border: none;
+    border-right: 2px solid #cfcfcf;
+    text-align: center;
+}
+
+.qnaButton {
+    width: 196px;
+    height: 29px;
+    border: none;
+    border-right: 2px solid #cfcfcf;
+    text-align: center;
+}
+
+.recommandButton {
+    width: 169px;
+    height: 29px;
+    border: none;
+    border-right: 2px solid #cfcfcf;
+    text-align: center;
+}
+
+.returnInfoButton {
+    width: 262px;
+    height: 29px;
+    border: none;
+    text-align: center;
+}
+
+ul, ol, li {list-style-type: none;}
+a {color: #333; text-decoration: none;}
+
+.list {position: relative; height: 50px; margin-bottom: 50px;}
+.list li {display: inline-block; padding: 0 20px;}
+.listbox {margin: 0 auto; text-align: center;}
+
+.productDetailButtonScroll, .reviewButtonScroll, .qnaButtonScroll, .recommandButtonscroll, .deliveryTitleScroll {width: 100%; margin-bottom: 20px;}
+
+.productNum {
+    height: 63px;
+    margin-top: 18px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.productDetail {
+    height: 46px;
+    margin-top: 80px;
+    font-size: 32px;
+    font-weight: 500;
+}
+.productDetailImg {
+    margin-top: 19px;
+}
+
+.productDetailBox {
+    text-align: center;
+}
+
+.reviewTitle {
+    margin-top: 58px;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.ratingBox {
+    display: flex;
+    margin-top: 17px;
+    height: 132px;
+    border: 1px solid #000000;
+}
+
+.ratingNum {
+    margin-top: 20px;
+    margin-left: 397px;
+    font-size: 64px;
+    font-weight: 500;
+}
+
+.ratingStar{
+    margin-top: 39px;
+    margin-left: 33px;
+    font-size: 24px;
+    font-weight: 400;
+    width: 120px;
+    height: 66px;
+    text-align: center;
+}
+
+.reviewAnnounce {
+    margin-top: 8px;
+    margin-left: 176px;
+    font-size: 16px;
+    font-weight: 400;
+    width: 708px;
+    height: 23px;
+    text-align: center;
+    color: #767676;
+}
+
+.reviewCategory {
+    margin-top: 35px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.qnaTitle {
+    margin-top: 57px;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.qnaAnnounce {
+    margin-top: 15px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #919191;
+}
+
+.qnaCategory {
+    display: flex;
+    margin-top: 32px;
+    color: #919191;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.qna-category-btn-area {
+    display: flex;
+    align-items: center;
+}
+
+.qna-category-line {
+    width: 1px;
+    height: 16px;
+    background: #919191;
+    margin: 0 16px;
+}
+
+.qnaCategory button {
+    font-size: 15px;
+    font-weight: 700;
+    color: #919191;
+    border-radius: 0;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+.qnaCategory button:hover,
+.qnaCategory button:active {
+    color: #000000;
+}
+
+.qnaAll {
+    border: none;
+}
+
+.qnaReplyDone {
+    border: none;
+}
+
+.qnaReplyWaiting {
+    border: none;
+}
+
+.qnaEnroll {
+    display: flex;
+    align-items: center;
+    height: 22px;
+    border: none;
+}
+
+.question {
+    height: 58px;
+    border-bottom: 2px solid #c4c4c4;
+    display: flex;
+    align-items: center;
+}
+
+.questionTitle {
+    border: none;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.questionDate {
+    margin-left: 230px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.questionDate2 {
+    margin-left: 191px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.questionState {
+    margin-left: 122px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #FF0000;
+}
+
+.questionState2 {
+    margin-left: 122px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #6F97FF;
+}
+
+.recommandTitle {
+    margin-top: 57px;
+    width: 258px;
+    height: 46px;
+    font-size: 32px;
+    font-weight: 500;
+  }
+
+.deliveryTitle {
+    margin-top: 49px;
+    width: 125px;
+    height: 46px;
+    font-size: 32px;
+    font-weight: 500;
+  }
+
+.deliveryContents {
+    position: relative;
+    display: flex;
+    height: 115px;
+    border-bottom: 1px solid #919191;
+  }
+
+.deliveryIcon {
+    margin-top: 12px;
+    margin-left: 19px;
+    width: 86px;
+    height: 86px;
+    border-radius: 43px;
+    background-color: #D9D9D9;
+  }
+
+.deliveryIconImg {
+    margin: 14px;
+    width: 58px;
+    height: 58px;
+  }
+
+.deliveryExplain {
+    margin-top: 31px;
+    margin-left: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #878D91;
+    line-height: 1.7;
+  }
+
+.deliveryCost {
+    margin-top: 44px;
+    position: absolute; /* 또는 absolute, relative 중 하나를 선택할 수 있습니다. */
+    right: 0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+.returnTitle {
+    margin-top: 57px;
+    width: 228px;
+    height: 46px;
+    font-size: 32px;
+    font-weight: 500;
+  }
+
+.returnApplyPeriod {
+    display: flex;
+    position: relative;
+    height: 62px;
+    border-bottom: 1px solid #919191;
+    font-size: 16px;
+}
+
+.returnApplyPeriodTitle {
+    margin-top: 20px;
+    font-weight: 700;
+}
+
+.returnApplyPeriodContents {
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 220px;
+    font-weight: 500;
+    color: #363A3C;
+}
+
+.returnApplyCost {
+    display: flex;
+    position: relative;
+    height: 96px;
+    border-bottom: 1px solid #919191;
+    font-size: 16px;
+}
+
+.returnApplyCostTitle {
+    margin-top: 20px;
+    font-weight: 700;
+}
+
+.returnApplyCostContents {
+    position: absolute;
+    margin-top: 16px;
+    margin-left: 220px;
+    font-weight: 500;
+    color: #363A3C;
+    line-height: 2;
+}
+
+.returnInfo {
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #505050;
+}
+
+.inquiryButton {
+    border: none;
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #505050;
+    padding: 0;
+    background-color: white;
+    text-decoration: underline;
+    cursor: pointer;
+}

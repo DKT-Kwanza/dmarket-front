@@ -1,0 +1,157 @@
+.InfoChange {
+    padding-bottom: 200px;
+}
+
+.InfoChange-body {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+.InfoChange-container {
+    margin-top: 40px;
+    display: flex;
+}
+
+.InfoChange-submenu {
+    width: 220px;
+    height: 500px;
+    border-radius: 20px;
+    border: 2px #e1e4e6 solid;
+    margin: 53px 20px 0 0;
+}
+
+.InfoChange-content {
+    display: flex;
+    flex-direction: column;
+    margin-left: 22px;
+}
+
+.InfoChange-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.InfoChange-title-bar {
+    width: 5px;
+    height: 34px;
+    background-color: #000000;
+}
+
+.InfoChange-title-content {
+    color: #000;
+    padding-left: 15px;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.InfoChange-title-line {
+    width: 1040px;
+    height: 2px;
+    background-color: #000;
+    margin-top: 16px;
+}
+
+.InfoChange-info {
+    margin-bottom: 84px;
+}
+
+.InfoChange-info-box {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    border: none;
+    border-bottom: 1px solid #DBDBDB;
+    padding: 14px 0;
+}
+
+.InfoChange-info-title {
+    width: 80px;
+    margin-right: 141px;
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.InfoChange-info-contents {
+    color: #363A3C;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.InfoChange-address-title {
+    margin-bottom: 13px;
+    color: #000;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.InfoChange-address-box {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    border: none;
+    border-bottom: 1px solid #DBDBDB;
+    padding: 10px 0;
+}
+
+.InfoChange-address-border {
+    width: 100%;
+    height: 1px;
+    background: #DBDBDB;
+}
+
+.InfoChange-address-essential {
+    margin-left: 10px;
+    color: #BDBDBD;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.InfoChange-address-minus {
+    width: 16px;
+    color: #363A3C;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.InfoChange-address-box2 {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    border: none;
+    padding-top: 12px;
+}
+
+.InfoChange-address-postalcode{
+    height: 28px;
+    border-radius: 5px;
+    border: 1px solid #EAEEEF;
+}
+
+.InfoChange-address-detail{
+    width: 290px;
+    height: 28px;
+    border-radius: 5px;
+    border: 1px solid #EAEEEF;
+}
+
+.InfoChange-btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.InfoChange-btn {
+    margin-top: 86px;
+    width: 122px;
+    height: 49px;
+    border-radius: 5px;
+    background: #FFD465;
+    border: none;
+    color: #363A3C;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}

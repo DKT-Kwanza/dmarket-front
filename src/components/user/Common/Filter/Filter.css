@@ -1,0 +1,117 @@
+.filter-container {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+.filter-price-container {
+    display: flex;
+    margin-top: 24px;
+    align-items: center;
+}
+
+.filter-label {
+    font-size: 16px;
+    font-weight: 400;
+    margin-right: 30px;
+}
+
+.filter-font {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0 20px;
+}
+
+.filter-price-min {
+    width: 141px;
+    height: 28px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    background: #fff;
+    padding: 1px 12px;
+    margin-left: 12px;
+}
+
+.filter-price-max {
+    width: 141px;
+    height: 28px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    background: #fff;
+    padding: 1px 12px;
+}
+
+.filter-validation {
+    color: red;
+    font-size: 12px;
+    padding-left: 10px;
+}
+
+.filter-rating-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.filter-radio-btn {
+    display: none;
+}
+
+.filter-radio-label {
+    display: inline-block;
+    text-align: center;
+    line-height: 28px;
+    width: 153px;
+    height: 28px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 400;
+    margin-right: 37px;
+    padding: 1px 6px;
+}
+
+.filter-radio-btn:checked + .filter-radio-label {
+    border: none;
+    border-radius: 5px;
+    background: #FFE39A;
+}
+
+.filter-radio-label:hover {
+    cursor: pointer;
+}
+
+.filter-star {
+    display: inline;
+    vertical-align: middle;
+    font-size: 16px;
+}
+
+.filter-btn-container {
+    text-align: right;
+}
+
+.filter-search-btn {
+    width: 72px;
+    height: 29px;
+    border: 0;
+    border-radius: 5px;
+    background: #FFD465;
+    margin-right: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.filter-clear-btn {
+    width: 72px;
+    height: 29px;
+    border: 0;
+    border-radius: 5px;
+    background: #F3F3F3;
+    color: #919191;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}

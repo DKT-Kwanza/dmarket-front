@@ -1,0 +1,38 @@
+[
+    {
+        "mileageReqId" : 1,
+        "mileageReqDate" : "2024-01-08 09:48:00",
+        "userId" : 10,
+        "userName" : "홍길동",
+        "userEmail" : "asdf@gmail.com",
+        "mileageReqReason" : "충전",
+        "mileageCharge" : 1000000
+    },
+    {
+        "mileageReqId" : 2,
+        "mileageReqDate" : "2024-01-08 09:48:00",
+        "userId" : 15,
+        "userName" : "신짱구",
+        "userEmail" : "asdsdfdf@gmail.com",
+        "mileageReqReason" : "환불",
+        "mileageCharge" : 30000
+    },
+    {
+        "mileageReqId" : 3,
+        "mileageReqDate" : "2024-01-08 09:48:00",
+        "userId" : 20,
+        "userName" : "신짱아",
+        "userEmail" : "asdf@gmail.com",
+        "mileageReqReason" : "충전",
+        "mileageCharge" : 200000
+    },
+    {
+        "mileageReqId" : 4,
+        "mileageReqDate" : "2024-01-08 09:48:00",
+        "userId" : 30,
+        "userName" : "봉미선",
+        "userEmail" : "23655@gmail.com",
+        "mileageReqReason" : "환불",
+        "mileageCharge" : 500000
+    }
+]

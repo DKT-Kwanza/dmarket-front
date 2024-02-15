@@ -1,0 +1,24 @@
+[
+    {
+        "productId": 452,
+        "reviewId": 2,
+        "productName": "바닐라코 파운데이션",
+        "reviewWriter": "신짱구",
+        "optionName": "21호/바닐라",
+        "reviewRating": 4,
+        "reviewContents": "색상이 엄청 밝네요",
+        "reviewCreatedDate": "2024-01-09 09:48:00",
+        "reviewImg": "https://placehold.co/100x100"
+    },
+    {
+        "productId": 453,
+        "reviewId": 3,
+        "productName": "바닐라코 파운데이션2",
+        "reviewWriter": "신짱아",
+        "optionName": "22호/바닐라",
+        "reviewRating": 3,
+        "reviewContents": "색상이 엄청 밝네요",
+        "reviewCreatedDate": "2024-01-09 09:48:00",
+        "reviewImg": "https://placehold.co/100x100"
+    }
+]

@@ -1,3 +1,14 @@
-.App {
-  text-align: center;
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+html {
+  width: 100%;
+  overflow-x: hidden;
 }

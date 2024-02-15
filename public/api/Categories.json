@@ -1,0 +1,95 @@
+[
+    {
+        "categoryId": 1,
+        "categoryDepthLevel": 1,
+        "categoryName": "패션의류 / 잡화",
+        "child": [
+            {
+                "categoryId": 2,
+                "categoryDepthLevel": 2,
+                "categoryName": "여성 의류",
+                "child": []
+            },
+            {
+                "categoryId": 3,
+                "categoryDepthLevel": 2,
+                "categoryName": "남성 의류",
+                "child": []
+            },
+            {
+                "categoryId": 4,
+                "categoryDepthLevel": 2,
+                "categoryName": "유아 의류",
+                "child": []
+            },
+            {
+                "categoryId": 5,
+                "categoryDepthLevel": 2,
+                "categoryName": "신발/가방/잡화",
+                "child": []
+            }
+        ]
+    },
+    {
+        "categoryId": 6,
+        "categoryDepthLevel": 1,
+        "categoryName": "뷰티/생필품",
+        "child": [
+            {
+                "categoryId": 7,
+                "categoryDepthLevel": 2,
+                "categoryName": "여성 의류",
+                "child": []
+            },
+            {
+                "categoryId": 8,
+                "categoryDepthLevel": 2,
+                "categoryName": "남성 의류",
+                "child": []
+            },
+            {
+                "categoryId": 9,
+                "categoryDepthLevel": 2,
+                "categoryName": "유아 의류",
+                "child": []
+            },
+            {
+                "categoryId": 10,
+                "categoryDepthLevel": 2,
+                "categoryName": "신발 / 가방 / 잡화",
+                "child": []
+            }
+        ]
+    },
+    {
+        "categoryId": 11,
+        "categoryDepthLevel": 1,
+        "categoryName": "홈데코/문구",
+        "child": [
+            {
+                "categoryId": 12,
+                "categoryDepthLevel": 2,
+                "categoryName": "여성 의류",
+                "child": []
+            },
+            {
+                "categoryId": 13,
+                "categoryDepthLevel": 2,
+                "categoryName": "남성 의류",
+                "child": []
+            },
+            {
+                "categoryId": 14,
+                "categoryDepthLevel": 2,
+                "categoryName": "유아 의류",
+                "child": []
+            },
+            {
+                "categoryId": 15,
+                "categoryDepthLevel": 2,
+                "categoryName": "신발 / 가방 / 잡화",
+                "child": []
+            }
+        ]
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "wishId": 10,
+        "productId": 32542,
+        "brand": "JAJU",
+        "productName": "쿠시노 코지 저상형 침대(패브릭,SS)",
+        "productImg": "https://placehold.co/100x100",
+        "sales": "1,208,000"
+    },
+    {
+        "wishId": 11,
+        "productId": 32542,
+        "brand": "나이키",
+        "productName": "여성 나이키 코르테즈 DN1791-105",
+        "productImg": "https://placehold.co/100x100",
+        "sales": "85,680"
+    },
+    {
+        "wishId": 12,
+        "productId": 32542,
+        "brand": "마리끌레르",
+        "productName": "렘스 퍼 무스 집업 점퍼(MSDDJP08SA)",
+        "productImg": "https://placehold.co/100x100",
+        "sales": "55,200"
+    }
+]

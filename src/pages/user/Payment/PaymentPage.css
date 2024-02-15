@@ -1,0 +1,237 @@
+.payment-background{
+    /* width: 1280px;  */ /*설정하면 화면 줄일때 1280px까지만 줄어듦*/
+	margin: 0 auto;
+    margin-top: 30px;
+}
+.payment-wrap{
+    margin: 0 auto;
+    width: 990px;
+    padding-bottom: 200px;
+}
+.payment-wrap input {
+    outline:none;
+    border: 1.3px solid #cccccc;
+    font-size: 13px;
+    text-align: start;
+    margin-right: 20px;
+    height: 25px;
+    background-color: white;
+}
+.payment-wrap input:-webkit-autofill{
+    -webkit-text-fill-color: #565656;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+.payment-wrap input:focus{
+    border: 1.2px solid #717171;   
+}
+.payment-wrap input::placeholder{
+    color: #dbdbdb;
+}
+
+.payment-title-div{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    height: 52px;
+    width: 990px;
+}
+.payment-title-span{
+    font-size: 36px;
+    height: 52px;
+    width: 133px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.payment-delivery{
+    width: 990px;
+    border-top-style: solid;
+    border-width: 2px;
+}
+.payment-delivery-title{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 72px;
+}
+.payment-delivery-title-span1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 122px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 28px;
+}
+.payment-delivery-title-span2{
+    color: #919191;
+    font-size: 14px;
+}
+.payment-deliveryAddr-form{
+    height: 111px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-bottom-style: solid;
+    border-width: 2px;
+    border-color: #dbdbdb;
+    padding-bottom: 20px;
+}
+.payment-deliveryAddr-span{
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 72px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 23px;
+    width: 78px;
+}
+.payment-deliveryAddr-input{
+    margin-top: 15px;
+}
+.payment-deliverAddr-input-add1{
+    margin-bottom: 8px;
+}
+.payment-deliverAddr-input-add2{
+    margin-bottom: 30px;
+}
+
+.payment-deliveryReq-form{
+    height: 85px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-width: 2px;
+    border-color: #dbdbdb;
+}
+.payment-deliveryReq-span{ /*span 크기 지정위해 display 설정했는데 없어도 될 것 같기도 해요(다른 span도 마찬가지)*/
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 25px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 23px;
+    width: 125px;
+}
+.payment-deliveryReq-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 1.3px solid #cccccc;
+    position: relative;
+    width: 440px;
+}
+.payment-deliveryReq-div input{
+    background-color: white;
+    outline:none;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    margin: 0;
+    width: 400px;
+    height: 40px;
+    font-size: 13px;
+    &:focus{
+        border: none;
+    }
+}
+.payment-deliveryReq-drop{
+    background-color: white;
+    cursor: pointer;
+    margin: 0;
+    width: 400px;
+    height: 40px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.payment-dropdown{
+    position: absolute;
+    width: 440px;
+    top: 40px;
+    right: -1px;
+    border: 1px solid #565656;
+    background: #fff;
+    overflow : auto;
+    z-index:1
+}
+.payment-dropdown-scroll{
+    overflow : auto;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+.payment-dropdown-scroll ul{
+    list-style-type:none;
+    margin: 0;
+    padding:10px 0;
+}
+.payment-dropdown-scroll li{
+    padding: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    &:hover, &:focus{
+        background-color: #f0f0f0;
+        font-weight: bold;
+    }
+}
+.payment-dropdown-scroll span{
+    padding: 0 20px;
+}
+
+.payment-deliveryInfo{
+    height: 76px;
+    font-size:16px;
+}
+.payment-deliveryInfo-num{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 15px;
+}
+.payment-deliveryInfo-num-span{
+    font-weight: bold;
+    margin-right: 105px;
+    width: 45px;
+    height: 23px;
+}
+.payment-deliveryInfo-name{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+.payment-deliveryInfo-name-span{
+    font-weight: bold;
+    margin-right: 33px;
+    width: 117px;
+    height: 23px;
+}
+
+.payment-products{
+    width: 990px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-top: 10px;
+    border-top-style: solid;
+    border-width: 2px;
+}
+.payment-products-title{
+    margin-top: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    width: 144px;
+    height: 35px;
+}
