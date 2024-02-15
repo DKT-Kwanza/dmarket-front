@@ -33,7 +33,7 @@ function SearchPage() {
                 const response = await axios.get(url, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                setProducts(response.data.data.content);
+                setProducts(response.data.data.productList);
                 setTotalPages(response.data.data.totalPages);
             } catch (e) {
                 console.error(e);
@@ -49,14 +49,12 @@ function SearchPage() {
         setCurrentPage(currentPage);
     
     }, [location.search]);
+    
 
     const handlePageChange = (event, value) => {
         navigate(`?q=${query}&page=${value}`);
     };
-
-    const navigateToProductDetail = ({productId}) => {
-        navigate(`/product/detail/${productId}`);
-    }
+    
 
     return (
         <div className="searchList-body">
@@ -77,9 +75,6 @@ function SearchPage() {
                         ratingAvg={item.productRating}
                         reviewCnt={item.productReviewCount}
                         discountRate={item.productDiscountRate}
-                        onClick={() => {
-                            navigateToProductDetail({productId: item.productId})
-                        }}
                     />
                 ))}
             </div>
